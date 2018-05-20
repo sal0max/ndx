@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+
+    <!-- days -->
+    <TextView
+        android:id="@+id/days"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin2x"
+        android:layout_marginTop="@dimen/margin2x"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="@dimen/text_big"
+        android:typeface="monospace"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1" />
+
+    <TextView
+        android:id="@+id/days_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/unit_days"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="@dimen/text_small"
+        app:layout_constraintBaseline_toBaselineOf="@id/days"
+        app:layout_constraintStart_toEndOf="@id/days" />
+    <!-- /days -->
+
+    <!-- hours -->
+    <TextView
+        android:id="@+id/hours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin2x"
+        android:layout_marginTop="@dimen/margin2x"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="@dimen/text_big"
+        android:typeface="monospace"
+        app:layout_constraintStart_toEndOf="@id/days_unit"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="2" />
+
+    <TextView
+        android:id="@+id/hours_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/unit_hours"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="@dimen/text_small"
+        app:layout_constraintBaseline_toBaselineOf="@id/hours"
+        app:layout_constraintStart_toEndOf="@id/hours" />
+    <!-- /hours -->
+
+
+    <!-- minutes -->
+    <TextView
+        android:id="@+id/minutes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:lines="1"
+        android:maxLength="2"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="@dimen/text_resultLarge"
+        android:typeface="monospace"
+        app:layout_constraintBottom_toBottomOf="@id/guideline3"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline3"
+        tools:text="01" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin1x"
+        android:gravity="center"
+        android:text="@string/unit_minutes"
+        android:textColor="?android:textColorPrimary"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/minutes" />
+    <!-- /minutes -->
+
+
+    <!-- divider -->
+    <TextView
+        android:id="@+id/divider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text=":"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="@dimen/text_resultMedium"
+        app:layout_constraintBottom_toBottomOf="@id/guideline3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline3"
+        tools:ignore="HardcodedText" />
+    <!-- /divider -->
+
+
+    <!-- seconds -->
+    <TextView
+        android:id="@+id/seconds"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="bottom"
+        android:lines="1"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="@dimen/text_resultLarge"
+        android:typeface="monospace"
+        app:layout_constraintBottom_toBottomOf="@id/minutes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintTop_toTopOf="@id/minutes"
+        tools:text="02" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin1x"
+        android:gravity="center"
+        android:text="@string/unit_seconds"
+        android:textColor="?android:textColorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@id/minutes" />
+    <!-- /seconds -->
+
+
+    <!-- fractions -->
+    <TextView
+        android:id="@+id/fractions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:lines="1"
+        android:maxLength="2"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="@dimen/text_resultSmall"
+        android:typeface="monospace"
+        app:layout_constraintBaseline_toBaselineOf="@id/minutes"
+        app:layout_constraintStart_toEndOf="@id/seconds"
+        tools:text=".5" />
+    <!-- /fractions -->
+
+</android.support.constraint.ConstraintLayout>

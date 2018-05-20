@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/prefTitle_categoryGeneral">
+
+        <ListPreference
+            android:defaultValue="3"
+            android:entries="@array/prefEntries_evSteps"
+            android:entryValues="@array/prefValues_evSteps"
+            android:key="@string/prefKey_evSteps"
+            android:summary="%s"
+            android:title="@string/prefTitle_evSteps" />
+
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/prefEntries_sortOrder"
+            android:entryValues="@array/prefValues_sortOrder"
+            android:key="@string/prefKey_sortOrder"
+            android:summary="%s"
+            android:title="@string/prefTitle_sortOrder" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/prefTitle_categoryAbout">
+
+        <!--suppress AndroidElementNotAllowed -->
+        <de.salomax.ndx.widget.LongSummaryPreference
+            android:key="@string/prefKey_donate"
+            android:summary="@string/prefSummary_donate"
+            android:title="@string/prefTitle_donate" />
+
+        <Preference
+            android:key="@string/prefKey_about"
+            android:selectable="false"
+            android:summary="@string/prefSummary_about"
+            android:title="@string/prefTitle_about" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,0 +1,59 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "de.salomax.ndx"
+        minSdkVersion 21
+        targetSdkVersion 27
+        versionCode 301
+        versionName versionCode.intdiv(100) + " ($versionCode)"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            applicationIdSuffix '.debug'
+        }
+    }
+    android {
+        sourceSets {
+            main.java.srcDirs += 'src/main/kotlin'
+        }
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+    // MVP
+    implementation 'com.joaquimverges:helium:0.1.0'
+
+    // Support libs
+    def supportLib_version = '27.1.1'
+    implementation "com.android.support:appcompat-v7:$supportLib_version"
+    implementation "com.android.support:design:$supportLib_version"
+    implementation "com.android.support:preference-v7:$supportLib_version"
+    implementation "com.android.support:recyclerview-v7:$supportLib_version"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+
+    // Room
+    def room_version = '1.1.0'
+    implementation "android.arch.persistence.room:runtime:$room_version"
+    implementation "android.arch.persistence.room:rxjava2:$room_version"
+    kapt "android.arch.persistence.room:compiler:$room_version"
+
+    // RxJava
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.13'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+
+    // LeakCanary
+    def leakcanary_version = '1.5.4'
+    debugImplementation   "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary_version"
+}

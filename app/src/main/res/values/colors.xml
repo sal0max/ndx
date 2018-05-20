@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- default -->
+    <!--<color name="colorPrimary">#3F51B5</color>-->
+    <!--<color name="colorPrimaryDark">#303F9F</color>-->
+    <!--<color name="colorAccent">#FF4081</color>-->
+    <!--<color name="colorBackground">#fff</color>-->
+
+    <!-- https://coolors.co/dcdcdd-c5c3c6-46494c-4c5c68-1985a1 (materialized) -->
+    <!--<color name="colorPrimary">#424242</color>-->
+    <!--<color name="colorPrimaryDark">@color/colorPrimary</color>-->
+    <!--<color name="colorAccent">#00838f</color>-->
+    <!--<color name="colorBackground">#e0e0e0</color>-->
+
+    <!-- casio fx-991de plus -->
+    <color name="colorPrimary">#63607d</color>
+    <color name="colorPrimaryDark">@color/colorPrimary</color>
+    <color name="colorAccent">#ffa459</color>
+    <color name="colorBackground">#e0e0e0</color>
+
+</resources>
