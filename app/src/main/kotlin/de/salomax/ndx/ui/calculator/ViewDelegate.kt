@@ -32,6 +32,7 @@ class ViewDelegate(inflater: LayoutInflater)
             adapter = shutterSpeedsAdapter
             addItemDecoration(CenterLineDecoration(ContextCompat.getColor(context, android.R.color.white))) // center line
             // addItemDecoration(DotDividerDecoration(ContextCompat.getColor(context, android.R.color.white)))
+            setHasFixedSize(true)
             snappedEvent.subscribe({
                 selectedSpeed = shutterSpeedsAdapter.selectedSpeed
                 showResult()
