@@ -5,6 +5,7 @@ import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 import android.arch.persistence.db.SupportSQLiteDatabase
+import de.salomax.ndx.R
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -32,12 +33,30 @@ abstract class NdxDatabase : RoomDatabase() {
                                         getInstance(context)
                                                 .filterDao()
                                                 .insertAll(listOf(
-                                                        Filter(null, 3, "Generic circular polarizer", "Polarizers add about 1½ Stops"),
-                                                        Filter(null, 4, "Cokin Nuances ND 4", null),
-                                                        Filter(null, 64, "Lee Little Stopper", null),
-                                                        Filter(null, 1_024, "Lee Big Stopper", null),
-                                                        Filter(null, 4_096, "Haida Slim PROII ND3.6", null),
-                                                        Filter(null, 65_536, "Formatt Hitech Firecrest 16", "Super dark for long exposures during bright daylight."))
+                                                        Filter(null,
+                                                                context.resources.getInteger(R.integer.preset_filterValue1),
+                                                                context.getString(R.string.preset_filterName1),
+                                                                context.getString(R.string.preset_filterInfo1)),
+                                                        Filter(null,
+                                                                context.resources.getInteger(R.integer.preset_filterValue2),
+                                                                context.getString(R.string.preset_filterName2),
+                                                                context.getString(R.string.preset_filterInfo2)),
+                                                        Filter(null,
+                                                                context.resources.getInteger(R.integer.preset_filterValue3),
+                                                                context.getString(R.string.preset_filterName3),
+                                                                context.getString(R.string.preset_filterInfo3)),
+                                                        Filter(null,
+                                                                context.resources.getInteger(R.integer.preset_filterValue4),
+                                                                context.getString(R.string.preset_filterName4),
+                                                                context.getString(R.string.preset_filterInfo4)),
+                                                        Filter(null,
+                                                                context.resources.getInteger(R.integer.preset_filterValue5),
+                                                                context.getString(R.string.preset_filterName5),
+                                                                context.getString(R.string.preset_filterInfo5)),
+                                                        Filter(null,
+                                                                context.resources.getInteger(R.integer.preset_filterValue6),
+                                                                context.getString(R.string.preset_filterName6),
+                                                                context.getString(R.string.preset_filterInfo6)))
                                                 )
                                         // default preferences
                                         getInstance(context)
