@@ -51,11 +51,13 @@ class ResultView : ConstraintLayout {
     private fun infinite() {
         minutes.text = "\u221E"
         seconds.text = "\u221E"
+        hoursDays.text = null
     }
 
     private fun smaller1s(micro: Long) {
         minutes.text = "00"
         seconds.text = getNearest(micro)
+        hoursDays.text = null
     }
 
     private fun greater1s(micro: Long) {
