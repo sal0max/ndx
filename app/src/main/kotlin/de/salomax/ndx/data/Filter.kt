@@ -10,7 +10,7 @@ import android.os.Parcelable
 data class Filter(@PrimaryKey(autoGenerate = true) var id: Long?,
                   @ColumnInfo(name = "FACTOR") val factor: Int,
                   @ColumnInfo(name = "NAME") val name: String,
-                  @ColumnInfo(name = "INFO") val info: String?) : Parcelable {
+                  @ColumnInfo(name = "INFO") val info: String?) : Parcelable, Comparable<Filter> {
 
     constructor(parcel: Parcel) : this(
             parcel.readValue(Long::class.java.classLoader) as? Long,
@@ -38,4 +38,17 @@ data class Filter(@PrimaryKey(autoGenerate = true) var id: Long?,
             return arrayOfNulls(size)
         }
     }
+
+    override fun compareTo(other: Filter): Int {
+        if (this.id != null && other.id != null) {
+            if (this.id!! > other.id!!) return 1
+            if (this.id!! < other.id!!) return -1
+        } else if (this.id != null && other.id == null) {
+            return 1
+        } else if (this.id == null && other.id != null) {
+            return -1
+        }
+        return 0
+    }
+
 }
