@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.joaquimverges.helium.retained.RetainedPresenters
 import de.salomax.ndx.R
 import de.salomax.ndx.data.Filter
 
@@ -18,7 +19,7 @@ class MyFiltersActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val presenter = Presenter()
+        val presenter = RetainedPresenters.get(this, Presenter::class.java)
         viewDelegate = ViewDelegate(layoutInflater)
         presenter.attach(viewDelegate)
         setContentView(viewDelegate.view)

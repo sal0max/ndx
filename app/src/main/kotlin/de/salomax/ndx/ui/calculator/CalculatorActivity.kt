@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.joaquimverges.helium.retained.RetainedPresenters
 import de.salomax.ndx.R
 import de.salomax.ndx.ui.myfilters.MyFiltersActivity
 import de.salomax.ndx.ui.preferences.PreferenceActivity
@@ -14,7 +15,7 @@ class CalculatorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val presenter = Presenter()
+        val presenter = RetainedPresenters.get(this, Presenter::class.java)
         val viewDelegate = ViewDelegate(layoutInflater)
         presenter.attach(viewDelegate)
         setContentView(viewDelegate.view)
