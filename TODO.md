@@ -1,4 +1,4 @@
-#TODO
+# TODO
 
 ## high priority
 * create releases config + upload it as beta to the play store
