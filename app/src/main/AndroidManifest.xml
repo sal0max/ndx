@@ -19,9 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.myfilters.MyFiltersActivity" />
-        <activity android:name=".ui.preferences.PreferenceActivity" />
         <activity android:name=".ui.filtereditor.FilterEditorActivity" />
+        <activity android:name=".ui.filterpouch.FilterPouchActivity" />
+        <activity android:name=".ui.preferences.PreferenceActivity" />
     </application>
 
 </manifest>

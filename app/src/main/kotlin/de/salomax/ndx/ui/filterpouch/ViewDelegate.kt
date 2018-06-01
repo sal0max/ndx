@@ -1,4 +1,4 @@
-package de.salomax.ndx.ui.myfilters
+package de.salomax.ndx.ui.filterpouch
 
 import android.content.Intent
 import android.support.design.widget.FloatingActionButton
@@ -11,7 +11,7 @@ import com.joaquimverges.helium.viewdelegate.BaseViewDelegate
 import de.salomax.ndx.R
 import de.salomax.ndx.ui.filtereditor.FilterEditorActivity
 
-class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.layout.activity_myfilters, inflater) {
+class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.layout.activity_filterpouch, inflater) {
 
     private val filterAdapter: FilterAdapter = FilterAdapter(context)
     private val list: RecyclerView = view.findViewById(android.R.id.list)

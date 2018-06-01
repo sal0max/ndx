@@ -1,4 +1,4 @@
-package de.salomax.ndx.ui.myfilters
+package de.salomax.ndx.ui.filterpouch
 
 import android.app.Activity
 import android.content.Intent
@@ -12,7 +12,7 @@ import de.salomax.ndx.data.Filter
  * Shows a list of all filters.
  * Can also start a dialog to add new or edit existing filters.
  */
-class MyFiltersActivity : AppCompatActivity() {
+class FilterPouchActivity : AppCompatActivity() {
 
     private lateinit var viewDelegate: ViewDelegate
 
@@ -25,7 +25,7 @@ class MyFiltersActivity : AppCompatActivity() {
         setContentView(viewDelegate.view)
 
         supportActionBar?.apply {
-            title = getString(R.string.title_myFilters)
+            title = getString(R.string.title_filterPouch)
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
         }

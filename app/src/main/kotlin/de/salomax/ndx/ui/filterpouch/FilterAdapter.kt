@@ -1,4 +1,4 @@
-package de.salomax.ndx.ui.myfilters
+package de.salomax.ndx.ui.filterpouch
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -21,7 +21,7 @@ class FilterAdapter(private val context: Context) : RecyclerView.Adapter<FilterA
     val clickEvent: Observable<Filter> = clickSubject
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.row_myfilters, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.row_filterpouch, parent, false)
         return ViewHolder(view)
     }
 

@@ -1,4 +1,4 @@
-package de.salomax.ndx.ui.myfilters
+package de.salomax.ndx.ui.filterpouch
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent

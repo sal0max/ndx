@@ -1,4 +1,4 @@
-package de.salomax.ndx.ui.myfilters
+package de.salomax.ndx.ui.filterpouch
 
 import com.joaquimverges.helium.state.ViewState
 import de.salomax.ndx.data.Filter

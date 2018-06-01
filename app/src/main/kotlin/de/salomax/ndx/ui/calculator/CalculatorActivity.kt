@@ -7,7 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.joaquimverges.helium.retained.RetainedPresenters
 import de.salomax.ndx.R
-import de.salomax.ndx.ui.myfilters.MyFiltersActivity
+import de.salomax.ndx.ui.filterpouch.FilterPouchActivity
 import de.salomax.ndx.ui.preferences.PreferenceActivity
 
 class CalculatorActivity : AppCompatActivity() {
@@ -32,7 +32,7 @@ class CalculatorActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.menu_manage_filters -> {
-                startActivity(Intent(this, MyFiltersActivity().javaClass))
+                startActivity(Intent(this, FilterPouchActivity().javaClass))
                 true
             }
             R.id.menu_settings -> {

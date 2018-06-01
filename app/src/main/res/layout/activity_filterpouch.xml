@@ -13,7 +13,7 @@
         android:clipToPadding="false"
         android:paddingBottom="@dimen/fabOverflow"
         android:scrollbars="none"
-        tools:listitem="@layout/row_myfilters" />
+        tools:listitem="@layout/row_filterpouch" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_add"

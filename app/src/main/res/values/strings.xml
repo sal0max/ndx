@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name" translatable="false">NDx</string>
 
-    <string name="title_myFilters">My filters</string>
+    <string name="title_filterPouch">My Filter Pouch</string>
     <string name="title_preferences">Settings</string>
     <string name="title_addFilter">Add Filter</string>
     <string name="title_editFilter">Edit Filter</string>
 
-    <string name="menu_myFilters" translatable="false">@string/title_myFilters</string>
+    <string name="menu_filterPouch" translatable="false">@string/title_filterPouch</string>
     <string name="menu_preferences" translatable="false">@string/title_preferences</string>
 
 
@@ -36,7 +36,7 @@
     <string name="hint_nd">ND</string>
 
 
-    <!-- my filters ............................................................................ -->
+    <!-- filter pouch .......................................................................... -->
     <string name="filterDeleted">Removed %1$s</string>
 
 
