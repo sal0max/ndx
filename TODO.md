@@ -1,18 +1,31 @@
-* create releases config
-* ~~show changelog somewhere~~
+#TODO
 
-* implement Donation via In-App Purchase
-  * 01,00€: small coffee
-  * 02,00€: small beer
-  * 03,00€: regular beer
-  * 10,00€: Oktoberfest
-  * -> Add link to settings
-* OR: make it freemium:
-  * more than 3 filters
-  * dark theme
+## high priority
+* create releases config + upload it as beta to the play store
+* ~~show changelog somewhere~~
+* landscape layout
+
+## normal priority
 * implement timer
-  * android wear support
+* additional themes
+   * all white ?
+   * all black
+   * dark
+* monetization
+
+## low priority
 * animate addition/removal of filters in `myfilters`
-* additional selectable themes: white, black
-* German translation
-* ~~landscape layout~~
+* German localization
+* android wear support (timer)
+
+---
+
+# monetization
+* freemium-model
+   * more than 3 or 4 filters
+   * additional themes
+* ~~maybe instead: implement donation via In-App Purchase~~
+   * 01,00€: small coffee
+   * 02,00€: small beer
+   * 03,00€: regular beer
+   * 10,00€: Oktoberfest
