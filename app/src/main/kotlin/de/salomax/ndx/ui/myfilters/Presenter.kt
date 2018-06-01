@@ -1,5 +1,7 @@
 package de.salomax.ndx.ui.myfilters
 
+import android.arch.lifecycle.Lifecycle
+import android.arch.lifecycle.OnLifecycleEvent
 import com.joaquimverges.helium.presenter.BasePresenter
 import de.salomax.ndx.App.Companion.context
 import de.salomax.ndx.data.NdxDatabase
@@ -9,11 +11,7 @@ import io.reactivex.schedulers.Schedulers
 
 class Presenter : BasePresenter<State, Event>() {
 
-    init {
-        loadFilters()
-    }
-
-    // @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     private fun loadFilters() {
         NdxDatabase.getInstance(context).filterDao().getAll()
                 .subscribeOn(Schedulers.io())
