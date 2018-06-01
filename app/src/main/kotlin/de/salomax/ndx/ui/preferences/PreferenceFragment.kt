@@ -6,7 +6,6 @@ import android.support.design.widget.Snackbar
 import android.support.v7.preference.ListPreference
 import android.support.v7.preference.Preference
 import android.support.v7.preference.PreferenceFragmentCompat
-import android.widget.Toast
 import de.salomax.ndx.R
 import de.salomax.ndx.data.NdxDatabase
 import de.salomax.ndx.data.Pref
@@ -24,6 +23,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
     private lateinit var filterSortingPreference: ListPreference
     private lateinit var donatePreference: Preference
     private lateinit var aboutPreference: Preference
+    private lateinit var changelogPreference: Preference
 
     override fun onCreatePreferences(bundle: Bundle?, s: String?) {
         addPreferencesFromResource(R.xml.preferences)
@@ -32,6 +32,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
         filterSortingPreference = findPreference(getString(R.string.prefKey_sortOrder)) as ListPreference
         donatePreference = findPreference(getString(R.string.prefKey_donate))
         aboutPreference = findPreference(getString(R.string.prefKey_about))
+        changelogPreference = findPreference(getString(R.string.prefKey_changelog))
 
         // ev steps
         evStepsPreference.onPreferenceChangeListener = this
@@ -39,6 +40,8 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
         filterSortingPreference.onPreferenceChangeListener = this
         // beg for donations
         donatePreference.onPreferenceClickListener = this
+        // show changelog
+        changelogPreference.onPreferenceClickListener = this
         // show correct version name & copyright year
         try {
             val version = activity?.packageManager?.getPackageInfo(activity?.packageName, 0)?.versionName
@@ -73,6 +76,10 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
         when (preference) {
             donatePreference -> {
                 Snackbar.make(view!!, "TODO: open In-App Purchase-Dialog", Snackbar.LENGTH_SHORT).show()
+            }
+            changelogPreference -> {
+                val fragment = ChangelogFragment()
+                fragment.show(childFragmentManager, null)
             }
         }
         return false

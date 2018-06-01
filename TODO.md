@@ -1,5 +1,5 @@
 * create releases config
-* show changelog somewhere
+* ~~show changelog somewhere~~
 
 * implement Donation via In-App Purchase
   * 01,00€: small coffee

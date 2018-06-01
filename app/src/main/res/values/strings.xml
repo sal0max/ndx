@@ -44,6 +44,7 @@
     <string name="prefTitle_sortOrder">Sort filters by…</string>
     <string name="prefTitle_about">Version %1$s</string>
     <string name="prefTitle_donate">Donate</string>
+    <string name="prefTitle_changelog">Changelog</string>
     <string name="prefTitle_categoryGeneral">General</string>
     <string name="prefTitle_categoryAbout">About</string>
 
@@ -66,6 +67,7 @@
     <string name="prefKey_sortOrder" translatable="false">KEY_SORT_ORDER</string>
     <string name="prefKey_about" translatable="false">KEY_ABOUT</string>
     <string name="prefKey_donate" translatable="false">KEY_DONATE</string>
+    <string name="prefKey_changelog" translatable="false">KEY_CHANGELOG</string>
 
     <string-array name="prefValues_evSteps" translatable="false">
         <item>1</item>
