@@ -11,6 +11,7 @@
 
 
     <!-- misc .................................................................................. -->
+    <string name="ok">OK</string>
     <string name="save">Save</string>
     <string name="undo">Undo</string>
     <string name="filterInfo">× %1$s\ \ ·\ \ %2$s Stops\ \ ·\ \ ND %3$s<i>%4$s</i></string>

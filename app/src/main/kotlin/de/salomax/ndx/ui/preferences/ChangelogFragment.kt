@@ -13,7 +13,7 @@ class ChangelogFragment : AppCompatDialogFragment() {
         val view = View.inflate(context, R.layout.fragment_changelog, null)
 
         return AlertDialog.Builder(context!!)
-                .setPositiveButton("OK", null)
+                .setPositiveButton(R.string.ok, null)
                 .setTitle(R.string.prefTitle_changelog)
                 .setView(view)
                 .create()
