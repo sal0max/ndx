@@ -15,7 +15,8 @@ interface FilterDao {
             "    CASE" +
             "       WHEN (SELECT `VALUE` FROM prefs WHERE `KEY` IS 'FILTER_SORT_ORDER') = '0' THEN FACTOR" +
             "       WHEN (SELECT `VALUE` FROM prefs WHERE `KEY` IS 'FILTER_SORT_ORDER') = '1' THEN NAME" +
-            "    END)")
+            "    END)" +
+            " COLLATE NOCASE")
     fun getAll(): Flowable<List<Filter>>
 
     @Query("SELECT * FROM filters WHERE id = :id")

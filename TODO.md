@@ -24,7 +24,7 @@
 
 
 ## Bugs
-* nothing (_found!_), yet…
+* ~~filter sort order: make it case insensitive~~
 
 
 ## Monetization
