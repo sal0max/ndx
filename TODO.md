@@ -1,26 +1,33 @@
 # TODO
 
-## high priority
+## Features
+
+### high priority
 * create releases config + upload it as beta to the play store
 * ~~show changelog somewhere~~
 * landscape layout
+   * ~~restore values on configuration change (-> activated filters)~~
+   * snap RecyclerView
 
-## normal priority
+### normal priority
 * implement timer
 * additional themes
-   * all white ?
-   * all black
    * dark
+   * all black
+   * all white (?)
 * monetization
 
-## low priority
+### low priority
 * animate addition/removal of filters in `myfilters`
 * German localization
 * android wear support (timer)
 
----
 
-# monetization
+## Bugs
+* nothing (_found!_), yet…
+
+
+## Monetization
 * freemium-model
    * more than 3 or 4 filters
    * additional themes
