@@ -30,6 +30,7 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
     init {
         factor.calc()
         fStops.calc()
+        factor.onlyGreaterEqualOne()
     }
 
     override fun render(viewState: State) {
@@ -68,7 +69,7 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
             is State.Finish -> {
                 (context as AppCompatActivity).finish()
             }
-            is State.DeleteAndFinish-> {
+            is State.DeleteAndFinish -> {
                 val returnIntent = Intent()
                 returnIntent.putExtra("FILTER", Filter(
                         oldId!!,
@@ -131,7 +132,20 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+    }
 
+    private fun EditText.onlyGreaterEqualOne() {
+        this.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                try {
+                    val i = Integer.parseInt(s.toString())
+                    if (i < 1) s?.clear()
+                } catch (ignored: NumberFormatException) {}
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
     }
