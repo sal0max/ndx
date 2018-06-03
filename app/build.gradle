@@ -9,7 +9,7 @@ android {
         applicationId "de.salomax.ndx"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 302
+        versionCode 303
         versionName versionCode.intdiv(100) + " ($versionCode)"
     }
     buildTypes {

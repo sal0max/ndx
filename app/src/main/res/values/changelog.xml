@@ -1,5 +1,8 @@
 <resources>
     <string name="changelog">
+        <b><big>v303</big></b>
+        \n• ....
+
         <b><big>v302</big></b>
         \n• Added this changelog dialog.
         \n• Fix: The filter factor is now only allowed to be ≥ 1. A filter can\'t really increase the amount of light.
