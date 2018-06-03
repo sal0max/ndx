@@ -13,8 +13,8 @@ interface FilterDao {
             " FROM filters" +
             " ORDER BY (" +
             "    CASE" +
-            "       WHEN (SELECT `VALUE` FROM prefs WHERE `KEY` IS 'FILTER_SORT_ORDER') = '0' THEN FACTOR" +
-            "       WHEN (SELECT `VALUE` FROM prefs WHERE `KEY` IS 'FILTER_SORT_ORDER') = '1' THEN NAME" +
+            "       WHEN (SELECT `VALUE` FROM prefs WHERE `KEY` IS '" + Pref.FILTER_SORT_ORDER + "') = '0' THEN FACTOR" +
+            "       WHEN (SELECT `VALUE` FROM prefs WHERE `KEY` IS '" + Pref.FILTER_SORT_ORDER + "') = '1' THEN NAME" +
             "    END)" +
             " COLLATE NOCASE")
     fun getAll(): Flowable<List<Filter>>

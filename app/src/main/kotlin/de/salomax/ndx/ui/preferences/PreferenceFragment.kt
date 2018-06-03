@@ -50,19 +50,33 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
         } catch (e: PackageManager.NameNotFoundException) {
             e.printStackTrace()
         }
+        // populate settings with values from db
+        Single.fromCallable {
+            NdxDatabase.getInstance(context!!)
+                    .prefDao()
+                    .getAll()
+                    .subscribe {
+                        for (pref in it) {
+                            when (pref.key) {
+                                Pref.FILTER_SORT_ORDER -> filterSortingPreference.value = pref.value
+                                Pref.EV_STEPS -> evStepsPreference.value = pref.value
+                            }
+                        }
+                    }
+        }.subscribe()
     }
 
     override fun onPreferenceChange(preference: Preference?, newValue: Any?): Boolean {
         when (preference) {
             evStepsPreference -> {
-                Single.fromCallable { NdxDatabase.getInstance(context!!).prefDao().insert(Pref("EV_STEPS", newValue as String)) }
+                Single.fromCallable { NdxDatabase.getInstance(context!!).prefDao().insert(Pref(Pref.EV_STEPS, newValue as String)) }
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe()
                 return true
             }
             filterSortingPreference -> {
-                Single.fromCallable { NdxDatabase.getInstance(context!!).prefDao().insert(Pref("FILTER_SORT_ORDER", newValue as String)) }
+                Single.fromCallable { NdxDatabase.getInstance(context!!).prefDao().insert(Pref(Pref.FILTER_SORT_ORDER, newValue as String)) }
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe()

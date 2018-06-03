@@ -4,7 +4,6 @@
     <PreferenceCategory android:title="@string/prefTitle_categoryGeneral">
 
         <ListPreference
-            android:defaultValue="3"
             android:entries="@array/prefEntries_evSteps"
             android:entryValues="@array/prefValues_evSteps"
             android:key="@string/prefKey_evSteps"
@@ -12,7 +11,6 @@
             android:title="@string/prefTitle_evSteps" />
 
         <ListPreference
-            android:defaultValue="0"
             android:entries="@array/prefEntries_sortOrder"
             android:entryValues="@array/prefValues_sortOrder"
             android:key="@string/prefKey_sortOrder"

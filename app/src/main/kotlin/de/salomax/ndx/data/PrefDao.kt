@@ -12,7 +12,7 @@ interface PrefDao {
     @Query("SELECT * FROM prefs")
     fun getAll(): Flowable<List<Pref>>
 
-    @Query("SELECT `VALUE` FROM prefs WHERE `KEY` = 'EV_STEPS' LIMIT 1")
+    @Query("SELECT `VALUE` FROM prefs WHERE `KEY` = '" + Pref.EV_STEPS + "' LIMIT 1")
     fun getEvSteps(): Flowable<String>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

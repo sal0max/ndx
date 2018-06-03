@@ -62,8 +62,8 @@ abstract class NdxDatabase : RoomDatabase() {
                                         getInstance(context)
                                                 .prefDao()
                                                 .insertAll(listOf(
-                                                        Pref("EV_STEPS", "3"),
-                                                        Pref("FILTER_SORT_ORDER", "0"))
+                                                        Pref(Pref.EV_STEPS, "3"),
+                                                        Pref(Pref.FILTER_SORT_ORDER, "0"))
                                                 )
                                     }.subscribeOn(Schedulers.io())
                                             .observeOn(AndroidSchedulers.mainThread())
