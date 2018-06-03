@@ -3,10 +3,10 @@
         <b><big>v303</big></b>
         \n• ....
 
-        <b><big>v302</big></b>
+        \n\n<b><big>v302</big></b>
+        \n• Landscape mode!
         \n• Added this changelog dialog.
         \n• Fix: The filter factor is now only allowed to be ≥ 1. A filter can\'t really increase the amount of light.
-        \n• Landscape mode! 🤙
 
         \n\n<b><big>v301 – <i>initial release</i></big></b>
         \nVersion 3 is my third iteration in writing this app. A complete re-write! A different,
