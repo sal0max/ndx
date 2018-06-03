@@ -13,11 +13,11 @@ class ShutterAdapter : RecyclerView.Adapter<ShutterAdapter.ViewHolder>() {
 
     var selectedSpeed: Long = 1
         private set
-    var speeds: ShutterSpeeds? = null
-        set (speeds) {
-            field = speeds
-            notifyDataSetChanged()
-        }
+
+    companion object {
+        private var items: ShutterSpeeds? = null
+    }
+
     private var subscription: Disposable? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,13 +26,20 @@ class ShutterAdapter : RecyclerView.Adapter<ShutterAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textView.text = speeds?.htmlValues?.get(position)
+        holder.textView.text = items?.htmlValues?.get(position)
+    }
+
+    fun setSpeeds(speeds: ShutterSpeeds) {
+        if (items != speeds) {
+            items = speeds
+            notifyDataSetChanged()
+        }
     }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
         subscription = (recyclerView as SnappyRecyclerView).snappedEvent.subscribe({
-            selectedSpeed = speeds?.doubleValues?.get(it) ?: 1
+            selectedSpeed = items?.doubleValues?.get(it) ?: 1
         })
     }
 
@@ -41,7 +48,7 @@ class ShutterAdapter : RecyclerView.Adapter<ShutterAdapter.ViewHolder>() {
         subscription?.dispose()
     }
 
-    override fun getItemCount() = speeds?.doubleValues?.size ?: 0
+    override fun getItemCount() = items?.doubleValues?.size ?: 0
 
     inner class ViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView)
 

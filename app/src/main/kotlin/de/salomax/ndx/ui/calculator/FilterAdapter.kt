@@ -14,14 +14,17 @@ import io.reactivex.subjects.BehaviorSubject
 
 class FilterAdapter(private val context: Context) : RecyclerView.Adapter<FilterAdapter.ViewHolder>() {
 
-    private val items: ArrayList<Filter> = arrayListOf()
-    private var filterFactor: Long = 1
-        set(value) {
-            field = value
-            filterFactorChanged.onNext(value)
-        }
+    /*
+     * static fields which stores each filter and its state for
+     * a) the view recycling
+     * b) configuration changes
+     */
+    companion object {
+        private val items: ArrayList<Filter> = arrayListOf()
+        private val activeItems: HashSet<Filter> = hashSetOf()
+    }
 
-    val filterFactorChanged = BehaviorSubject.createDefault(filterFactor)
+    val filterFactorChanged = BehaviorSubject.createDefault(1L)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.row_filter, parent, false)
@@ -29,28 +32,43 @@ class FilterAdapter(private val context: Context) : RecyclerView.Adapter<FilterA
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textView1.text = items[position].name
+        val filter = items[position]
+        holder.textView1.text = filter.name
         holder.textView2.text = context.resources.getString(R.string.filterInfo,
-                items[position].factor.toString(),
-                MathUtils.factor2fstopRounded(items[position].factor.toDouble()),
-                MathUtils.factor2nd(items[position].factor.toDouble()),
-                if (items[position].info.isNullOrBlank()) "" else "  ·  " + items[position].info)
+                filter.factor.toString(),
+                MathUtils.factor2fstopRounded(filter.factor.toDouble()),
+                MathUtils.factor2nd(filter.factor.toDouble()),
+                if (filter.info.isNullOrBlank()) "" else "  ·  " + filter.info)
+        holder.switch.isChecked = activeItems.contains(filter)
     }
 
     override fun getItemCount() = items.size
 
     fun setFilters(filters: List<Filter>?) {
         items.clear()
-        filterFactor = 1
-        filters?.let { items.addAll(it) }
+        filters?.let {
+            // add all filters
+            items.addAll(it)
+            // remove activeItems which aren't present any more
+            activeItems.retainAll(filters)
+            calculateFactor()
+        }
         notifyDataSetChanged()
+    }
+
+    fun calculateFactor() {
+        var factor = 1L
+        for (itemsState in activeItems) {
+            factor *= itemsState.factor
+        }
+        filterFactorChanged.onNext(factor)
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val textView1: TextView = itemView.findViewById(R.id.name)
         val textView2: TextView = itemView.findViewById(R.id.info)
-        private val switch: Switch = itemView.findViewById(R.id.checkbox)
+        val switch: Switch = itemView.findViewById(R.id.checkbox)
 
         init {
             switch.isClickable = false
@@ -58,9 +76,10 @@ class FilterAdapter(private val context: Context) : RecyclerView.Adapter<FilterA
             switch.setOnCheckedChangeListener { _, isChecked ->
                 val item = items[adapterPosition]
                 if (isChecked)
-                    filterFactor *= item.factor
+                    activeItems.add(item)
                 else
-                    filterFactor /= item.factor
+                    activeItems.remove(item)
+                calculateFactor()
             }
         }
     }

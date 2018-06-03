@@ -6,10 +6,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import com.joaquimverges.helium.viewdelegate.BaseViewDelegate
 import de.salomax.ndx.R
-import de.salomax.ndx.data.ShutterSpeeds
 import de.salomax.ndx.util.MathUtils
 import de.salomax.ndx.widget.CenterLineDecoration
-import de.salomax.ndx.widget.DotDividerDecoration
 import de.salomax.ndx.widget.SnappyRecyclerView
 import de.salomax.ndx.widget.ResultView
 
@@ -21,10 +19,8 @@ class ViewDelegate(inflater: LayoutInflater)
 
     private var selectedSpeed: Long = 1
     private var filterFactor: Long = 1
-    private var speeds: ShutterSpeeds? = null
 
     private val resultView = view.findViewById<ResultView>(R.id.resultView)
-
 
     init {
         // list & adapter : shutter speeds
@@ -53,9 +49,8 @@ class ViewDelegate(inflater: LayoutInflater)
         when (viewState) {
             is State.FiltersReady -> filterAdapter.setFilters(viewState.filters)
             is State.ShutterSpeedsReady -> {
-                speeds = viewState.speeds
-                shutterSpeedsAdapter.speeds = speeds
-                resultView.speed = speeds
+                shutterSpeedsAdapter.setSpeeds(viewState.speeds)
+                resultView.evSteps = viewState.speeds
                 showResult()
             }
         }

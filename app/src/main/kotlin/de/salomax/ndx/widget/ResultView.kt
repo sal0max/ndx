@@ -15,7 +15,7 @@ import de.salomax.ndx.data.ShutterSpeeds
 @SuppressLint("SetTextI18n")
 class ResultView : ConstraintLayout {
 
-    var speed: ShutterSpeeds? = ShutterSpeeds.FULL
+    var evSteps: ShutterSpeeds? = ShutterSpeeds.FULL
 
     private var seconds: TextView
     private var minutes: TextView
@@ -110,7 +110,7 @@ class ResultView : ConstraintLayout {
     }
 
     private fun getNearest(input: Long): Spanned {
-        val s = speed
+        val s = evSteps
         return if (s != null) {
             var nearest: Spanned? = null
             var oldDiff = java.lang.Long.MAX_VALUE

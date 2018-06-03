@@ -5,9 +5,9 @@
 ### high priority
 * create releases config + upload it as beta to the play store
 * ~~show changelog somewhere~~
-* landscape layout
+* ~~landscape layout~~
    * ~~restore values on configuration change (-> activated filters)~~
-   * snap RecyclerView
+   * ~~keep position of shutter-snappyRecyclerView and snap it~~
 
 ### normal priority
 * implement timer
