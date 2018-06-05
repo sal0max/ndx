@@ -5,6 +5,7 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 27
+
     defaultConfig {
         applicationId "de.salomax.ndx"
         minSdkVersion 21
@@ -12,6 +13,11 @@ android {
         versionCode 303
         versionName versionCode.intdiv(100) + " ($versionCode)"
     }
+
+    lintOptions {
+        disable 'GoogleAppIndexingWarning', 'GoogleAppIndexingApiWarning' // app doesn't provide deep-links
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -21,6 +27,7 @@ android {
             applicationIdSuffix '.debug'
         }
     }
+
     android {
         sourceSets {
             main.java.srcDirs += 'src/main/kotlin'
