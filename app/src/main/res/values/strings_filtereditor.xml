@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_addFilter">Add Filter</string>
+    <string name="title_editFilter">Edit Filter</string>
+
+    <string name="error_nameRequired">Name is required</string>
+    <string name="error_factorRequired">Filter factor is required.</string>
+
+    <string name="hint_name">Name</string>
+    <string name="hint_info">Additional info</string>
+    <string name="hint_properties">Properties</string>
+    <string name="hint_factor">Filter factor</string>
+    <string name="hint_stops">ƒ-Stops</string>
+    <string name="hint_nd">ND</string>
+
+</resources>

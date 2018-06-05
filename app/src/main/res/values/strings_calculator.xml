@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unit_seconds">s</string>
+    <string name="unit_minutes">m</string>
+    <string name="unit_hours">h</string>
+    <string name="unit_days">d</string>
+
+</resources>

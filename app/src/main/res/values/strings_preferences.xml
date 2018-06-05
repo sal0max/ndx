@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_preferences">Settings</string>
+
+    <string name="prefTitle_evSteps">Exposure value step size</string>
+    <string name="prefTitle_sortOrder">Sort filters by…</string>
+    <string name="prefTitle_about">Version %1$s</string>
+    <string name="prefTitle_donate">Donate</string>
+    <string name="prefTitle_changelog">Changelog</string>
+    <string name="prefTitle_categoryGeneral">General</string>
+    <string name="prefTitle_categoryAbout">About</string>
+
+    <string name="prefSummary_about" translatable="false">© %1$d Maximilian Salomon</string>
+    <string name="prefSummary_donate">I developed NDx because I couldn\'t find a similar app: With an intuitive and easy user interface and the flexibility to combine various filters.\n\nDeveloping this app is very time consuming. I do it in my free time. Nevertheless, I give away NDx 100% for free. I trust in you — if you like this app — to show your gratitude by buying me a beer.\nDue to Play Store restrictions, unfortunately you can\'t do that via PayPal, but only via an In-App Purchase.\n\nJust click here, if you\'d like to do so. And keep in mind: Google keeps 30% of your donation.</string>
+
+    <string-array name="prefEntries_evSteps">
+        <item>1 Stop</item>
+        <item>½ Stop</item>
+        <item>⅓ Stop</item>
+    </string-array>
+    <string-array name="prefEntries_sortOrder">
+        <item>Filter factor</item>
+        <item>Name</item>
+    </string-array>
+
+
+    <!-- CONSTANTS ............................................................................. -->
+    <string name="prefKey_evSteps" translatable="false">KEY_EV_STEPS</string>
+    <string name="prefKey_sortOrder" translatable="false">KEY_SORT_ORDER</string>
+    <string name="prefKey_about" translatable="false">KEY_ABOUT</string>
+    <string name="prefKey_donate" translatable="false">KEY_DONATE</string>
+    <string name="prefKey_changelog" translatable="false">KEY_CHANGELOG</string>
+
+    <string-array name="prefValues_evSteps" translatable="false">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="prefValues_sortOrder" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+</resources>

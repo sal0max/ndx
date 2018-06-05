@@ -1,109 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">NDx</string>
 
-    <string name="title_filterPouch">My Filter Pouch</string>
-    <string name="title_preferences">Settings</string>
-    <string name="title_addFilter">Add Filter</string>
-    <string name="title_editFilter">Edit Filter</string>
-
+    <!-- menu entries .......................................................................... -->
     <string name="menu_filterPouch" translatable="false">@string/title_filterPouch</string>
     <string name="menu_preferences" translatable="false">@string/title_preferences</string>
-
 
     <!-- misc .................................................................................. -->
     <string name="ok">OK</string>
     <string name="save">Save</string>
     <string name="undo">Undo</string>
+
     <string name="filterInfo">× %1$s\ \ ·\ \ %2$s Stops\ \ ·\ \ ND %3$s<i>%4$s</i></string>
-
-
-    <!-- calculator ............................................................................ -->
-    <string name="unit_seconds">s</string>
-    <string name="unit_minutes">m</string>
-    <string name="unit_hours">h</string>
-    <string name="unit_days">d</string>
-
-
-    <!-- filter editor ......................................................................... -->
-    <string name="error_nameRequired">Name is required</string>
-    <string name="error_factorRequired">Filter factor is required.</string>
-
-    <string name="hint_name">Name</string>
-    <string name="hint_info">Additional info</string>
-    <string name="hint_properties">Properties</string>
-    <string name="hint_factor">Filter factor</string>
-    <string name="hint_stops">ƒ-Stops</string>
-    <string name="hint_nd">ND</string>
-
-
-    <!-- filter pouch .......................................................................... -->
-    <string name="filterDeleted">Removed %1$s</string>
-
-
-    <!-- preferences ........................................................................... -->
-    <string name="prefTitle_evSteps">Exposure value step size</string>
-    <string name="prefTitle_sortOrder">Sort filters by…</string>
-    <string name="prefTitle_about">Version %1$s</string>
-    <string name="prefTitle_donate">Donate</string>
-    <string name="prefTitle_changelog">Changelog</string>
-    <string name="prefTitle_categoryGeneral">General</string>
-    <string name="prefTitle_categoryAbout">About</string>
-
-    <string name="prefSummary_about" translatable="false">© %1$d Maximilian Salomon</string>
-    <string name="prefSummary_donate">I developed NDx because I couldn\'t find a similar app: With an intuitive and easy user interface and the flexibility to combine various filters.\n\nDeveloping this app is very time consuming. I do it in my free time. Nevertheless, I give away NDx 100% for free. I trust in you — if you like this app — to show your gratitude by buying me a beer.\nDue to Play Store restrictions, unfortunately you can\'t do that via PayPal, but only via an In-App Purchase.\n\nJust click here, if you\'d like to do so. And keep in mind: Google keeps 30% of your donation.</string>
-
-    <string-array name="prefEntries_evSteps">
-        <item>1 Stop</item>
-        <item>½ Stop</item>
-        <item>⅓ Stop</item>
-    </string-array>
-    <string-array name="prefEntries_sortOrder">
-        <item>Filter factor</item>
-        <item>Name</item>
-    </string-array>
-
-
-    <!-- preferences: CONSTANTS ................................................................ -->
-    <string name="prefKey_evSteps" translatable="false">KEY_EV_STEPS</string>
-    <string name="prefKey_sortOrder" translatable="false">KEY_SORT_ORDER</string>
-    <string name="prefKey_about" translatable="false">KEY_ABOUT</string>
-    <string name="prefKey_donate" translatable="false">KEY_DONATE</string>
-    <string name="prefKey_changelog" translatable="false">KEY_CHANGELOG</string>
-
-    <string-array name="prefValues_evSteps" translatable="false">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-    <string-array name="prefValues_sortOrder" translatable="false">
-        <item>0</item>
-        <item>1</item>
-    </string-array>
-
-
-    <!-- filter presets ........................................................................ -->
-    <integer name="preset_filterValue1">3</integer>
-    <string name="preset_filterName1">Generic circular polarizer</string>
-    <string name="preset_filterInfo1">Polarizers add about 1½ Stops</string>
-
-    <integer name="preset_filterValue2">4</integer>
-    <string name="preset_filterName2" translatable="false">Cokin Nuances ND 4</string>
-    <string name="preset_filterInfo2" />
-
-    <integer name="preset_filterValue3">64</integer>
-    <string name="preset_filterName3" translatable="false">Lee Little Stopper</string>
-    <string name="preset_filterInfo3" />
-
-    <integer name="preset_filterValue4">1024</integer>
-    <string name="preset_filterName4" translatable="false">Lee Big Stopper</string>
-    <string name="preset_filterInfo4" />
-
-    <integer name="preset_filterValue5">4096</integer>
-    <string name="preset_filterName5" translatable="false">Haida Slim PROII ND3.6</string>
-    <string name="preset_filterInfo5" />
-
-    <integer name="preset_filterValue6">65536</integer>
-    <string name="preset_filterName6" translatable="false">Formatt Hitech Firecrest 16</string>
-    <string name="preset_filterInfo6">Super dark for long exposures during bright daylight. Cover the viewfinder to prevent light leaks!</string>
 
 </resources>

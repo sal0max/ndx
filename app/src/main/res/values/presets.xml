@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="preset_filterValue1">3</integer>
+    <string name="preset_filterName1">Generic circular polarizer</string>
+    <string name="preset_filterInfo1">Polarizers add about 1½ Stops</string>
+
+    <integer name="preset_filterValue2">4</integer>
+    <string name="preset_filterName2" translatable="false">Cokin Nuances ND 4</string>
+    <string name="preset_filterInfo2" />
+
+    <integer name="preset_filterValue3">64</integer>
+    <string name="preset_filterName3" translatable="false">Lee Little Stopper</string>
+    <string name="preset_filterInfo3" />
+
+    <integer name="preset_filterValue4">1024</integer>
+    <string name="preset_filterName4" translatable="false">Lee Big Stopper</string>
+    <string name="preset_filterInfo4" />
+
+    <integer name="preset_filterValue5">4096</integer>
+    <string name="preset_filterName5" translatable="false">Haida Slim PROII ND3.6</string>
+    <string name="preset_filterInfo5" />
+
+    <integer name="preset_filterValue6">65536</integer>
+    <string name="preset_filterName6" translatable="false">Formatt Hitech Firecrest 16</string>
+    <string name="preset_filterInfo6">Super dark for long exposures during bright daylight. Cover the viewfinder to prevent light leaks!</string>
+
+</resources>
