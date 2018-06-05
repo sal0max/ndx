@@ -20,11 +20,13 @@ class ViewDelegate(inflater: LayoutInflater)
     private var selectedSpeed: Long = 1
     private var filterFactor: Long = 1
 
-    private val resultView = view.findViewById<ResultView>(R.id.resultView)
+    private val shutterView: SnappyRecyclerView = view.findViewById(R.id.recycler_shutter)
+    private val filtersView: RecyclerView = view.findViewById(R.id.recycler_filters)
+    private val resultView: ResultView = view.findViewById(R.id.resultView)
 
     init {
         // list & adapter : shutter speeds
-        view.findViewById<SnappyRecyclerView>(R.id.recycler_shutter).apply {
+        shutterView.apply {
             adapter = shutterSpeedsAdapter
             addItemDecoration(CenterLineDecoration(ContextCompat.getColor(context, android.R.color.white))) // center line
             // addItemDecoration(DotDividerDecoration(ContextCompat.getColor(context, android.R.color.white)))
@@ -35,7 +37,7 @@ class ViewDelegate(inflater: LayoutInflater)
             })
         }
         // list & adapter : filters
-        view.findViewById<RecyclerView>(R.id.recycler_filters).apply {
+        filtersView.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = filterAdapter
             filterAdapter.filterFactorChanged.subscribe({
@@ -50,6 +52,7 @@ class ViewDelegate(inflater: LayoutInflater)
             is State.FiltersReady -> filterAdapter.setFilters(viewState.filters)
             is State.ShutterSpeedsReady -> {
                 shutterSpeedsAdapter.setSpeeds(viewState.speeds)
+                shutterView.snap()
                 resultView.evSteps = viewState.speeds
                 showResult()
             }

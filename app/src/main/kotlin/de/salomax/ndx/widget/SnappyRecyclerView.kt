@@ -50,14 +50,15 @@ class SnappyRecyclerView : RecyclerView {
     override fun onRestoreInstanceState(state: Parcelable?) {
         if (state is Bundle) {
             post({
-                // right way
                 scrollToPosition(state.getInt("snappedPosition"))
-                // hacky way
-                // snapHelper.findSnapView(layoutManager)?.let { snapHelper.calculateDistanceToFinalSnap(layoutManager, it)?.let { scrollBy(it[0], 0) } }
             })
             super.onRestoreInstanceState(state.getParcelable<Parcelable>("superState"))
         } else
             super.onRestoreInstanceState(state)
+    }
+
+    fun snap() {
+        snapHelper.findSnapView(layoutManager)?.let { snapHelper.calculateDistanceToFinalSnap(layoutManager, it)?.let { scrollBy(it[0], 0) } }
     }
 
     /**

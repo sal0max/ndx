@@ -21,10 +21,15 @@
 * animate addition/removal of filters in `myfilters`
 * German localization
 * android wear support (timer)
+* intro/howto on
+   * using nd filters
+   * using this app
+   * when to use which exposure time
 
 
 ## Bugs
 * ~~filter sort order: make it case insensitive~~
+* ~~when shutter-list is scrolled and user changes ev step size, list is repositioned and not snapped any more.~~
 
 
 ## Monetization
