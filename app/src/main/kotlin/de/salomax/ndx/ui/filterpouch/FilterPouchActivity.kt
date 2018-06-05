@@ -24,8 +24,9 @@ class FilterPouchActivity : AppCompatActivity() {
         presenter.attach(viewDelegate)
         setContentView(viewDelegate.view)
 
+        // title bar
+        setTitle(R.string.title_filterPouch)
         supportActionBar?.apply {
-            title = getString(R.string.title_filterPouch)
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
         }

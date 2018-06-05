@@ -92,7 +92,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
                 Snackbar.make(view!!, "TODO: open In-App Purchase-Dialog", Snackbar.LENGTH_SHORT).show()
             }
             changelogPreference -> {
-                val fragment = ChangelogFragment()
+                val fragment = ChangelogDialog()
                 fragment.show(childFragmentManager, null)
             }
         }

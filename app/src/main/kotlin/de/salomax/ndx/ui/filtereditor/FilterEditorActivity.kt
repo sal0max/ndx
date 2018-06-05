@@ -28,11 +28,9 @@ class FilterEditorActivity : AppCompatActivity() {
         val filter = intent.getParcelableExtra<Filter>(ARG_FILTER)
         if (filter != null) presenter.pushState(State.Prepopulate(filter))
 
+        // title bar
+        setTitle(if (filter != null) R.string.title_editFilter else R.string.title_addFilter)
         supportActionBar?.apply {
-            title = if (filter != null)
-                getString(R.string.title_editFilter)
-            else
-                getString(R.string.title_addFilter)
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
             setHomeAsUpIndicator(R.drawable.ic_close_white_24dp)

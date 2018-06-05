@@ -12,6 +12,8 @@ class PreferenceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_preferences)
+
+        // title bar
         setTitle(R.string.title_preferences)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }

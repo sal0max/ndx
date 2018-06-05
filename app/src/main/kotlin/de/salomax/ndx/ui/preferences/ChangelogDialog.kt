@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatDialogFragment
 import android.view.View
 import de.salomax.ndx.R
 
-class ChangelogFragment : AppCompatDialogFragment() {
+class ChangelogDialog : AppCompatDialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val view = View.inflate(context, R.layout.fragment_changelog, null)
