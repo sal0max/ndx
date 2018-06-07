@@ -19,3 +19,9 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class de.salomax.ndx.data.ShutterSpeeds
+-keep class android.arch.lifecycle.**
+-dontnote android.net.http.**
+-dontnote org.apache.http.**
+-dontwarn com.uber.autodispose.**
