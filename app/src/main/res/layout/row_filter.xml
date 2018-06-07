@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_small"
-            tools:text="× 1024  ·  10 Stops  ·  ND 3.0  ·  Super dark for long exposures during bright daylight." />
+            tools:text="× 1024  ·  10 Stops  ·  ND 3.0\nSuper dark for long exposures during bright daylight." />
 
     </LinearLayout>
 

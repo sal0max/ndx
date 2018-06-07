@@ -38,7 +38,7 @@ class FilterAdapter(private val context: Context) : RecyclerView.Adapter<FilterA
                 filter.factor.toString(),
                 MathUtils.factor2fstopRounded(filter.factor.toDouble()),
                 MathUtils.factor2nd(filter.factor.toDouble()),
-                if (filter.info.isNullOrBlank()) "" else "  ·  " + filter.info)
+                if (filter.info.isNullOrBlank()) "" else "\n" + filter.info)
         holder.switch.isChecked = activeItems.contains(filter)
     }
 

@@ -31,7 +31,7 @@ class FilterAdapter(private val context: Context) : RecyclerView.Adapter<FilterA
                 items[position].factor.toString(),
                 MathUtils.factor2fstopRounded(items[position].factor.toDouble()),
                 MathUtils.factor2nd(items[position].factor.toDouble()),
-                if (items[position].info.isNullOrBlank()) "" else "  ·  " + items[position].info)
+                if (items[position].info.isNullOrBlank()) "" else "\n" + items[position].info)
     }
 
     override fun getItemCount() = items.size
