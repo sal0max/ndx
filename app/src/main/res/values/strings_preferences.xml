@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="title_preferences">Settings</string>
 
     <string name="prefTitle_evSteps">Exposure value step size</string>
@@ -10,8 +10,8 @@
     <string name="prefTitle_categoryGeneral">General</string>
     <string name="prefTitle_categoryAbout">About</string>
 
-    <string name="prefSummary_about" translatable="false">© %1$d Maximilian Salomon</string>
-    <string name="prefSummary_donate">I developed NDx because I couldn\'t find a similar app: With an intuitive and easy user interface and the flexibility to combine various filters.\n\nDeveloping this app is very time consuming. I do it in my free time. Nevertheless, I give away NDx 100% for free. I trust in you — if you like this app — to show your gratitude by buying me a beer.\nDue to Play Store restrictions, unfortunately you can\'t do that via PayPal, but only via an In-App Purchase.\n\nJust click here, if you\'d like to do so. And keep in mind: Google keeps 30% of your donation.</string>
+    <string name="prefSummary_about" translatable="false" tools:ignore="PluralsCandidate">© %1$d Maximilian Salomon</string>
+    <string name="prefSummary_donate">I developed NDx because I couldn\'t find a similar app: With an intuitive and easy user interface and the flexibility to combine various filters.\n\nDeveloping this app is very time consuming. I do it in my free time. Nevertheless, I give away NDx 100%% for free. I trust in you — if you like this app — to show your gratitude by buying me a beer.\nDue to Play Store restrictions, unfortunately you can\'t do that via PayPal, but only via an In-App Purchase.\n\nJust click here, if you\'d like to do so. And keep in mind: Google keeps 30%% of your donation.</string>
 
     <string-array name="prefEntries_evSteps">
         <item>1 Stop</item>

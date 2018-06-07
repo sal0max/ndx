@@ -14,10 +14,6 @@ android {
         versionName versionCode.intdiv(100) + " ($versionCode)"
     }
 
-    lintOptions {
-        disable 'GoogleAppIndexingWarning', 'GoogleAppIndexingApiWarning' // app doesn't provide deep-links
-    }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -26,6 +22,11 @@ android {
         debug {
             applicationIdSuffix '.debug'
         }
+    }
+
+    lintOptions {
+        disable 'GoogleAppIndexingWarning', 'GoogleAppIndexingApiWarning' // app doesn't provide deep-links
+        disable 'UnusedResources' //like "text_resultSmall"
     }
 
     android {
