@@ -64,7 +64,7 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
                         .subscribeOn(Schedulers.io()) // Run on a background thread
                         .observeOn(AndroidSchedulers.mainThread()) // Be notified on the main thread
                         .subscribe {
-                            if (millisTotal - millisOffset > 0)
+                            if (millisTotal - millisOffset >= 0)
                                 updateUi(millisTotal, millisOffset)
                             else
                                 pushEvent(Event.Alarm)
