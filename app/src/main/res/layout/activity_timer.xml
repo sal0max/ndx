@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.github.guilhe.circularprogressview.CircularProgressView
+        android:id="@+id/progress"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:backgroundAlphaEnabled="true"
+        app:layout_constraintBottom_toTopOf="@+id/fab_pause"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_max="wrap"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_max="wrap"
+        app:progressBarColor="@color/colorAccent"
+        app:progressBarThickness="4dp"
+        app:progressThumb="true"
+        app:shadow="false"
+        tools:progress="60" />
+
+    <TextView
+        android:id="@+id/guideline"
+        style="@style/Base.TextAppearance.AppCompat.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="@dimen/margin1x"
+        android:paddingStart="@dimen/margin1x"
+        android:text=":"
+        android:textSize="@dimen/text_resultLarge"
+        app:layout_constraintBottom_toBottomOf="@id/progress"
+        app:layout_constraintEnd_toEndOf="@id/progress"
+        app:layout_constraintStart_toStartOf="@id/progress"
+        app:layout_constraintTop_toTopOf="@id/progress"
+        tools:ignore="hardcodedText" />
+
+    <TextView
+        android:id="@+id/textMin"
+        style="@style/Base.TextAppearance.AppCompat.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_resultLarge"
+        app:layout_constraintBaseline_toBaselineOf="@id/guideline"
+        app:layout_constraintEnd_toStartOf="@id/guideline"
+        tools:text="01" />
+
+    <TextView
+        android:id="@+id/textSec"
+        style="@style/Base.TextAppearance.AppCompat.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="@dimen/margin1x"
+        android:textSize="@dimen/text_resultLarge"
+        app:layout_constraintBaseline_toBaselineOf="@id/guideline"
+        app:layout_constraintStart_toEndOf="@id/guideline"
+        tools:ignore="RtlSymmetry"
+        tools:text="12" />
+
+    <TextView
+        android:id="@+id/textMilli"
+        style="@style/Base.TextAppearance.AppCompat.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_resultSmall"
+        app:layout_constraintBaseline_toBaselineOf="@id/guideline"
+        app:layout_constraintStart_toEndOf="@id/textSec"
+        tools:text=".1" />
+
+    <TextView
+        android:id="@+id/textHour"
+        style="@style/Base.TextAppearance.AppCompat.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_normal"
+        app:layout_constraintBottom_toTopOf="@id/guideline"
+        app:layout_constraintStart_toStartOf="@id/textMin"
+        tools:text="152 h" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_pause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin2x"
+        android:src="@drawable/ic_pause_white_24dp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
