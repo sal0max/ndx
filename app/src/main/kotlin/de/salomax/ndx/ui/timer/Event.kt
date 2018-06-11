@@ -8,5 +8,5 @@ sealed class Event : ViewEvent {
     object PauseTimer : Event()
 
     object Alarm : Event()
-    object Stop : Event()
+    object Finish : Event()
 }
