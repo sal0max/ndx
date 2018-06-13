@@ -51,7 +51,8 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
     override fun render(viewState: State) {
         when (viewState) {
             is State.PopulateTimer -> {
-                subscription?.dispose()
+                if (subscription != null)
+                    return
                 //
                 millisTotal = viewState.millisTotal
                 millisOffset = viewState.millisOffset

@@ -1,16 +1,8 @@
 package de.salomax.ndx.ui.timer
 
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.OnLifecycleEvent
 import com.joaquimverges.helium.presenter.BasePresenter
 
 class Presenter : BasePresenter<State, Event>() {
-
-    //TODO remove
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    private fun start() {
-        pushState(State.PopulateTimer(1_000 * 4, 0))
-    }
 
     override fun onViewEvent(event: Event) {
         when (event) {

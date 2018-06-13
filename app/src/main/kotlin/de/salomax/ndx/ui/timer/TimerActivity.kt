@@ -23,6 +23,10 @@ class TimerActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
         }
+
+        intent.extras?.let {
+            presenter.pushState(State.PopulateTimer(it.getLong("MILLIS"), 0))
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

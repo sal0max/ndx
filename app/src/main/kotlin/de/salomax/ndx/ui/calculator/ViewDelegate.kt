@@ -8,8 +8,8 @@ import com.joaquimverges.helium.viewdelegate.BaseViewDelegate
 import de.salomax.ndx.R
 import de.salomax.ndx.util.MathUtils
 import de.salomax.ndx.widget.CenterLineDecoration
-import de.salomax.ndx.widget.SnappyRecyclerView
 import de.salomax.ndx.widget.ResultView
+import de.salomax.ndx.widget.SnappyRecyclerView
 
 class ViewDelegate(inflater: LayoutInflater)
     : BaseViewDelegate<State, Event>(R.layout.activity_calculator, inflater) {
@@ -31,19 +31,19 @@ class ViewDelegate(inflater: LayoutInflater)
             addItemDecoration(CenterLineDecoration(ContextCompat.getColor(context, android.R.color.white))) // center line
             // addItemDecoration(DotDividerDecoration(ContextCompat.getColor(context, android.R.color.white)))
             setHasFixedSize(true)
-            snappedEvent.subscribe({
+            snappedEvent.subscribe {
                 selectedSpeed = shutterSpeedsAdapter.selectedSpeed
                 showResult()
-            })
+            }
         }
         // list & adapter : filters
         filtersView.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = filterAdapter
-            filterAdapter.filterFactorChanged.subscribe({
+            filterAdapter.filterFactorChanged.subscribe {
                 filterFactor = it
                 showResult()
-            })
+            }
         }
     }
 
@@ -62,6 +62,16 @@ class ViewDelegate(inflater: LayoutInflater)
     private fun showResult() {
         val micro = MathUtils.multiply(selectedSpeed, filterFactor)
         resultView.setDuration(micro)
+        // activate timer?
+        if (micro != null)
+            (context as CalculatorActivity).enableTimer(micro > 1_000_000L) // > 1s
+        else
+            (context as CalculatorActivity).enableTimer(false)
+    }
+
+    // micros
+    fun getSelectedSpeed(): Long? {
+        return MathUtils.multiply(selectedSpeed, filterFactor)
     }
 
 }
