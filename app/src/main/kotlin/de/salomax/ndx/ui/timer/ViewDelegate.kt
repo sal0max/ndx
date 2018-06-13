@@ -3,9 +3,12 @@ package de.salomax.ndx.ui.timer
 import android.content.Context
 import android.media.AudioAttributes
 import android.media.AudioManager
+import android.media.MediaPlayer
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
+import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.TextView
 import com.github.guilhe.circularprogressview.CircularProgressView
 import com.joaquimverges.helium.viewdelegate.BaseViewDelegate
@@ -15,9 +18,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
-import android.view.animation.AnimationUtils
-import android.media.MediaPlayer
-import android.view.View
 
 class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.layout.activity_timer, inflater) {
 
@@ -71,7 +71,7 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
                         .subscribeOn(Schedulers.io()) // Run on a background thread
                         .observeOn(AndroidSchedulers.mainThread()) // Be notified on the main thread
                         .subscribe {
-                            if (millisTotal - millisOffset < 0) pushEvent(Event.Alarm)
+                            if (millisTotal - millisOffset == 0L) pushEvent(Event.Alarm)
                             updateText(millisTotal, millisOffset)
                             millisOffset += it
                         }
