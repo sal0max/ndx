@@ -11,7 +11,7 @@
 
 ### normal priority
 * implement timer
-   * restore state on configuration change
+   * ~~restore state on configuration change~~
    * make system alarm when in background
    * add a reset button for when when paused
    * also display days, not just hours

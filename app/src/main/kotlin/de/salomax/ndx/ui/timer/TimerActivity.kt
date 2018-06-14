@@ -8,12 +8,13 @@ import de.salomax.ndx.R
 class TimerActivity : AppCompatActivity() {
 
     private lateinit var presenter: Presenter
+    private lateinit var viewDelegate: ViewDelegate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         presenter = RetainedPresenters.get(this, Presenter::class.java)
-        val viewDelegate = ViewDelegate(layoutInflater)
+        viewDelegate = ViewDelegate(layoutInflater)
         presenter.attach(viewDelegate)
         setContentView(viewDelegate.view)
 
@@ -25,12 +26,12 @@ class TimerActivity : AppCompatActivity() {
         }
 
         intent.extras?.let {
-            presenter.pushState(State.PopulateTimer(it.getLong("MILLIS"), 0))
+            viewDelegate.pushEvent(Event.PopulateTimer(it.getLong("MILLIS"), 0))
         }
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        presenter.pushState(State.Finish)
+        viewDelegate.pushEvent(Event.Finish)
         return true
     }
 

@@ -13,10 +13,6 @@ import android.widget.TextView
 import com.github.guilhe.circularprogressview.CircularProgressView
 import com.joaquimverges.helium.viewdelegate.BaseViewDelegate
 import de.salomax.ndx.R
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
 class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.layout.activity_timer, inflater) {
@@ -43,61 +39,39 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
         alarmPlayer.isLooping = true
     }
 
-    // current state
-    private var subscription: Disposable? = null
-    private var millisTotal = 0L
-    private var millisOffset = 0L
-
     override fun render(viewState: State) {
         when (viewState) {
-            is State.PopulateTimer -> {
-                if (subscription != null)
-                    return
-                //
-                millisTotal = viewState.millisTotal
-                millisOffset = viewState.millisOffset
-                btnControl.setImageResource(R.drawable.ic_play_arrow_white_24dp)
-                btnControl.setOnClickListener { pushEvent(Event.RunTimer) }
-                blinkText(false)
+            is State.UpdateText -> {
                 updateText(viewState.millisTotal, viewState.millisOffset)
             }
 
-            is State.RunTimer -> {
+            is State.Init -> {
+                blinkText(false)
+                btnControl.setImageResource(R.drawable.ic_play_arrow_white_24dp)
+                btnControl.setOnClickListener { pushEvent(Event.StartCountDown) }
+            }
+
+            is State.TimerRunning -> {
                 btnControl.setImageResource(R.drawable.ic_pause_white_24dp)
                 btnControl.setOnClickListener { pushEvent(Event.PauseTimer) }
                 blinkText(false)
-                // start countdown
-                subscription = Observable.interval(10, TimeUnit.MILLISECONDS)
-                        .map { 10L }
-                        .subscribeOn(Schedulers.io()) // Run on a background thread
-                        .observeOn(AndroidSchedulers.mainThread()) // Be notified on the main thread
-                        .subscribe {
-                            if (millisTotal - millisOffset == 0L) pushEvent(Event.Alarm)
-                            updateText(millisTotal, millisOffset)
-                            millisOffset += it
-                        }
             }
 
-            is State.PauseTimer -> {
+            is State.TimerPaused -> {
                 btnControl.setImageResource(R.drawable.ic_play_arrow_white_24dp)
-                btnControl.setOnClickListener { pushEvent(Event.RunTimer) }
+                btnControl.setOnClickListener { pushEvent(Event.StartCountDown) }
                 blinkText(true)
-                //
-                subscription?.dispose()
             }
 
             is State.Alarm -> {
                 alarmPlayer.start()
                 circularProgress.startAnimation(blinkAnimation)
                 btnControl.setImageResource(R.drawable.ic_stop_white_24dp)
-                btnControl.setOnClickListener {
-                    pushEvent(Event.Finish)
-                }
+                btnControl.setOnClickListener { pushEvent(Event.Finish) }
             }
 
             is State.Finish -> {
                 alarmPlayer.stop()
-                subscription?.dispose()
                 (context as AppCompatActivity).finish()
             }
         }
@@ -106,12 +80,14 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
     private fun blinkText(enabled: Boolean) {
         if (enabled) {
             tvColon.startAnimation(blinkAnimation)
+            tvMinus.startAnimation(blinkAnimation)
             tvMinutes.startAnimation(blinkAnimation)
             tvSeconds.startAnimation(blinkAnimation)
             tvHours.startAnimation(blinkAnimation)
             tvMillis.startAnimation(blinkAnimation)
         } else {
             tvColon.clearAnimation()
+            tvMinus.clearAnimation()
             tvMinutes.clearAnimation()
             tvSeconds.clearAnimation()
             tvHours.clearAnimation()
