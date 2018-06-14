@@ -64,7 +64,7 @@ class ViewDelegate(inflater: LayoutInflater)
         resultView.setDuration(micro)
         // activate timer?
         if (micro != null)
-            (context as CalculatorActivity).enableTimer(micro > 1_000_000L) // > 1s
+            (context as CalculatorActivity).enableTimer(micro >= 1_000_000L) // >= 1s
         else
             (context as CalculatorActivity).enableTimer(false)
     }
