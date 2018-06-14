@@ -11,6 +11,10 @@
 
 ### normal priority
 * implement timer
+   * restore state on configuration change
+   * make system alarm when in background
+   * add a reset button for when when paused
+   * also display days, not just hours
 * additional themes
    * dark
    * all black
@@ -35,6 +39,7 @@
 ## Monetization
 * freemium-model
    * more than 3 or 4 filters
+   * timer OR timer > 30s
    * additional themes
 * ~~maybe instead: implement donation via In-App Purchase~~
    * 01,00€: small coffee
