@@ -28,7 +28,7 @@ class Presenter : BasePresenter<State, Event>() {
                 }
             }
 
-            is Event.StartCountDown -> {
+            is Event.StartCountdown -> {
                 // countdown
                 intervalSubscription = Observable.interval(10, TimeUnit.MILLISECONDS)
                         .map { 10L }
@@ -47,6 +47,13 @@ class Presenter : BasePresenter<State, Event>() {
             is Event.PauseTimer -> {
                 intervalSubscription?.dispose()
                 pushState(State.TimerPaused)
+            }
+
+            is Event.Reset -> {
+                intervalSubscription?.dispose()
+                millisCurrent = 0L
+                pushState(State.Init)
+                pushState(State.UpdateText(millisTotal, millisCurrent))
             }
 
             is Event.Alarm -> {

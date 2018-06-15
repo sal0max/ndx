@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.AnimationUtils
+import android.widget.Button
 import android.widget.TextView
 import com.github.guilhe.circularprogressview.CircularProgressView
 import com.joaquimverges.helium.viewdelegate.BaseViewDelegate
@@ -26,6 +27,7 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
     private val tvMillis = view.findViewById<TextView>(R.id.textMilli)
     private val circularProgress = view.findViewById<CircularProgressView>(R.id.progress)
     private val btnControl = view.findViewById<FloatingActionButton>(R.id.fab_pause)
+    private val btnReset = view.findViewById<Button>(R.id.btn_reset)
 
     // final objects
     private val blinkAnimation = AnimationUtils.loadAnimation(context, R.anim.blink)
@@ -37,9 +39,11 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
 
     init {
         alarmPlayer.isLooping = true
+        btnReset.setOnClickListener { pushEvent(Event.Reset) }
     }
 
     override fun render(viewState: State) {
+        btnReset.visibility = View.GONE
         when (viewState) {
             is State.UpdateText -> {
                 updateText(viewState.millisTotal, viewState.millisOffset)
@@ -48,7 +52,7 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
             is State.Init -> {
                 blinkText(false)
                 btnControl.setImageResource(R.drawable.ic_play_arrow_white_24dp)
-                btnControl.setOnClickListener { pushEvent(Event.StartCountDown) }
+                btnControl.setOnClickListener { pushEvent(Event.StartCountdown) }
             }
 
             is State.TimerRunning -> {
@@ -59,8 +63,9 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
 
             is State.TimerPaused -> {
                 btnControl.setImageResource(R.drawable.ic_play_arrow_white_24dp)
-                btnControl.setOnClickListener { pushEvent(Event.StartCountDown) }
+                btnControl.setOnClickListener { pushEvent(Event.StartCountdown) }
                 blinkText(true)
+                btnReset.visibility = View.VISIBLE
             }
 
             is State.Alarm -> {

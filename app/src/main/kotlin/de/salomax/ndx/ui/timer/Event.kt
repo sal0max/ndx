@@ -4,8 +4,9 @@ import com.joaquimverges.helium.event.ViewEvent
 
 sealed class Event : ViewEvent {
     data class PopulateTimer(val millisTotal: Long, val millisCurrent: Long) : Event()
-    object StartCountDown : Event()
+    object StartCountdown : Event()
     object PauseTimer : Event()
+    object Reset : Event()
 
     object Alarm : Event()
     object Finish : Event()

@@ -23,6 +23,7 @@ class TimerActivity : AppCompatActivity() {
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
+            setHomeAsUpIndicator(R.drawable.ic_close_white_24dp)
         }
 
         intent.extras?.let {
@@ -31,8 +32,13 @@ class TimerActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        viewDelegate.pushEvent(Event.Finish)
+        onBackPressed()
         return true
+    }
+
+    override fun onBackPressed() {
+        viewDelegate.pushEvent(Event.Finish)
+        super.onBackPressed()
     }
 
 }

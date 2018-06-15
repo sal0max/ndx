@@ -13,13 +13,14 @@
         app:backgroundAlphaEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/fab_pause"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_max="wrap"
+        app:layout_constraintHeight_max="300sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_max="wrap"
+        app:layout_constraintWidth_max="300sp"
         app:progressBarColor="@color/colorAccent"
         app:progressBarThickness="8dp"
         app:progressThumb="true"
+        app:reverse="true"
         app:shadow="false"
         tools:progress="60" />
 
@@ -32,10 +33,10 @@
         android:paddingStart="@dimen/margin1x"
         android:text=":"
         android:textSize="@dimen/text_resultLarge"
-        app:layout_constraintBottom_toBottomOf="@id/progress"
-        app:layout_constraintEnd_toEndOf="@id/progress"
-        app:layout_constraintStart_toStartOf="@id/progress"
-        app:layout_constraintTop_toTopOf="@id/progress"
+        app:layout_constraintBottom_toTopOf="@id/fab_pause"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="hardcodedText" />
 
     <TextView
@@ -94,6 +95,19 @@
         app:layout_constraintBottom_toTopOf="@id/colon"
         app:layout_constraintStart_toStartOf="@id/textMin"
         tools:text="152 h" />
+
+    <Button
+        android:id="@+id/btn_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="?android:selectableItemBackgroundBorderless"
+        android:minHeight="48dp"
+        android:minWidth="48dp"
+        android:text="@string/reset_timer"
+        app:layout_constraintEnd_toEndOf="@id/colon"
+        app:layout_constraintStart_toStartOf="@id/colon"
+        app:layout_constraintTop_toBottomOf="@id/colon" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_pause"
