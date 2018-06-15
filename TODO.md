@@ -12,9 +12,13 @@
 ### normal priority
 * implement timer
    * ~~restore state on configuration change~~
+   * ~~add a reset button for when paused~~
+   * ~~better layout on large screens~~
+   * ~~make alarm sound quieter~~
    * make system alarm when in background
-   * add a reset button for when when paused
    * also display days, not just hours
+   * better blinking
+   * vibrate?
 * additional themes
    * dark
    * all black
@@ -28,7 +32,8 @@
 * intro/howto on
    * using nd filters
    * using this app
-   * when to use which exposure time
+   * when to use which exposure time (foggy waves, dynamic waves, disappearing people, ...)
+   * how to use the timer when no remote shutter release is at hand
 
 
 ## Bugs
