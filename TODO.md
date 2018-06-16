@@ -11,6 +11,15 @@
 
 ### normal priority
 * implement timer
+   * ~~restore state on configuration change~~
+   * ~~add a reset button for when paused~~
+   * ~~better layout on large screens~~
+   * ~~make alarm sound quieter~~
+   * ~~vibrate~~
+   * ~~fix: wrong state when finished and configuration change happens~~
+   * make system alarm when in background
+   * also display days, not just hours
+   * better blinking
 * additional themes
    * dark
    * all black
@@ -24,7 +33,8 @@
 * intro/howto on
    * using nd filters
    * using this app
-   * when to use which exposure time
+   * when to use which exposure time (foggy waves, dynamic waves, disappearing people, ...)
+   * how to use the timer when no remote shutter release is at hand
 
 
 ## Bugs
@@ -35,6 +45,7 @@
 ## Monetization
 * freemium-model
    * more than 3 or 4 filters
+   * timer OR timer > 30s
    * additional themes
 * ~~maybe instead: implement donation via In-App Purchase~~
    * 01,00€: small coffee

@@ -11,5 +11,7 @@ data class Pref(@PrimaryKey @ColumnInfo(name = "KEY") val key: String,
     companion object {
         const val EV_STEPS = "EV_STEPS"
         const val FILTER_SORT_ORDER = "FILTER_SORT_ORDER"
+        const val ALARM_BEEP = "ALARM_BEEP"
+        const val ALARM_VIBRATE = "ALARM_VIBRATE"
     }
 }

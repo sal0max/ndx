@@ -12,11 +12,14 @@ import de.salomax.ndx.ui.preferences.PreferenceActivity
 
 class CalculatorActivity : AppCompatActivity() {
 
+    private var timerEnabled: Boolean = true
+    private lateinit var viewDelegate: ViewDelegate
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val presenter = RetainedPresenters.get(this, Presenter::class.java)
-        val viewDelegate = ViewDelegate(layoutInflater)
+        viewDelegate = ViewDelegate(layoutInflater)
         presenter.attach(viewDelegate)
         setContentView(viewDelegate.view)
 
@@ -26,6 +29,12 @@ class CalculatorActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.calculator, menu)
+
+        // enable or disable timer
+        val timer = menu.findItem(R.id.menu_timer)
+        timer.isEnabled = timerEnabled
+        timer.icon.alpha = if (timerEnabled) 255 else 128
+
         return true
     }
 
@@ -39,7 +48,18 @@ class CalculatorActivity : AppCompatActivity() {
                 startActivity(Intent(this, PreferenceActivity().javaClass))
                 true
             }
+            R.id.menu_timer -> {
+                viewDelegate.pushEvent(Event.StartTimer(viewDelegate.getSelectedSpeed()!!))
+                true
+            }
             else -> false
+        }
+    }
+
+    fun enableTimer(enabled: Boolean) {
+        if (enabled != timerEnabled) {
+            timerEnabled = enabled
+            invalidateOptionsMenu()
         }
     }
 

@@ -9,4 +9,9 @@
         android:id="@+id/menu_settings"
         android:title="@string/menu_preferences"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_timer"
+        android:icon="@drawable/ic_timer_white_24dp"
+        android:title="@string/title_timer"
+        app:showAsAction="ifRoom" />
 </menu>

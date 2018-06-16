@@ -15,6 +15,9 @@ interface PrefDao {
     @Query("SELECT `VALUE` FROM prefs WHERE `KEY` = '" + Pref.EV_STEPS + "' LIMIT 1")
     fun getEvSteps(): Flowable<String>
 
+    @Query("SELECT * FROM prefs WHERE `KEY` = '" + Pref.ALARM_BEEP + "' OR `KEY` = '" + Pref.ALARM_VIBRATE + "'")
+    fun getTimerAlarms(): List<Pref>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(pref: Pref)
 

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.salomax.ndx">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -20,6 +22,7 @@
         <activity android:name=".ui.filtereditor.FilterEditorActivity" />
         <activity android:name=".ui.filterpouch.FilterPouchActivity" />
         <activity android:name=".ui.preferences.PreferenceActivity" />
+        <activity android:name=".ui.timer.TimerActivity" />
     </application>
 
 </manifest>

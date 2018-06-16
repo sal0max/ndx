@@ -3,7 +3,9 @@ package de.salomax.ndx.widget
 import android.annotation.SuppressLint
 import android.content.Context
 import android.support.constraint.ConstraintLayout
-import android.text.*
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.SpannedString
 import android.text.style.RelativeSizeSpan
 import android.util.AttributeSet
 import android.view.LayoutInflater

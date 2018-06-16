@@ -59,6 +59,9 @@ dependencies {
     // MVP
     implementation 'com.joaquimverges:helium:0.1.0'
 
+    // widgets
+    implementation 'com.github.guilhe:circular-progress-view:1.3.1'
+
     // Support libs
     def supportLib_version = '27.1.1'
     implementation "com.android.support:appcompat-v7:$supportLib_version"

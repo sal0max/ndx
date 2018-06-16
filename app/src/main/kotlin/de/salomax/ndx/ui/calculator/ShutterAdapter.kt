@@ -38,9 +38,9 @@ class ShutterAdapter : RecyclerView.Adapter<ShutterAdapter.ViewHolder>() {
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
-        subscription = (recyclerView as SnappyRecyclerView).snappedEvent.subscribe({
+        subscription = (recyclerView as SnappyRecyclerView).snappedEvent.subscribe {
             selectedSpeed = items?.doubleValues?.get(it) ?: 1
-        })
+        }
     }
 
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
