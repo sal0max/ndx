@@ -10,7 +10,7 @@ android {
         applicationId "de.salomax.ndx"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 303
+        versionCode 401
         versionName versionCode.intdiv(100) + " ($versionCode)"
     }
 
@@ -68,7 +68,7 @@ dependencies {
     implementation "com.android.support:design:$supportLib_version"
     implementation "com.android.support:preference-v7:$supportLib_version"
     implementation "com.android.support:recyclerview-v7:$supportLib_version"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
 
     // Room
     def room_version = '1.1.0'
