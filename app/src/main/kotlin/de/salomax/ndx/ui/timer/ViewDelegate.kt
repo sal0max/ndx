@@ -2,7 +2,6 @@ package de.salomax.ndx.ui.timer
 
 import android.content.Context
 import android.media.AudioAttributes
-import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.VibrationEffect
@@ -25,6 +24,10 @@ import java.util.concurrent.TimeUnit
 
 class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.layout.activity_timer, inflater) {
 
+    companion object {
+        private var alarmPlayer: MediaPlayer? = null
+    }
+
     // all the views
     private val tvColon = view.findViewById<TextView>(R.id.colon)
     private val tvMinus = view.findViewById<TextView>(R.id.minus)
@@ -36,63 +39,82 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
     private val btnControl = view.findViewById<FloatingActionButton>(R.id.fab_pause)
     private val btnReset = view.findViewById<Button>(R.id.btn_reset)
 
-    // final objects
+    // animation, alarms
     private val blinkAnimation = AnimationUtils.loadAnimation(context, R.anim.blink)
     private val vibrator: Vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
     private val vibratorPattern = longArrayOf(0, 100, 100, 200, 500)
-    private var alarmPlayer: MediaPlayer = MediaPlayer.create(
-            context,
-            R.raw.timer_expire_short,
-            AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_ALARM).build(),
-            (context.getSystemService(Context.AUDIO_SERVICE) as AudioManager).generateAudioSessionId())
 
     init {
-        alarmPlayer.isLooping = true
-        btnReset.setOnClickListener { pushEvent(Event.Reset) }
+        btnReset.setOnClickListener { pushEvent(Event.ResetTimer) }
+
+        if (alarmPlayer == null) {
+            alarmPlayer = MediaPlayer()
+            val afd = context.resources.openRawResourceFd(R.raw.timer_expire_short)
+            alarmPlayer!!.setDataSource(afd!!.fileDescriptor, afd.startOffset, afd.length)
+            afd.close()
+            alarmPlayer!!.setAudioAttributes(AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_ALARM).build())
+            alarmPlayer!!.isLooping = true
+            alarmPlayer!!.prepare()
+        }
     }
 
     override fun render(viewState: State) {
-        btnReset.visibility = View.GONE
         when (viewState) {
-            is State.UpdateText -> {
-                updateText(viewState.millisTotal, viewState.millisOffset)
-            }
-
-            is State.Init -> {
-                blinkText(false)
+            is State.InitOrReset -> {
+                // update Text
+                updateText(viewState.millisTotal, viewState.millisOffset, false)
+                // play-button
                 btnControl.setImageResource(R.drawable.ic_play_arrow_white_24dp)
-                btnControl.setOnClickListener { pushEvent(Event.StartCountdown) }
+                btnControl.setOnClickListener { pushEvent(Event.RunCountdown) }
+                // no blinking
+                blinkText(false)
+                circularProgress.clearAnimation()
+                // hide reset
+                btnReset.visibility = View.GONE
             }
-
-            is State.TimerRunning -> {
+            is State.CountdownRunning -> {
+                // update Text
+                updateText(viewState.millisTotal, viewState.millisOffset, false)
+                // pause-button
                 btnControl.setImageResource(R.drawable.ic_pause_white_24dp)
-                btnControl.setOnClickListener { pushEvent(Event.PauseTimer) }
+                btnControl.setOnClickListener { pushEvent(Event.PauseCountdown) }
+                // no blinking
                 blinkText(false)
+                circularProgress.clearAnimation()
+                // hide reset
+                btnReset.visibility = View.GONE
             }
-
-            is State.TimerPaused -> {
+            is State.CountdownPaused -> {
+                updateText(viewState.millisTotal, viewState.millisOffset, true)
+                // play-button
                 btnControl.setImageResource(R.drawable.ic_play_arrow_white_24dp)
-                btnControl.setOnClickListener { pushEvent(Event.StartCountdown) }
-                blinkText(true)
+                btnControl.setOnClickListener { pushEvent(Event.RunCountdown) }
+                // blink text
+                if (tvColon.animation == null) blinkText(true)
+                // show reset
                 btnReset.visibility = View.VISIBLE
             }
-
-            is State.Alarm -> {
-                circularProgress.startAnimation(blinkAnimation)
+            is State.CountdownFinished -> {
+                // update Text
+                updateText(viewState.millisTotal, viewState.millisOffset, false)
+                // stop-button
                 btnControl.setImageResource(R.drawable.ic_stop_white_24dp)
                 btnControl.setOnClickListener { pushEvent(Event.Finish) }
-                // check whether to beep and/or to vibrate
+                // blink progress
+                if (circularProgress.animation == null)
+                    circularProgress.startAnimation(blinkAnimation)
+                // hide reset
+                btnReset.visibility = View.GONE
+                // alarm: check whether to beep and/or to vibrate
                 Observable.just(NdxDatabase.getInstance(context))
                         .subscribeOn(Schedulers.io())
                         .subscribe {
                             for (pref in it.prefDao().getTimerAlarms()) {
                                 when (pref.key) {
                                     Pref.ALARM_BEEP -> if (pref.value == "1") {
-                                        // alarm: beep
-                                        alarmPlayer.start()
+                                        alarmPlayer?.let { if (!alarmPlayer!!.isPlaying) alarmPlayer!!.start() }
                                     }
                                     Pref.ALARM_VIBRATE -> if (pref.value == "1") {
-                                        // alarm: vibration
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                             vibrator.vibrate(VibrationEffect.createWaveform(vibratorPattern, 0))
                                         } else {
@@ -104,9 +126,10 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
                             }
                         }
             }
-
             is State.Finish -> {
-                alarmPlayer.stop()
+                alarmPlayer?.stop()
+                alarmPlayer?.release()
+                alarmPlayer = null
                 vibrator.cancel()
                 (context as AppCompatActivity).finish()
             }
@@ -131,9 +154,9 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
         }
     }
 
-    private fun updateText(totalMillis: Long, currentMillis: Long) {
+    private fun updateText(totalMillis: Long, currentMillis: Long, forceUpdate: Boolean) {
         // every 0.1s
-        if (currentMillis % 100 == 0L) {
+        if (currentMillis % 100 == 0L || forceUpdate) {
             val remainingTime = totalMillis - currentMillis
 
             // minus
@@ -168,9 +191,14 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
         }
 
         // every 0.01s / 10ms (100fps)
-        if (totalMillis - currentMillis >= 0 && currentMillis % 10 == 0L) {
-            circularProgress.max = totalMillis.toInt()
-            circularProgress.progress = currentMillis.toFloat()
+        if (currentMillis % 10 == 0L) {
+            if (totalMillis - currentMillis >= 0) {
+                circularProgress.max = totalMillis.toInt()
+                circularProgress.progress = currentMillis.toFloat()
+            } else {
+                circularProgress.max = 1
+                circularProgress.progress = 1f
+            }
         }
     }
 

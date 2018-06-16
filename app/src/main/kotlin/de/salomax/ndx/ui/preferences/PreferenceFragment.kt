@@ -51,7 +51,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
         alarmBeepPreference.onPreferenceClickListener = this
         alarmVibratePreference.onPreferenceClickListener = this
         // check whether device can vibrate
-        alarmVibratePreference.isEnabled = (context!!.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator).hasVibrator()
+        alarmVibratePreference.isVisible = (context!!.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator).hasVibrator()
 
         // beg for donations
         donatePreference.onPreferenceClickListener = this

@@ -16,7 +16,7 @@
    * ~~better layout on large screens~~
    * ~~make alarm sound quieter~~
    * ~~vibrate~~
-   * fix: wrong state when finished and configuration change happens
+   * ~~fix: wrong state when finished and configuration change happens~~
    * make system alarm when in background
    * also display days, not just hours
    * better blinking
