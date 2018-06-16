@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="changelog">
-        <b><big>v303</big></b>
+        <b><big>v4 (401)</big></b>
+        \n• New big feature: <b>A Timer</b>! Comes in handy, if you forgot your remote shutter release at home. (Or when it fell in the water…)
+        \n• Prettified the settings menu. Material ftw!
+
+        \n\n<b><big>v3 (303)</big></b>
         \n• Some tiny UI refinements and other under-the-hood enhancements
 
-        \n\n<b><big>v302</big></b>
-        \n• Landscape mode!
+        \n\n<b><big>v3 (302)</big></b>
+        \n• <b>Landscape mode!</b>
         \n• Added this changelog dialog.
         \n• Fix: The filter factor is now only allowed to be ≥ 1. A filter can\'t really increase the amount of light.
 
-        \n\n<b><big>v301 – <i>initial release</i></big></b>
+        \n\n<b><big>v3 (301) – <i>initial release</i></big></b>
         \nVersion 3 is my third iteration in writing this app. A complete re-write! A different,
         better user interface! Performance first! More features than ever! And ultimately the first
         version that is openly available.
