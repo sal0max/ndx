@@ -4,6 +4,9 @@ import android.content.Context
 import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
+import android.os.Build
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
@@ -14,6 +17,10 @@ import android.widget.TextView
 import com.github.guilhe.circularprogressview.CircularProgressView
 import com.joaquimverges.helium.viewdelegate.BaseViewDelegate
 import de.salomax.ndx.R
+import de.salomax.ndx.data.NdxDatabase
+import de.salomax.ndx.data.Pref
+import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
 class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.layout.activity_timer, inflater) {
@@ -31,6 +38,8 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
 
     // final objects
     private val blinkAnimation = AnimationUtils.loadAnimation(context, R.anim.blink)
+    private val vibrator: Vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+    private val vibratorPattern = longArrayOf(0, 100, 100, 200, 500)
     private var alarmPlayer: MediaPlayer = MediaPlayer.create(
             context,
             R.raw.timer_expire_short,
@@ -69,14 +78,36 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
             }
 
             is State.Alarm -> {
-                alarmPlayer.start()
                 circularProgress.startAnimation(blinkAnimation)
                 btnControl.setImageResource(R.drawable.ic_stop_white_24dp)
                 btnControl.setOnClickListener { pushEvent(Event.Finish) }
+                // check whether to beep and/or to vibrate
+                Observable.just(NdxDatabase.getInstance(context))
+                        .subscribeOn(Schedulers.io())
+                        .subscribe {
+                            for (pref in it.prefDao().getTimerAlarms()) {
+                                when (pref.key) {
+                                    Pref.ALARM_BEEP -> if (pref.value == "1") {
+                                        // alarm: beep
+                                        alarmPlayer.start()
+                                    }
+                                    Pref.ALARM_VIBRATE -> if (pref.value == "1") {
+                                        // alarm: vibration
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                            vibrator.vibrate(VibrationEffect.createWaveform(vibratorPattern, 0))
+                                        } else {
+                                            @Suppress("DEPRECATION")
+                                            vibrator.vibrate(vibratorPattern, 0)
+                                        }
+                                    }
+                                }
+                            }
+                        }
             }
 
             is State.Finish -> {
                 alarmPlayer.stop()
+                vibrator.cancel()
                 (context as AppCompatActivity).finish()
             }
         }
