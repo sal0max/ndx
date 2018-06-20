@@ -1,11 +1,5 @@
 package de.salomax.ndx.ui.timer
 
-import android.content.Context
-import android.media.AudioAttributes
-import android.media.MediaPlayer
-import android.os.Build
-import android.os.VibrationEffect
-import android.os.Vibrator
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
@@ -18,15 +12,13 @@ import com.joaquimverges.helium.viewdelegate.BaseViewDelegate
 import de.salomax.ndx.R
 import de.salomax.ndx.data.NdxDatabase
 import de.salomax.ndx.data.Pref
+import de.salomax.ndx.util.ManagedAlarmPlayer
+import de.salomax.ndx.util.ManagedVibrator
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
 class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.layout.activity_timer, inflater) {
-
-    companion object {
-        private var alarmPlayer: MediaPlayer? = null
-    }
 
     // all the views
     private val tvColon = view.findViewById<TextView>(R.id.colon)
@@ -41,26 +33,18 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
 
     // animation, alarms
     private val blinkAnimation = AnimationUtils.loadAnimation(context, R.anim.blink)
-    private val vibrator: Vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
     private val vibratorPattern = longArrayOf(0, 100, 100, 200, 500)
+    private val vibrator: ManagedVibrator = ManagedVibrator.getInstance(context)
+    private val alarmPlayer: ManagedAlarmPlayer = ManagedAlarmPlayer.getInstance(context)
 
     init {
         btnReset.setOnClickListener { pushEvent(Event.ResetTimer) }
 
-        if (alarmPlayer == null) {
-            alarmPlayer = MediaPlayer()
-            val afd = context.resources.openRawResourceFd(R.raw.timer_expire_short)
-            alarmPlayer!!.setDataSource(afd!!.fileDescriptor, afd.startOffset, afd.length)
-            afd.close()
-            alarmPlayer!!.setAudioAttributes(AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_ALARM).build())
-            alarmPlayer!!.isLooping = true
-            alarmPlayer!!.prepare()
-        }
     }
 
     override fun render(viewState: State) {
         when (viewState) {
-            is State.InitOrReset -> {
+            is State.InitOrReset -> { // stopped
                 // update Text
                 updateText(viewState.millisTotal, viewState.millisOffset, false)
                 // play-button
@@ -72,7 +56,7 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
                 // hide reset
                 btnReset.visibility = View.GONE
             }
-            is State.CountdownRunning -> {
+            is State.CountdownRunning -> { // running
                 // update Text
                 updateText(viewState.millisTotal, viewState.millisOffset, false)
                 // pause-button
@@ -84,7 +68,7 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
                 // hide reset
                 btnReset.visibility = View.GONE
             }
-            is State.CountdownPaused -> {
+            is State.CountdownPaused -> { // stopped
                 updateText(viewState.millisTotal, viewState.millisOffset, true)
                 // play-button
                 btnControl.setImageResource(R.drawable.ic_play_arrow_white_24dp)
@@ -94,7 +78,7 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
                 // show reset
                 btnReset.visibility = View.VISIBLE
             }
-            is State.CountdownFinished -> {
+            is State.CountdownFinished -> {// running
                 // update Text
                 updateText(viewState.millisTotal, viewState.millisOffset, false)
                 // stop-button
@@ -112,32 +96,28 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
                             for (pref in it.prefDao().getTimerAlarms()) {
                                 when (pref.key) {
                                     Pref.ALARM_BEEP -> if (pref.value == "1") {
-                                        alarmPlayer?.let { if (!alarmPlayer!!.isPlaying) alarmPlayer!!.start() }
+                                        alarmPlayer.play(R.raw.timer_expire_short)
                                     }
                                     Pref.ALARM_VIBRATE -> if (pref.value == "1") {
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                            vibrator.vibrate(VibrationEffect.createWaveform(vibratorPattern, 0))
-                                        } else {
-                                            @Suppress("DEPRECATION")
-                                            vibrator.vibrate(vibratorPattern, 0)
-                                        }
+                                        vibrator.vibrate(vibratorPattern)
                                     }
                                 }
                             }
                         }
             }
             is State.Finish -> {
-                alarmPlayer?.stop()
-                alarmPlayer?.release()
-                alarmPlayer = null
-                vibrator.cancel()
+                // stop alarm
+                alarmPlayer.stop()
+                // stop vibration
+                vibrator.stop()
+                // exit
                 (context as AppCompatActivity).finish()
             }
         }
     }
 
     private fun blinkText(enabled: Boolean) {
-        if (enabled) {
+        if (enabled && tvColon.animation != null) {
             tvColon.startAnimation(blinkAnimation)
             tvMinus.startAnimation(blinkAnimation)
             tvMinutes.startAnimation(blinkAnimation)
