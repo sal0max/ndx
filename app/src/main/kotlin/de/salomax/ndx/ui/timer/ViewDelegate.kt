@@ -4,7 +4,7 @@ import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
-import android.view.animation.AnimationUtils
+import android.view.animation.Animation
 import android.widget.Button
 import android.widget.TextView
 import com.github.guilhe.circularprogressview.CircularProgressView
@@ -14,6 +14,7 @@ import de.salomax.ndx.data.NdxDatabase
 import de.salomax.ndx.data.Pref
 import de.salomax.ndx.util.ManagedAlarmPlayer
 import de.salomax.ndx.util.ManagedVibrator
+import de.salomax.ndx.widget.BlinkAnimation
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
@@ -32,14 +33,13 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
     private val btnReset = view.findViewById<Button>(R.id.btn_reset)
 
     // animation, alarms
-    private val blinkAnimation = AnimationUtils.loadAnimation(context, R.anim.blink)
+    private val blinkAnimation: Animation = BlinkAnimation()
     private val vibratorPattern = longArrayOf(0, 100, 100, 200, 500)
     private val vibrator: ManagedVibrator = ManagedVibrator.getInstance(context)
     private val alarmPlayer: ManagedAlarmPlayer = ManagedAlarmPlayer.getInstance(context)
 
     init {
         btnReset.setOnClickListener { pushEvent(Event.ResetTimer) }
-
     }
 
     override fun render(viewState: State) {
@@ -117,7 +117,7 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
     }
 
     private fun blinkText(enabled: Boolean) {
-        if (enabled && tvColon.animation != null) {
+        if (enabled && tvColon.animation == null) {
             tvColon.startAnimation(blinkAnimation)
             tvMinus.startAnimation(blinkAnimation)
             tvMinutes.startAnimation(blinkAnimation)

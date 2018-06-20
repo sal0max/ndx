@@ -17,9 +17,9 @@
    * ~~make alarm sound quieter~~
    * ~~vibrate~~
    * ~~fix: wrong state when finished and configuration change happens~~
+   * ~~better blinking~~
    * make system alarm when in background
-   * also display days, not just hours
-   * better blinking
+   * (also display days, not just hours)
 * additional themes
    * dark
    * all black
