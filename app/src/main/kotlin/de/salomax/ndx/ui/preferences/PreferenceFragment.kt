@@ -5,7 +5,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Vibrator
 import android.support.design.widget.Snackbar
-import android.support.v7.preference.CheckBoxPreference
+import android.support.v14.preference.SwitchPreference
 import android.support.v7.preference.ListPreference
 import android.support.v7.preference.Preference
 import android.support.v7.preference.PreferenceFragmentCompat
@@ -22,8 +22,8 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
 
     private lateinit var evStepsPreference: ListPreference
     private lateinit var filterSortingPreference: ListPreference
-    private lateinit var alarmBeepPreference: CheckBoxPreference
-    private lateinit var alarmVibratePreference: CheckBoxPreference
+    private lateinit var alarmBeepPreference: SwitchPreference
+    private lateinit var alarmVibratePreference: SwitchPreference
     private lateinit var donatePreference: Preference
     private lateinit var aboutPreference: Preference
     private lateinit var changelogPreference: Preference
@@ -35,8 +35,8 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
         evStepsPreference = findPreference(getString(R.string.prefKey_evSteps)) as ListPreference
         filterSortingPreference = findPreference(getString(R.string.prefKey_sortOrder)) as ListPreference
         // timer
-        alarmBeepPreference = findPreference(getString(R.string.prefKey_alarmBeep)) as CheckBoxPreference
-        alarmVibratePreference = findPreference(getString(R.string.prefKey_alarmVibrate)) as CheckBoxPreference
+        alarmBeepPreference = findPreference(getString(R.string.prefKey_alarmBeep)) as SwitchPreference
+        alarmVibratePreference = findPreference(getString(R.string.prefKey_alarmVibrate)) as SwitchPreference
         // about
         donatePreference = findPreference(getString(R.string.prefKey_donate))
         aboutPreference = findPreference(getString(R.string.prefKey_about))
@@ -110,11 +110,11 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
                 fragment.show(childFragmentManager, null)
             }
             alarmBeepPreference -> {
-                addToDb(Pref.ALARM_BEEP, if ((preference as CheckBoxPreference).isChecked) "1" else "0")
+                addToDb(Pref.ALARM_BEEP, if ((preference as SwitchPreference).isChecked) "1" else "0")
                 return true
             }
             alarmVibratePreference -> {
-                addToDb(Pref.ALARM_VIBRATE, if ((preference as CheckBoxPreference).isChecked) "1" else "0")
+                addToDb(Pref.ALARM_VIBRATE, if ((preference as SwitchPreference).isChecked) "1" else "0")
                 return true
             }
         }

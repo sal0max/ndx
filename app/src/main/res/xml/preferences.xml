@@ -21,12 +21,12 @@
 
     <PreferenceCategory android:title="Timer">
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="@string/prefKey_alarmBeep"
             android:summary="@string/prefSummary_timerBeep"
             android:title="@string/prefTitle_timerBeep" />
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="@string/prefKey_alarmVibrate"
             android:summary="@string/prefSummary_timerVibrate"
             android:title="@string/prefTitle_timerVibrate" />
