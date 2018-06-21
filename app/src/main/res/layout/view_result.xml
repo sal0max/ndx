@@ -30,6 +30,21 @@
         tools:text="1d 2h" />
     <!-- /days & hours -->
 
+    <!-- warning -->
+    <ImageView
+        android:id="@+id/warning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin2x"
+        android:src="@drawable/ic_warning_red_24dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"
+        tools:visibility="visible" />
+    <!-- /warning -->
+
+
     <!-- minutes -->
     <TextView
         android:id="@+id/minutes"

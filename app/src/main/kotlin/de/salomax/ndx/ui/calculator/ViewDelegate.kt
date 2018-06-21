@@ -56,6 +56,10 @@ class ViewDelegate(inflater: LayoutInflater)
                 resultView.evSteps = viewState.speeds
                 showResult()
             }
+            is State.ShowWarning -> {
+                resultView.showWarning = viewState.enabled
+                showResult()
+            }
         }
     }
 

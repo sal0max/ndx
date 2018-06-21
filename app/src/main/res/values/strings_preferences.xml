@@ -5,6 +5,8 @@
     <string name="prefTitle_categoryGeneral">General</string>
     <string name="prefTitle_evSteps">Exposure value step size</string>
     <string name="prefTitle_sortOrder">Sort filters by…</string>
+    <string name="prefTitle_showWarning">Warn of too long exposures</string>
+    <string name="prefSummary_showWarning">Show a warning label, when a time larger than 20 minutes is calculated. Exposures that long usually overheat the sensor and produce too much noise to be useful any more.</string>
 
     <string name="prefTitle_categoryTimer" translatable="false">@string/title_timer</string>
     <string name="prefTitle_timerBeep">Beep</string>
@@ -33,6 +35,7 @@
     <!-- CONSTANTS ............................................................................. -->
     <string name="prefKey_evSteps" translatable="false">KEY_EV_STEPS</string>
     <string name="prefKey_sortOrder" translatable="false">KEY_SORT_ORDER</string>
+    <string name="prefKey_showWarning" translatable="false">KEY_SHOW_WARNING</string>
 
     <string name="prefKey_alarmBeep" translatable="false">KEY_ALARM_BEEP</string>
     <string name="prefKey_alarmVibrate" translatable="false">KEY_ALARM_VIBRATE</string>

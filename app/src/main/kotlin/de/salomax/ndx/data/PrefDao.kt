@@ -18,6 +18,9 @@ interface PrefDao {
     @Query("SELECT * FROM prefs WHERE `KEY` = '" + Pref.ALARM_BEEP + "' OR `KEY` = '" + Pref.ALARM_VIBRATE + "'")
     fun getTimerAlarms(): List<Pref>
 
+    @Query("SELECT `VALUE` FROM prefs WHERE `KEY` = '" + Pref.SHOW_WARNING + "' LIMIT 1")
+    fun getWarningEnabled(): Flowable<String>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(pref: Pref)
 

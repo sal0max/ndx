@@ -13,5 +13,6 @@ data class Pref(@PrimaryKey @ColumnInfo(name = "KEY") val key: String,
         const val FILTER_SORT_ORDER = "FILTER_SORT_ORDER"
         const val ALARM_BEEP = "ALARM_BEEP"
         const val ALARM_VIBRATE = "ALARM_VIBRATE"
+        const val SHOW_WARNING = "SHOW_WARNING"
     }
 }

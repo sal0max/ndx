@@ -41,6 +41,16 @@ class Presenter : BasePresenter<State, Event>() {
                 ?.subscribe { filters -> pushState(State.FiltersReady(filters)) }
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    private fun loadShowWarning() {
+        NdxDatabase.getInstance(context)
+                .prefDao()
+                .getWarningEnabled()
+                .subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.subscribe { pushState(State.ShowWarning(it == "1")) }
+    }
+
     override fun onViewEvent(event: Event) {
         when (event) {
             is Event.StartTimer -> {

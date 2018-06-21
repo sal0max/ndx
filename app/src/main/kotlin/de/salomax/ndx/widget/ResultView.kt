@@ -10,6 +10,7 @@ import android.text.style.RelativeSizeSpan
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import de.salomax.ndx.R
 import de.salomax.ndx.data.ShutterSpeeds
@@ -23,8 +24,12 @@ class ResultView : ConstraintLayout {
     private var minutes: TextView
     private var hoursDays: TextView
 
+    private var warning: ImageView
+
     private val dUnit = resources.getString(R.string.unit_days)
     private val hUnit = resources.getString(R.string.unit_hours)
+
+    var showWarning = false
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -35,6 +40,8 @@ class ResultView : ConstraintLayout {
         seconds = findViewById(R.id.seconds)
         minutes = findViewById(R.id.minutes)
         hoursDays = findViewById(R.id.daysHours)
+
+        warning = findViewById(R.id.warning)
     }
 
 
@@ -43,12 +50,16 @@ class ResultView : ConstraintLayout {
         if (micro == null) {
             infinite()
         } else {
-            if (micro < 1_000_000L)
+            if (micro < 1_000_000L) {
                 smaller1s(micro)
-            else
+            } else {
                 greater1s(micro)
+                // show warning? (20min)
+                warning.visibility = if (showWarning && micro >= 1_000_000L * 60 * 20) View.VISIBLE else View.GONE
+            }
         }
     }
+
 
     private fun infinite() {
         minutes.text = "\u221E"

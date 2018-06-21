@@ -17,6 +17,11 @@
             android:summary="%s"
             android:title="@string/prefTitle_sortOrder" />
 
+        <SwitchPreference
+            android:key="@string/prefKey_showWarning"
+            android:summary="@string/prefSummary_showWarning"
+            android:title="@string/prefTitle_showWarning" />
+
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Timer">

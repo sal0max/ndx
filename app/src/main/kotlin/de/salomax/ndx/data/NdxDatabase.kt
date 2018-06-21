@@ -11,7 +11,7 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-@Database(entities = [(Filter::class), (Pref::class)], version = 2)
+@Database(entities = [(Filter::class), (Pref::class)], version = 3)
 abstract class NdxDatabase : RoomDatabase() {
 
     abstract fun filterDao(): FilterDao
@@ -27,6 +27,7 @@ abstract class NdxDatabase : RoomDatabase() {
                             .databaseBuilder(context.applicationContext, NdxDatabase::class.java, "ndx.db")
                             .addCallback(init(context))
                             .addMigrations(migration1To2(context))
+                            .addMigrations(migration2To3(context))
                             .build()
                 }
             }
@@ -89,6 +90,21 @@ abstract class NdxDatabase : RoomDatabase() {
                             .insertAll(listOf(
                                     Pref(Pref.ALARM_BEEP, "1"),
                                     Pref(Pref.ALARM_VIBRATE, "0"))
+                            )
+                }.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe()
+            }
+        }
+
+        private fun migration2To3(context: Context): Migration = object : Migration(2, 3) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                Single.fromCallable {
+                    // add default preferences
+                    getInstance(context)
+                            .prefDao()
+                            .insert(
+                                    Pref(Pref.SHOW_WARNING, "0")
                             )
                 }.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())

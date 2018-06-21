@@ -22,6 +22,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
 
     private lateinit var evStepsPreference: ListPreference
     private lateinit var filterSortingPreference: ListPreference
+    private lateinit var showWarningPreference: SwitchPreference
     private lateinit var alarmBeepPreference: SwitchPreference
     private lateinit var alarmVibratePreference: SwitchPreference
     private lateinit var donatePreference: Preference
@@ -34,6 +35,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
         // general
         evStepsPreference = findPreference(getString(R.string.prefKey_evSteps)) as ListPreference
         filterSortingPreference = findPreference(getString(R.string.prefKey_sortOrder)) as ListPreference
+        showWarningPreference = findPreference(getString(R.string.prefKey_showWarning)) as SwitchPreference
         // timer
         alarmBeepPreference = findPreference(getString(R.string.prefKey_alarmBeep)) as SwitchPreference
         alarmVibratePreference = findPreference(getString(R.string.prefKey_alarmVibrate)) as SwitchPreference
@@ -46,6 +48,8 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
         evStepsPreference.onPreferenceChangeListener = this
         // sortOrder of the filters: by factor or by name
         filterSortingPreference.onPreferenceChangeListener = this
+        // shows a little warning label, if calculated time is too large
+        showWarningPreference.onPreferenceClickListener = this
 
         // alarm preferences when the timer is up
         alarmBeepPreference.onPreferenceClickListener = this
@@ -76,6 +80,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
                             when (pref.key) {
                                 Pref.FILTER_SORT_ORDER -> filterSortingPreference.value = pref.value
                                 Pref.EV_STEPS -> evStepsPreference.value = pref.value
+                                Pref.SHOW_WARNING -> showWarningPreference.isChecked = pref.value == "1"
                                 Pref.ALARM_BEEP -> alarmBeepPreference.isChecked = pref.value == "1"
                                 Pref.ALARM_VIBRATE -> alarmVibratePreference.isChecked = pref.value == "1"
                             }
@@ -108,6 +113,10 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
             changelogPreference -> {
                 val fragment = ChangelogDialog()
                 fragment.show(childFragmentManager, null)
+            }
+            showWarningPreference -> {
+                addToDb(Pref.SHOW_WARNING, if ((preference as SwitchPreference).isChecked) "1" else "0")
+                return true
             }
             alarmBeepPreference -> {
                 addToDb(Pref.ALARM_BEEP, if ((preference as SwitchPreference).isChecked) "1" else "0")

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="changelog">
-        <b><big>v4 (401)</big></b>
+        <b><big>v4 (401) - <i>Features!!</i></big></b>
         \n• New big feature: <b>A Timer</b>! Comes in handy, if you forgot your remote shutter release at home. (Or when it fell in the water…)
+        \n• And another new feature: Added the option to let a little indicator warn you if your calculated exposure time is too long to produce anything other than a lot of hot pixels.
         \n• Prettified the settings menu. Material ftw!
 
         \n\n<b><big>v3 (303)</big></b>
