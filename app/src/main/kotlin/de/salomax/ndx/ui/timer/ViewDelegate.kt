@@ -46,7 +46,7 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
         when (viewState) {
             is State.InitOrReset -> { // stopped
                 // update Text
-                updateText(viewState.millisTotal, viewState.millisOffset, false)
+                updateText(viewState.millisTotal, viewState.millisOffset)
                 // play-button
                 btnControl.setImageResource(R.drawable.ic_play_arrow_white_24dp)
                 btnControl.setOnClickListener { pushEvent(Event.RunCountdown) }
@@ -58,7 +58,7 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
             }
             is State.CountdownRunning -> { // running
                 // update Text
-                updateText(viewState.millisTotal, viewState.millisOffset, false)
+                updateText(viewState.millisTotal, viewState.millisOffset)
                 // pause-button
                 btnControl.setImageResource(R.drawable.ic_pause_white_24dp)
                 btnControl.setOnClickListener { pushEvent(Event.PauseCountdown) }
@@ -69,7 +69,7 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
                 btnReset.visibility = View.GONE
             }
             is State.CountdownPaused -> { // stopped
-                updateText(viewState.millisTotal, viewState.millisOffset, true)
+                updateText(viewState.millisTotal, viewState.millisOffset)
                 // play-button
                 btnControl.setImageResource(R.drawable.ic_play_arrow_white_24dp)
                 btnControl.setOnClickListener { pushEvent(Event.RunCountdown) }
@@ -80,7 +80,7 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
             }
             is State.CountdownFinished -> {// running
                 // update Text
-                updateText(viewState.millisTotal, viewState.millisOffset, false)
+                updateText(viewState.millisTotal, viewState.millisOffset)
                 // stop-button
                 btnControl.setImageResource(R.drawable.ic_stop_white_24dp)
                 btnControl.setOnClickListener { pushEvent(Event.Finish) }
@@ -134,51 +134,46 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
         }
     }
 
-    private fun updateText(totalMillis: Long, currentMillis: Long, forceUpdate: Boolean) {
-        // every 0.1s
-        if (currentMillis % 100 == 0L || forceUpdate) {
-            val remainingTime = totalMillis - currentMillis
+    private fun updateText(totalMillis: Long, currentMillis: Long) {
+        val remainingTime = totalMillis - currentMillis
 
-            // minus
-            tvMinus.visibility = if (remainingTime < 0) View.VISIBLE else View.GONE
-
-            // hours
-            val h = Math.abs(TimeUnit.MILLISECONDS.toHours(remainingTime))
-            if (h > 0) {
-                val sH = h.toString() + context.getString(R.string.unit_hours)
-                if (tvHours.text != sH)
-                    tvHours.text = sH
-            } else if (tvHours.text != null) {
-                tvHours.text = null
-            }
-
-            // minutes
-            val min = Math.abs(TimeUnit.MILLISECONDS.toMinutes(remainingTime) % 60)
-            val sMin = String.format("%02d", min)
-            if (tvMinutes.text != sMin)
-                tvMinutes.text = sMin
-
-            // seconds
-            val sec = Math.abs(TimeUnit.MILLISECONDS.toSeconds(remainingTime) % 60)
-            val sSec = String.format("%02d", sec)
-            if (tvSeconds.text != sSec)
-                tvSeconds.text = sSec
-
-            // tenths of a second
-            val tenth = Math.abs(remainingTime / 100 % 10)
-            tvMillis.text = String.format(".%d", tenth)
-
+        // progress bar
+        if (totalMillis - currentMillis >= 0) {
+            if (circularProgress.max != totalMillis.toInt())
+                circularProgress.max = totalMillis.toInt()
+            circularProgress.setProgress(currentMillis.toFloat(), true, 100)
+        } else if (circularProgress.max != 1) {
+            circularProgress.progress = 1f
+            circularProgress.max = 1
         }
 
-        // every 0.01s / 10ms (100fps)
-        if (currentMillis % 10 == 0L) {
-            if (totalMillis - currentMillis >= 0) {
-                circularProgress.max = totalMillis.toInt()
-                circularProgress.progress = currentMillis.toFloat()
-            } else {
-                circularProgress.max = 1
-                circularProgress.progress = 1f
-            }
+        // negative
+        tvMinus.visibility = if (remainingTime < 0) View.VISIBLE else View.GONE
+
+        // tenths of a second
+        val tenth = Math.abs(remainingTime / 100 % 10)
+        tvMillis.text = String.format(".%d", tenth)
+
+        // seconds
+        val sec = Math.abs(TimeUnit.MILLISECONDS.toSeconds(remainingTime) % 60)
+        val sSec = String.format("%02d", sec)
+        if (tvSeconds.text != sSec)
+            tvSeconds.text = sSec
+
+        // minus
+        val min = Math.abs(TimeUnit.MILLISECONDS.toMinutes(remainingTime) % 60)
+        val sMin = String.format("%02d", min)
+        if (tvMinutes.text != sMin)
+            tvMinutes.text = sMin
+
+        // hours
+        val h = Math.abs(TimeUnit.MILLISECONDS.toHours(remainingTime))
+        if (h > 0) {
+            val sH = h.toString() + context.getString(R.string.unit_hours)
+            if (tvHours.text != sH)
+                tvHours.text = sH
+        } else if (tvHours.text != null) {
+            tvHours.text = null
         }
     }
 

@@ -27,8 +27,8 @@ class Presenter : BasePresenter<State, Event>() {
                 }
             }
             is Event.RunCountdown -> {
-                intervalSubscription = Observable.interval(10, TimeUnit.MILLISECONDS)
-                        .map { 10L }
+                intervalSubscription = Observable.interval(100, TimeUnit.MILLISECONDS) // every 0.1s
+                        .map { 100 }
                         .subscribeOn(Schedulers.io()) // Run on a background thread
                         .observeOn(AndroidSchedulers.mainThread()) // Be notified on the main thread
                         .subscribe {
