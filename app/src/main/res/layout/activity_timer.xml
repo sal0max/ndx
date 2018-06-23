@@ -113,7 +113,7 @@
         android:id="@+id/fab_pause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin2x"
+        android:layout_marginBottom="@dimen/margin2x"
         android:src="@drawable/ic_pause_white_24dp"
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"

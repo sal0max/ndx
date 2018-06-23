@@ -5,9 +5,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Switch
 import android.widget.TextView
 import de.salomax.ndx.R
-
 import de.salomax.ndx.data.Filter
 import de.salomax.ndx.util.MathUtils
 import io.reactivex.Observable
@@ -21,7 +21,7 @@ class FilterAdapter(private val context: Context) : RecyclerView.Adapter<FilterA
     val clickEvent: Observable<Filter> = clickSubject
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.row_filterpouch, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.row_filter, parent, false)
         return ViewHolder(view)
     }
 
@@ -48,6 +48,7 @@ class FilterAdapter(private val context: Context) : RecyclerView.Adapter<FilterA
         val textView2: TextView = itemView.findViewById(R.id.info)
 
         init {
+            itemView.findViewById<Switch>(R.id.checkbox).visibility = View.GONE
             itemView.setOnClickListener {
                 clickSubject.onNext(items[layoutPosition])
             }

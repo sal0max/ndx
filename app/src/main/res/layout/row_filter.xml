@@ -10,39 +10,34 @@
     android:padding="@dimen/margin2x"
     tools:ignore="Overdraw">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin1x"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/checkbox"
+        android:lines="1"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="@dimen/text_big"
+        app:layout_constraintEnd_toStartOf="@id/checkbox"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        tools:text="Lee Big Stopper" />
 
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:lines="1"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="@dimen/text_big"
-            tools:text="Lee Big Stopper" />
-
-        <TextView
-            android:id="@+id/info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_small"
-            tools:text="× 1024  ·  10 Stops  ·  ND 3.0\nSuper dark for long exposures during bright daylight." />
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_small"
+        app:layout_constraintEnd_toStartOf="@id/checkbox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        tools:text="× 1024  ·  10 Stops  ·  ND 3.0\nSuper dark for long exposures during bright daylight." />
 
     <Switch
         android:id="@+id/checkbox"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:paddingStart="@dimen/margin1x"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry" />
 </android.support.constraint.ConstraintLayout>
