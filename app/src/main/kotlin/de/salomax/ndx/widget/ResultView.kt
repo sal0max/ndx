@@ -46,18 +46,20 @@ class ResultView : ConstraintLayout {
 
 
     fun setDuration(micro: Long?) {
-        // sanity check
+        // set time
         if (micro == null) {
             infinite()
         } else {
-            if (micro < 1_000_000L) {
+            if (micro < 1_000_000L)
                 smaller1s(micro)
-            } else {
+            else
                 greater1s(micro)
-                // show warning? (20min)
-                warning.visibility = if (showWarning && micro >= 1_000_000L * 60 * 20) View.VISIBLE else View.GONE
-            }
         }
+        // show warning
+        if (showWarning && (micro == null || micro >= 1_000_000L * 60 * 20)) { // 20min
+            warning.visibility = View.VISIBLE
+        } else
+            warning.visibility = View.GONE
     }
 
 
