@@ -10,8 +10,12 @@ android {
         applicationId "de.salomax.ndx"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 401
-        versionName versionCode.intdiv(100) + " ($versionCode)"
+        // SemVer
+        def major = 3
+        def minor = 0
+        def patch = 0
+        versionCode = (major * 10000) + (minor * 100) + patch
+        versionName = "$major ($major.$minor.$patch)"
     }
 
     signingConfigs {

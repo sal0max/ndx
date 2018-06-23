@@ -11,7 +11,7 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-@Database(entities = [(Filter::class), (Pref::class)], version = 3)
+@Database(entities = [(Filter::class), (Pref::class)], version = 1)
 abstract class NdxDatabase : RoomDatabase() {
 
     abstract fun filterDao(): FilterDao
@@ -20,14 +20,19 @@ abstract class NdxDatabase : RoomDatabase() {
     companion object {
         private var INSTANCE: NdxDatabase? = null
 
+        /*
+         * ATTENTION! Every migration runs only if an older db version was already installed.
+         * Hence on db upgrade:
+         * 1. provide migration
+         * 2. add migration result also to #init()
+         */
         fun getInstance(context: Context): NdxDatabase {
             if (INSTANCE == null) {
                 synchronized(NdxDatabase::class) {
                     INSTANCE = Room
                             .databaseBuilder(context.applicationContext, NdxDatabase::class.java, "ndx.db")
                             .addCallback(init(context))
-                            .addMigrations(migration1To2(context))
-                            .addMigrations(migration2To3(context))
+                            //.addMigrations(migration1To2(context))
                             .build()
                 }
             }
@@ -73,44 +78,28 @@ abstract class NdxDatabase : RoomDatabase() {
                             .prefDao()
                             .insertAll(listOf(
                                     Pref(Pref.EV_STEPS, "3"),
-                                    Pref(Pref.FILTER_SORT_ORDER, "0"))
-                            )
-                }.subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe()
-            }
-        }
-
-        private fun migration1To2(context: Context): Migration = object : Migration(1, 2) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                Single.fromCallable {
-                    // add default preferences
-                    getInstance(context)
-                            .prefDao()
-                            .insertAll(listOf(
+                                    Pref(Pref.FILTER_SORT_ORDER, "0"),
                                     Pref(Pref.ALARM_BEEP, "1"),
-                                    Pref(Pref.ALARM_VIBRATE, "0"))
-                            )
+                                    Pref(Pref.ALARM_VIBRATE, "0"),
+                                    Pref(Pref.SHOW_WARNING, "0")
+                            ))
                 }.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe()
             }
         }
 
-        private fun migration2To3(context: Context): Migration = object : Migration(2, 3) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                Single.fromCallable {
-                    // add default preferences
-                    getInstance(context)
-                            .prefDao()
-                            .insert(
-                                    Pref(Pref.SHOW_WARNING, "0")
-                            )
-                }.subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe()
-            }
-        }
+//        private fun migration1To2(context: Context): Migration = object : Migration(2, 3) {
+//            override fun migrate(database: SupportSQLiteDatabase) {
+//                Single.fromCallable {
+//                    getInstance(context)
+//                            .prefDao()
+//                            .insert(Pref(Pref.SHOW_WARNING, "0"))
+//                }.subscribeOn(Schedulers.io())
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .subscribe()
+//            }
+//        }
 
     }
 }

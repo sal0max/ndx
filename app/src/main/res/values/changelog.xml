@@ -1,23 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="changelog">
-        <b><big>v4 (401) - <i>Features!!</i></big></b>
-        \n• New big feature: <b>A Timer</b>! Comes in handy, if you forgot your remote shutter release at home. (Or when it fell in the water…)
-        \n• And another new feature: Added the option to let a little indicator warn you if your calculated exposure time is too long to produce anything other than a lot of hot pixels.
-        \n• Prettified the settings menu. Material ftw!
-
-        \n\n<b><big>v3 (303)</big></b>
-        \n• Some tiny UI refinements and other under-the-hood enhancements
-
-        \n\n<b><big>v3 (302)</big></b>
-        \n• <b>Landscape mode!</b>
-        \n• Added this changelog dialog.
-        \n• Fix: The filter factor is now only allowed to be ≥ 1. A filter can\'t really increase the amount of light.
-
-        \n\n<b><big>v3 (301) – <i>initial release</i></big></b>
-        \nVersion 3 is my third iteration in writing this app. A complete re-write! A different,
-        better user interface! Performance first! More features than ever! And ultimately the first
-        version that is openly available.
+        <b><big>3.0.0 – <i>initial release</i></big></b>
+        \n
+        \nVersion 3 is my third iteration in writing this app.
+        \n• A complete re-write!
+        \n• A different, better user interface!
+        \n• Performance first!
+        \n• More features than ever!
+        \nAnd ultimately the first version that is openly available.
     </string>
 
 </resources>
