@@ -12,6 +12,7 @@ data class Pref(@PrimaryKey @ColumnInfo(name = "KEY") val key: String,
         const val EV_STEPS = "EV_STEPS"
         const val FILTER_SORT_ORDER = "FILTER_SORT_ORDER"
         const val ALARM_BEEP = "ALARM_BEEP"
+        const val THEME = "THEME"
         const val ALARM_VIBRATE = "ALARM_VIBRATE"
         const val SHOW_WARNING = "SHOW_WARNING"
     }

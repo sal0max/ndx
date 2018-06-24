@@ -7,6 +7,7 @@
     <string name="prefTitle_sortOrder">Sort filters by…</string>
     <string name="prefTitle_showWarning">Warn of too long exposures</string>
     <string name="prefSummary_showWarning">Show a warning label, when a time larger than 20 minutes is calculated. Exposures that long usually overheat the sensor and produce too much noise to be useful any more.</string>
+    <string name="prefTitle_themeSelector">Select Theme</string>
 
     <string name="prefTitle_categoryTimer" translatable="false">@string/title_timer</string>
     <string name="prefTitle_timerBeep">Beep</string>
@@ -30,12 +31,17 @@
         <item>Filter factor</item>
         <item>Name</item>
     </string-array>
+    <string-array name="prefEntries_themes">
+        <item>Light</item>
+        <item>Dark</item>
+    </string-array>
 
 
     <!-- CONSTANTS ............................................................................. -->
     <string name="prefKey_evSteps" translatable="false">KEY_EV_STEPS</string>
     <string name="prefKey_sortOrder" translatable="false">KEY_SORT_ORDER</string>
     <string name="prefKey_showWarning" translatable="false">KEY_SHOW_WARNING</string>
+    <string name="prefKey_themeSelector" translatable="false">KEY_THEME_SELECTOR</string>
 
     <string name="prefKey_alarmBeep" translatable="false">KEY_ALARM_BEEP</string>
     <string name="prefKey_alarmVibrate" translatable="false">KEY_ALARM_VIBRATE</string>
@@ -50,6 +56,10 @@
         <item>3</item>
     </string-array>
     <string-array name="prefValues_sortOrder" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+    <string-array name="prefValues_themes" translatable="false">
         <item>0</item>
         <item>1</item>
     </string-array>

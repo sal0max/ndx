@@ -24,6 +24,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
     private lateinit var filterSortingPreference: ListPreference
     private lateinit var showWarningPreference: SwitchPreference
     private lateinit var alarmBeepPreference: SwitchPreference
+    private lateinit var themeSelectorPreference: ListPreference
     private lateinit var alarmVibratePreference: SwitchPreference
     private lateinit var donatePreference: Preference
     private lateinit var aboutPreference: Preference
@@ -36,6 +37,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
         evStepsPreference = findPreference(getString(R.string.prefKey_evSteps)) as ListPreference
         filterSortingPreference = findPreference(getString(R.string.prefKey_sortOrder)) as ListPreference
         showWarningPreference = findPreference(getString(R.string.prefKey_showWarning)) as SwitchPreference
+        themeSelectorPreference = findPreference(getString(R.string.prefKey_themeSelector)) as ListPreference
         // timer
         alarmBeepPreference = findPreference(getString(R.string.prefKey_alarmBeep)) as SwitchPreference
         alarmVibratePreference = findPreference(getString(R.string.prefKey_alarmVibrate)) as SwitchPreference
@@ -50,6 +52,8 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
         filterSortingPreference.onPreferenceChangeListener = this
         // shows a little warning label, if calculated time is too large
         showWarningPreference.onPreferenceClickListener = this
+        // theme switcher
+        themeSelectorPreference.onPreferenceChangeListener = this
 
         // alarm preferences when the timer is up
         alarmBeepPreference.onPreferenceClickListener = this
@@ -81,6 +85,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
                                 Pref.FILTER_SORT_ORDER -> filterSortingPreference.value = pref.value
                                 Pref.EV_STEPS -> evStepsPreference.value = pref.value
                                 Pref.SHOW_WARNING -> showWarningPreference.isChecked = pref.value == "1"
+                                Pref.THEME -> themeSelectorPreference.value = pref.value
                                 Pref.ALARM_BEEP -> alarmBeepPreference.isChecked = pref.value == "1"
                                 Pref.ALARM_VIBRATE -> alarmVibratePreference.isChecked = pref.value == "1"
                             }
@@ -99,6 +104,10 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
             }
             filterSortingPreference -> {
                 addToDb(Pref.FILTER_SORT_ORDER, newValue as String)
+                return true
+            }
+            themeSelectorPreference -> {
+                addToDb(Pref.THEME, newValue as String)
                 return true
             }
         }
