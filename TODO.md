@@ -3,7 +3,7 @@
 ## Features
 
 ### high priority
-* create releases config + upload it as beta to the play store
+* ~~create releases config +~~ upload it as beta to the play store
 * ~~show changelog somewhere~~
 * ~~landscape layout~~
    * ~~restore values on configuration change (-> activated filters)~~
@@ -20,10 +20,10 @@
    * ~~better blinking~~
    * make system alarm when in background
    * (also display days, not just hours)
-* additional themes
-   * dark
-   * all black
-   * all white (?)
+* ~~additional themes~~
+   * ~~dark~~
+   * ~~all black~~
+   * ~~all white (?)~~
 * monetization
 
 ### low priority
