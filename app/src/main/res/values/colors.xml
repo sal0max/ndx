@@ -19,4 +19,7 @@
     <color name="colorAccent">#ffa459</color>
     <color name="colorBackground">#e0e0e0</color>
 
+    <color name="colorBlackAccent">@color/colorPrimary</color>
+    <color name="colorBlackBackground">#000</color>
+
 </resources>

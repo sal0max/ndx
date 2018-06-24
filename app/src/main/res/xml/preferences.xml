@@ -22,6 +22,13 @@
             android:summary="@string/prefSummary_showWarning"
             android:title="@string/prefTitle_showWarning" />
 
+        <ListPreference
+            android:entries="@array/prefEntries_themes"
+            android:entryValues="@array/prefValues_themes"
+            android:key="@string/prefKey_themeSelector"
+            android:summary="%s"
+            android:title="@string/prefTitle_themeSelector" />
+
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Timer">

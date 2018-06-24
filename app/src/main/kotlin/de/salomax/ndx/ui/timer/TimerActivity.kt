@@ -1,11 +1,11 @@
 package de.salomax.ndx.ui.timer
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import com.joaquimverges.helium.retained.RetainedPresenters
 import de.salomax.ndx.R
+import de.salomax.ndx.ui.BaseActivity
 
-class TimerActivity : AppCompatActivity() {
+class TimerActivity : BaseActivity() {
 
     private lateinit var presenter: Presenter
     private lateinit var viewDelegate: ViewDelegate

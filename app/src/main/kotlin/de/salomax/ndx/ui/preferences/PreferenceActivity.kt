@@ -1,12 +1,12 @@
 package de.salomax.ndx.ui.preferences
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import de.salomax.ndx.R
+import de.salomax.ndx.ui.BaseActivity
 
 
-class PreferenceActivity : AppCompatActivity() {
+class PreferenceActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

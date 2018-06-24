@@ -9,6 +9,7 @@ import android.support.v14.preference.SwitchPreference
 import android.support.v7.preference.ListPreference
 import android.support.v7.preference.Preference
 import android.support.v7.preference.PreferenceFragmentCompat
+import android.support.v7.preference.PreferenceManager
 import de.salomax.ndx.R
 import de.salomax.ndx.data.NdxDatabase
 import de.salomax.ndx.data.Pref
@@ -16,6 +17,9 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.util.*
+import android.content.Intent
+import android.support.v4.app.TaskStackBuilder
+import de.salomax.ndx.ui.calculator.CalculatorActivity
 
 class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener,
         Preference.OnPreferenceClickListener {
@@ -24,6 +28,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
     private lateinit var filterSortingPreference: ListPreference
     private lateinit var showWarningPreference: SwitchPreference
     private lateinit var alarmBeepPreference: SwitchPreference
+    private lateinit var themeSelectorPreference: ListPreference
     private lateinit var alarmVibratePreference: SwitchPreference
     private lateinit var donatePreference: Preference
     private lateinit var aboutPreference: Preference
@@ -36,6 +41,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
         evStepsPreference = findPreference(getString(R.string.prefKey_evSteps)) as ListPreference
         filterSortingPreference = findPreference(getString(R.string.prefKey_sortOrder)) as ListPreference
         showWarningPreference = findPreference(getString(R.string.prefKey_showWarning)) as SwitchPreference
+        themeSelectorPreference = findPreference(getString(R.string.prefKey_themeSelector)) as ListPreference
         // timer
         alarmBeepPreference = findPreference(getString(R.string.prefKey_alarmBeep)) as SwitchPreference
         alarmVibratePreference = findPreference(getString(R.string.prefKey_alarmVibrate)) as SwitchPreference
@@ -50,6 +56,8 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
         filterSortingPreference.onPreferenceChangeListener = this
         // shows a little warning label, if calculated time is too large
         showWarningPreference.onPreferenceClickListener = this
+        // theme switcher
+        themeSelectorPreference.onPreferenceChangeListener = this
 
         // alarm preferences when the timer is up
         alarmBeepPreference.onPreferenceClickListener = this
@@ -89,6 +97,10 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
         }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe()
+        // theme setting is stored in shared prefs, not db
+        themeSelectorPreference.value = PreferenceManager
+                .getDefaultSharedPreferences(context)
+                .getString(Pref.THEME, resources.getStringArray(R.array.prefValues_themes)[0])
     }
 
     override fun onPreferenceChange(preference: Preference?, newValue: Any?): Boolean {
@@ -99,6 +111,18 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
             }
             filterSortingPreference -> {
                 addToDb(Pref.FILTER_SORT_ORDER, newValue as String)
+                return true
+            }
+            themeSelectorPreference -> {
+                // needs to be in shared prefs; not possible to store to room as it doesn't allow
+                // blocking access, which would be needed in order to be retrieved before onCreate()
+                val mPrefs = PreferenceManager.getDefaultSharedPreferences(context)
+                mPrefs.edit().putString(Pref.THEME, newValue as String).apply()
+                // re-create all open activities
+                TaskStackBuilder.create(context!!)
+                        .addNextIntent(Intent(activity, CalculatorActivity::class.java))
+                        .addNextIntent(activity!!.intent)
+                        .startActivities()
                 return true
             }
         }
