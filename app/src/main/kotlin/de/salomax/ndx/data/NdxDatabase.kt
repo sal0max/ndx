@@ -80,7 +80,6 @@ abstract class NdxDatabase : RoomDatabase() {
                                     Pref(Pref.EV_STEPS, "3"),
                                     Pref(Pref.FILTER_SORT_ORDER, "0"),
                                     Pref(Pref.ALARM_BEEP, "1"),
-                                    Pref(Pref.THEME, "0"),
                                     Pref(Pref.ALARM_VIBRATE, "0"),
                                     Pref(Pref.SHOW_WARNING, "0")
                             ))
