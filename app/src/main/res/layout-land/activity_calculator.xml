@@ -28,7 +28,7 @@
         android:id="@+id/recycler_shutter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
+        android:background="?android:attr/colorAccent"
         android:elevation="2dp"
         android:orientation="horizontal"
         android:scrollbars="none"
