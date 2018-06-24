@@ -2,15 +2,15 @@ package de.salomax.ndx.ui.calculator
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.joaquimverges.helium.retained.RetainedPresenters
 import de.salomax.ndx.R
+import de.salomax.ndx.ui.BaseActivity
 import de.salomax.ndx.ui.filterpouch.FilterPouchActivity
 import de.salomax.ndx.ui.preferences.PreferenceActivity
 
-class CalculatorActivity : AppCompatActivity() {
+class CalculatorActivity : BaseActivity() {
 
     private var timerEnabled: Boolean = true
     private lateinit var viewDelegate: ViewDelegate

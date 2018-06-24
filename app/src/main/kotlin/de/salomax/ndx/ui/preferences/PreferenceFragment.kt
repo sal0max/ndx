@@ -9,6 +9,7 @@ import android.support.v14.preference.SwitchPreference
 import android.support.v7.preference.ListPreference
 import android.support.v7.preference.Preference
 import android.support.v7.preference.PreferenceFragmentCompat
+import android.support.v7.preference.PreferenceManager
 import de.salomax.ndx.R
 import de.salomax.ndx.data.NdxDatabase
 import de.salomax.ndx.data.Pref
@@ -16,6 +17,9 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.util.*
+import android.content.Intent
+import android.support.v4.app.TaskStackBuilder
+import de.salomax.ndx.ui.calculator.CalculatorActivity
 
 class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener,
         Preference.OnPreferenceClickListener {
@@ -85,7 +89,6 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
                                 Pref.FILTER_SORT_ORDER -> filterSortingPreference.value = pref.value
                                 Pref.EV_STEPS -> evStepsPreference.value = pref.value
                                 Pref.SHOW_WARNING -> showWarningPreference.isChecked = pref.value == "1"
-                                Pref.THEME -> themeSelectorPreference.value = pref.value
                                 Pref.ALARM_BEEP -> alarmBeepPreference.isChecked = pref.value == "1"
                                 Pref.ALARM_VIBRATE -> alarmVibratePreference.isChecked = pref.value == "1"
                             }
@@ -94,6 +97,10 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
         }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe()
+        // theme setting is stored in shared prefs, not db
+        themeSelectorPreference.value = PreferenceManager
+                .getDefaultSharedPreferences(context)
+                .getString(Pref.THEME, resources.getStringArray(R.array.prefValues_themes)[0])
     }
 
     override fun onPreferenceChange(preference: Preference?, newValue: Any?): Boolean {
@@ -107,7 +114,15 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
                 return true
             }
             themeSelectorPreference -> {
-                addToDb(Pref.THEME, newValue as String)
+                // needs to be in shared prefs; not possible to store to room as it doesn't allow
+                // blocking access, which would be needed in order to be retrieved before onCreate()
+                val mPrefs = PreferenceManager.getDefaultSharedPreferences(context)
+                mPrefs.edit().putString(Pref.THEME, newValue as String).apply()
+                // re-create all open activities
+                TaskStackBuilder.create(context!!)
+                        .addNextIntent(Intent(activity, CalculatorActivity::class.java))
+                        .addNextIntent(activity!!.intent)
+                        .startActivities()
                 return true
             }
         }

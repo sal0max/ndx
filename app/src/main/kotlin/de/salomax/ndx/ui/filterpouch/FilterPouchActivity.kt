@@ -3,16 +3,16 @@ package de.salomax.ndx.ui.filterpouch
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import com.joaquimverges.helium.retained.RetainedPresenters
 import de.salomax.ndx.R
 import de.salomax.ndx.data.Filter
+import de.salomax.ndx.ui.BaseActivity
 
 /**
  * Shows a list of all filters.
  * Can also start a dialog to add new or edit existing filters.
  */
-class FilterPouchActivity : AppCompatActivity() {
+class FilterPouchActivity : BaseActivity() {
 
     private lateinit var viewDelegate: ViewDelegate
 
