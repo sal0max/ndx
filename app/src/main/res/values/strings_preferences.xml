@@ -32,9 +32,9 @@
         <item>Name</item>
     </string-array>
     <string-array name="prefEntries_themes">
-        <item>Light</item>
-        <item>Dark</item>
-        <item>Black (OLED)</item>
+        <item>NDx Light</item>
+        <item>Moonlit Dark</item>
+        <item>Pitch Black</item>
     </string-array>
 
 
