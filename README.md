@@ -1,21 +1,29 @@
 # NDx
 
-Exposure time calculator when using ND filter(s). Written in Kotlin. For Android.
+Exposure time calculator for when using ND filter(s). Written in Kotlin. For Android.
 
 
 ### Features
 
-* Create your own filters
-* Combine filters
-* Customizable EV step size: full, half or third
 * Beautiful and fast user interface
-* Comes with pre-defined filters (removable)
+* High precision calculation
+* Combine (_stack_) as many filters as you like
+* Create your own filters
+* Includes a handy timer
+* Customizable EV step size: full, half or third
+* Comes with a pre-defined filter set 
 
 
 ### Screenshots
 
-![Application screenshot01](art/screenshots/screenshot01.png)
-![Application screenshot02](art/screenshots/screenshot02.png)
+#### Three different themes
+![](art/screenshots/screenshot01.png)
+
+#### Timer & Filter Editor
+![](art/screenshots/screenshot02.png)
+
+#### Landscape layout
+![](art/screenshots/screenshot03.png)
 
 
 ## License
