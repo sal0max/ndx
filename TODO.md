@@ -27,7 +27,7 @@
 * monetization
 
 ### low priority
-* animate addition/removal of filters in `myfilters`
+* ~~animate addition/removal of filters in `myfilters`~~
 * German localization
 * android wear support (timer)
 * intro/howto on
@@ -43,12 +43,12 @@
 
 
 ## Monetization
-* freemium-model
-   * more than 3 or 4 filters
-   * timer OR timer > 30s
-   * additional themes
+* freemium-features:
+   1. additional themes
+   2. more than 3 (or 4?) filters
+   3. timer (or timer > 30s?)
 * ~~maybe instead: implement donation via In-App Purchase~~
-   * 01,00€: small coffee
-   * 02,00€: small beer
-   * 03,00€: regular beer
-   * 10,00€: Oktoberfest
+   * ~~01,00€: small coffee~~
+   * ~~02,00€: small beer~~
+   * ~~03,00€: regular beer~~
+   * ~~10,00€: Oktoberfest~~

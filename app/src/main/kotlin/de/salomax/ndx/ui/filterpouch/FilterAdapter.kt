@@ -20,6 +20,10 @@ class FilterAdapter(private val context: Context) : RecyclerView.Adapter<FilterA
 
     val clickEvent: Observable<Filter> = clickSubject
 
+    init {
+        setHasStableIds(true)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.row_filter, parent, false)
         return ViewHolder(view)
@@ -35,6 +39,8 @@ class FilterAdapter(private val context: Context) : RecyclerView.Adapter<FilterA
     }
 
     override fun getItemCount() = items.size
+
+    override fun getItemId(position: Int) = items[position].id!!
 
     fun setFilters(filters: List<Filter>) {
         items.clear()

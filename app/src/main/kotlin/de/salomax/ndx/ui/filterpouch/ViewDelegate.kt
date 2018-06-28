@@ -17,12 +17,12 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
     private val list: RecyclerView = view.findViewById(android.R.id.list)
 
     init {
-        filterAdapter.clickEvent.subscribe({ filter -> pushEvent(Event.FilterClicked(filter)) })
+        filterAdapter.clickEvent.subscribe { filter -> pushEvent(Event.FilterClicked(filter)) }
         list.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = filterAdapter
         }
-        view.findViewById<FloatingActionButton>(R.id.fab_add).setOnClickListener({ pushEvent(Event.AddNewClicked) })
+        view.findViewById<FloatingActionButton>(R.id.fab_add).setOnClickListener { pushEvent(Event.AddNewClicked) }
     }
 
     override fun render(viewState: State) {
@@ -41,9 +41,9 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
                 val snackbar = Snackbar.make(list,
                         context.getString(R.string.filterDeleted, viewState.filter.name),
                         5_000) // 5s
-                        .setAction(R.string.undo, {
+                        .setAction(R.string.undo) {
                             pushEvent(Event.RestoreFilter(viewState.filter))
-                        })
+                        }
                 snackbar.show()
             }
         }
