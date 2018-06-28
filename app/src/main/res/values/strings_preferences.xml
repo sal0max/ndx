@@ -2,40 +2,65 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="title_preferences">Settings</string>
 
+    <!-- general -->
     <string name="prefTitle_categoryGeneral">General</string>
+    <!-- -->
     <string name="prefTitle_evSteps">Exposure value step size</string>
-    <string name="prefTitle_sortOrder">Sort filters by…</string>
-    <string name="prefTitle_showWarning">Warn of too long exposures</string>
-    <string name="prefSummary_showWarning">Show a warning label, when a time larger than 20 minutes is calculated. Exposures that long usually overheat the sensor and produce too much noise to be useful any more.</string>
-    <string name="prefTitle_themeSelector">Select Theme</string>
-
-    <string name="prefTitle_categoryTimer" translatable="false">@string/title_timer</string>
-    <string name="prefTitle_timerBeep">Beep</string>
-    <string name="prefSummary_timerBeep">Play an alarm sound when the time is up.</string>
-    <string name="prefTitle_timerVibrate">Vibrate</string>
-    <string name="prefSummary_timerVibrate">… when the time is up.</string>
-
-    <string name="prefTitle_categoryAbout">About</string>
-    <string name="prefTitle_about">Version %1$s</string>
-    <string name="prefSummary_about" translatable="false" tools:ignore="PluralsCandidate">© %1$d Maximilian Salomon</string>
-    <string name="prefTitle_donate">Donate</string>
-    <string name="prefSummary_donate">I developed NDx because I couldn\'t find a similar app: With an intuitive and easy user interface and the flexibility to combine various filters.\n\nDeveloping this app is very time consuming. I do it in my free time. Nevertheless, I give away NDx 100%% for free. I trust in you — if you like this app — to show your gratitude by buying me a beer.\nDue to Play Store restrictions, unfortunately you can\'t do that via PayPal, but only via an In-App Purchase.\n\nJust click here, if you\'d like to do so. And keep in mind: Google keeps 30%% of your donation.</string>
-    <string name="prefTitle_changelog">Changelog</string>
-
     <string-array name="prefEntries_evSteps">
         <item>1 Stop</item>
         <item>½ Stop</item>
         <item>⅓ Stop</item>
     </string-array>
+    <!-- -->
+    <string name="prefTitle_sortOrder">Sort filters by…</string>
     <string-array name="prefEntries_sortOrder">
         <item>Filter factor</item>
         <item>Name</item>
     </string-array>
+    <!-- -->
+    <string name="prefTitle_showWarning">Warn of too long exposures</string>
+    <string name="prefSummary_showWarning">Show a warning label, when a time larger than 20 minutes is calculated. Exposures that long usually overheat the sensor and produce too much noise to be useful any more.</string>
+    <!--  -->
+    <string name="prefTitle_themeSelector">Select Theme</string>
     <string-array name="prefEntries_themes">
         <item>NDx Light</item>
         <item>Moonlit Dark</item>
         <item>Pitch Black</item>
     </string-array>
+
+    <!-- timer -->
+    <string name="prefTitle_categoryTimer" translatable="false">@string/title_timer</string>
+    <!-- -->
+    <string name="prefTitle_timerBeep">Beep</string>
+    <string name="prefSummary_timerBeep">Play an alarm sound when the time is up.</string>
+    <!-- -->
+    <string name="prefTitle_timerVibrate">Vibrate</string>
+    <string name="prefSummary_timerVibrate">… when the time is up.</string>
+
+    <!-- about -->
+    <string name="prefTitle_categoryAbout">About</string>
+    <!-- -->
+    <string name="prefTitle_about">Version %1$s</string>
+    <string name="prefSummary_about" translatable="false" tools:ignore="PluralsCandidate">© %1$d Maximilian Salomon</string>
+    <!-- -->
+    <string name="prefTitle_donate">NDx Premium</string>
+    <string name="prefSummary_donate">Support the development of this app.</string>
+    <!-- -->
+    <string name="prefTitle_changelog">Show Changelog</string>
+
+    <!-- feedback -->
+    <string name="prefTitle_categoryFeedback">Feedback</string>
+    <!-- -->
+    <string name="prefTitle_mail">Send a mail</string>
+    <string name="prefValue_mail_address">msal.coding@gmail.com</string>
+    <string name="prefValue_mail_subject">Feedback: NDx</string>
+    <string name="prefError_mail">There seems to be no mail client available.</string>
+    <!-- -->
+    <string name="prefTitle_rate">Rate this app</string>
+    <string name="prefError_rate">The Play Store doesn\'t seem to be installed.</string>
+    <!-- -->
+    <string name="prefTitle_recommend">Recommend NDx</string>
+    <string name="prefValue_recommend">Check out this app! NDx — an awesome calculator for using ND filters. It\'s available for free in the Play Store: https://play.google.com/store/apps/details?id=de.salomax.ndx</string>
 
 
     <!-- CONSTANTS ............................................................................. -->
@@ -50,6 +75,10 @@
     <string name="prefKey_about" translatable="false">KEY_ABOUT</string>
     <string name="prefKey_donate" translatable="false">KEY_DONATE</string>
     <string name="prefKey_changelog" translatable="false">KEY_CHANGELOG</string>
+
+    <string name="prefKey_mail" translatable="false">KEY_MAIL</string>
+    <string name="prefKey_rate" translatable="false">KEY_RATE</string>
+    <string name="prefKey_recommend" translatable="false">KEY_RECOMMEND</string>
 
     <string-array name="prefValues_evSteps" translatable="false">
         <item>1</item>

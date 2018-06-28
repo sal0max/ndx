@@ -6,6 +6,7 @@ import android.support.v7.preference.PreferenceViewHolder
 import android.util.AttributeSet
 import android.widget.TextView
 
+//TODO delete
 class LongSummaryPreference(context: Context?,
                                     attrs: AttributeSet?,
                                     defStyleAttr: Int,

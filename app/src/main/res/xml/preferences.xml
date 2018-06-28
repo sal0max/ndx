@@ -47,8 +47,7 @@
 
     <PreferenceCategory android:title="@string/prefTitle_categoryAbout">
 
-        <!--suppress AndroidElementNotAllowed -->
-        <de.salomax.ndx.widget.LongSummaryPreference
+        <Preference
             android:key="@string/prefKey_donate"
             android:summary="@string/prefSummary_donate"
             android:title="@string/prefTitle_donate" />
@@ -62,6 +61,22 @@
         <Preference
             android:key="@string/prefKey_changelog"
             android:title="@string/prefTitle_changelog" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/prefTitle_categoryFeedback">
+
+        <!--suppress AndroidElementNotAllowed -->
+        <Preference
+            android:key="@string/prefKey_mail"
+            android:title="@string/prefTitle_mail" />
+
+        <Preference
+            android:key="@string/prefKey_rate"
+            android:title="@string/prefTitle_rate" />
+
+        <Preference
+            android:key="@string/prefKey_recommend"
+            android:title="@string/prefTitle_recommend" />
     </PreferenceCategory>
 
 </PreferenceScreen>
