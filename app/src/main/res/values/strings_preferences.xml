@@ -40,13 +40,12 @@
     <!-- about -->
     <string name="prefTitle_categoryAbout">About</string>
     <!-- -->
-    <string name="prefTitle_about">Version %1$s</string>
-    <string name="prefSummary_about" translatable="false" tools:ignore="PluralsCandidate">© %1$d Maximilian Salomon</string>
-    <!-- -->
     <string name="prefTitle_donate">NDx Premium</string>
     <string name="prefSummary_donate">Support the development of this app.</string>
     <!-- -->
-    <string name="prefTitle_changelog">Show Changelog</string>
+    <string name="prefTitle_about">Version %1$s</string>
+    <string name="prefSummary_about" translatable="false" tools:ignore="PluralsCandidate">© %1$d Maximilian Salomon</string>
+    <string name="title_changelog">Changelog</string>
 
     <!-- feedback -->
     <string name="prefTitle_categoryFeedback">Feedback</string>

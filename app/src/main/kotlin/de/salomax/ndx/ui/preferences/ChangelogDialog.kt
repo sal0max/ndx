@@ -14,7 +14,7 @@ class ChangelogDialog : AppCompatDialogFragment() {
 
         return AlertDialog.Builder(context!!)
                 .setPositiveButton(R.string.ok, null)
-                .setTitle(R.string.prefTitle_changelog)
+                .setTitle(R.string.title_changelog)
                 .setView(view)
                 .create()
     }

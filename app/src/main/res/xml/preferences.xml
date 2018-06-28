@@ -54,13 +54,9 @@
 
         <Preference
             android:key="@string/prefKey_about"
-            android:selectable="false"
             android:summary="@string/prefSummary_about"
             android:title="@string/prefTitle_about" />
 
-        <Preference
-            android:key="@string/prefKey_changelog"
-            android:title="@string/prefTitle_changelog" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/prefTitle_categoryFeedback">

@@ -36,7 +36,6 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
 
     private lateinit var donatePreference: Preference
     private lateinit var aboutPreference: Preference
-    private lateinit var changelogPreference: Preference
 
     private lateinit var mailPreference: Preference
     private lateinit var ratePreference: Preference
@@ -58,7 +57,6 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
         // about
         donatePreference = findPreference(getString(R.string.prefKey_donate))
         aboutPreference = findPreference(getString(R.string.prefKey_about))
-        changelogPreference = findPreference(getString(R.string.prefKey_changelog))
         // feedback
         mailPreference = findPreference(getString(R.string.prefKey_mail))
         ratePreference = findPreference(getString(R.string.prefKey_rate))
@@ -77,7 +75,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
         alarmVibratePreference.isVisible = (context!!.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator).hasVibrator()
         // about
         donatePreference.onPreferenceClickListener = this
-        changelogPreference.onPreferenceClickListener = this
+        aboutPreference.onPreferenceClickListener = this
         try {
             val version = activity?.packageManager?.getPackageInfo(activity?.packageName, 0)?.versionName
             aboutPreference.title = getString(R.string.prefTitle_about, version)
@@ -145,7 +143,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
             donatePreference -> {
                 Snackbar.make(view!!, "TODO: open In-App Purchase-Dialog", Snackbar.LENGTH_SHORT).show()
             }
-            changelogPreference -> {
+            aboutPreference -> {
                 val fragment = ChangelogDialog()
                 fragment.show(childFragmentManager, null)
             }
