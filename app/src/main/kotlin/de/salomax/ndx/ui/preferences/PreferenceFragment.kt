@@ -159,7 +159,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
             mailPreference -> {
                 val mailIntent = Intent(Intent.ACTION_SENDTO)
                 mailIntent.data = Uri.parse("mailto:") // only email apps should handle this
-                mailIntent.putExtra(Intent.EXTRA_EMAIL, getString(R.string.prefValue_mail_address))
+                mailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.prefValue_mail_address)))
                 mailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.prefValue_mail_subject))
                 //intent.putExtra(Intent.EXTRA_TEXT, subject)
                 if (mailIntent.resolveActivity(context!!.packageManager) != null)
