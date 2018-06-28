@@ -40,7 +40,6 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
 
     private lateinit var mailPreference: Preference
     private lateinit var ratePreference: Preference
-    private lateinit var recommendPreference: Preference
 
     override fun onCreatePreferences(bundle: Bundle?, s: String?) {
         addPreferencesFromResource(R.xml.preferences)
@@ -63,7 +62,6 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
         // feedback
         mailPreference = findPreference(getString(R.string.prefKey_mail))
         ratePreference = findPreference(getString(R.string.prefKey_rate))
-        recommendPreference = findPreference(getString(R.string.prefKey_recommend))
 
         /*
          * set listeners & content
@@ -90,7 +88,6 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
         // feedback
         mailPreference.onPreferenceClickListener = this
         ratePreference.onPreferenceClickListener = this
-        recommendPreference.onPreferenceClickListener = this
 
         /*
          * populate settings with values from db
@@ -181,14 +178,6 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
                 else // play store not installed
                     showError(getString(R.string.prefError_rate))
 
-            }
-            recommendPreference -> {
-                val shareIntent = Intent(Intent.ACTION_SEND)
-                shareIntent.type = "text/plain"
-                shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.prefValue_recommend))
-                shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                if (shareIntent.resolveActivity(context!!.packageManager) != null)
-                    startActivity(shareIntent)
             }
             else -> return false
         }

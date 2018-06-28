@@ -58,9 +58,6 @@
     <!-- -->
     <string name="prefTitle_rate">Rate this app</string>
     <string name="prefError_rate">The Play Store doesn\'t seem to be installed.</string>
-    <!-- -->
-    <string name="prefTitle_recommend">Recommend NDx</string>
-    <string name="prefValue_recommend">Check out this app! NDx — an awesome calculator for using ND filters. It\'s available for free in the Play Store: https://play.google.com/store/apps/details?id=de.salomax.ndx</string>
 
 
     <!-- CONSTANTS ............................................................................. -->
@@ -78,7 +75,6 @@
 
     <string name="prefKey_mail" translatable="false">KEY_MAIL</string>
     <string name="prefKey_rate" translatable="false">KEY_RATE</string>
-    <string name="prefKey_recommend" translatable="false">KEY_RECOMMEND</string>
 
     <string-array name="prefValues_evSteps" translatable="false">
         <item>1</item>

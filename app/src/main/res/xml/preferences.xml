@@ -73,10 +73,6 @@
         <Preference
             android:key="@string/prefKey_rate"
             android:title="@string/prefTitle_rate" />
-
-        <Preference
-            android:key="@string/prefKey_recommend"
-            android:title="@string/prefTitle_recommend" />
     </PreferenceCategory>
 
 </PreferenceScreen>
