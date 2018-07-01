@@ -2,8 +2,8 @@ package de.salomax.ndx.ui.preferences
 
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Vibrator
 import android.support.design.widget.Snackbar
@@ -14,6 +14,7 @@ import android.support.v7.preference.ListPreference
 import android.support.v7.preference.Preference
 import android.support.v7.preference.PreferenceFragmentCompat
 import android.support.v7.preference.PreferenceManager
+import de.salomax.ndx.BuildConfig
 import de.salomax.ndx.R
 import de.salomax.ndx.data.NdxDatabase
 import de.salomax.ndx.data.Pref
@@ -76,13 +77,8 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
         // about
         donatePreference.onPreferenceClickListener = this
         aboutPreference.onPreferenceClickListener = this
-        try {
-            val version = activity?.packageManager?.getPackageInfo(activity?.packageName, 0)?.versionName
-            aboutPreference.title = getString(R.string.prefTitle_about, version)
-            aboutPreference.summary = getString(R.string.prefSummary_about, Calendar.getInstance().get(Calendar.YEAR))
-        } catch (e: PackageManager.NameNotFoundException) {
-            e.printStackTrace()
-        }
+        aboutPreference.title = getString(R.string.prefTitle_about, BuildConfig.VERSION_NAME)
+        aboutPreference.summary = getString(R.string.prefSummary_about, Calendar.getInstance().get(Calendar.YEAR))
         // feedback
         mailPreference.onPreferenceClickListener = this
         ratePreference.onPreferenceClickListener = this
@@ -161,7 +157,14 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
                 mailIntent.data = Uri.parse("mailto:") // only email apps should handle this
                 mailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.prefValue_mail_address)))
                 mailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.prefValue_mail_subject))
-                //intent.putExtra(Intent.EXTRA_TEXT, subject)
+                val device = Build.MANUFACTURER + " " + Build.MODEL + " (" + Build.DEVICE + ")"
+                val osVersion = Build.VERSION.RELEASE + " (" + Build.VERSION.SDK_INT.toString() + ")"
+                val appVersion = BuildConfig.VERSION_NAME
+                val info = "Device=$device\n" +
+                        "OS Version=$osVersion\n" +
+                        "App Version=$appVersion\n" +
+                        "---\n\n"
+                mailIntent.putExtra(Intent.EXTRA_TEXT, info)
                 if (mailIntent.resolveActivity(context!!.packageManager) != null)
                     startActivity(mailIntent)
                 else // no mail client available
