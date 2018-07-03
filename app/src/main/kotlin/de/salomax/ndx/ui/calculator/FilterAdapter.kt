@@ -34,11 +34,15 @@ class FilterAdapter(private val context: Context) : RecyclerView.Adapter<FilterA
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val filter = items[position]
         holder.textView1.text = filter.name
-        holder.textView2.text = context.resources.getString(R.string.filterInfo,
-                filter.factor.toString(),
-                MathUtils.factor2fstopRounded(filter.factor.toDouble()),
-                MathUtils.factor2nd(filter.factor.toDouble()),
-                if (filter.info.isNullOrBlank()) "" else "\n" + filter.info)
+        //
+        val factor = items[position].factor
+        val stops = MathUtils.factor2fstopRounded(factor)
+        val nd = MathUtils.factor2nd(factor)
+        holder.textView2.text = context.resources.getQuantityString(R.plurals.filterInfo,
+                factor - 1,
+                factor, stops, nd,
+                if (items[position].info.isNullOrBlank()) "" else "\n" + items[position].info)
+        //
         holder.switch.isChecked = activeItems.contains(filter)
     }
 
