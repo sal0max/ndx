@@ -17,9 +17,9 @@ object MathUtils {
     fun factor2fstop(factor: Double): String =
             String.format(Locale.US, "%.1f", kotlin.math.log2(factor))
 
-    fun factor2fstopRounded(factor: Double): String =
-            Math.round(kotlin.math.log2(factor)).toString()
+    fun factor2fstopRounded(factor: Number): String =
+            Math.round(kotlin.math.log2(factor.toDouble())).toString()
 
-    fun factor2nd(factor: Double): String =
-            String.format(Locale.US, "%.1f", kotlin.math.log10(factor))
+    fun factor2nd(factor: Number): String =
+            String.format(Locale.US, "%.1f", kotlin.math.log10(factor.toDouble()))
 }

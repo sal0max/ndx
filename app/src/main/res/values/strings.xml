@@ -12,6 +12,10 @@
     <string name="undo">Undo</string>
     <string name="delete">Delete</string>
 
-    <string name="filterInfo">× %1$s\ \ ·\ \ %2$s Stops\ \ ·\ \ ND %3$s<i>%4$s</i></string>
+    <plurals name="filterInfo">
+        <item quantity="one">× %1$s\ \ ·\ \ %2$s Stop\ \ ·\ \ ND %3$s%4$s</item>
+        <item quantity="other">× %1$s\ \ ·\ \ %2$s Stops\ \ ·\ \ ND %3$s%4$s</item>
+    </plurals>
+
 
 </resources>
