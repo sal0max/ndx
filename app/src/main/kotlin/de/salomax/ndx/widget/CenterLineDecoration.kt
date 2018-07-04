@@ -25,7 +25,7 @@ class CenterLineDecoration(color: Int, width: Float) : RecyclerView.ItemDecorati
         mPaint.style = Paint.Style.FILL
     }
 
-    override fun onDrawOver(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State?) {
+    override fun onDrawOver(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDrawOver(canvas, parent, state)
         canvas.save()
 

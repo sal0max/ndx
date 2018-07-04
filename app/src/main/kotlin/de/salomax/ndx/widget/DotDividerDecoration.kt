@@ -26,7 +26,7 @@ class DotDividerDecoration(color: Int, width: Float) : RecyclerView.ItemDecorati
         mPaint.isAntiAlias = true
     }
 
-    override fun onDrawOver(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State?) {
+    override fun onDrawOver(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDrawOver(canvas, parent, state)
         canvas.save()
 
@@ -36,7 +36,7 @@ class DotDividerDecoration(color: Int, width: Float) : RecyclerView.ItemDecorati
         val childCount = parent.childCount
         for (i in 0 until childCount - 1) {
             val child = parent.getChildAt(i)
-            val itemCenter = layoutManager.getDecoratedRight(child).toFloat()
+            val itemCenter = layoutManager!!.getDecoratedRight(child).toFloat()
             canvas.drawCircle(
                     itemCenter, bottom / 2f,
                     convertDpToPixel(1f),

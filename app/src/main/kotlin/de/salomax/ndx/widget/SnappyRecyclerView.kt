@@ -49,16 +49,16 @@ class SnappyRecyclerView : RecyclerView {
     // restore selected item
     override fun onRestoreInstanceState(state: Parcelable?) {
         if (state is Bundle) {
-            post({
+            post {
                 scrollToPosition(state.getInt("snappedPosition"))
-            })
+            }
             super.onRestoreInstanceState(state.getParcelable<Parcelable>("superState"))
         } else
             super.onRestoreInstanceState(state)
     }
 
     fun snap() {
-        snapHelper.findSnapView(layoutManager)?.let { snapHelper.calculateDistanceToFinalSnap(layoutManager, it)?.let { scrollBy(it[0], 0) } }
+        snapHelper.findSnapView(layoutManager!!)?.let { snapHelper.calculateDistanceToFinalSnap(layoutManager!!, it)?.let { scrollBy(it[0], 0) } }
     }
 
     /**
@@ -93,11 +93,11 @@ class SnappyRecyclerView : RecyclerView {
         override fun attachToRecyclerView(recyclerView: RecyclerView?) {
             var viewCache: View? = null
             recyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
-                    val view = findSnapView(layoutManager)
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    val view = findSnapView(layoutManager!!)
                     if (viewCache != view) {
                         viewCache = view
-                        snappedSubject.onNext(layoutManager.getPosition(view))
+                        snappedSubject.onNext(layoutManager!!.getPosition(view!!))
                     }
                 }
             })
@@ -127,7 +127,7 @@ class SnappyRecyclerView : RecyclerView {
             for (i in 0 until totalChildren) {
                 val child = layoutManager.getChildAt(i)
                 // if child center is closer than previous closest, set it as closest
-                val childCenter = helper.getTransformedStartWithDecoration(child) + child.width / 2
+                val childCenter = helper.getTransformedStartWithDecoration(child) + child!!.width / 2
                 val distToCenter = Math.abs(childCenter - center)
                 if (distToCenter < absClosest) {
                     absClosest = distToCenter
@@ -138,8 +138,8 @@ class SnappyRecyclerView : RecyclerView {
         }
 
         fun getSnappedPosition(): Int {
-            val view = findSnapView(layoutManager)
-            return if (view != null) layoutManager.getPosition(view) else -1
+            val view = findSnapView(layoutManager!!)
+            return if (view != null) layoutManager!!.getPosition(view) else -1
         }
     }
 
@@ -152,12 +152,12 @@ class SnappyRecyclerView : RecyclerView {
 
         private var parentWidth = width
 
-        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State?) {
+        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
             super.getItemOffsets(outRect, view, parent, state)
 
             // only add offset BEFORE FIRST and AFTER LAST item
             val position = parent.getChildAdapterPosition(view)
-            val total = parent.adapter.itemCount
+            val total = parent.adapter!!.itemCount
             if (position == 0 || position == total - 1) {
                 // item width
                 view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
