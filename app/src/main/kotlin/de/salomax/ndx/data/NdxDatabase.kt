@@ -11,7 +11,7 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-@Database(entities = [(Filter::class), (Pref::class)], version = 1)
+@Database(entities = [(Filter::class), (Pref::class)], version = 1, exportSchema = false)
 abstract class NdxDatabase : RoomDatabase() {
 
     abstract fun filterDao(): FilterDao
