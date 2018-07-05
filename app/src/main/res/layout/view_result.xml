@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
     Try to make every element "fixed" by avoiding wrap_content and instead use match_parent or 0dp
     Improves performance a lot!
