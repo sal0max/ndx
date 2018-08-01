@@ -9,6 +9,7 @@ import de.salomax.ndx.R
 import de.salomax.ndx.ui.BaseActivity
 import de.salomax.ndx.ui.filterpouch.FilterPouchActivity
 import de.salomax.ndx.ui.preferences.PreferenceActivity
+import de.salomax.ndx.ui.timer.TimerActivity
 
 class CalculatorActivity : BaseActivity() {
 
@@ -49,7 +50,9 @@ class CalculatorActivity : BaseActivity() {
                 true
             }
             R.id.menu_timer -> {
-                viewDelegate.pushEvent(Event.StartTimer(viewDelegate.getSelectedSpeed()!!))
+                val i = Intent(this, TimerActivity().javaClass)
+                i.putExtra("MILLIS", viewDelegate.getSelectedSpeed()!! / 1000)
+                startActivity(i)
                 true
             }
             else -> false
