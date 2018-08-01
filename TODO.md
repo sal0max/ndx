@@ -25,6 +25,8 @@
    * ~~all black~~
    * ~~all white (?)~~
 * monetization
+* filter calibrator
+* Crashlytics
 
 ### low priority
 * ~~animate addition/removal of filters in `myfilters`~~
@@ -35,6 +37,13 @@
    * using this app
    * when to use which exposure time (foggy waves, dynamic waves, disappearing people, ...)
    * how to use the timer when no remote shutter release is at hand
+* Google Analytics
+   * How many filters are used?
+   * How often is the calibrator used (when adding/editing a new filter)?
+   * How often is the timer used?
+   * How long is the average session?
+   * What filters are used? (Name)
+   * What theme is used?
 
 
 ## Bugs
