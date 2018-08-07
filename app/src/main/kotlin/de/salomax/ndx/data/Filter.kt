@@ -15,7 +15,7 @@ data class Filter(@PrimaryKey(autoGenerate = true) var id: Long?,
     constructor(parcel: Parcel) : this(
             parcel.readValue(Long::class.java.classLoader) as? Long,
             parcel.readInt(),
-            parcel.readString(),
+            parcel.readString()!!,
             parcel.readString())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
