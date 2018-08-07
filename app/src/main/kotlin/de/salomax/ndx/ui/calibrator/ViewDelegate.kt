@@ -64,7 +64,7 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
 
     private fun showResult() {
         val factor = (((afterMin * 60) + afterSec) * 1_000_000L) / before.toDouble()
-        if (factor <= 0) {
+        if (factor < 1) {
             resultError.visibility = View.VISIBLE
             resultFactor.text = null
             resultStops.text = null

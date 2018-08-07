@@ -14,5 +14,5 @@
     <string name="label_factor">× %d</string>
     <string name="label_f_stops">%1$s Stops</string>
     <string name="label_nd">ND %1$s</string>
-    <string name="calibrator_error">Pick a speed <b>with</b> filter > speed <b>without</b> filter</string>
+    <string name="calibrator_error">Pick a speed <b>with</b> filter ≥ speed <b>without</b> filter</string>
 </resources>
