@@ -17,6 +17,7 @@
         android:id="@+id/card"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:cardCornerRadius="0dp"
         app:cardElevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideline_center"
