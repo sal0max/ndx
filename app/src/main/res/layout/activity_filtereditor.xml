@@ -21,22 +21,36 @@
             android:paddingTop="@dimen/margin2x">
 
             <android.support.constraint.Guideline
-                android:id="@+id/guideline1"
+                android:id="@+id/guideline_center"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent=".5" />
 
+            <!-- Text: Properties -->
+            <TextView
+                android:id="@+id/title_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin2x"
+                android:text="@string/hint_description"
+                android:textSize="@dimen/text_normal"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <!-- /Text: Properties -->
+
             <!-- Name -->
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/guideline"
+                android:id="@+id/container_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin2x"
                 android:layout_marginStart="@dimen/margin2x"
+                android:layout_marginTop="@dimen/margin2x"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@id/title_description">
 
                 <EditText
                     android:id="@+id/name"
@@ -50,14 +64,15 @@
 
             <!-- Info -->
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/guideline3"
+                android:id="@+id/container_info"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin2x"
                 android:layout_marginStart="@dimen/margin2x"
+                android:layout_marginTop="@dimen/margin2x"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/guideline">
+                app:layout_constraintTop_toBottomOf="@id/container_name">
 
                 <EditText
                     android:id="@+id/info"
@@ -71,28 +86,28 @@
 
             <!-- Text: Properties -->
             <TextView
-                android:id="@+id/guideline4"
+                android:id="@+id/title_strength"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin2x"
-                android:layout_marginTop="@dimen/margin3x"
-                android:text="@string/hint_properties"
+                android:layout_marginTop="@dimen/margin4x"
+                android:text="@string/hint_strength"
                 android:textSize="@dimen/text_normal"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/guideline3" />
+                app:layout_constraintTop_toBottomOf="@id/container_info" />
             <!-- /Text: Properties -->
 
             <!-- Factor -->
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/guideline5"
+                android:id="@+id/container_factor"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin2x"
                 android:layout_marginTop="@dimen/margin2x"
-                app:layout_constraintEnd_toStartOf="@id/guideline1"
+                app:layout_constraintEnd_toStartOf="@id/guideline_center"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/guideline4">
+                app:layout_constraintTop_toBottomOf="@id/title_strength">
 
                 <EditText
                     android:id="@+id/factor"
@@ -106,13 +121,13 @@
 
             <!-- Stops -->
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/guideline6"
+                android:id="@+id/container_f_stops"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin2x"
-                app:layout_constraintEnd_toStartOf="@+id/guideline7"
-                app:layout_constraintStart_toEndOf="@id/guideline5"
-                app:layout_constraintTop_toBottomOf="@id/guideline4">
+                app:layout_constraintEnd_toStartOf="@+id/container_nd"
+                app:layout_constraintStart_toEndOf="@id/container_factor"
+                app:layout_constraintTop_toBottomOf="@id/title_strength">
 
                 <EditText
                     android:id="@+id/f_stops"
@@ -126,14 +141,14 @@
 
             <!-- ND -->
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/guideline7"
+                android:id="@+id/container_nd"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin2x"
                 android:layout_marginTop="@dimen/margin2x"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/guideline6"
-                app:layout_constraintTop_toBottomOf="@id/guideline4">
+                app:layout_constraintStart_toEndOf="@id/container_f_stops"
+                app:layout_constraintTop_toBottomOf="@id/title_strength">
 
                 <EditText
                     android:id="@+id/nd"
@@ -146,12 +161,34 @@
             </android.support.design.widget.TextInputLayout>
             <!-- /ND -->
 
+            <TextView
+                android:id="@+id/calibrator_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin1x"
+                android:layout_marginTop="@dimen/margin1x"
+                android:text="@string/calibrator_description"
+                app:layout_constraintEnd_toStartOf="@id/btn_calibrator"
+                app:layout_constraintStart_toStartOf="@id/container_factor"
+                app:layout_constraintTop_toBottomOf="@id/container_factor" />
+
+            <Button
+                android:id="@+id/btn_calibrator"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin1x"
+                android:text="@string/btn_calibrator"
+                app:layout_constraintBottom_toBottomOf="@+id/calibrator_description"
+                app:layout_constraintEnd_toEndOf="@id/container_name"
+                app:layout_constraintTop_toBottomOf="@id/container_nd" />
+
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 
     <!-- delete -->
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/delete"
+        android:id="@+id/btn_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin2x"

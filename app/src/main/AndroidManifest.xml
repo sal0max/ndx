@@ -19,6 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.calibrator.CalibratorActivity" />
         <activity android:name=".ui.filtereditor.FilterEditorActivity" />
         <activity android:name=".ui.filterpouch.FilterPouchActivity" />
         <activity android:name=".ui.preferences.PreferenceActivity" />

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- result -->
+    <android.support.v7.widget.CardView
+        android:id="@+id/card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin4x">
+
+            <TextView
+                android:id="@+id/error"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/margin2x"
+                android:gravity="center"
+                android:text="@string/calibrator_error"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="@dimen/text_normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="gone" />
+
+            <TextView
+                android:id="@+id/factor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin2x"
+                android:layout_marginEnd="@dimen/margin2x"
+                android:layout_marginTop="@dimen/margin4x"
+                android:gravity="end|center_vertical"
+                android:lines="1"
+                android:textColor="?android:attr/colorAccent"
+                android:textSize="@dimen/text_resultVeryLarge"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="× 1024" />
+
+            <TextView
+                android:id="@+id/f_stops"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/margin2x"
+                android:fontFamily="monospace"
+                android:gravity="center_vertical|bottom"
+                android:lines="1"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="@dimen/text_normal"
+                app:layout_constraintBottom_toTopOf="@id/nd"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/factor"
+                tools:text="10 Stops" />
+
+            <TextView
+                android:id="@+id/nd"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/margin2x"
+                android:fontFamily="monospace"
+                android:gravity="center_vertical|top"
+                android:lines="1"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="@dimen/text_normal"
+                app:layout_constraintBottom_toBottomOf="@id/factor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/f_stops"
+                tools:text="ND 3.0" />
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+    <!-- /result -->
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin2x">
+
+            <android.support.constraint.Group
+                android:id="@+id/manual_text"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:constraint_referenced_ids="text1_desc, text2_desc, text3, text3_desc" />
+
+            <!-- input 1 -->
+            <TextView
+                android:id="@+id/text1"
+                style="@style/TextAppearance.AppCompat.Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin2x"
+                android:text="@string/label_1"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="@dimen/text_normal"
+                app:layout_constraintBaseline_toBaselineOf="@id/manual_text"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/text1_desc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin2x"
+                android:layout_marginStart="@dimen/margin2x"
+                android:layout_marginTop="@dimen/margin1x"
+                android:text="@string/manual_pt1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text1" />
+
+            <de.salomax.ndx.widget.SnappyRecyclerView
+                android:id="@+id/snappy1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin2x"
+                android:background="?android:attr/colorAccent"
+                android:elevation="2dp"
+                android:orientation="horizontal"
+                android:scrollbars="none"
+                app:layout_constraintTop_toBottomOf="@id/text1_desc"
+                tools:listitem="@layout/row_shutter" />
+            <!-- /input 1 -->
+
+            <!-- input 2 -->
+            <TextView
+                android:id="@+id/text2"
+                style="@style/TextAppearance.AppCompat.Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin2x"
+                android:layout_marginTop="@dimen/margin3x"
+                android:text="@string/label_2"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="@dimen/text_normal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/snappy1" />
+
+            <TextView
+                android:id="@+id/text2_desc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin2x"
+                android:layout_marginStart="@dimen/margin2x"
+                android:layout_marginTop="@dimen/margin1x"
+                android:text="@string/manual_pt2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text2" />
+
+            <de.salomax.ndx.widget.SnappyRecyclerView
+                android:id="@+id/snappy2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin2x"
+                android:background="@color/colorPrimary"
+                android:elevation="2dp"
+                android:orientation="horizontal"
+                android:scrollbars="none"
+                app:layout_constraintEnd_toStartOf="@id/snappy3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text2_desc"
+                tools:listitem="@layout/row_shutter" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/unit_minutes"
+                android:textSize="@dimen/text_normal"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/snappy2"
+                app:layout_constraintStart_toStartOf="@id/snappy2"
+                app:layout_constraintTop_toBottomOf="@id/snappy3" />
+
+            <de.salomax.ndx.widget.SnappyRecyclerView
+                android:id="@+id/snappy3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:elevation="2dp"
+                android:scrollbars="none"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/snappy2"
+                app:layout_constraintTop_toTopOf="@id/snappy2"
+                tools:listitem="@layout/row_shutter" />
+
+            <TextView
+                android:id="@+id/label_seconds"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/unit_seconds"
+                android:textSize="@dimen/text_normal"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/snappy3"
+                app:layout_constraintStart_toStartOf="@id/snappy3"
+                app:layout_constraintTop_toBottomOf="@id/snappy3" />
+            <!-- /input 2 -->
+
+            <TextView
+                android:id="@+id/text3"
+                style="@style/TextAppearance.AppCompat.Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin2x"
+                android:layout_marginStart="@dimen/margin2x"
+                android:layout_marginTop="@dimen/margin3x"
+                android:text="@string/label_3"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="@dimen/text_normal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/label_seconds" />
+
+            <TextView
+                android:id="@+id/text3_desc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin2x"
+                android:layout_marginStart="@dimen/margin2x"
+                android:layout_marginTop="@dimen/margin1x"
+                android:text="@string/manual_pt3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text3" />
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

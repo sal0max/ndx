@@ -1,19 +1,21 @@
 package de.salomax.ndx.ui.filtereditor
 
+import android.app.Activity
+import android.content.Intent
+import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import com.joaquimverges.helium.viewdelegate.BaseViewDelegate
 import de.salomax.ndx.R
 import de.salomax.ndx.data.Filter
+import de.salomax.ndx.ui.calibrator.CalibratorActivity
 import de.salomax.ndx.util.MathUtils
 import java.util.*
-import android.app.Activity
-import android.content.Intent
-import android.support.design.widget.FloatingActionButton
 
 class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.layout.activity_filtereditor, inflater) {
 
@@ -23,7 +25,8 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
     private val fStops = view.findViewById<EditText>(R.id.f_stops)
     private val nd = view.findViewById<EditText>(R.id.nd)
 
-    private val delete = view.findViewById<FloatingActionButton>(R.id.delete)
+    private val calibrator = view.findViewById<Button>(R.id.btn_calibrator)
+    private val delete = view.findViewById<FloatingActionButton>(R.id.btn_delete)
 
     private var oldId: Long? = null
 
@@ -31,6 +34,11 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
         factor.calc()
         fStops.calc()
         factor.onlyGreaterEqualOne()
+
+        calibrator.setOnClickListener {
+            val intent = Intent(context, CalibratorActivity().javaClass)
+            (context as AppCompatActivity).startActivity(intent)
+        }
     }
 
     override fun render(viewState: State) {
@@ -39,7 +47,7 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
                 // edit mode: show delete button
                 if (viewState.data.id != null) {
                     oldId = viewState.data.id
-                    delete.visibility = View.VISIBLE
+                    delete.show()
                     delete.setOnClickListener {
                         pushEvent(Event.Delete(viewState.data.id!!))
                     }

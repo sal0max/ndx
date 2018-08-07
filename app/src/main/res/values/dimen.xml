@@ -3,6 +3,7 @@
     <dimen name="margin1x">8dp</dimen>
     <dimen name="margin2x">16dp</dimen>
     <dimen name="margin3x">24dp</dimen>
+    <dimen name="margin4x">32dp</dimen>
 
     <dimen name="text_big">18sp</dimen>
     <dimen name="text_normal">16sp</dimen>
@@ -13,4 +14,5 @@
     <dimen name="text_resultSmall">24sp</dimen>
     <dimen name="text_resultMedium">33sp</dimen>
     <dimen name="text_resultLarge">45sp</dimen>
+    <dimen name="text_resultVeryLarge">53sp</dimen>
 </resources>
