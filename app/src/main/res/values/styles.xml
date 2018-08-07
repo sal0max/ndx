@@ -25,6 +25,11 @@
         <item name="colorAccent">@color/colorBlackAccent</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
         <item name="android:windowBackground">@color/colorBlackBackground</item>
+        <item name="cardViewStyle">@style/AppTheme.CardView.Black</item>
+    </style>
+
+    <style name="AppTheme.CardView.Black" parent="CardView.Dark">
+        <item name="cardBackgroundColor">@color/colorBlackBackground</item>
     </style>
 
 </resources>
