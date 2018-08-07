@@ -193,9 +193,9 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
     }
 
     private fun showError(errorMsg: String) {
-        val toast = Snackbar.make(view!!, errorMsg, Snackbar.LENGTH_SHORT)
-        toast.view.setBackgroundColor(ContextCompat.getColor(context!!, android.R.color.holo_red_light))
-        toast.show()
+        val snackbar = Snackbar.make(view!!, errorMsg, Snackbar.LENGTH_SHORT)
+        snackbar.view.setBackgroundColor(ContextCompat.getColor(context!!, android.R.color.holo_red_light))
+        snackbar.show()
     }
 
 }
