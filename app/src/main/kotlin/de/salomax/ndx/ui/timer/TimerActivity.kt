@@ -1,7 +1,7 @@
 package de.salomax.ndx.ui.timer
 
 import android.os.Bundle
-import com.joaquimverges.helium.retained.RetainedPresenters
+import com.joaquimverges.helium.core.retained.RetainedPresenters
 import de.salomax.ndx.R
 import de.salomax.ndx.ui.BaseActivity
 

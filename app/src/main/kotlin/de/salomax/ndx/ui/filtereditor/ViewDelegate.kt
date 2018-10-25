@@ -10,7 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import com.joaquimverges.helium.viewdelegate.BaseViewDelegate
+import com.joaquimverges.helium.core.viewdelegate.BaseViewDelegate
 import de.salomax.ndx.R
 import de.salomax.ndx.data.Filter
 import de.salomax.ndx.ui.calibrator.CalibratorActivity

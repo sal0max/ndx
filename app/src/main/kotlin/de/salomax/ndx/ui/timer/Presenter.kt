@@ -1,6 +1,6 @@
 package de.salomax.ndx.ui.timer
 
-import com.joaquimverges.helium.presenter.BasePresenter
+import com.joaquimverges.helium.core.presenter.BasePresenter
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable

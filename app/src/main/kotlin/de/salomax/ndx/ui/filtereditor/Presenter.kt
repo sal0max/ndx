@@ -1,6 +1,6 @@
 package de.salomax.ndx.ui.filtereditor
 
-import com.joaquimverges.helium.presenter.BasePresenter
+import com.joaquimverges.helium.core.presenter.BasePresenter
 import de.salomax.ndx.App.Companion.context
 import de.salomax.ndx.data.NdxDatabase
 import io.reactivex.Single

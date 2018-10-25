@@ -1,10 +1,11 @@
 package de.salomax.ndx.ui.calibrator
 
+import android.support.constraint.Group
 import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
-import com.joaquimverges.helium.viewdelegate.BaseViewDelegate
+import com.joaquimverges.helium.core.viewdelegate.BaseViewDelegate
 import de.salomax.ndx.R
 import de.salomax.ndx.ui.calculator.ShutterAdapter
 import de.salomax.ndx.util.MathUtils
@@ -16,6 +17,8 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
     private val listBefore: SnappyRecyclerView = view.findViewById(R.id.snappy1)
     private val listAfterMinutes: SnappyRecyclerView = view.findViewById(R.id.snappy2)
     private val listAfterSeconds: SnappyRecyclerView = view.findViewById(R.id.snappy3)
+
+    private val manual: Group = view.findViewById(R.id.manual_text)
 
     private val resultFactor: TextView = view.findViewById(R.id.factor)
     private val resultStops: TextView = view.findViewById(R.id.f_stops)
@@ -58,7 +61,12 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
 
     override fun render(viewState: State) {
         when (viewState) {
-            //is State.FiltersReady -> filterAdapter.setFilters(viewState.data)
+            is State.ToggleManual -> {
+                if (manual.visibility == View.VISIBLE) //TODO
+                    manual.visibility = View.GONE
+                else
+                    manual.visibility = View.VISIBLE
+            }
         }
     }
 

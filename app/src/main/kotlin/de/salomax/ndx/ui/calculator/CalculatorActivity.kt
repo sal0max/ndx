@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import com.joaquimverges.helium.retained.RetainedPresenters
+import com.joaquimverges.helium.core.retained.RetainedPresenters
 import de.salomax.ndx.R
 import de.salomax.ndx.ui.BaseActivity
 import de.salomax.ndx.ui.filterpouch.FilterPouchActivity

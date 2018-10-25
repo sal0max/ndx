@@ -1,6 +1,6 @@
 package de.salomax.ndx.ui.filtereditor
 
-import com.joaquimverges.helium.state.ViewState
+import com.joaquimverges.helium.core.state.ViewState
 import de.salomax.ndx.data.Filter
 
 sealed class State : ViewState {

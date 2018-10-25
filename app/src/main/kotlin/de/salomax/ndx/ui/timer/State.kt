@@ -1,6 +1,6 @@
 package de.salomax.ndx.ui.timer
 
-import com.joaquimverges.helium.state.ViewState
+import com.joaquimverges.helium.core.state.ViewState
 
 sealed class State : ViewState {
     data class InitOrReset(val millisTotal: Long, val millisOffset: Long) : State()

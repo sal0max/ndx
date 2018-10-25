@@ -3,7 +3,7 @@ package de.salomax.ndx.ui.filtereditor
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import com.joaquimverges.helium.retained.RetainedPresenters
+import com.joaquimverges.helium.core.retained.RetainedPresenters
 import de.salomax.ndx.R
 import de.salomax.ndx.data.Filter
 import de.salomax.ndx.ui.BaseActivity

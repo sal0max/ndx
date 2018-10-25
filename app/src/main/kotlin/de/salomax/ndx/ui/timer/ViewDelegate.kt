@@ -8,7 +8,7 @@ import android.view.animation.Animation
 import android.widget.Button
 import android.widget.TextView
 import com.github.guilhe.circularprogressview.CircularProgressView
-import com.joaquimverges.helium.viewdelegate.BaseViewDelegate
+import com.joaquimverges.helium.core.viewdelegate.BaseViewDelegate
 import de.salomax.ndx.R
 import de.salomax.ndx.data.NdxDatabase
 import de.salomax.ndx.data.Pref

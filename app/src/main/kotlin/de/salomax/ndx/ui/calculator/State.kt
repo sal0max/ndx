@@ -1,6 +1,6 @@
 package de.salomax.ndx.ui.calculator
 
-import com.joaquimverges.helium.state.ViewState
+import com.joaquimverges.helium.core.state.ViewState
 import de.salomax.ndx.data.Filter
 import de.salomax.ndx.data.ShutterSpeeds
 

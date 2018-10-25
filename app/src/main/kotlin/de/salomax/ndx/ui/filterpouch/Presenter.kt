@@ -2,7 +2,7 @@ package de.salomax.ndx.ui.filterpouch
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
-import com.joaquimverges.helium.presenter.BasePresenter
+import com.joaquimverges.helium.core.presenter.BasePresenter
 import de.salomax.ndx.App.Companion.context
 import de.salomax.ndx.data.NdxDatabase
 import io.reactivex.Single

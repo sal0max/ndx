@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import com.joaquimverges.helium.viewdelegate.BaseViewDelegate
+import com.joaquimverges.helium.core.viewdelegate.BaseViewDelegate
 import de.salomax.ndx.R
 import de.salomax.ndx.ui.filtereditor.FilterEditorActivity
 

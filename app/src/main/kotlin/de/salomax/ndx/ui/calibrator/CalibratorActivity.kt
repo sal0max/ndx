@@ -1,12 +1,9 @@
 package de.salomax.ndx.ui.calibrator
 
 import android.os.Bundle
-import android.support.constraint.Group
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import androidx.core.view.isVisible
-import com.joaquimverges.helium.retained.RetainedPresenters
+import com.joaquimverges.helium.core.retained.RetainedPresenters
 import de.salomax.ndx.R
 import de.salomax.ndx.ui.BaseActivity
 
@@ -46,15 +43,11 @@ class CalibratorActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.ok -> {
-                //presenter.pushState(State.InsertOrUpdate)
+                //presenter.pushState(State.Finish)
                 true
             }
             R.id.manual_toggle -> {
-                val manual = findViewById<Group>(R.id.manual_text)
-                if (manual.isVisible)
-                    manual.visibility = View.GONE
-                else
-                    manual.visibility = View.VISIBLE
+                presenter.pushState(State.ToggleManual)
                 true
             }
             else -> false
