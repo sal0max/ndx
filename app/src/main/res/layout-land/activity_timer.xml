@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_max="wrap"
-        app:progressBarColor="@color/colorAccent"
+        app:progressBarColor="?android:attr/colorAccent"
         app:progressBarThickness="8dp"
         app:progressThumb="true"
         app:reverse="true"
