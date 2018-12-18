@@ -3,6 +3,7 @@ package de.salomax.ndx.ui
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.preference.PreferenceManager
+import de.salomax.ndx.App
 import de.salomax.ndx.R
 import de.salomax.ndx.data.Pref
 
@@ -19,6 +20,11 @@ abstract class BaseActivity : AppCompatActivity() {
             "1" -> setTheme(R.style.AppTheme_Dark)
             "2" -> setTheme(R.style.AppTheme_Black)
         }
+        // analytics
+        theme?.let {
+            App.analytics.setUserProperty("theme", resources.getStringArray(R.array.prefEntries_themes)[it.toInt()])
+        }
+
         super.onCreate(savedInstanceState)
     }
 
