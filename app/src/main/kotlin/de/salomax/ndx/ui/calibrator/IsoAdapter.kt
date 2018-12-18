@@ -5,39 +5,43 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import de.salomax.ndx.R
+import de.salomax.ndx.data.ISOs
 import de.salomax.ndx.widget.SnappyRecyclerView
 import io.reactivex.disposables.Disposable
 
-class SecondsAdapter(max: Int) : RecyclerView.Adapter<SecondsAdapter.ViewHolder>() {
+class IsoAdapter : RecyclerView.Adapter<IsoAdapter.ViewHolder>() {
 
-    var selectedValue: Int = 1
+    var selectedValue: Int = 100
         private set
 
-    private val items: IntArray = IntArray(max + 1) { it }
+    private var items: ISOs? = null
 
     private var subscription: Disposable? = null
 
-    init {
-        setHasStableIds(true)
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.row_shutter, parent, false) as TextView
-        return ViewHolder(view)
+        val textView = LayoutInflater.from(parent.context).inflate(R.layout.row_shutter, parent, false) as TextView
+        return ViewHolder(textView)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textView.text = items[position].toString()
+        holder.textView.text = items?.get(position)?.toString()
+    }
+
+    fun setISOs(isos: ISOs) {
+        if (items != isos) {
+            items = isos
+            notifyDataSetChanged()
+        }
     }
 
     override fun getItemId(position: Int): Long {
-        return items[position].toLong()
+        return items?.get(position)?.toLong() ?: -1
     }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
         subscription = (recyclerView as SnappyRecyclerView).snappedEvent.subscribe {
-            selectedValue = items[it]
+            selectedValue = items?.get(it) ?: 100
         }
     }
 
@@ -46,7 +50,7 @@ class SecondsAdapter(max: Int) : RecyclerView.Adapter<SecondsAdapter.ViewHolder>
         subscription?.dispose()
     }
 
-    override fun getItemCount() = items.size
+    override fun getItemCount() = items?.values?.size ?: 0
 
     inner class ViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView)
 

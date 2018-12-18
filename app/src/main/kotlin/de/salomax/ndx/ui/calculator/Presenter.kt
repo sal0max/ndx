@@ -1,5 +1,6 @@
 package de.salomax.ndx.ui.calculator
 
+import android.annotation.SuppressLint
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import com.joaquimverges.helium.core.presenter.BasePresenter
@@ -11,6 +12,7 @@ import io.reactivex.schedulers.Schedulers
 
 class Presenter : BasePresenter<State, Event>() {
 
+    @SuppressLint("CheckResult")
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     private fun loadShutterSpeeds() {
         NdxDatabase.getInstance(context).prefDao().getEvSteps()
@@ -28,6 +30,7 @@ class Presenter : BasePresenter<State, Event>() {
                 }
     }
 
+    @SuppressLint("CheckResult")
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     private fun loadFilters() {
         // listen to filter changes and reset list
@@ -39,6 +42,7 @@ class Presenter : BasePresenter<State, Event>() {
                 ?.subscribe { filters -> pushState(State.FiltersReady(filters)) }
     }
 
+    @SuppressLint("CheckResult")
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     private fun loadShowWarning() {
         NdxDatabase.getInstance(context)

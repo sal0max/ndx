@@ -25,7 +25,7 @@
    * ~~all black~~
    * ~~all white (?)~~
 * monetization
-* filter calibrator
+* ~~filter calibrator~~
 * Crashlytics
 
 ### low priority

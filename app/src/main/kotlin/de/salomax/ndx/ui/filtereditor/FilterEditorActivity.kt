@@ -1,5 +1,7 @@
 package de.salomax.ndx.ui.filtereditor
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -15,12 +17,13 @@ class FilterEditorActivity : BaseActivity() {
     }
 
     private lateinit var presenter: Presenter
+    private lateinit var viewDelegate: ViewDelegate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         presenter = RetainedPresenters.get(this, Presenter::class.java)
-        val viewDelegate = ViewDelegate(layoutInflater)
+        viewDelegate = ViewDelegate(layoutInflater)
         presenter.attach(viewDelegate)
         setContentView(viewDelegate.view)
 
@@ -55,6 +58,14 @@ class FilterEditorActivity : BaseActivity() {
                 true
             }
             else -> false
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK
+                && data != null && data.hasExtra("FACTOR")) {
+            val factor = data.getIntExtra("FACTOR", 1)
+            viewDelegate.pushEvent(Event.Calibrated(factor))
         }
     }
 

@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import com.joaquimverges.helium.core.viewdelegate.BaseViewDelegate
@@ -37,7 +36,7 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
 
         calibrator.setOnClickListener {
             val intent = Intent(context, CalibratorActivity().javaClass)
-            (context as AppCompatActivity).startActivity(intent)
+            (context as AppCompatActivity).startActivityForResult(intent, 1)
         }
     }
 
@@ -55,11 +54,7 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
                 // populate editText fields
                 name.setText(viewState.data.name)
                 info.setText(viewState.data.info)
-                factor.setText(viewState.data.factor.toString())
-                // calc fStops & nd
-                val factor = viewState.data.factor.toString().toDouble()
-                fStops.setText(MathUtils.factor2fstop(factor))
-                nd.setText(MathUtils.factor2nd(factor))
+                init(viewState.data.factor)
             }
             is State.InsertOrUpdate -> {
                 // validate
@@ -88,7 +83,17 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
                 activity.setResult(Activity.RESULT_OK, returnIntent)
                 activity.finish()
             }
+            is State.Calibrated -> {
+                init(viewState.factor)
+            }
         }
+    }
+
+    private fun init(factor: Int) {
+        this.factor.setText(factor.toString())
+        // calc fStops & nd
+        this.fStops.setText(MathUtils.factor2fstop(factor.toDouble()))
+        this.nd.setText(MathUtils.factor2nd(factor))
     }
 
     // Auto-fill properties

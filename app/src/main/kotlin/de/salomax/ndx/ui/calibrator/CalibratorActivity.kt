@@ -43,11 +43,11 @@ class CalibratorActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.ok -> {
-                //presenter.pushState(State.Finish)
+                presenter.pushState(State.Finish)
                 true
             }
             R.id.manual_toggle -> {
-                presenter.pushState(State.ToggleManual)
+                presenter.pushState(State.ShowManual)
                 true
             }
             else -> false

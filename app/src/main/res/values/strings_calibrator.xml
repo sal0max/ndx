@@ -2,17 +2,15 @@
 <resources>
     <string name="title_calibrator">Filter Calibrator</string>
 
-    <string name="label_1">Shutter speed <b>without</b> filter</string>
-    <string name="label_2">Shutter speed <b>with</b> filter</string>
-    <string name="label_3">Check histograms &amp; repeat</string>
+    <string name="label_1"><b>Without</b> filter</string>
+    <string name="label_2"><b>With</b> filter</string>
 
-    <string name="manual_toggle">How-to</string>
-    <string name="manual_pt1">Take a photo in manual mode without the filter in an environment where the light doesn\'t change. Ideally there\'s no daylight and a constant artificial light source. Use a tripod to fix the camera.</string>
-    <string name="manual_pt2">Now put on the filter and compensate for it by cranking up the exposure time by the factor the filter manufacturer claims. Don\'t change ISO and aperture!</string>
-    <string name="manual_pt3">Take the photo and compare the histograms. They should look identical. If they don\'t, repeat step 2 with increased or decreased shutter speed until they do.</string>
+    <string name="manual_title">How-to</string>
+    <string name="manual_summary">1) Take a photo in <b>manual mode</b> without the filter in an environment where the light doesn\'t change: Ideally there\'s no daylight and a constant artificial light source.\nUse a tripod to fix the camera.
+        \n\n2) Now put on the filter and compensate for it by cranking up the exposure time by the factor the filter manufacturer claims. If necessary also increase the ISO, when measuring strong filters. <b>However don\'t change the aperture setting!</b>
+        \n\n3) Take the photo and compare both histograms. <b>They should look identical</b>. If they don\'t, repeat step 2 with increased or decreased shutter speed and/or ISO until they do.</string>
 
     <string name="label_factor">× %d</string>
     <string name="label_f_stops">%1$s Stops</string>
     <string name="label_nd">ND %1$s</string>
-    <string name="calibrator_error">Pick a speed <b>with</b> filter ≥ speed <b>without</b> filter</string>
 </resources>

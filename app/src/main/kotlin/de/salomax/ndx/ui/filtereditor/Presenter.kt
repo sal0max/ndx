@@ -32,6 +32,7 @@ class Presenter : BasePresenter<State, Event>() {
                         .subscribe()
             }
             is Event.Cancel -> pushState(State.Finish)
+            is Event.Calibrated -> pushState(State.Calibrated(event.factor))
         }
     }
 

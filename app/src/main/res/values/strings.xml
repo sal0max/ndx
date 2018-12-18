@@ -16,6 +16,7 @@
     <string name="unit_minutes">min</string>
     <string name="unit_hours">h</string>
     <string name="unit_days">d</string>
+    <string name="unit_iso">ISO</string>
 
     <plurals name="filterInfo">
         <item quantity="one">× %1$s\ \ ·\ \ %2$s Stop\ \ ·\ \ ND %3$s%4$s</item>
