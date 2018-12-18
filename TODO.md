@@ -24,9 +24,11 @@
    * ~~dark~~
    * ~~all black~~
    * ~~all white (?)~~
-* monetization
 * ~~filter calibrator~~
 * ~~Crashlytics~~
+* monetization
+* add privacy policy
+   * crashlytics: http://try.crashlytics.com/terms/privacy-policy.pdf
 
 ### low priority
 * ~~animate addition/removal of filters in `myfilters`~~
