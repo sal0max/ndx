@@ -18,18 +18,19 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        analytics = FirebaseAnalytics.getInstance(this)
-        context = this
-
-        // leakCanary TODO: remove?
-        if (!LeakCanary.isInAnalyzerProcess(this)) {
+        // init leakCanary TODO: remove?
+        if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.
             // You should not init your app in this process.
             return
         }
         LeakCanary.install(this)
 
-        // crashlytics
+        // provide app-wide context
+        context = this
+        // provide app-wide analytics
+        analytics = FirebaseAnalytics.getInstance(this)
+        // init crashlytics
         Fabric.with(this, Crashlytics())
     }
 }
