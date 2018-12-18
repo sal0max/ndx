@@ -19,7 +19,7 @@ class Presenter : BasePresenter<State, Event>() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { steps ->
-                    val isos: ISOs= when (steps.toInt()) {
+                    val isos: ISOs = when (steps.toInt()) {
                         1 -> ISOs.FULL
                         2 -> ISOs.HALF
                         else -> {
@@ -30,10 +30,6 @@ class Presenter : BasePresenter<State, Event>() {
                 }
     }
 
-    override fun onViewEvent(event: Event) {
-        when (event) {
-//            is Event.FilterClicked -> pushState(State.EditFilter(event.filter))
-        }
-    }
+    override fun onViewEvent(event: Event) {}
 
 }
