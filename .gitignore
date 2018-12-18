@@ -15,11 +15,10 @@ build/
 *.iml
 .idea/
 
-# Keystore files
+# keystore/api keys/local configuration
 .jks
 keystore.properties
-
-# Local configuration file (sdk path, etc)
+secrets.properties
 local.properties
 
 #OS
