@@ -26,7 +26,7 @@
    * ~~all white (?)~~
 * monetization
 * ~~filter calibrator~~
-* Crashlytics
+* ~~Crashlytics~~
 
 ### low priority
 * ~~animate addition/removal of filters in `myfilters`~~
