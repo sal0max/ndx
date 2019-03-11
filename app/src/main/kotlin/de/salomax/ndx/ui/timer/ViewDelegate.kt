@@ -9,8 +9,8 @@ import android.widget.Button
 import android.widget.TextView
 import com.github.guilhe.views.CircularProgressView
 import com.joaquimverges.helium.core.viewdelegate.BaseViewDelegate
+import de.salomax.ndx.App
 import de.salomax.ndx.R
-import de.salomax.ndx.data.NdxDatabase
 import de.salomax.ndx.data.Pref
 import de.salomax.ndx.util.ManagedAlarmPlayer
 import de.salomax.ndx.util.ManagedVibrator
@@ -90,7 +90,7 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
                 // hide reset
                 btnReset.visibility = View.GONE
                 // alarm: check whether to beep and/or to vibrate
-                Observable.just(NdxDatabase.getInstance(context))
+                Observable.just(App.database)
                         .subscribeOn(Schedulers.io())
                         .subscribe {
                             for (pref in it.prefDao().getTimerAlarms()) {

@@ -14,9 +14,9 @@ import android.support.v7.preference.ListPreference
 import android.support.v7.preference.Preference
 import android.support.v7.preference.PreferenceFragmentCompat
 import android.support.v7.preference.PreferenceManager
+import de.salomax.ndx.App
 import de.salomax.ndx.BuildConfig
 import de.salomax.ndx.R
-import de.salomax.ndx.data.NdxDatabase
 import de.salomax.ndx.data.Pref
 import de.salomax.ndx.ui.calculator.CalculatorActivity
 import io.reactivex.Single
@@ -87,7 +87,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
          * populate settings with values from db
          */
         Single.fromCallable {
-            NdxDatabase.getInstance(context!!)
+            App.database
                     .prefDao()
                     .getAll()
                     .subscribe {
@@ -186,7 +186,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
     }
 
     private fun addToDb(key: String, value: String) {
-        Single.fromCallable { NdxDatabase.getInstance(context!!).prefDao().insert(Pref(key, value)) }
+        Single.fromCallable { App.database.prefDao().insert(Pref(key, value)) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe()

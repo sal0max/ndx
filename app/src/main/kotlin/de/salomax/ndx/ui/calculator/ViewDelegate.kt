@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import com.joaquimverges.helium.core.viewdelegate.BaseViewDelegate
+import de.salomax.ndx.App
 import de.salomax.ndx.R
 import de.salomax.ndx.util.MathUtils
 import de.salomax.ndx.widget.CenterLineDecoration
@@ -49,7 +50,11 @@ class ViewDelegate(inflater: LayoutInflater)
 
     override fun render(viewState: State) {
         when (viewState) {
-            is State.FiltersReady -> filterAdapter.setFilters(viewState.filters)
+            is State.FiltersReady -> {
+                filterAdapter.setFilters(viewState.filters)
+                // analytics
+                App.analytics.setUserProperty("filter_count", viewState.filters.size.toString())
+            }
             is State.ShutterSpeedsReady -> {
                 shutterSpeedsAdapter.setSpeeds(viewState.speeds)
                 shutterView.snap()

@@ -4,8 +4,7 @@ import android.annotation.SuppressLint
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import com.joaquimverges.helium.core.presenter.BasePresenter
-import de.salomax.ndx.App.Companion.context
-import de.salomax.ndx.data.NdxDatabase
+import de.salomax.ndx.App
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -15,7 +14,7 @@ class Presenter : BasePresenter<State, Event>() {
     @SuppressLint("CheckResult")
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     private fun loadFilters() {
-        NdxDatabase.getInstance(context).filterDao().getAll()
+        App.database.filterDao().getAll()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { filters ->
@@ -30,8 +29,7 @@ class Presenter : BasePresenter<State, Event>() {
             is Event.ReceivedDeletionResult -> pushState(State.ShowUndoDeletionSnackbar(event.filter))
             is Event.RestoreFilter -> {
                 Single.fromCallable {
-                    NdxDatabase.getInstance(context)
-                            .filterDao()
+                    App.database.filterDao()
                             .insert(event.filter)
                 }.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())

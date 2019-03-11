@@ -4,8 +4,7 @@ import android.annotation.SuppressLint
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import com.joaquimverges.helium.core.presenter.BasePresenter
-import de.salomax.ndx.App.Companion.context
-import de.salomax.ndx.data.NdxDatabase
+import de.salomax.ndx.App
 import de.salomax.ndx.data.ShutterSpeeds
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -15,7 +14,7 @@ class Presenter : BasePresenter<State, Event>() {
     @SuppressLint("CheckResult")
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     private fun loadShutterSpeeds() {
-        NdxDatabase.getInstance(context).prefDao().getEvSteps()
+        App.database.prefDao().getEvSteps()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { steps ->
@@ -34,22 +33,20 @@ class Presenter : BasePresenter<State, Event>() {
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     private fun loadFilters() {
         // listen to filter changes and reset list
-        NdxDatabase.getInstance(context)
-                .filterDao()
+        App.database.filterDao()
                 .getAll()
                 .subscribeOn(Schedulers.io())
-                ?.observeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
                 ?.subscribe { filters -> pushState(State.FiltersReady(filters)) }
     }
 
     @SuppressLint("CheckResult")
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     private fun loadShowWarning() {
-        NdxDatabase.getInstance(context)
-                .prefDao()
+        App.database.prefDao()
                 .getWarningEnabled()
                 .subscribeOn(Schedulers.io())
-                ?.observeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
                 ?.subscribe { pushState(State.ShowWarning(it == "1")) }
     }
 

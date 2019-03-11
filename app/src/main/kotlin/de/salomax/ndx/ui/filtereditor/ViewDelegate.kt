@@ -74,11 +74,12 @@ class ViewDelegate(inflater: LayoutInflater) : BaseViewDelegate<State, Event>(R.
             }
             is State.DeleteAndFinish -> {
                 val returnIntent = Intent()
-                returnIntent.putExtra("FILTER", Filter(
+                val deletedFilter = Filter(
                         oldId!!,
                         factor.text.toString().toInt(),
                         name.text.toString(),
-                        info.text.toString()))
+                        info.text.toString())
+                returnIntent.putExtra("FILTER", deletedFilter)
                 val activity = context as AppCompatActivity
                 activity.setResult(Activity.RESULT_OK, returnIntent)
                 activity.finish()

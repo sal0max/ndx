@@ -1,8 +1,8 @@
 package de.salomax.ndx.ui.filtereditor
 
+import android.os.Bundle
 import com.joaquimverges.helium.core.presenter.BasePresenter
-import de.salomax.ndx.App.Companion.context
-import de.salomax.ndx.data.NdxDatabase
+import de.salomax.ndx.App
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -13,18 +13,20 @@ class Presenter : BasePresenter<State, Event>() {
         when (event) {
             is Event.InsertOrUpdate -> {
                 Single.fromCallable {
-                    NdxDatabase.getInstance(context)
-                            .filterDao()
+                    App.database.filterDao()
                             .insert(event.filter)
                     pushState(State.Finish)
                 }.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe()
+                // analytics
+                val params = Bundle()
+                params.putString("filter_name", event.filter.name.take(100))
+                App.analytics.logEvent("filter_inserted_or_updated", params)
             }
             is Event.Delete -> {
                 Single.fromCallable {
-                    NdxDatabase.getInstance(context)
-                            .filterDao()
+                    App.database.filterDao()
                             .delete(event.id)
                     pushState(State.DeleteAndFinish)
                 }.subscribeOn(Schedulers.io())
