@@ -1,10 +1,10 @@
 package de.salomax.ndx.data
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.OnConflictStrategy
-import android.arch.persistence.room.Query
-import io.reactivex.Flowable
+import androidx.lifecycle.LiveData
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 
 @Dao
 interface FilterDao {
@@ -17,10 +17,10 @@ interface FilterDao {
             "       WHEN (SELECT `VALUE` FROM prefs WHERE `KEY` IS '" + Pref.FILTER_SORT_ORDER + "') = '1' THEN NAME" +
             "    END)" +
             " COLLATE NOCASE")
-    fun getAll(): Flowable<List<Filter>>
+    fun getAll(): LiveData<List<Filter>?>
 
     @Query("SELECT * FROM filters WHERE id = :id")
-    fun get(id: Long): Flowable<Filter>
+    fun get(id: Long): LiveData<Filter>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(filter: Filter)

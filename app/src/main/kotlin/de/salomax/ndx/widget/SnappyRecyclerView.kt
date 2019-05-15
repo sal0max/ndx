@@ -3,15 +3,15 @@ package de.salomax.ndx.widget
 import android.content.Context
 import android.graphics.Rect
 import android.os.Parcelable
-import android.support.v4.view.ViewCompat
-import android.support.v7.widget.*
+import androidx.core.view.ViewCompat
 import android.util.AttributeSet
 import android.view.View
-import android.view.ViewGroup
-import io.reactivex.Observable
-import io.reactivex.subjects.PublishSubject
-import android.support.v7.widget.RecyclerView
 import android.os.Bundle
+import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.OrientationHelper
+import androidx.recyclerview.widget.RecyclerView
 
 class SnappyRecyclerView : RecyclerView {
 
@@ -21,11 +21,9 @@ class SnappyRecyclerView : RecyclerView {
 
     constructor(context: Context, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle)
 
-    private val snappedSubject = PublishSubject.create<Int>()
+    val snapped = MutableLiveData<Int>()
     private val snapHelper = MyLinearSnapHelper()
     private fun getSnappedPosition() = snapHelper.getSnappedPosition()
-
-    val snappedEvent: Observable<Int> = snappedSubject
 
     init {
         this.layoutManager = MyLayoutManager()
@@ -57,8 +55,13 @@ class SnappyRecyclerView : RecyclerView {
             super.onRestoreInstanceState(state)
     }
 
+    @Suppress("unused")
     fun snap() {
-        snapHelper.findSnapView(layoutManager!!)?.let { snapHelper.calculateDistanceToFinalSnap(layoutManager!!, it)?.let { scrollBy(it[0], 0) } }
+        snapHelper.findSnapView(layoutManager!!)?.let {
+            snapHelper.calculateDistanceToFinalSnap(layoutManager!!, it)?.let { distance ->
+                scrollBy(distance[0], 0)
+            }
+        }
     }
 
     /**
@@ -97,7 +100,7 @@ class SnappyRecyclerView : RecyclerView {
                     val view = findSnapView(layoutManager!!)
                     if (viewCache != view) {
                         viewCache = view
-                        snappedSubject.onNext(layoutManager!!.getPosition(view!!))
+                        snapped.value = layoutManager!!.getPosition(view!!)
                     }
                 }
             })
@@ -107,7 +110,7 @@ class SnappyRecyclerView : RecyclerView {
         /**
          * correctly calculate the center of each filter, including first and last ones
          */
-        override fun findSnapView(layoutManager: RecyclerView.LayoutManager): View? {
+        override fun findSnapView(layoutManager: LayoutManager): View? {
             val helper = OrientationHelper.createHorizontalHelper(layoutManager)
 
             // those are only the visible children!
@@ -152,7 +155,7 @@ class SnappyRecyclerView : RecyclerView {
 
         private var parentWidth = width
 
-        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: State) {
             super.getItemOffsets(outRect, view, parent, state)
 
             // only add offset BEFORE FIRST and AFTER LAST item
@@ -160,7 +163,7 @@ class SnappyRecyclerView : RecyclerView {
             val total = parent.adapter!!.itemCount
             if (position == 0 || position == total - 1) {
                 // item width
-                view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+                view.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED)
                 val viewWidth = view.measuredWidth
                 // calculate offset
                 val offset = (parentWidth - viewWidth) / 2
@@ -168,12 +171,12 @@ class SnappyRecyclerView : RecyclerView {
                 val ltr = ViewCompat.getLayoutDirection(view) == ViewCompat.LAYOUT_DIRECTION_LTR
                 // add offset
                 if ((position == 0 && ltr) || (position == total - 1 && !ltr))
-                    (view.layoutParams as ViewGroup.MarginLayoutParams).leftMargin = offset //outRect.left = offset
+                    (view.layoutParams as MarginLayoutParams).leftMargin = offset //outRect.left = offset
                 else if ((position == 0 && !ltr) || (position == total - 1 && ltr))
-                    (view.layoutParams as ViewGroup.MarginLayoutParams).rightMargin = offset //outRect.right = offset
+                    (view.layoutParams as MarginLayoutParams).rightMargin = offset //outRect.right = offset
             } else {
-                (view.layoutParams as ViewGroup.MarginLayoutParams).leftMargin = 0
-                (view.layoutParams as ViewGroup.MarginLayoutParams).rightMargin = 0
+                (view.layoutParams as MarginLayoutParams).leftMargin = 0
+                (view.layoutParams as MarginLayoutParams).rightMargin = 0
             }
         }
     }

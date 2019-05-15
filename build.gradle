@@ -10,22 +10,20 @@ buildscript {
     }
     dependencies {
         // android
-        classpath 'com.android.tools.build:gradle:3.4.0'
+        classpath 'com.android.tools.build:gradle:3.4.1'
         // kotlin
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // crashlytics
         classpath 'com.google.gms:google-services:4.2.0'
-        classpath 'io.fabric.tools:gradle:1.28.1'
-        // Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath 'io.fabric.tools:gradle:1.29.0'
     }
 }
 
+// dependency-update-checker
 plugins {
     id "com.github.ben-manes.versions" version "0.21.0"
 }
-
-// let dependency update checker only check for stable versions
+// only check for stable versions
 dependencyUpdates.resolutionStrategy {
     componentSelection { rules ->
         rules.all { ComponentSelection selection ->

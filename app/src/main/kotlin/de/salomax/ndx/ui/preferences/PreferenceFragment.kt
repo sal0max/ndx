@@ -6,26 +6,23 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Vibrator
-import android.support.design.widget.Snackbar
-import android.support.v14.preference.SwitchPreference
-import android.support.v4.app.TaskStackBuilder
-import android.support.v4.content.ContextCompat
-import android.support.v7.preference.ListPreference
-import android.support.v7.preference.Preference
-import android.support.v7.preference.PreferenceFragmentCompat
-import android.support.v7.preference.PreferenceManager
-import de.salomax.ndx.App
+import androidx.core.app.TaskStackBuilder
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.preference.*
+import com.google.android.material.snackbar.Snackbar
 import de.salomax.ndx.BuildConfig
-import de.salomax.ndx.R
 import de.salomax.ndx.data.Pref
+import de.salomax.ndx.R
 import de.salomax.ndx.ui.calculator.CalculatorActivity
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import java.util.*
 
-class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener,
+class PreferenceFragment : PreferenceFragmentCompat(),
+        Preference.OnPreferenceChangeListener,
         Preference.OnPreferenceClickListener {
+
+    private lateinit var viewModel: PreferenceViewModel
 
     private lateinit var evStepsPreference: ListPreference
     private lateinit var filterSortingPreference: ListPreference
@@ -43,6 +40,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
 
     override fun onCreatePreferences(bundle: Bundle?, s: String?) {
         addPreferencesFromResource(R.xml.preferences)
+        viewModel = ViewModelProviders.of(this).get(PreferenceViewModel::class.java)
 
         /*
          * find prefs
@@ -86,24 +84,17 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
         /*
          * populate settings with values from db
          */
-        Single.fromCallable {
-            App.database
-                    .prefDao()
-                    .getAll()
-                    .subscribe {
-                        for (pref in it) {
-                            when (pref.key) {
-                                Pref.FILTER_SORT_ORDER -> filterSortingPreference.value = pref.value
-                                Pref.EV_STEPS -> evStepsPreference.value = pref.value
-                                Pref.SHOW_WARNING -> showWarningPreference.isChecked = pref.value == "1"
-                                Pref.ALARM_BEEP -> alarmBeepPreference.isChecked = pref.value == "1"
-                                Pref.ALARM_VIBRATE -> alarmVibratePreference.isChecked = pref.value == "1"
-                            }
-                        }
-                    }
-        }.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe()
+        viewModel.prefs.observe(this, Observer<List<Pref>> {
+            for (pref in it) {
+                when (pref.key) {
+                    Pref.FILTER_SORT_ORDER -> filterSortingPreference.value = pref.value
+                    Pref.EV_STEPS -> evStepsPreference.value = pref.value
+                    Pref.SHOW_WARNING -> showWarningPreference.isChecked = pref.value == "1"
+                    Pref.ALARM_BEEP -> alarmBeepPreference.isChecked = pref.value == "1"
+                    Pref.ALARM_VIBRATE -> alarmVibratePreference.isChecked = pref.value == "1"
+                }
+            }
+        })
         // theme setting is stored in shared prefs, not db
         themeSelectorPreference.value = PreferenceManager
                 .getDefaultSharedPreferences(context)
@@ -160,10 +151,14 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
                 val device = Build.MANUFACTURER + " " + Build.MODEL + " (" + Build.DEVICE + ")"
                 val osVersion = Build.VERSION.RELEASE + " (" + Build.VERSION.SDK_INT.toString() + ")"
                 val appVersion = BuildConfig.VERSION_NAME
-                val info = "Device=$device\n" +
-                        "OS Version=$osVersion\n" +
-                        "App Version=$appVersion\n" +
-                        "---\n\n"
+                val info = """
+                    Device=$device
+                    OS Version=$osVersion
+                    App Version=$appVersion
+                    ---
+
+
+                    """.trimIndent()
                 mailIntent.putExtra(Intent.EXTRA_TEXT, info)
                 if (mailIntent.resolveActivity(context!!.packageManager) != null)
                     startActivity(mailIntent)
@@ -186,10 +181,7 @@ class PreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceCh
     }
 
     private fun addToDb(key: String, value: String) {
-        Single.fromCallable { App.database.prefDao().insert(Pref(key, value)) }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe()
+        viewModel.insert(Pref(key, value))
     }
 
     private fun showError(errorMsg: String) {

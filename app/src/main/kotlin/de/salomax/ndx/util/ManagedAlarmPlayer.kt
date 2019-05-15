@@ -6,9 +6,7 @@ import android.media.AudioManager
 import android.media.MediaPlayer
 
 @Suppress("unused")
-class ManagedAlarmPlayer private constructor(val context: Context) {
-
-    companion object : SingletonHolder<ManagedAlarmPlayer, Context>(::ManagedAlarmPlayer)
+class ManagedAlarmPlayer constructor(val context: Context) {
 
     private var alarmPlayer: MediaPlayer? = null
 

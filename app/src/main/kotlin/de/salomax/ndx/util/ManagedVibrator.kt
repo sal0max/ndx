@@ -6,9 +6,7 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 
 @Suppress("unused")
-class ManagedVibrator private constructor(context: Context) {
-
-    companion object : SingletonHolder<ManagedVibrator, Context>(::ManagedVibrator)
+class ManagedVibrator constructor(context: Context) {
 
     private val vibrator: Vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 

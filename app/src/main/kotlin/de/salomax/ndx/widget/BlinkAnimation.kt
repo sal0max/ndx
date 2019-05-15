@@ -9,7 +9,7 @@ class BlinkAnimation : Animation() {
     init {
         interpolator = LinearInterpolator()
         duration = 1000
-        repeatCount = Animation.INFINITE
+        repeatCount = INFINITE
     }
 
     override fun applyTransformation(interpolatedTime: Float, t: Transformation) {

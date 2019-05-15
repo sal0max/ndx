@@ -1,15 +1,13 @@
 package de.salomax.ndx.data
 
-import android.arch.persistence.db.SupportSQLiteDatabase
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.Room
-import android.arch.persistence.room.RoomDatabase
-import android.arch.persistence.room.migration.Migration
 import android.content.Context
+import android.os.AsyncTask
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import de.salomax.ndx.R
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import java.util.concurrent.Executors
 
 @Database(entities = [(Filter::class), (Pref::class)], version = 1, exportSchema = false)
 abstract class NdxDatabase : RoomDatabase() {
@@ -43,8 +41,9 @@ abstract class NdxDatabase : RoomDatabase() {
             // pre-populate the database
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
-                Single.fromCallable {
-                    // add some filters
+
+                // add some filters
+                Executors.newSingleThreadScheduledExecutor().execute {
                     getInstance(context)
                             .filterDao()
                             .insertAll(listOf(
@@ -73,7 +72,9 @@ abstract class NdxDatabase : RoomDatabase() {
                                             context.getString(R.string.preset_filterName6),
                                             context.getString(R.string.preset_filterInfo6)))
                             )
-                    // add default preferences
+                }
+                // add default preferences
+                Executors.newSingleThreadScheduledExecutor().execute {
                     getInstance(context)
                             .prefDao()
                             .insertAll(listOf(
@@ -83,9 +84,7 @@ abstract class NdxDatabase : RoomDatabase() {
                                     Pref(Pref.ALARM_VIBRATE, "0"),
                                     Pref(Pref.SHOW_WARNING, "0")
                             ))
-                }.subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe()
+                }
             }
         }
 

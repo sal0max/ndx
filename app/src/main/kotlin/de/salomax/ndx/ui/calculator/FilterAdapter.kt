@@ -1,16 +1,15 @@
 package de.salomax.ndx.ui.calculator
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Switch
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import de.salomax.ndx.R
 import de.salomax.ndx.data.Filter
 import de.salomax.ndx.util.MathUtils
-import io.reactivex.subjects.BehaviorSubject
 
 class FilterAdapter(private val context: Context) : RecyclerView.Adapter<FilterAdapter.ViewHolder>() {
 
@@ -24,7 +23,7 @@ class FilterAdapter(private val context: Context) : RecyclerView.Adapter<FilterA
         private val activeItems: HashSet<Filter> = hashSetOf()
     }
 
-    val filterFactorChanged = BehaviorSubject.createDefault(1L)
+    var onFilterFactorChanged: ((Long) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.row_filter, parent, false)
@@ -65,7 +64,7 @@ class FilterAdapter(private val context: Context) : RecyclerView.Adapter<FilterA
         for (itemsState in activeItems) {
             factor *= itemsState.factor
         }
-        filterFactorChanged.onNext(factor)
+        onFilterFactorChanged?.invoke(factor)
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

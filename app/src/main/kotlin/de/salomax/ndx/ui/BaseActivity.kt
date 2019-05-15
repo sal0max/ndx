@@ -1,8 +1,8 @@
 package de.salomax.ndx.ui
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.preference.PreferenceManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import de.salomax.ndx.App
 import de.salomax.ndx.R
 import de.salomax.ndx.data.Pref

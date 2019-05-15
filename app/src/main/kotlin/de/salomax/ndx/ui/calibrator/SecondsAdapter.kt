@@ -1,21 +1,19 @@
 package de.salomax.ndx.ui.calibrator
 
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import de.salomax.ndx.R
 import de.salomax.ndx.widget.SnappyRecyclerView
-import io.reactivex.disposables.Disposable
 
-class SecondsAdapter(max: Int) : RecyclerView.Adapter<SecondsAdapter.ViewHolder>() {
-
-    var selectedValue: Int = 1
-        private set
+class SecondsAdapter(private val context: AppCompatActivity, max: Int) : RecyclerView.Adapter<SecondsAdapter.ViewHolder>() {
 
     private val items: IntArray = IntArray(max + 1) { it }
 
-    private var subscription: Disposable? = null
+    var onValueSelected: ((Int) -> Unit)? = null
 
     init {
         setHasStableIds(true)
@@ -36,14 +34,9 @@ class SecondsAdapter(max: Int) : RecyclerView.Adapter<SecondsAdapter.ViewHolder>
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
-        subscription = (recyclerView as SnappyRecyclerView).snappedEvent.subscribe {
-            selectedValue = items[it]
-        }
-    }
-
-    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
-        super.onDetachedFromRecyclerView(recyclerView)
-        subscription?.dispose()
+        (recyclerView as SnappyRecyclerView).snapped.observe(context, Observer<Int> {
+            onValueSelected?.invoke(items[it])
+        })
     }
 
     override fun getItemCount() = items.size

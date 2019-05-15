@@ -1,6 +1,6 @@
 package de.salomax.ndx.data
 
-enum class ISOs(val values: IntArray) {
+enum class IsoSteps(val values: IntArray) {
 
     FULL(
             intArrayOf(

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinatorLayout"
@@ -14,13 +14,13 @@
         android:paddingBottom="@dimen/fabOverflow"
         android:scrollbars="none">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingTop="@dimen/margin2x">
 
-            <android.support.constraint.Guideline
+            <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_center"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -41,13 +41,13 @@
             <!-- /Text: Properties -->
 
             <!-- Name -->
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/container_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin2x"
                 android:layout_marginStart="@dimen/margin2x"
                 android:layout_marginTop="@dimen/margin2x"
+                android:layout_marginEnd="@dimen/margin2x"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_description">
@@ -57,19 +57,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_name"
+                    android:importantForAutofill="no"
                     android:inputType="textCapSentences"
+                    tools:targetApi="o"
                     tools:text="Lee Big Stopper" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
             <!-- /Name -->
 
             <!-- Info -->
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/container_info"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin2x"
                 android:layout_marginStart="@dimen/margin2x"
                 android:layout_marginTop="@dimen/margin2x"
+                android:layout_marginEnd="@dimen/margin2x"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/container_name">
@@ -79,9 +81,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_info"
+                    android:importantForAutofill="no"
                     android:inputType="textMultiLine|textCapSentences"
+                    tools:targetApi="o"
                     tools:text="measured ~ND3.0" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
             <!-- /Info -->
 
             <!-- Text: Properties -->
@@ -99,7 +103,7 @@
             <!-- /Text: Properties -->
 
             <!-- Factor -->
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/container_factor"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -114,13 +118,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_factor"
+                    android:importantForAutofill="no"
                     android:inputType="number"
+                    tools:targetApi="o"
                     tools:text="1024" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
             <!-- /Factor -->
 
             <!-- Stops -->
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/container_f_stops"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -134,18 +140,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_stops"
+                    android:importantForAutofill="no"
                     android:inputType="numberDecimal"
+                    tools:targetApi="o"
                     tools:text="10" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
             <!-- /Stops -->
 
             <!-- ND -->
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/container_nd"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin2x"
                 android:layout_marginTop="@dimen/margin2x"
+                android:layout_marginEnd="@dimen/margin2x"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/container_f_stops"
                 app:layout_constraintTop_toBottomOf="@id/title_strength">
@@ -156,17 +164,19 @@
                     android:layout_height="wrap_content"
                     android:enabled="false"
                     android:hint="@string/hint_nd"
+                    android:importantForAutofill="no"
                     android:inputType="numberDecimal"
+                    tools:targetApi="o"
                     tools:text="3.0" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
             <!-- /ND -->
 
             <TextView
                 android:id="@+id/calibrator_description"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin1x"
                 android:layout_marginTop="@dimen/margin1x"
+                android:layout_marginEnd="@dimen/margin1x"
                 android:text="@string/calibrator_description"
                 app:layout_constraintEnd_toStartOf="@id/btn_calibrator"
                 app:layout_constraintStart_toStartOf="@id/container_factor"
@@ -183,11 +193,11 @@
                 app:layout_constraintEnd_toEndOf="@id/container_name"
                 app:layout_constraintTop_toBottomOf="@id/container_nd" />
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
     <!-- delete -->
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -201,4 +211,4 @@
         tools:visibility="visible" />
     <!-- /delete -->
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

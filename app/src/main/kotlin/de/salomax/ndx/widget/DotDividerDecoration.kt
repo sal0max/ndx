@@ -4,8 +4,8 @@ import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.support.v7.widget.RecyclerView
 import android.util.DisplayMetrics
+import androidx.recyclerview.widget.RecyclerView
 
 /**
  * Adds little dots between all items (use horizontally).

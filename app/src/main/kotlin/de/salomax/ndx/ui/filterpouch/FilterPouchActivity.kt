@@ -3,10 +3,15 @@ package de.salomax.ndx.ui.filterpouch
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import com.joaquimverges.helium.core.retained.RetainedPresenters
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import de.salomax.ndx.R
 import de.salomax.ndx.data.Filter
 import de.salomax.ndx.ui.BaseActivity
+import de.salomax.ndx.ui.filtereditor.FilterEditorActivity
+import kotlinx.android.synthetic.main.activity_filterpouch.*
 
 /**
  * Shows a list of all filters.
@@ -14,15 +19,34 @@ import de.salomax.ndx.ui.BaseActivity
  */
 class FilterPouchActivity : BaseActivity() {
 
-    private lateinit var viewDelegate: ViewDelegate
+    private lateinit var viewModel: FilterPouchViewModel
+
+    private val filterAdapter: FilterAdapter = FilterAdapter(this)
+
+    companion object {
+        private const val ARG_EDIT = 1
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val presenter = RetainedPresenters.get(this, Presenter::class.java)
-        viewDelegate = ViewDelegate(layoutInflater)
-        presenter.attach(viewDelegate)
-        setContentView(viewDelegate.view)
+        // init view
+        setContentView(R.layout.activity_filterpouch)
+        viewModel = ViewModelProviders.of(this).get(FilterPouchViewModel::class.java)
+
+        filterAdapter.onClick = {
+            val intent = Intent(this, FilterEditorActivity().javaClass)
+            intent.putExtra(FilterEditorActivity.ARG_FILTER, it)
+            startActivityForResult(intent, ARG_EDIT)
+        }
+        list.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = filterAdapter
+        }
+        fab_add.setOnClickListener {
+            val intent = Intent(this, FilterEditorActivity().javaClass)
+            startActivity(intent)
+        }
 
         // title bar
         setTitle(R.string.title_filterPouch)
@@ -30,6 +54,9 @@ class FilterPouchActivity : BaseActivity() {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
         }
+
+        // refresh data on init & observe
+        viewModel.filters.observe(this, Observer { filterAdapter.setFilters(it) })
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -38,9 +65,12 @@ class FilterPouchActivity : BaseActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == 1 && resultCode == Activity.RESULT_OK && data != null) {
+        // filter got deleted: show undo
+        if (requestCode == ARG_EDIT && resultCode == Activity.RESULT_OK && data != null) {
             val filter = data.getParcelableExtra<Filter>("FILTER")
-            viewDelegate.pushEvent(Event.ReceivedDeletionResult(filter))
+            Snackbar.make(list, getString(R.string.filterDeleted, filter.name), 5_000) // 5s
+                    .setAction(R.string.undo) { viewModel.insert(filter) }
+                    .show()
         }
     }
 

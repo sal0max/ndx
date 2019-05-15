@@ -3,7 +3,7 @@
     Try to make every element "fixed" by avoiding wrap_content and instead use match_parent or 0dp
     Improves performance a lot!
 -->
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,7 +11,7 @@
 
     <!-- days & hours -->
     <TextView
-        android:id="@+id/daysHours"
+        android:id="@+id/hoursDays"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:paddingEnd="@dimen/margin2x"
@@ -123,4 +123,4 @@
         app:layout_constraintWidth_percent=".5" />
     <!-- /seconds & fractions -->
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

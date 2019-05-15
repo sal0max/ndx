@@ -2,9 +2,9 @@ package de.salomax.ndx.ui.preferences
 
 import android.app.Dialog
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatDialogFragment
 import android.view.View
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDialogFragment
 import de.salomax.ndx.R
 
 class ChangelogDialog : AppCompatDialogFragment() {

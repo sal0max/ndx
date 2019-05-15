@@ -1,22 +1,22 @@
 package de.salomax.ndx.ui.calibrator
 
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import de.salomax.ndx.R
-import de.salomax.ndx.data.ISOs
+import de.salomax.ndx.data.IsoSteps
 import de.salomax.ndx.widget.SnappyRecyclerView
-import io.reactivex.disposables.Disposable
 
-class IsoAdapter : RecyclerView.Adapter<IsoAdapter.ViewHolder>() {
+class IsoAdapter(private val context: AppCompatActivity) : RecyclerView.Adapter<IsoAdapter.ViewHolder>() {
 
-    var selectedValue: Int = 100
-        private set
+    companion object {
+        private var items: IsoSteps? = null
+    }
 
-    private var items: ISOs? = null
-
-    private var subscription: Disposable? = null
+    var onIsoSelected: ((Int) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val textView = LayoutInflater.from(parent.context).inflate(R.layout.row_shutter, parent, false) as TextView
@@ -27,9 +27,9 @@ class IsoAdapter : RecyclerView.Adapter<IsoAdapter.ViewHolder>() {
         holder.textView.text = items?.get(position)?.toString()
     }
 
-    fun setISOs(isos: ISOs) {
-        if (items != isos) {
-            items = isos
+    fun setISOs(isoSteps: IsoSteps?) {
+        if (items != isoSteps) {
+            items = isoSteps
             notifyDataSetChanged()
         }
     }
@@ -40,14 +40,9 @@ class IsoAdapter : RecyclerView.Adapter<IsoAdapter.ViewHolder>() {
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
-        subscription = (recyclerView as SnappyRecyclerView).snappedEvent.subscribe {
-            selectedValue = items?.get(it) ?: 100
-        }
-    }
-
-    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
-        super.onDetachedFromRecyclerView(recyclerView)
-        subscription?.dispose()
+        (recyclerView as SnappyRecyclerView).snapped.observe(context, Observer<Int> {
+            onIsoSelected?.invoke(items?.get(it) ?: 100)
+        })
     }
 
     override fun getItemCount() = items?.values?.size ?: 0

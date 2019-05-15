@@ -4,27 +4,64 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import com.joaquimverges.helium.core.retained.RetainedPresenters
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.*
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import de.salomax.ndx.R
 import de.salomax.ndx.ui.BaseActivity
 import de.salomax.ndx.ui.filterpouch.FilterPouchActivity
 import de.salomax.ndx.ui.preferences.PreferenceActivity
 import de.salomax.ndx.ui.timer.TimerActivity
+import de.salomax.ndx.widget.CenterLineDecoration
+import kotlinx.android.synthetic.main.activity_calculator.*
 
 class CalculatorActivity : BaseActivity() {
 
-    private var timerEnabled: Boolean = true
-    private lateinit var viewDelegate: ViewDelegate
+    private lateinit var viewModel: CalculatorViewModel
+    private var timerMenuEnabled: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val presenter = RetainedPresenters.get(this, Presenter::class.java)
-        viewDelegate = ViewDelegate(layoutInflater)
-        presenter.attach(viewDelegate)
-        setContentView(viewDelegate.view)
+        // init view
+        setContentView(R.layout.activity_calculator)
+        viewModel = ViewModelProviders.of(this).get(CalculatorViewModel::class.java)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        title = null
+        // list & adapter : shutter speeds
+        recycler_shutter.apply {
+            adapter = ShutterAdapter(this@CalculatorActivity)
+            addItemDecoration(CenterLineDecoration(ContextCompat.getColor(context, android.R.color.white))) // center line
+            // addItemDecoration(DotDividerDecoration(ContextCompat.getColor(context, android.R.color.white)))
+            setHasFixedSize(true)
+            (adapter as ShutterAdapter).onSpeedSelected = {
+                viewModel.selectedSpeed.value = it
+            }
+        }
+        // list & adapter : filters
+        recycler_filters.apply {
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            adapter = FilterAdapter(this@CalculatorActivity)
+            (adapter as FilterAdapter).onFilterFactorChanged = {
+                viewModel.filterFactor.value = it
+            }
+        }
+
+        // refresh data on init & observe
+        viewModel.filters.observe(this, Observer {
+            (recycler_filters.adapter as FilterAdapter).setFilters(it)
+        })
+        viewModel.speeds.observe(this, Observer {
+            (recycler_shutter.adapter as ShutterAdapter).setSpeeds(it)
+        })
+        viewModel.isWarningEnabled.observe(this, Observer { enabled ->
+            enabled?.let { resultView.showWarning = it }
+        })
+        viewModel.calculatedSpeed.observe(this, Observer { micros ->
+            resultView.setDuration(micros)
+            enableTimer(micros != null && micros >= 1_000_000L)
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -32,9 +69,10 @@ class CalculatorActivity : BaseActivity() {
         inflater.inflate(R.menu.calculator, menu)
 
         // enable or disable timer
-        val timer = menu.findItem(R.id.menu_timer)
-        timer.isEnabled = timerEnabled
-        timer.icon.alpha = if (timerEnabled) 255 else 128
+        menu.findItem(R.id.menu_timer).apply {
+            isEnabled = timerMenuEnabled
+            icon.alpha = if (timerMenuEnabled) 255 else 128
+        }
 
         return true
     }
@@ -51,7 +89,7 @@ class CalculatorActivity : BaseActivity() {
             }
             R.id.menu_timer -> {
                 val i = Intent(this, TimerActivity().javaClass)
-                i.putExtra("MILLIS", viewDelegate.getSelectedSpeed()!! / 1000)
+                i.putExtra("MILLIS", viewModel.calculatedSpeed.value?.div(1000))
                 startActivity(i)
                 true
             }
@@ -59,9 +97,9 @@ class CalculatorActivity : BaseActivity() {
         }
     }
 
-    fun enableTimer(enabled: Boolean) {
-        if (enabled != timerEnabled) {
-            timerEnabled = enabled
+    private fun enableTimer(enabled: Boolean) {
+        if (enabled != timerMenuEnabled) {
+            timerMenuEnabled = enabled
             invalidateOptionsMenu()
         }
     }

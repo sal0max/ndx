@@ -2,7 +2,6 @@ package de.salomax.ndx.widget
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.constraint.ConstraintLayout
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.SpannedString
@@ -12,36 +11,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import de.salomax.ndx.R
 import de.salomax.ndx.data.ShutterSpeeds
+import kotlinx.android.synthetic.main.view_result.view.*
 
 @SuppressLint("SetTextI18n")
 class ResultView : ConstraintLayout {
 
-    var evSteps: ShutterSpeeds? = ShutterSpeeds.FULL
-
-    private var seconds: TextView
-    private var minutes: TextView
-    private var hoursDays: TextView
-
-    private var warning: ImageView
+    private var evSteps: ShutterSpeeds? = ShutterSpeeds.THIRD //TODO
 
     private val dUnit = resources.getString(R.string.unit_days)
     private val hUnit = resources.getString(R.string.unit_hours)
 
     var showWarning = false
+        set(value) {
+            field = value
+            invalidate()
+        }
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         inflater.inflate(R.layout.view_result, this)
-
-        seconds = findViewById(R.id.seconds)
-        minutes = findViewById(R.id.minutes)
-        hoursDays = findViewById(R.id.daysHours)
-
-        warning = findViewById(R.id.warning)
     }
 
 
@@ -110,7 +103,7 @@ class ResultView : ConstraintLayout {
             hourDayStringBuilder
                     .append(h.toString())
                     .append(hUnit)
-        if (!hourDayStringBuilder.isEmpty()) {
+        if (hourDayStringBuilder.isNotEmpty()) {
             hoursDays.visibility = View.VISIBLE
             val hourDayString = SpannableString(hourDayStringBuilder)
             val indexDUnit = hourDayStringBuilder.indexOf(dUnit)
