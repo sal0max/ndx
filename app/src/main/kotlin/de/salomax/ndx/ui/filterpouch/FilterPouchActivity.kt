@@ -11,6 +11,7 @@ import de.salomax.ndx.R
 import de.salomax.ndx.data.Filter
 import de.salomax.ndx.ui.BaseActivity
 import de.salomax.ndx.ui.filtereditor.FilterEditorActivity
+import de.salomax.ndx.widget.MarginHorizontalDividerItemDecoration
 import kotlinx.android.synthetic.main.activity_filterpouch.*
 
 /**
@@ -41,6 +42,7 @@ class FilterPouchActivity : BaseActivity() {
         }
         list.apply {
             layoutManager = LinearLayoutManager(context)
+            addItemDecoration(MarginHorizontalDividerItemDecoration(this@FilterPouchActivity, resources.getDimension(R.dimen.margin2x).toInt()))
             adapter = filterAdapter
         }
         fab_add.setOnClickListener {
