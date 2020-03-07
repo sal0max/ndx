@@ -5,8 +5,6 @@ buildscript {
     repositories {
         google()
         jcenter()
-        maven { url 'https://jitpack.io' }
-        maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
         // android
@@ -18,7 +16,7 @@ buildscript {
 
 // dependency-update-checker
 plugins {
-    id "com.github.ben-manes.versions" version "0.21.0"
+    id "com.github.ben-manes.versions" version "0.28.0"
 }
 // only check for stable versions
 dependencyUpdates.resolutionStrategy {
