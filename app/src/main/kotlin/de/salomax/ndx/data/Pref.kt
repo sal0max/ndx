@@ -16,5 +16,6 @@ data class Pref(
         const val THEME = "THEME"
         const val ALARM_VIBRATE = "ALARM_VIBRATE"
         const val SHOW_WARNING = "SHOW_WARNING"
+        const val HAS_PREMIUM = "HAS_PREMIUM"
     }
 }

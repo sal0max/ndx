@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import de.salomax.ndx.R
 import de.salomax.ndx.ui.BaseActivity
 import de.salomax.ndx.ui.filterpouch.FilterPouchActivity
@@ -88,10 +89,15 @@ class CalculatorActivity : BaseActivity() {
                 true
             }
             R.id.menu_timer -> {
-                val i = Intent(this, TimerActivity().javaClass)
-                i.putExtra("MILLIS", viewModel.calculatedSpeed.value?.div(1000))
-                startActivity(i)
-                true
+                if (viewModel.hasPremium.value == true) {
+                    val i = Intent(this, TimerActivity().javaClass)
+                    i.putExtra("MILLIS", viewModel.calculatedSpeed.value?.div(1000))
+                    startActivity(i)
+                    true
+                } else {
+                    Snackbar.make(recycler_filters, "Buy app", Snackbar.LENGTH_LONG).show() //TODO show billing
+                    false
+                }
             }
             else -> false
         }

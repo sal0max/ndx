@@ -13,6 +13,7 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
     internal val filters: LiveData<List<Filter>?>
     internal val speeds: LiveData<ShutterSpeeds?>
     internal val isWarningEnabled: LiveData<Boolean?>
+    internal val hasPremium: LiveData<Boolean?>
 
     // live calculated
     internal val calculatedSpeed: LiveData<Long>
@@ -27,6 +28,7 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
         filters = filterDao.getAll()
         speeds = prefDao.getEvSteps()
         isWarningEnabled = prefDao.isWarningEnabled()
+        hasPremium = prefDao.hasPremium()
 
         calculatedSpeed = MicroLiveData()
     }

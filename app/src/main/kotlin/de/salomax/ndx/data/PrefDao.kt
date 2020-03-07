@@ -10,20 +10,24 @@ interface PrefDao {
     @Query("SELECT * FROM prefs")
     fun getAll(): LiveData<List<Pref>>
 
-    @Query("SELECT `VALUE` FROM prefs WHERE `KEY` = '" + Pref.EV_STEPS + "' LIMIT 1")
+    @Query("SELECT `VALUE` FROM prefs WHERE `KEY` = '${Pref.EV_STEPS}' LIMIT 1")
     @TypeConverters(ShutterSpeedsConverter::class)
     fun getEvSteps(): LiveData<ShutterSpeeds?>
 
-    @Query("SELECT `VALUE` FROM prefs WHERE `KEY` = '" + Pref.EV_STEPS + "' LIMIT 1")
+    @Query("SELECT `VALUE` FROM prefs WHERE `KEY` = '${Pref.EV_STEPS}' LIMIT 1")
     @TypeConverters(IsoConverter::class)
     fun getIsoSteps(): LiveData<IsoSteps?>
 
-    @Query("SELECT * FROM prefs WHERE `KEY` = '" + Pref.ALARM_BEEP + "' OR `KEY` = '" + Pref.ALARM_VIBRATE + "'")
+    @Query("SELECT * FROM prefs WHERE `KEY` = '${Pref.ALARM_BEEP}' OR `KEY` = '${Pref.ALARM_VIBRATE}'")
     fun getTimerAlarms(): LiveData<List<Pref>?>
 
-    @Query("SELECT `VALUE` FROM prefs WHERE `KEY` = '" + Pref.SHOW_WARNING + "' LIMIT 1")
+    @Query("SELECT `VALUE` FROM prefs WHERE `KEY` = '${Pref.SHOW_WARNING}' LIMIT 1")
     @TypeConverters(BooleanConverter::class)
     fun isWarningEnabled(): LiveData<Boolean?>
+
+    @Query("SELECT `VALUE` FROM prefs WHERE `KEY` = '${Pref.HAS_PREMIUM}' LIMIT 1")
+    @TypeConverters(BooleanConverter::class)
+    fun hasPremium(): LiveData<Boolean?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(pref: Pref)

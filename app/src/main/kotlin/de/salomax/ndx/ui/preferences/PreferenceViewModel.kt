@@ -9,6 +9,7 @@ import java.util.concurrent.Executors
 class PreferenceViewModel(application: Application) : AndroidViewModel(application) {
 
     internal val prefs: LiveData<List<Pref>>
+    internal val hasPremium: LiveData<Boolean?>
 
     private val prefDao: PrefDao
 
@@ -16,6 +17,7 @@ class PreferenceViewModel(application: Application) : AndroidViewModel(applicati
         val ndxDatabase = NdxDatabase.getInstance(application)
         prefDao = ndxDatabase.prefDao()
         prefs = prefDao.getAll()
+        hasPremium = prefDao.hasPremium()
     }
 
     fun insert(pref: Pref) {

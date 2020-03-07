@@ -110,15 +110,20 @@ class PreferenceFragment : PreferenceFragmentCompat(),
                 addToDb(Pref.FILTER_SORT_ORDER, newValue as String)
             }
             themeSelectorPreference -> {
-                // needs to be in shared prefs; not possible to store to room as it doesn't allow
-                // blocking access, which would be needed in order to be retrieved before onCreate()
-                val mPrefs = PreferenceManager.getDefaultSharedPreferences(context)
-                mPrefs.edit().putString(Pref.THEME, newValue as String).apply()
-                // re-create all open activities
-                TaskStackBuilder.create(context!!)
-                        .addNextIntent(Intent(activity, CalculatorActivity::class.java))
-                        .addNextIntent(activity!!.intent)
-                        .startActivities()
+                if (viewModel.hasPremium.value == true) {
+                    // needs to be in shared prefs; not possible to store to room as it doesn't allow
+                    // blocking access, which would be needed in order to be retrieved before onCreate()
+                    val mPrefs = PreferenceManager.getDefaultSharedPreferences(context)
+                    mPrefs.edit().putString(Pref.THEME, newValue as String).apply()
+                    // re-create all open activities
+                    TaskStackBuilder.create(context!!)
+                          .addNextIntent(Intent(activity, CalculatorActivity::class.java))
+                          .addNextIntent(activity!!.intent)
+                          .startActivities()
+                } else {
+                    Snackbar.make(view!!, "Buy app", Snackbar.LENGTH_LONG).show() //TODO show billing
+                    return false
+                }
             }
             else -> return false
         }
@@ -128,7 +133,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
     override fun onPreferenceClick(preference: Preference?): Boolean {
         when (preference) {
             donatePreference -> {
-                Snackbar.make(view!!, "TODO: open In-App Purchase-Dialog", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(view!!, "Buy app", Snackbar.LENGTH_LONG).show() //TODO show billing
             }
             aboutPreference -> {
                 val fragment = ChangelogDialog()
@@ -164,7 +169,6 @@ class PreferenceFragment : PreferenceFragmentCompat(),
                     startActivity(mailIntent)
                 else // no mail client available
                     showError(getString(R.string.prefError_mail))
-
             }
             ratePreference -> {
                 val rateIntent = Intent(Intent.ACTION_VIEW)
@@ -173,7 +177,6 @@ class PreferenceFragment : PreferenceFragmentCompat(),
                     startActivity(rateIntent)
                 else // play store not installed
                     showError(getString(R.string.prefError_rate))
-
             }
             else -> return false
         }

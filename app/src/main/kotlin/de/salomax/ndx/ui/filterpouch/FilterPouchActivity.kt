@@ -46,8 +46,15 @@ class FilterPouchActivity : BaseActivity() {
             adapter = filterAdapter
         }
         fab_add.setOnClickListener {
-            val intent = Intent(this, FilterEditorActivity().javaClass)
-            startActivity(intent)
+            if (
+                  viewModel.filters.value?.size?.let { it < 4 } == true || // less than 4 filters until now...
+                  viewModel.hasPremium.value == true                        // ...or has premium
+            ) {
+                val intent = Intent(this, FilterEditorActivity().javaClass)
+                startActivity(intent)
+            } else {
+                Snackbar.make(list, "Buy app", Snackbar.LENGTH_LONG).show() //TODO show billing
+            }
         }
 
         // title bar

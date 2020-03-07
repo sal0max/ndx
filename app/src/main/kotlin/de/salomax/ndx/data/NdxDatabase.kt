@@ -1,7 +1,6 @@
 package de.salomax.ndx.data
 
 import android.content.Context
-import android.os.AsyncTask
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -82,7 +81,8 @@ abstract class NdxDatabase : RoomDatabase() {
                                     Pref(Pref.FILTER_SORT_ORDER, "0"),
                                     Pref(Pref.ALARM_BEEP, "1"),
                                     Pref(Pref.ALARM_VIBRATE, "0"),
-                                    Pref(Pref.SHOW_WARNING, "0")
+                                    Pref(Pref.SHOW_WARNING, "0"),
+                                    Pref(Pref.HAS_PREMIUM, "0")
                             ))
                 }
             }
