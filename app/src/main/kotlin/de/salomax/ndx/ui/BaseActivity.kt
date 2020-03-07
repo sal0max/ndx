@@ -20,10 +20,6 @@ abstract class BaseActivity : AppCompatActivity() {
             "1" -> setTheme(R.style.AppTheme_Dark)
             "2" -> setTheme(R.style.AppTheme_Black)
         }
-        // analytics
-        theme?.let {
-            App.analytics.setUserProperty("theme", resources.getStringArray(R.array.prefEntries_themes)[it.toInt()])
-        }
 
         super.onCreate(savedInstanceState)
     }

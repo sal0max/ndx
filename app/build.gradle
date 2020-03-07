@@ -4,8 +4,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-// crashlytics
-apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 29
@@ -88,10 +86,6 @@ dependencies {
     def leakcanary_version = '1.6.3'
     debugImplementation   "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary_version"
-
-    // Crashlytics
-    implementation 'com.google.firebase:firebase-core:16.0.9'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 }
 
 def getSecret(String key) {
@@ -104,6 +98,3 @@ def getSecret(String key) {
         return null
     }
 }
-
-// google services - add at end of file!
-apply plugin: 'com.google.gms.google-services'
