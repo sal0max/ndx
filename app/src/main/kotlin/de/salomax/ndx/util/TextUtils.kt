@@ -19,11 +19,9 @@ object TextUtils {
 
     private class SuperScriptSpan(val shiftFactor: Int) : MetricAffectingSpan() {
 
-        override fun updateMeasureState(p: TextPaint?) {
-            if (p != null) {
-                p.baselineShift += (p.ascent() / shiftFactor).toInt()
-                p.textSize = p.textSize * .6f
-            }
+        override fun updateMeasureState(p: TextPaint) {
+            p.baselineShift += (p.ascent() / shiftFactor).toInt()
+            p.textSize = p.textSize * .6f
         }
 
         override fun updateDrawState(p: TextPaint?) {

@@ -46,19 +46,19 @@ class PreferenceFragment : PreferenceFragmentCompat(),
          * find prefs
          */
         // general
-        evStepsPreference = findPreference(getString(R.string.prefKey_evSteps)) as ListPreference
-        filterSortingPreference = findPreference(getString(R.string.prefKey_sortOrder)) as ListPreference
-        showWarningPreference = findPreference(getString(R.string.prefKey_showWarning)) as SwitchPreference
-        themeSelectorPreference = findPreference(getString(R.string.prefKey_themeSelector)) as ListPreference
+        evStepsPreference = findPreference(getString(R.string.prefKey_evSteps))!!
+        filterSortingPreference = findPreference(getString(R.string.prefKey_sortOrder))!!
+        showWarningPreference = findPreference(getString(R.string.prefKey_showWarning))!!
+        themeSelectorPreference = findPreference(getString(R.string.prefKey_themeSelector))!!
         // timer
-        alarmBeepPreference = findPreference(getString(R.string.prefKey_alarmBeep)) as SwitchPreference
-        alarmVibratePreference = findPreference(getString(R.string.prefKey_alarmVibrate)) as SwitchPreference
+        alarmBeepPreference = findPreference(getString(R.string.prefKey_alarmBeep))!!
+        alarmVibratePreference = findPreference(getString(R.string.prefKey_alarmVibrate))!!
         // about
-        donatePreference = findPreference(getString(R.string.prefKey_donate))
-        aboutPreference = findPreference(getString(R.string.prefKey_about))
+        donatePreference = findPreference(getString(R.string.prefKey_donate))!!
+        aboutPreference = findPreference(getString(R.string.prefKey_about))!!
         // feedback
-        mailPreference = findPreference(getString(R.string.prefKey_mail))
-        ratePreference = findPreference(getString(R.string.prefKey_rate))
+        mailPreference = findPreference(getString(R.string.prefKey_mail))!!
+        ratePreference = findPreference(getString(R.string.prefKey_rate))!!
 
         /*
          * set listeners & content
