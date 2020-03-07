@@ -3,7 +3,6 @@ package de.salomax.ndx.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
-import de.salomax.ndx.App
 import de.salomax.ndx.R
 import de.salomax.ndx.data.Pref
 

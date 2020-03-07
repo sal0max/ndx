@@ -32,23 +32,22 @@ class TimerViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     internal fun startTimer() {
-        executor?.shutdownNow()
+        executor.shutdownNow()
         executor = Executors.newSingleThreadScheduledExecutor()
-        executor?.scheduleAtFixedRate({
+        executor.scheduleAtFixedRate({
             millisCurrent.postValue(millisCurrent.value!! + 100)
             state.postValue(
-                    if (millisCurrent.value!! < millisTotal!!)
-                        State.RUNNING_POSITIVE
-                    else if (millisCurrent.value!! == millisTotal!!)
-                        State.FINISHED
-                    else
-                        State.RUNNING_NEGATIVE)
+                  when {
+                     millisCurrent.value!! < millisTotal!! -> State.RUNNING_POSITIVE
+                     millisCurrent.value!! == millisTotal!! -> State.FINISHED
+                     else -> State.RUNNING_NEGATIVE
+                  })
         }, 0, 100, TimeUnit.MILLISECONDS)
     }
 
     internal fun stopTimer() {
         state.value = State.PAUSED
-        executor?.shutdownNow()
+        executor.shutdownNow()
     }
 
     enum class State {

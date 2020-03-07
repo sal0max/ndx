@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import de.salomax.ndx.R
@@ -33,7 +33,7 @@ class FilterPouchActivity : BaseActivity() {
 
         // init view
         setContentView(R.layout.activity_filterpouch)
-        viewModel = ViewModelProviders.of(this).get(FilterPouchViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(FilterPouchViewModel::class.java)
 
         filterAdapter.onClick = {
             val intent = Intent(this, FilterEditorActivity().javaClass)
@@ -67,9 +67,10 @@ class FilterPouchActivity : BaseActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         // filter got deleted: show undo
         if (requestCode == ARG_EDIT && resultCode == Activity.RESULT_OK && data != null) {
-            val filter = data.getParcelableExtra<Filter>("FILTER")
+            val filter = data.getParcelableExtra<Filter>("FILTER")!!
             Snackbar.make(list, getString(R.string.filterDeleted, filter.name), 5_000) // 5s
                     .setAction(R.string.undo) { viewModel.insert(filter) }
                     .show()

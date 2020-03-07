@@ -8,7 +8,7 @@ import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import de.salomax.ndx.R
 import de.salomax.ndx.data.Filter
 import de.salomax.ndx.ui.BaseActivity
@@ -16,6 +16,7 @@ import de.salomax.ndx.ui.calibrator.CalibratorActivity
 import de.salomax.ndx.util.MathUtils
 import kotlinx.android.synthetic.main.activity_filtereditor.*
 import java.util.*
+import kotlin.math.pow
 
 class FilterEditorActivity : BaseActivity() {
 
@@ -32,7 +33,7 @@ class FilterEditorActivity : BaseActivity() {
 
         // init view
         setContentView(R.layout.activity_filtereditor)
-        viewModel = ViewModelProviders.of(this).get(FilterEditorViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(FilterEditorViewModel::class.java)
 
         // edit existing filter
         val filter = intent.getParcelableExtra<Filter>(ARG_FILTER)
@@ -108,6 +109,7 @@ class FilterEditorActivity : BaseActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1 && resultCode == Activity.RESULT_OK
                 && data != null && data.hasExtra("FACTOR")) {
             init(data.getIntExtra("FACTOR", 1))
@@ -146,8 +148,8 @@ class FilterEditorActivity : BaseActivity() {
                         nd.setText(MathUtils.factor2nd(input))
                     }
                     f_stops -> {
-                        factor.setText(Math.pow(2.0, input).toInt().toString())
-                        nd.setText(String.format(Locale.US, "%.1f", kotlin.math.log10(Math.pow(2.0, input))))
+                        factor.setText(2.0.pow(input).toInt().toString())
+                        nd.setText(String.format(Locale.US, "%.1f", kotlin.math.log10(2.0.pow(input))))
                     }
                     // don't let users enter the ND value: very inaccurate!
                     // factor.setText(kotlin.math.round(Math.pow(10.0, input)).toInt().toString())

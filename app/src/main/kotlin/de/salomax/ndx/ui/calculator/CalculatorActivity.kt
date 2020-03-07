@@ -26,7 +26,7 @@ class CalculatorActivity : BaseActivity() {
 
         // init view
         setContentView(R.layout.activity_calculator)
-        viewModel = ViewModelProviders.of(this).get(CalculatorViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(CalculatorViewModel::class.java)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         // list & adapter : shutter speeds

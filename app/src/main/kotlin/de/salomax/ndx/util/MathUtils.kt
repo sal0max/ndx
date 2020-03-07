@@ -1,6 +1,7 @@
 package de.salomax.ndx.util
 
 import java.util.*
+import kotlin.math.roundToLong
 
 object MathUtils {
 
@@ -18,7 +19,7 @@ object MathUtils {
             String.format(Locale.US, "%.1f", kotlin.math.log2(factor))
 
     fun factor2fstopRounded(factor: Number): String =
-            Math.round(kotlin.math.log2(factor.toDouble())).toString()
+            kotlin.math.log2(factor.toDouble()).roundToLong().toString()
 
     fun factor2nd(factor: Number): String =
             String.format(Locale.US, "%.1f", kotlin.math.log10(factor.toDouble()))

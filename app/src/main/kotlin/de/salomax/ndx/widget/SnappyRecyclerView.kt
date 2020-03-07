@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.OrientationHelper
 import androidx.recyclerview.widget.RecyclerView
+import kotlin.math.abs
 
 class SnappyRecyclerView : RecyclerView {
 
@@ -131,7 +132,7 @@ class SnappyRecyclerView : RecyclerView {
                 val child = layoutManager.getChildAt(i)
                 // if child center is closer than previous closest, set it as closest
                 val childCenter = helper.getTransformedStartWithDecoration(child) + child!!.width / 2
-                val distToCenter = Math.abs(childCenter - center)
+                val distToCenter = abs(childCenter - center)
                 if (distToCenter < absClosest) {
                     absClosest = distToCenter
                     closestChild = child

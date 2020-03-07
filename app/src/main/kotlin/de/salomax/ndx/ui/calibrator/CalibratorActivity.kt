@@ -8,7 +8,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import de.salomax.ndx.R
 import de.salomax.ndx.ui.BaseActivity
 import de.salomax.ndx.ui.calculator.ShutterAdapter
@@ -37,7 +37,7 @@ class CalibratorActivity : BaseActivity() {
 
         // init view
         setContentView(R.layout.activity_calibrator)
-        viewModel = ViewModelProviders.of(this).get(CalibratorViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(CalibratorViewModel::class.java)
 
         // title bar
         supportActionBar?.apply {

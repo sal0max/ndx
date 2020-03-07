@@ -9,7 +9,7 @@ import android.os.Vibrator
 import androidx.core.app.TaskStackBuilder
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.preference.*
 import com.google.android.material.snackbar.Snackbar
 import de.salomax.ndx.BuildConfig
@@ -40,7 +40,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
 
     override fun onCreatePreferences(bundle: Bundle?, s: String?) {
         addPreferencesFromResource(R.xml.preferences)
-        viewModel = ViewModelProviders.of(this).get(PreferenceViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(PreferenceViewModel::class.java)
 
         /*
          * find prefs

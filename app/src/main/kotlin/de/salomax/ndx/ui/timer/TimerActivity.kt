@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import de.salomax.ndx.R
 import de.salomax.ndx.data.Pref
 import de.salomax.ndx.ui.BaseActivity
@@ -13,6 +13,7 @@ import de.salomax.ndx.util.ManagedVibrator
 import de.salomax.ndx.widget.BlinkAnimation
 import kotlinx.android.synthetic.main.activity_timer.*
 import java.util.concurrent.*
+import kotlin.math.abs
 
 class TimerActivity : BaseActivity() {
 
@@ -27,7 +28,7 @@ class TimerActivity : BaseActivity() {
 
         // init view
         setContentView(R.layout.activity_timer)
-        viewModel = ViewModelProviders.of(this).get(TimerViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(TimerViewModel::class.java)
         alarmPlayer = ManagedAlarmPlayer(this)
         vibrator = ManagedVibrator(this)
         btn_reset.setOnClickListener {
@@ -196,23 +197,23 @@ class TimerActivity : BaseActivity() {
         minus.visibility = if (remainingTime < 0) View.VISIBLE else View.GONE
 
         // tenths of a second
-        val tenth = Math.abs(remainingTime / 100 % 10)
+        val tenth = abs(remainingTime / 100 % 10)
         textMilli.text = String.format(".%d", tenth)
 
         // seconds
-        val sec = Math.abs(TimeUnit.MILLISECONDS.toSeconds(remainingTime) % 60)
+        val sec = abs(TimeUnit.MILLISECONDS.toSeconds(remainingTime) % 60)
         val sSec = String.format("%02d", sec)
         if (textSec.text != sSec)
             textSec.text = sSec
 
         // minus
-        val min = Math.abs(TimeUnit.MILLISECONDS.toMinutes(remainingTime) % 60)
+        val min = abs(TimeUnit.MILLISECONDS.toMinutes(remainingTime) % 60)
         val sMin = String.format("%02d", min)
         if (textMin.text != sMin)
             textMin.text = sMin
 
         // hours
-        val h = Math.abs(TimeUnit.MILLISECONDS.toHours(remainingTime))
+        val h = abs(TimeUnit.MILLISECONDS.toHours(remainingTime))
         if (h > 0) {
             val sH = h.toString() + getString(R.string.unit_hours)
             if (textHour.text != sH)
