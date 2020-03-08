@@ -42,6 +42,7 @@
     <!-- -->
     <string name="prefTitle_donate">NDx Premium</string>
     <string name="prefSummary_donate">Support the development of this app.</string>
+    <string name="prefSummary_has_donated">Thank you for having supported the development of this app. Enjoy the premium features! ❤️</string>
     <!-- -->
     <string name="prefTitle_about">Version %1$s</string>
     <string name="prefSummary_about" translatable="false" tools:ignore="PluralsCandidate">© %1$d Maximilian Salomon</string>

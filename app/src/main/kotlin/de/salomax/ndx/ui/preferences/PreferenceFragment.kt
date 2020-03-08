@@ -92,6 +92,14 @@ class PreferenceFragment : PreferenceFragmentCompat(),
                     Pref.SHOW_WARNING -> showWarningPreference.isChecked = pref.value == "1"
                     Pref.ALARM_BEEP -> alarmBeepPreference.isChecked = pref.value == "1"
                     Pref.ALARM_VIBRATE -> alarmVibratePreference.isChecked = pref.value == "1"
+                    Pref.HAS_PREMIUM -> if (pref.value == "1") {
+                        donatePreference.summary = getString(R.string.prefSummary_has_donated)
+                        donatePreference.isSelectable = false
+                    }
+                    else {
+                        donatePreference.summary = getString(R.string.prefSummary_donate)
+                        donatePreference.isSelectable = true
+                    }
                 }
             }
         })
