@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:app="http://schemas.android.com/apk/res-auto"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent">
+
+   <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:clipToPadding="false"
+      android:paddingBottom="@dimen/fabOverflow"
+      android:scrollbars="none">
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:padding="@dimen/margin2x">
+
+         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/billing_lead"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin1x"
+            android:gravity="center"
+            android:text="@string/billing_lead"
+            android:textSize="@dimen/text_big"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+         <!-- feature 1 -->
+         <TextView
+            android:id="@+id/billing_pro_feature_1_title"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin3x"
+            android:text="@string/billing_pro_feature_1_title"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/billing_lead" />
+
+         <TextView
+            android:id="@+id/billing_pro_feature_1_summary"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/billing_pro_feature_1_summary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/billing_pro_feature_1_title" />
+         <!-- /feature 1 -->
+
+         <!-- feature 2 -->
+         <TextView
+            android:id="@+id/billing_pro_feature_2_title"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin2x"
+            android:text="@string/billing_pro_feature_2_title"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/billing_pro_feature_1_summary" />
+
+         <TextView
+            android:id="@+id/billing_pro_feature_2_summary"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/billing_pro_feature_2_summary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/billing_pro_feature_2_title" />
+         <!-- /feature 2 -->
+
+         <!-- feature 3 -->
+         <TextView
+            android:id="@+id/billing_pro_feature_3_title"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin2x"
+            android:text="@string/billing_pro_feature_3_title"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/billing_pro_feature_2_summary" />
+
+         <TextView
+            android:id="@+id/billing_pro_feature_3_summary"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/billing_pro_feature_3_summary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/billing_pro_feature_3_title" />
+         <!-- /feature 3 -->
+
+         <!-- feature 4 -->
+         <TextView
+            android:id="@+id/billing_pro_feature_4_title"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin2x"
+            android:text="@string/billing_pro_feature_4_title"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/billing_pro_feature_3_summary" />
+
+         <TextView
+            android:id="@+id/billing_pro_feature_4_summary"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/billing_pro_feature_4_summary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/billing_pro_feature_4_title" />
+
+         <TextView
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="casual"
+            android:text="@string/billing_pro_feature_4_closing"
+            android:textSize="@dimen/text_normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/billing_pro_feature_4_summary" />
+         <!-- /feature 4 -->
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+   </ScrollView>
+
+   <Button
+      android:id="@+id/btn_billing_buy"
+      style="@style/Widget.AppCompat.Button.Colored"
+      android:layout_width="0dp"
+      android:padding="@dimen/margin2x"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/margin3x"
+      android:text="@string/billing_btn_buy"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

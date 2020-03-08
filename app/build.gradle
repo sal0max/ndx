@@ -62,14 +62,15 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
-    def lifecycle_version = '2.2.0'
-    def room_version = '2.2.4'
     // ViewModel and LiveData
+    def lifecycle_version = '2.2.0'
+    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version" // optional
+
     // Room
-    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
+    def room_version = '2.2.4'
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
@@ -85,6 +86,9 @@ dependencies {
 
     // LeakCanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
+
+    // billing
+    implementation 'com.android.billingclient:billing:2.1.0'
 }
 
 def getSecret(String key) {

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_billing">NDx Premium</string>
+
+    <string name="billing_lead">Upgrade to get the following features:</string>
+
+    <string name="billing_pro_feature_1_title">🌟 Add more than four filters</string>
+    <string name="billing_pro_feature_1_summary">NDx lets you insert up to four filters. If you carry more than that, you should get the premium upgrade to eliminate this limit.</string>
+
+    <string name="billing_pro_feature_2_title">✨ Two additional themes</string>
+    <string name="billing_pro_feature_2_summary">Enjoy two awesome dark themes: \"Moonlit Dark\", a modern eye-pleasing dimmed down version of the default theme. \"Pitch Black\" is even darker for all you OLED owners and milky way hunters!</string>
+
+    <string name="billing_pro_feature_3_title">💫 Timer</string>
+    <string name="billing_pro_feature_3_summary">Forgot that remote shutter release, again? Fear no more: Put your camera in Bulb Timer mode and use the NDx&#160;Timer™ to count down the calculated exposure time.</string>
+
+    <string name="billing_pro_feature_4_title">💖 A good feeling</string>
+    <string name="billing_pro_feature_4_summary">"By going premium you not only get all this, but you also support the future development of this app and show your appreciation. ❤️
+
+I'm working on this project in my free time. I spent many hours on it, to make it perfect. Getting premium is your chance to buy me a beer. 🍺
+
+Thank you,"</string>
+    <string name="billing_pro_feature_4_closing">\ Max</string>
+
+    <string name="billing_btn_buy">Become a supporter</string>
+</resources>

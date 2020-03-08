@@ -15,6 +15,7 @@ import com.google.android.material.snackbar.Snackbar
 import de.salomax.ndx.BuildConfig
 import de.salomax.ndx.data.Pref
 import de.salomax.ndx.R
+import de.salomax.ndx.ui.billing.BillingActivity
 import de.salomax.ndx.ui.calculator.CalculatorActivity
 import java.util.*
 
@@ -84,7 +85,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
         /*
          * populate settings with values from db
          */
-        viewModel.prefs.observe(this, Observer<List<Pref>> {
+        viewModel.prefs.observe(this, Observer {
             for (pref in it) {
                 when (pref.key) {
                     Pref.FILTER_SORT_ORDER -> filterSortingPreference.value = pref.value
@@ -129,7 +130,8 @@ class PreferenceFragment : PreferenceFragmentCompat(),
                           .addNextIntent(activity!!.intent)
                           .startActivities()
                 } else {
-                    Snackbar.make(view!!, "Buy app", Snackbar.LENGTH_LONG).show() //TODO show billing
+                    val intent = Intent(context, BillingActivity().javaClass)
+                    startActivityForResult(intent, 1)
                     return false
                 }
             }
@@ -141,7 +143,8 @@ class PreferenceFragment : PreferenceFragmentCompat(),
     override fun onPreferenceClick(preference: Preference?): Boolean {
         when (preference) {
             donatePreference -> {
-                Snackbar.make(view!!, "Buy app", Snackbar.LENGTH_LONG).show() //TODO show billing
+                val intent = Intent(context, BillingActivity().javaClass)
+                startActivityForResult(intent, 1)
             }
             aboutPreference -> {
                 val fragment = ChangelogDialog()

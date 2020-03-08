@@ -25,3 +25,4 @@
 -dontnote android.net.http.**
 -dontnote org.apache.http.**
 -dontwarn com.uber.autodispose.**
+-keep class com.android.vending.billing.**

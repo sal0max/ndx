@@ -8,9 +8,9 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import de.salomax.ndx.R
 import de.salomax.ndx.ui.BaseActivity
+import de.salomax.ndx.ui.billing.BillingActivity
 import de.salomax.ndx.ui.filterpouch.FilterPouchActivity
 import de.salomax.ndx.ui.preferences.PreferenceActivity
 import de.salomax.ndx.ui.timer.TimerActivity
@@ -95,7 +95,8 @@ class CalculatorActivity : BaseActivity() {
                     startActivity(i)
                     true
                 } else {
-                    Snackbar.make(recycler_filters, "Buy app", Snackbar.LENGTH_LONG).show() //TODO show billing
+                    val intent = Intent(this, BillingActivity().javaClass)
+                    startActivityForResult(intent, 1)
                     false
                 }
             }

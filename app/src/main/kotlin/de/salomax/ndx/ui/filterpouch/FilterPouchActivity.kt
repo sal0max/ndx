@@ -10,6 +10,7 @@ import com.google.android.material.snackbar.Snackbar
 import de.salomax.ndx.R
 import de.salomax.ndx.data.Filter
 import de.salomax.ndx.ui.BaseActivity
+import de.salomax.ndx.ui.billing.BillingActivity
 import de.salomax.ndx.ui.filtereditor.FilterEditorActivity
 import de.salomax.ndx.widget.MarginHorizontalDividerItemDecoration
 import kotlinx.android.synthetic.main.activity_filterpouch.*
@@ -53,7 +54,8 @@ class FilterPouchActivity : BaseActivity() {
                 val intent = Intent(this, FilterEditorActivity().javaClass)
                 startActivity(intent)
             } else {
-                Snackbar.make(list, "Buy app", Snackbar.LENGTH_LONG).show() //TODO show billing
+                val intent = Intent(this, BillingActivity().javaClass)
+                startActivityForResult(intent, 1)
             }
         }
 
