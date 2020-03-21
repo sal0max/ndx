@@ -1,9 +1,10 @@
 package de.salomax.ndx
 
+import android.app.Application
 import leakcanary.LeakCanary
 
 @Suppress("unused")
-class DebugApp : App() {
+class DebugApp : Application() {
 
    override fun onCreate() {
       super.onCreate()
