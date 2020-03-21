@@ -29,6 +29,10 @@ interface PrefDao {
     @TypeConverters(BooleanConverter::class)
     fun hasPremium(): LiveData<Boolean?>
 
+    @Query("UPDATE prefs SET `VALUE` = 1 WHERE `KEY` = '${Pref.HAS_PREMIUM}'")
+    @TypeConverters(BooleanConverter::class)
+    fun enablePremium()
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(pref: Pref)
 

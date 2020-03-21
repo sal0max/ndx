@@ -2,6 +2,7 @@ package de.salomax.ndx.ui.billing
 
 import android.os.Bundle
 import android.widget.Button
+import androidx.lifecycle.ViewModelProvider
 import com.android.billingclient.api.*
 import de.salomax.ndx.R
 import de.salomax.ndx.ui.BaseActivity
@@ -15,19 +16,12 @@ Billing workflow:
 4. evaluate result of the buy: #onPurchasesUpdated()
   a) accept buy:               #acknowledgePurchase() -> for non-consumable
  */
-class BillingActivity : BaseActivity(), PurchasesUpdatedListener {
+class BillingActivity : BaseActivity() {
 
-   private lateinit var billingClient: BillingClient
+   private var billingClient: BillingClient? = null
 
    override fun onCreate(savedInstanceState: Bundle?) {
       super.onCreate(savedInstanceState)
-
-      // setup billing client
-      billingClient = BillingClient
-            .newBuilder(this)
-            .enablePendingPurchases()
-            .setListener(this) // onPurchasesUpdated
-            .build()
 
       // init view
       setContentView(R.layout.activity_billing)
@@ -40,9 +34,17 @@ class BillingActivity : BaseActivity(), PurchasesUpdatedListener {
          setHomeAsUpIndicator(R.drawable.ic_close_white_24dp)
       }
 
+      // setup billing client
+      billingClient = BillingClient
+            .newBuilder(applicationContext)
+            .enablePendingPurchases()
+            .setListener(this::onPurchasesUpdated) // onPurchasesUpdated
+            .build()
+
       // button
       findViewById<Button>(R.id.btn_billing_buy).setOnClickListener {
-         // buy() TODO
+         ViewModelProvider(this).get(BillingViewModel::class.java).enablePremium()
+//         buy() // TODO
       }
    }
 
@@ -51,14 +53,16 @@ class BillingActivity : BaseActivity(), PurchasesUpdatedListener {
       return true
    }
 
-   override fun onStop() {
-      super.onStop()
-      billingClient.endConnection()
+   override fun onDestroy() {
+      super.onDestroy()
+      billingClient?.endConnection()
+      billingClient = null
    }
 
    // 1. connect client
    private fun buy() {
-      billingClient.startConnection(object : BillingClientStateListener {
+      // connect
+      billingClient?.startConnection(object : BillingClientStateListener {
          override fun onBillingSetupFinished(billingResponse: BillingResult) {
             if (billingResponse.responseCode == BillingClient.BillingResponseCode.OK) {
                Logger.log("startConnection        | The BillingClient is ready. You can query purchases here.")
@@ -69,7 +73,7 @@ class BillingActivity : BaseActivity(), PurchasesUpdatedListener {
          }
 
          override fun onBillingServiceDisconnected() {
-            billingClient.startConnection(this)
+            billingClient?.startConnection(this)
             Logger.log("onBillingServiceDisconnected   | Disconnected")
          }
       })
@@ -77,14 +81,13 @@ class BillingActivity : BaseActivity(), PurchasesUpdatedListener {
 
    // 2. get details of all SKUs
    private fun querySkuDetails() {
-      if (billingClient.isReady) {
+      if (billingClient?.isReady == true) {
          val params = SkuDetailsParams
                .newBuilder()
-               .setSkusList(listOf("android.test.purchased", "android.test.canceled", "android.test.refunded", "android.test.item_unavailable"))
-//               .setSkusList(listOf("premium")) // non-consumable
+               .setSkusList(listOf("premium")) // non-consumable
                .setType(BillingClient.SkuType.INAPP)
                .build()
-         billingClient.querySkuDetailsAsync(params) { billingResult, skuDetailsList ->
+         billingClient?.querySkuDetailsAsync(params) { billingResult, skuDetailsList ->
             if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
                Logger.log("querySkuDetailsAsync   | response: ${billingResult.responseCode} (OK)")
                launchBillingFlow(skuDetailsList)
@@ -100,17 +103,25 @@ class BillingActivity : BaseActivity(), PurchasesUpdatedListener {
    // 3. buy something
    private fun launchBillingFlow(skuDetails: List<SkuDetails>) {
       for (skuDetail in skuDetails) {
-         billingClient.launchBillingFlow(this, BillingFlowParams.newBuilder().setSkuDetails(skuDetail).build())
+         Logger.log("launchBillingFlow      | ${skuDetail.originalJson}")
+         billingClient?.launchBillingFlow(this, BillingFlowParams.newBuilder().setSkuDetails(skuDetail).build())
+
+         // temp
+//         billingClient?.consumeAsync(ConsumeParams.newBuilder()
+//               .setPurchaseToken("klkmnfhjhaobpfaifhmmcmjf.AO-J1Ow_ovlJ60rrhvwFjjcI7DyhMTOb7QK1aRAaaPHIgRtryvQ8F3p3UPiz-F7KScZiQ5Bv60PmYVWL-3gZRROpWI6CyJysvcZL5xte2d_hVozzTiRzGWk")
+//               .build()) { billingResult, s ->
+//            Logger.log("newnew | ${billingResult.responseCode}")
+//         }
       }
    }
 
-   // 4. evaluate result of the buy
-   override fun onPurchasesUpdated(billingResponse: BillingResult?, purchases: MutableList<Purchase>?) {
+   // 4. evaluate result of the buy...
+   private fun onPurchasesUpdated(billingResponse: BillingResult?, purchases: MutableList<Purchase>?) {
       if (billingResponse?.responseCode == BillingClient.BillingResponseCode.OK && purchases != null) {
          for (purchase in purchases)
             if (purchase.purchaseState == Purchase.PurchaseState.PURCHASED) {
-               // TODO Grant the item to the user...
-
+               Logger.log("onPurchasesUpdated     | premium granted")
+               ViewModelProvider(this).get(BillingViewModel::class.java).enablePremium()
                // ...and acknowledge the purchase if it hasn't already been acknowledged.
                if (!purchase.isAcknowledged) {
                   acknowledgePurchase(purchase.purchaseToken)
@@ -127,7 +138,7 @@ class BillingActivity : BaseActivity(), PurchasesUpdatedListener {
       val params = AcknowledgePurchaseParams.newBuilder()
             .setPurchaseToken(purchaseToken)
             .build()
-      billingClient.acknowledgePurchase(params) { billingResult ->
+      billingClient?.acknowledgePurchase(params) { billingResult ->
          if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
             Logger.log("acknowledgePurchase    | success; billingResult: ${billingResult.responseCode}")
          } else {
