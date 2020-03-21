@@ -3,6 +3,7 @@ package de.salomax.ndx.ui.filterpouch
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import de.salomax.ndx.data.Filter
 import de.salomax.ndx.data.FilterDao
 import de.salomax.ndx.data.NdxDatabase
@@ -13,7 +14,11 @@ class FilterPouchViewModel(application: Application) : AndroidViewModel(applicat
     private val filterDao: FilterDao
 
     internal val filters: LiveData<List<Filter>?>
-    internal val hasPremium: LiveData<Boolean?>
+    internal var hasPremium: Boolean = false
+        private set
+
+    private val hasPremiumLive: LiveData<Boolean?>
+    private val premiumObserver = Observer<Boolean?> { hasPremium = it ?: false }
 
     init {
         val ndxDatabase = NdxDatabase.getInstance(application)
@@ -21,7 +26,13 @@ class FilterPouchViewModel(application: Application) : AndroidViewModel(applicat
         filters = filterDao.getAll()
 
         val prefDao = ndxDatabase.prefDao()
-        hasPremium = prefDao.hasPremium()
+        hasPremiumLive = prefDao.hasPremium()
+        hasPremiumLive.observeForever { premiumObserver }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        hasPremiumLive.removeObserver(premiumObserver)
     }
 
     fun insert(filter: Filter) {
