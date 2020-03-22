@@ -13,8 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.preference.*
 import com.google.android.material.snackbar.Snackbar
 import de.salomax.ndx.BuildConfig
-import de.salomax.ndx.data.Pref
 import de.salomax.ndx.R
+import de.salomax.ndx.data.model.ShutterSpeeds
 import de.salomax.ndx.ui.billing.BillingActivity
 import de.salomax.ndx.ui.calculator.CalculatorActivity
 import java.util.*
@@ -83,47 +83,42 @@ class PreferenceFragment : PreferenceFragmentCompat(),
         ratePreference.onPreferenceClickListener = this
 
         /*
-         * populate settings with values from db
+         * populate settings with values from prefs
          */
-        viewModel.prefs.observe(this, Observer {
-            for (pref in it) {
-                when (pref.key) {
-                    Pref.FILTER_SORT_ORDER -> filterSortingPreference.value = pref.value
-                    Pref.EV_STEPS -> evStepsPreference.value = pref.value
-                    Pref.SHOW_WARNING -> showWarningPreference.isChecked = pref.value == "1"
-                    Pref.ALARM_BEEP -> alarmBeepPreference.isChecked = pref.value == "1"
-                    Pref.ALARM_VIBRATE -> alarmVibratePreference.isChecked = pref.value == "1"
-                    Pref.HAS_PREMIUM -> if (pref.value == "1") {
-                        donatePreference.summary = getString(R.string.prefSummary_has_donated)
-                        donatePreference.isSelectable = false
-                    }
-                    else {
-                        donatePreference.summary = getString(R.string.prefSummary_donate)
-                        donatePreference.isSelectable = true
-                    }
-                }
+        viewModel.filterSortOrder.observe(this, Observer { filterSortingPreference.value = it.toString() })
+        viewModel.evSteps.observe(this, Observer { speeds ->
+            evStepsPreference.value = when (speeds) {
+                ShutterSpeeds.FULL -> "1"
+                ShutterSpeeds.HALF -> "2"
+                else -> "3"
             }
         })
-        // theme setting is stored in shared prefs, not db
-        themeSelectorPreference.value = PreferenceManager
-                .getDefaultSharedPreferences(context)
-                .getString(Pref.THEME, resources.getStringArray(R.array.prefValues_themes)[0])
+        viewModel.showWarning.observe(this, Observer { showWarningPreference.isChecked = it })
+        viewModel.alarmBeepEnabled.observe(this, Observer { alarmBeepPreference.isChecked = it })
+        viewModel.alarmVibrateEnabled.observe(this, Observer { alarmVibratePreference.isChecked = it })
+        viewModel.hasPremium.observe(this, Observer {
+            if (it) {
+                donatePreference.summary = getString(R.string.prefSummary_has_donated)
+                donatePreference.isSelectable = false
+            } else {
+                donatePreference.summary = getString(R.string.prefSummary_donate)
+                donatePreference.isSelectable = true
+            }
+        })
+        viewModel.theme.observe(this, Observer { themeSelectorPreference.value = it.toString() })
     }
 
     override fun onPreferenceChange(preference: Preference?, newValue: Any?): Boolean {
         when (preference) {
             evStepsPreference -> {
-                addToDb(Pref.EV_STEPS, newValue as String)
+                viewModel.setEvSteps(newValue.toString().toInt())
             }
             filterSortingPreference -> {
-                addToDb(Pref.FILTER_SORT_ORDER, newValue as String)
+                viewModel.setFilterSortOrder(newValue.toString().toInt())
             }
             themeSelectorPreference -> {
                 if (viewModel.hasPremium.value == true) {
-                    // needs to be in shared prefs; not possible to store to room as it doesn't allow
-                    // blocking access, which would be needed in order to be retrieved before onCreate()
-                    val mPrefs = PreferenceManager.getDefaultSharedPreferences(context)
-                    mPrefs.edit().putString(Pref.THEME, newValue as String).apply()
+                    viewModel.setTheme(newValue.toString().toInt())
                     // re-create all open activities
                     TaskStackBuilder.create(context!!)
                           .addNextIntent(Intent(activity, CalculatorActivity::class.java))
@@ -151,13 +146,13 @@ class PreferenceFragment : PreferenceFragmentCompat(),
                 fragment.show(childFragmentManager, null)
             }
             showWarningPreference -> {
-                addToDb(Pref.SHOW_WARNING, if ((preference as SwitchPreference).isChecked) "1" else "0")
+                viewModel.setWarning((preference as SwitchPreference).isChecked)
             }
             alarmBeepPreference -> {
-                addToDb(Pref.ALARM_BEEP, if ((preference as SwitchPreference).isChecked) "1" else "0")
+                viewModel.setAlarmBeep((preference as SwitchPreference).isChecked)
             }
             alarmVibratePreference -> {
-                addToDb(Pref.ALARM_VIBRATE, if ((preference as SwitchPreference).isChecked) "1" else "0")
+                viewModel.setAlarmVibrate((preference as SwitchPreference).isChecked)
             }
             mailPreference -> {
                 val mailIntent = Intent(Intent.ACTION_SENDTO)
@@ -192,10 +187,6 @@ class PreferenceFragment : PreferenceFragmentCompat(),
             else -> return false
         }
         return true
-    }
-
-    private fun addToDb(key: String, value: String) {
-        viewModel.insert(Pref(key, value))
     }
 
     private fun showError(errorMsg: String) {

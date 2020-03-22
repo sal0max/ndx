@@ -56,11 +56,11 @@ class CalculatorActivity : BaseActivity() {
         viewModel.speeds.observe(this, Observer {
             (recycler_shutter.adapter as ShutterAdapter).setSpeeds(it)
         })
-        viewModel.isWarningEnabled.observe(this, Observer { enabled ->
-            enabled?.let { resultView.showWarning = it }
+        viewModel.isWarningEnabled.observe(this, Observer {
+            resultView.showWarning = it
         })
         viewModel.calculatedSpeed.observe(this, Observer { micros ->
-            resultView.setDuration(micros)
+            resultView.duration = micros
             enableTimer(micros != null && micros >= 1_000_000L)
         })
     }

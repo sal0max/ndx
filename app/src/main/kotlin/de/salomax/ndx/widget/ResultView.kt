@@ -9,25 +9,40 @@ import android.text.style.RelativeSizeSpan
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import de.salomax.ndx.R
-import de.salomax.ndx.data.ShutterSpeeds
+import de.salomax.ndx.data.model.ShutterSpeeds
 import kotlinx.android.synthetic.main.view_result.view.*
+import kotlin.math.abs
 
 @SuppressLint("SetTextI18n")
 class ResultView : ConstraintLayout {
 
-    private var evSteps: ShutterSpeeds? = ShutterSpeeds.THIRD //TODO
-
     private val dUnit = resources.getString(R.string.unit_days)
     private val hUnit = resources.getString(R.string.unit_hours)
+
+    //TODO make changeable
+    private var evSteps: ShutterSpeeds? = ShutterSpeeds.THIRD
 
     var showWarning = false
         set(value) {
             field = value
-            invalidate()
+            showWarning()
+        }
+
+    var duration: Long? = null
+        set(micro) {
+            field = micro
+            // set time
+            if (micro == null) {
+                infinite()
+            } else {
+                if (micro < 1_000_000L)
+                    smaller1s(micro)
+                else
+                    greater1s(micro)
+            }
+            showWarning()
         }
 
     constructor(context: Context) : this(context, null)
@@ -37,24 +52,23 @@ class ResultView : ConstraintLayout {
         inflater.inflate(R.layout.view_result, this)
     }
 
+    /*
+     * warning icon
+     */
 
-    fun setDuration(micro: Long?) {
-        // set time
-        if (micro == null) {
-            infinite()
-        } else {
-            if (micro < 1_000_000L)
-                smaller1s(micro)
-            else
-                greater1s(micro)
-        }
+    private fun showWarning() {
+        val micro = duration
         // show warning
         if (showWarning && (micro == null || micro >= 1_000_000L * 60 * 20)) { // 20min
             warning.visibility = View.VISIBLE
-        } else
+        } else {
             warning.visibility = View.GONE
+        }
     }
 
+    /*
+     * time calculations
+     */
 
     private fun infinite() {
         minutes.text = "\u221E"
@@ -79,8 +93,8 @@ class ResultView : ConstraintLayout {
          * fractions & seconds
          */
         val sf = SpannableString("  " + // 2 leading blanks for centering
-                "%02d".format(s) + // seconds
-                "." + f.toString()) // fractions
+              "%02d".format(s) + // seconds
+              "." + f.toString()) // fractions
         sf.setSpan(RelativeSizeSpan(.6f), 0, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         sf.setSpan(RelativeSizeSpan(.6f), sf.length - 2, sf.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         seconds.text = sf
@@ -96,13 +110,13 @@ class ResultView : ConstraintLayout {
         val hourDayStringBuilder = StringBuilder()
         if (d != 0L)
             hourDayStringBuilder
-                    .append(d.toString())
-                    .append(dUnit)
-                    .append(" ")
+                  .append(d.toString())
+                  .append(dUnit)
+                  .append(" ")
         if (h != 0L)
             hourDayStringBuilder
-                    .append(h.toString())
-                    .append(hUnit)
+                  .append(h.toString())
+                  .append(hUnit)
         if (hourDayStringBuilder.isNotEmpty()) {
             hoursDays.visibility = View.VISIBLE
             val hourDayString = SpannableString(hourDayStringBuilder)
@@ -125,7 +139,7 @@ class ResultView : ConstraintLayout {
             val values = s.doubleValues
 
             for ((index, value) in values.withIndex()) {
-                val diff = Math.abs(value - input)
+                val diff = abs(value - input)
                 if (oldDiff > diff) {
                     oldDiff = diff
                     nearest = s.htmlValues[index]

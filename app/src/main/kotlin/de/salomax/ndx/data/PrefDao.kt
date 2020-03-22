@@ -1,103 +1,124 @@
 package de.salomax.ndx.data
 
-import androidx.lifecycle.LiveData
-import androidx.room.*
-import java.lang.IllegalArgumentException
+import android.content.Context
+import android.content.SharedPreferences
+import androidx.preference.PreferenceManager
+import de.salomax.ndx.data.model.IsoSteps
+import de.salomax.ndx.data.model.ShutterSpeeds
+import de.salomax.ndx.util.Logger
 
-@Dao
-interface PrefDao {
+class PrefDao private constructor(val context: Context) {
 
-    @Query("SELECT * FROM prefs")
-    fun getAll(): LiveData<List<Pref>>
+   companion object {
+      private var INSTANCE: PrefDao? = null
 
-    @Query("SELECT `VALUE` FROM prefs WHERE `KEY` = '${Pref.EV_STEPS}' LIMIT 1")
-    @TypeConverters(ShutterSpeedsConverter::class)
-    fun getEvSteps(): LiveData<ShutterSpeeds?>
+      fun getInstance(context: Context): PrefDao {
+         if (INSTANCE == null) {
+            synchronized(PrefDao::class) {
+               INSTANCE = PrefDao(context)
+            }
+         }
+         return INSTANCE!!
+      }
+   }
 
-    @Query("SELECT `VALUE` FROM prefs WHERE `KEY` = '${Pref.EV_STEPS}' LIMIT 1")
-    @TypeConverters(IsoConverter::class)
-    fun getIsoSteps(): LiveData<IsoSteps?>
+   private val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
-    @Query("SELECT * FROM prefs WHERE `KEY` = '${Pref.ALARM_BEEP}' OR `KEY` = '${Pref.ALARM_VIBRATE}'")
-    fun getTimerAlarms(): LiveData<List<Pref>?>
+   /*
+    * ev steps
+    */
 
-    @Query("SELECT `VALUE` FROM prefs WHERE `KEY` = '${Pref.SHOW_WARNING}' LIMIT 1")
-    @TypeConverters(BooleanConverter::class)
-    fun isWarningEnabled(): LiveData<Boolean?>
+   fun getIsoSteps(): SharedPreferenceLiveData<IsoSteps> {
+      return sharedPreferences.isoStepsLiveData(Pref.EV_STEPS, IsoSteps.THIRD)
+   }
 
-    @Query("SELECT `VALUE` FROM prefs WHERE `KEY` = '${Pref.HAS_PREMIUM}' LIMIT 1")
-    @TypeConverters(BooleanConverter::class)
-    fun hasPremium(): LiveData<Boolean?>
+   fun getEvSteps(): SharedPreferenceLiveData<ShutterSpeeds> {
+      return sharedPreferences.shutterSpeedsLiveData(Pref.EV_STEPS, ShutterSpeeds.THIRD)
+   }
 
-    @Query("UPDATE prefs SET `VALUE` = 1 WHERE `KEY` = '${Pref.HAS_PREMIUM}'")
-    @TypeConverters(BooleanConverter::class)
-    fun enablePremium()
+   fun setEvSteps(evSteps: Int) {
+      sharedPreferences.edit().putInt(Pref.EV_STEPS, evSteps).apply()
+   }
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(pref: Pref)
+   /*
+    * filter sort order
+    */
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(prefs: List<Pref>)
+   fun getFilterSortOrder(): SharedPreferenceLiveData<Int> {
+      return sharedPreferences.intLiveData(Pref.FILTER_SORT_ORDER, 0)
+   }
 
-    @Query("DELETE FROM prefs")
-    fun deleteAll()
-}
+   fun setFilterSortOrder(sortOrder: Int) {
+      sharedPreferences.edit().putInt(Pref.FILTER_SORT_ORDER, sortOrder).apply()
+   }
 
-class ShutterSpeedsConverter {
-    @TypeConverter
-    fun toShutterSpeed(s: String): ShutterSpeeds {
-        return when (s) {
-            "1" -> ShutterSpeeds.FULL
-            "2" -> ShutterSpeeds.HALF
-            else -> ShutterSpeeds.THIRD
-        }
-    }
+   /*
+    * alarm
+    */
 
-    @TypeConverter
-    fun fromShutterSpeed(s: ShutterSpeeds): String {
-        return when (s) {
-            ShutterSpeeds.FULL -> "1"
-            ShutterSpeeds.HALF -> "2"
-            else -> "3"
-        }
-    }
-}
+   fun shouldAlarmBeep(): SharedPreferenceLiveData<Boolean> {
+      return sharedPreferences.booleanLiveData(Pref.ALARM_BEEP, false)
+   }
 
-class IsoConverter {
-    @TypeConverter
-    fun toShutterSpeed(s: String): IsoSteps {
-        return when (s) {
-            "1" -> IsoSteps.FULL
-            "2" -> IsoSteps.HALF
-            else -> IsoSteps.THIRD
-        }
-    }
+   fun shouldAlarmBeepSync(): Boolean {
+      return sharedPreferences.getBoolean(Pref.ALARM_BEEP, false)
+   }
 
-    @TypeConverter
-    fun fromShutterSpeed(s: IsoSteps): String {
-        return when (s) {
-            IsoSteps.FULL -> "1"
-            IsoSteps.HALF -> "2"
-            else -> "3"
-        }
-    }
-}
+   fun setAlarmBeep(enabled: Boolean) {
+      sharedPreferences.edit().putBoolean(Pref.ALARM_BEEP, enabled).apply()
+   }
 
-class BooleanConverter {
-    @TypeConverter
-    fun toBoolean(s: String): Boolean {
-        return when (s) {
-            "0" -> false
-            "1" -> true
-            else -> throw IllegalArgumentException()
-        }
-    }
+   fun shouldAlarmVibrate(): SharedPreferenceLiveData<Boolean> {
+      return sharedPreferences.booleanLiveData(Pref.ALARM_VIBRATE, false)
+   }
 
-    @TypeConverter
-    fun fromBoolean(b: Boolean): String {
-        return when (b) {
-            false -> "0"
-            true -> "1"
-        }
-    }
+   fun shouldAlarmVibrateSync(): Boolean {
+      return sharedPreferences.getBoolean(Pref.ALARM_VIBRATE, false)
+   }
+
+   fun setAlarmVibrate(enabled: Boolean) {
+      sharedPreferences.edit().putBoolean(Pref.ALARM_VIBRATE, enabled).apply()
+   }
+
+   /*
+    * exposure time warning
+    */
+
+   fun isWarningEnabled(): SharedPreferenceLiveData<Boolean> {
+      return sharedPreferences.booleanLiveData(Pref.SHOW_WARNING, false)
+   }
+
+   fun setWarning(enabled: Boolean) {
+      sharedPreferences.edit().putBoolean(Pref.SHOW_WARNING, enabled).apply()
+   }
+
+   /*
+    * premium
+    */
+
+   fun hasPremium(): SharedPreferenceLiveData<Boolean> {
+      return sharedPreferences.booleanLiveData(Pref.HAS_PREMIUM, false)
+   }
+
+   fun enablePremium() {
+      sharedPreferences.edit().putBoolean(Pref.HAS_PREMIUM, true).apply()
+   }
+
+   /*
+    * theme
+    */
+
+   fun getTheme(): SharedPreferenceLiveData<Int> {
+      return sharedPreferences.intLiveData(Pref.THEME, 0)
+   }
+
+   fun getThemeSync(): Int {
+      return sharedPreferences.getInt(Pref.THEME, 0)
+   }
+
+   fun setTheme(theme: Int) {
+      sharedPreferences.edit().putInt(Pref.THEME, theme).apply()
+   }
+
+
 }

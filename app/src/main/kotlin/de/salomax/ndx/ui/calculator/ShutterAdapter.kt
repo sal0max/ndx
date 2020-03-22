@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import de.salomax.ndx.R
-import de.salomax.ndx.data.ShutterSpeeds
+import de.salomax.ndx.data.model.ShutterSpeeds
 import de.salomax.ndx.widget.SnappyRecyclerView
 
 class ShutterAdapter(private val context: AppCompatActivity) : RecyclerView.Adapter<ShutterAdapter.ViewHolder>() {

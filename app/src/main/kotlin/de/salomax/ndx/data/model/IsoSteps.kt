@@ -1,4 +1,4 @@
-package de.salomax.ndx.data
+package de.salomax.ndx.data.model
 
 enum class IsoSteps(val values: IntArray) {
 

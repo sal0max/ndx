@@ -1,4 +1,4 @@
-package de.salomax.ndx.data
+package de.salomax.ndx.data.model
 
 import android.text.Spanned
 import android.text.SpannedString

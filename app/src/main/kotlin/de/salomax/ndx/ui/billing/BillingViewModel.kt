@@ -1,25 +1,17 @@
 package de.salomax.ndx.ui.billing
 
 import android.app.Application
+import android.content.Context
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import de.salomax.ndx.data.*
-import java.util.concurrent.Executors
+import de.salomax.ndx.data.PrefDao
+import de.salomax.ndx.data.SharedPreferenceLiveData
 
 class BillingViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val prefDao: PrefDao
-
-    init {
-        val ndxDatabase = NdxDatabase.getInstance(application)
-        prefDao = ndxDatabase.prefDao()
-    }
+    private val prefDao = PrefDao.getInstance(application)
 
     fun enablePremium() {
-//        Executors.newSingleThreadScheduledExecutor().execute { prefDao.enablePremium() }
-        Executors.newSingleThreadScheduledExecutor().execute {
-            prefDao.insert(Pref(Pref.HAS_PREMIUM, "1"))
-        }
+        prefDao.enablePremium()
     }
 
 }

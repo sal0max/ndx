@@ -9,14 +9,7 @@ import androidx.room.Query
 @Dao
 interface FilterDao {
 
-    @Query("SELECT *" +
-            " FROM filters" +
-            " ORDER BY (" +
-            "    CASE" +
-            "       WHEN (SELECT `VALUE` FROM prefs WHERE `KEY` IS '" + Pref.FILTER_SORT_ORDER + "') = '0' THEN FACTOR" +
-            "       WHEN (SELECT `VALUE` FROM prefs WHERE `KEY` IS '" + Pref.FILTER_SORT_ORDER + "') = '1' THEN NAME" +
-            "    END)" +
-            " COLLATE NOCASE")
+    @Query("SELECT * FROM filters ORDER BY FACTOR COLLATE NOCASE")
     fun getAll(): LiveData<List<Filter>?>
 
     @Query("SELECT * FROM filters WHERE id = :id")

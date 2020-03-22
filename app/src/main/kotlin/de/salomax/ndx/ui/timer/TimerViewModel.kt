@@ -1,18 +1,24 @@
 package de.salomax.ndx.ui.timer
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import de.salomax.ndx.data.NdxDatabase
-import de.salomax.ndx.data.Pref
+import de.salomax.ndx.data.PrefDao
+import de.salomax.ndx.data.SharedPreferenceLiveData
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
 class TimerViewModel(application: Application) : AndroidViewModel(application) {
 
-    internal val prefs: LiveData<List<Pref>?>
+    private val prefDao: PrefDao = PrefDao.getInstance(application)
+
+    internal fun shouldAlarmVibrate(): Boolean {
+        return prefDao.shouldAlarmVibrateSync()
+    }
+
+    internal fun shouldAlarmBeep(): Boolean {
+        return prefDao.shouldAlarmBeepSync()
+    }
 
     // current state
     internal var millisTotal: Long? = null
@@ -23,11 +29,6 @@ class TimerViewModel(application: Application) : AndroidViewModel(application) {
     private var executor = Executors.newSingleThreadScheduledExecutor()
 
     init {
-        // db
-        val ndxDatabase = NdxDatabase.getInstance(application)
-        val prefDao = ndxDatabase.prefDao()
-        prefs = prefDao.getTimerAlarms()
-
         millisCurrent.value = 0L
     }
 

@@ -8,11 +8,10 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import de.salomax.ndx.R
 import java.util.concurrent.Executors
 
-@Database(entities = [(Filter::class), (Pref::class)], version = 1, exportSchema = false)
+@Database(entities = [(Filter::class)], version = 1, exportSchema = false)
 abstract class NdxDatabase : RoomDatabase() {
 
     abstract fun filterDao(): FilterDao
-    abstract fun prefDao(): PrefDao
 
     companion object {
         private var INSTANCE: NdxDatabase? = null
@@ -71,19 +70,6 @@ abstract class NdxDatabase : RoomDatabase() {
                                             context.getString(R.string.preset_filterName6),
                                             context.getString(R.string.preset_filterInfo6)))
                             )
-                }
-                // add default preferences
-                Executors.newSingleThreadScheduledExecutor().execute {
-                    getInstance(context)
-                            .prefDao()
-                            .insertAll(listOf(
-                                    Pref(Pref.EV_STEPS, "3"),
-                                    Pref(Pref.FILTER_SORT_ORDER, "0"),
-                                    Pref(Pref.ALARM_BEEP, "1"),
-                                    Pref(Pref.ALARM_VIBRATE, "0"),
-                                    Pref(Pref.SHOW_WARNING, "0"),
-                                    Pref(Pref.HAS_PREMIUM, "0")
-                            ))
                 }
             }
         }

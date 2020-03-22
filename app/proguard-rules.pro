@@ -20,7 +20,7 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep class de.salomax.ndx.data.ShutterSpeeds
+-keep class de.salomax.ndx.data.model.ShutterSpeeds
 -keep class android.arch.lifecycle.**
 -dontnote android.net.http.**
 -dontnote org.apache.http.**

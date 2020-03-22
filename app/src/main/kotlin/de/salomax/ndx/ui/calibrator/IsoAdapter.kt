@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import de.salomax.ndx.R
-import de.salomax.ndx.data.IsoSteps
+import de.salomax.ndx.data.model.IsoSteps
 import de.salomax.ndx.widget.SnappyRecyclerView
 
 class IsoAdapter(private val context: AppCompatActivity) : RecyclerView.Adapter<IsoAdapter.ViewHolder>() {
@@ -40,7 +40,7 @@ class IsoAdapter(private val context: AppCompatActivity) : RecyclerView.Adapter<
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
-        (recyclerView as SnappyRecyclerView).snapped.observe(context, Observer<Int> {
+        (recyclerView as SnappyRecyclerView).snapped.observe(context, Observer {
             onIsoSelected?.invoke(items?.get(it) ?: 100)
         })
     }

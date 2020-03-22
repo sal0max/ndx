@@ -6,7 +6,6 @@ import android.view.animation.Animation
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import de.salomax.ndx.R
-import de.salomax.ndx.data.Pref
 import de.salomax.ndx.ui.BaseActivity
 import de.salomax.ndx.util.ManagedAlarmPlayer
 import de.salomax.ndx.util.ManagedVibrator
@@ -81,15 +80,8 @@ class TimerActivity : BaseActivity() {
                     // animations
                     progress.startAnimation(blinkAnimation)
                     // alarms
-                    viewModel.prefs.observe(this, Observer { prefs ->
-                        prefs?.let {
-                            for (pref in it)
-                                when (pref.key) {
-                                    Pref.ALARM_BEEP -> if (pref.value == "1") playAlarm()
-                                    Pref.ALARM_VIBRATE -> if (pref.value == "1") vibrate()
-                                }
-                        }
-                    })
+                    if (viewModel.shouldAlarmBeep()) playAlarm()
+                    if (viewModel.shouldAlarmVibrate()) vibrate()
                 }
                 TimerViewModel.State.RUNNING_NEGATIVE -> {
                     // animations
