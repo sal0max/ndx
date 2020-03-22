@@ -10,6 +10,7 @@
    * ~~keep position of shutter-snappyRecyclerView and snap it~~
 
 ### normal priority
+* decrease distance of numbers in resultView
 * implement timer
    * ~~restore state on configuration change~~
    * ~~add a reset button for when paused~~
