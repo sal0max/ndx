@@ -51,7 +51,7 @@ class SnappyRecyclerView : RecyclerView {
             post {
                 scrollToPosition(state.getInt("snappedPosition"))
             }
-            super.onRestoreInstanceState(state.getParcelable<Parcelable>("superState"))
+            super.onRestoreInstanceState(state.getParcelable("superState"))
         } else
             super.onRestoreInstanceState(state)
     }
