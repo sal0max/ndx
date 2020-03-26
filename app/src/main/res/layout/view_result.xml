@@ -1,126 +1,111 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
     Try to make every element "fixed" by avoiding wrap_content and instead use match_parent or 0dp
     Improves performance a lot!
 -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+   xmlns:app="http://schemas.android.com/apk/res-auto"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent">
 
-    <!-- days & hours -->
-    <TextView
-        android:id="@+id/hoursDays"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:paddingEnd="@dimen/margin2x"
-        android:paddingStart="@dimen/margin2x"
-        android:paddingTop="@dimen/margin2x"
-        android:textColor="?android:textColorPrimary"
-        android:textSize="@dimen/text_big"
-        android:typeface="monospace"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="45dp"
-        tools:text="1d 2h" />
-    <!-- /days & hours -->
+   <!-- days & hours -->
+   <TextView
+      android:id="@+id/hoursDays"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/margin2x"
+      android:textColor="?android:textColorPrimary"
+      android:textSize="@dimen/text_big"
+      android:typeface="monospace"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="1d 2h" />
+   <!-- /days & hours -->
 
-    <!-- warning -->
-    <ImageView
-        android:id="@+id/warning"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/margin2x"
-        android:src="@drawable/ic_warning_red_24dp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription"
-        tools:visibility="visible" />
-    <!-- /warning -->
+   <!-- warning -->
+   <ImageView
+      android:id="@+id/warning"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:padding="@dimen/margin2x"
+      android:src="@drawable/ic_warning_red_24dp"
+      android:visibility="gone"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:ignore="ContentDescription"
+      tools:visibility="visible" />
+   <!-- /warning -->
 
 
-    <!-- minutes -->
-    <TextView
-        android:id="@+id/minutes"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:lines="1"
-        android:maxLength="2"
-        android:textColor="?android:textColorPrimary"
-        android:textSize="@dimen/text_resultLarge"
-        android:typeface="monospace"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent=".5"
-        tools:text="01" />
+   <!-- minutes -->
+   <TextView
+      android:id="@+id/minutes"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/margin2x"
+      android:layout_marginEnd="@dimen/margin2x"
+      android:lines="1"
+      android:maxLength="2"
+      android:textColor="?android:textColorPrimary"
+      android:textSize="@dimen/text_resultLarge"
+      android:typeface="monospace"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@id/divider"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="01" />
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/text_resultLarge"
-        android:gravity="center"
-        android:paddingTop="@dimen/margin3x"
-        android:text="@string/unit_minutes"
-        android:textColor="?android:textColorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent=".5" />
-    <!-- /minutes -->
+   <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/margin3x"
+      android:text="@string/unit_minutes"
+      android:textColor="?android:textColorPrimary"
+      app:layout_constraintEnd_toStartOf="@id/divider"
+      app:layout_constraintTop_toBottomOf="@id/minutes" />
+   <!-- /minutes -->
 
 
-    <!-- divider -->
-    <TextView
-        android:id="@+id/divider"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text=":"
-        android:textColor="?android:textColorPrimary"
-        android:textSize="@dimen/text_resultMedium"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
-    <!-- /divider -->
+   <!-- divider -->
+   <TextView
+      android:id="@+id/divider"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text=":"
+      android:textColor="?android:textColorPrimary"
+      android:textSize="@dimen/text_resultMedium"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:ignore="HardcodedText" />
+   <!-- /divider -->
 
 
-    <!-- seconds & fractions -->
-    <TextView
-        android:id="@+id/seconds"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:lines="1"
-        android:textColor="?android:textColorPrimary"
-        android:textSize="@dimen/text_resultLarge"
-        android:typeface="monospace"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent=".5"
-        tools:text="  01.6" />
+   <!-- seconds & fractions -->
+   <TextView
+      android:id="@+id/seconds"
+      android:layout_width="wrap_content"
+      android:layout_height="0dp"
+      android:layout_marginStart="@dimen/margin2x"
+      android:layout_marginEnd="@dimen/margin2x"
+      android:gravity="bottom"
+      android:lines="1"
+      android:textColor="?android:textColorPrimary"
+      android:textSize="@dimen/text_resultLarge"
+      android:typeface="monospace"
+      app:layout_constraintBottom_toBottomOf="@id/minutes"
+      app:layout_constraintStart_toEndOf="@id/divider"
+      app:layout_constraintTop_toTopOf="@id/minutes"
+      tools:text="01.6" />
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/text_resultLarge"
-        android:gravity="center"
-        android:paddingTop="@dimen/margin3x"
-        android:text="@string/unit_seconds"
-        android:textColor="?android:textColorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent=".5" />
-    <!-- /seconds & fractions -->
+   <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/margin3x"
+      android:text="@string/unit_seconds"
+      android:textColor="?android:textColorPrimary"
+      app:layout_constraintStart_toEndOf="@id/divider"
+      app:layout_constraintTop_toBottomOf="@id/seconds" />
+   <!-- /seconds & fractions -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

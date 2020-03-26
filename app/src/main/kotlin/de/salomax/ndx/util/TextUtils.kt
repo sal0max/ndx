@@ -9,11 +9,11 @@ import android.text.style.RelativeSizeSpan
 
 object TextUtils {
 
-    fun getFraction(x: Number): Spannable {
-        val string = SpannableString("1∕$x")
-        string.setSpan(SuperScriptSpan(2), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        string.setSpan(SuperScriptSpan(3), 1, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        string.setSpan(RelativeSizeSpan(.85f), 2, x.toString().length + 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+    fun getFraction(fraction: Number): Spannable {
+        val string = SpannableString("1∕$fraction")
+        string.setSpan(SuperScriptSpan(2), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE) // 1
+        string.setSpan(SuperScriptSpan(3), 1, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE) // ∕
+        string.setSpan(RelativeSizeSpan(.75f), 2, fraction.toString().length + 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE) // x
         return string
     }
 

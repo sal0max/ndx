@@ -89,24 +89,15 @@ class ResultView : ConstraintLayout {
         val s = micro / 1_000_000 % 60
         val f = micro / 100_000 % 10
 
-        /*
-         * fractions & seconds
-         */
-        val sf = SpannableString("  " + // 2 leading blanks for centering
-              "%02d".format(s) + // seconds
-              "." + f.toString()) // fractions
-        sf.setSpan(RelativeSizeSpan(.6f), 0, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        sf.setSpan(RelativeSizeSpan(.6f), sf.length - 2, sf.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        // seconds & fractions: e.g. "02.1"
+        val sf = SpannableString("%02d".format(s) + ".$f")
+        sf.setSpan(RelativeSizeSpan(.6f), sf.length - 2, sf.length, Spanned.SPAN_INCLUSIVE_INCLUSIVE)
         seconds.text = sf
 
-        /*
-         * minutes
-         */
+        // minutes: e.g. "00"
         minutes.text = "%02d".format(m)
 
-        /*
-         * hours & days
-         */
+        // hours & days
         val hourDayStringBuilder = StringBuilder()
         if (d != 0L)
             hourDayStringBuilder
