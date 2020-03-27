@@ -1,13 +1,11 @@
 package de.salomax.ndx.data
 
 import android.content.Context
-import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
 import de.salomax.ndx.data.model.IsoSteps
 import de.salomax.ndx.data.model.ShutterSpeeds
-import de.salomax.ndx.util.Logger
 
-class PrefDao private constructor(val context: Context) {
+class PrefDao private constructor(context: Context) {
 
    companion object {
       private var INSTANCE: PrefDao? = null
