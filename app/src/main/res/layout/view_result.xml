@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
     Try to make every element "fixed" by avoiding wrap_content and instead use match_parent or 0dp
     Improves performance a lot!
 -->
@@ -11,14 +12,22 @@
    <!-- days & hours -->
    <TextView
       android:id="@+id/hoursDays"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_margin="@dimen/margin2x"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:gravity="start"
+      android:paddingStart="@dimen/margin2x"
+      android:paddingTop="@dimen/margin2x"
+      android:paddingEnd="@dimen/margin2x"
+      android:textAlignment="viewStart"
       android:textColor="?android:textColorPrimary"
       android:textSize="@dimen/text_big"
       android:typeface="monospace"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
+      tools:layout_editor_absoluteX="0dp"
+      tools:layout_editor_absoluteY="45dp"
       tools:text="1d 2h" />
    <!-- /days & hours -->
 
@@ -28,6 +37,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:padding="@dimen/margin2x"
+      android:scaleType="center"
       android:src="@drawable/ic_warning_red_24dp"
       android:visibility="gone"
       app:layout_constraintEnd_toEndOf="parent"
@@ -40,36 +50,47 @@
    <!-- minutes -->
    <TextView
       android:id="@+id/minutes"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="@dimen/margin2x"
-      android:layout_marginEnd="@dimen/margin2x"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:gravity="center|end"
       android:lines="1"
       android:maxLength="2"
+      android:paddingStart="@dimen/margin2x"
+      android:paddingEnd="@dimen/margin2x"
+      android:textAlignment="viewEnd"
       android:textColor="?android:textColorPrimary"
       android:textSize="@dimen/text_resultLarge"
       android:typeface="monospace"
       app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toStartOf="@id/divider"
+      app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintWidth_percent=".5"
       tools:text="01" />
 
    <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="@dimen/margin3x"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_marginTop="@dimen/text_resultLarge"
+      android:gravity="center_vertical|end"
+      android:paddingStart="@dimen/margin3x"
+      android:paddingTop="@dimen/margin3x"
+      android:paddingEnd="@dimen/margin3x"
       android:text="@string/unit_minutes"
+      android:textAlignment="viewEnd"
       android:textColor="?android:textColorPrimary"
-      app:layout_constraintEnd_toStartOf="@id/divider"
-      app:layout_constraintTop_toBottomOf="@id/minutes" />
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintWidth_percent=".5" />
    <!-- /minutes -->
 
 
    <!-- divider -->
    <TextView
       android:id="@+id/divider"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:gravity="center"
       android:text=":"
       android:textColor="?android:textColorPrimary"
       android:textSize="@dimen/text_resultMedium"
@@ -84,28 +105,37 @@
    <!-- seconds & fractions -->
    <TextView
       android:id="@+id/seconds"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="0dp"
-      android:layout_marginStart="@dimen/margin2x"
-      android:layout_marginEnd="@dimen/margin2x"
-      android:gravity="bottom"
+      android:gravity="center|start"
       android:lines="1"
+      android:paddingStart="@dimen/margin2x"
+      android:paddingEnd="@dimen/margin2x"
+      android:textAlignment="viewStart"
       android:textColor="?android:textColorPrimary"
       android:textSize="@dimen/text_resultLarge"
       android:typeface="monospace"
       app:layout_constraintBottom_toBottomOf="@id/minutes"
-      app:layout_constraintStart_toEndOf="@id/divider"
-      app:layout_constraintTop_toTopOf="@id/minutes"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintWidth_percent=".5"
       tools:text="01.6" />
 
    <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="@dimen/margin3x"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_marginTop="@dimen/text_resultLarge"
+      android:gravity="center_vertical|start"
+      android:paddingStart="@dimen/margin3x"
+      android:paddingTop="@dimen/margin3x"
+      android:paddingEnd="@dimen/margin3x"
       android:text="@string/unit_seconds"
+      android:textAlignment="viewStart"
       android:textColor="?android:textColorPrimary"
-      app:layout_constraintStart_toEndOf="@id/divider"
-      app:layout_constraintTop_toBottomOf="@id/seconds" />
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintWidth_percent=".5" />
    <!-- /seconds & fractions -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
