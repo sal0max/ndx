@@ -1,216 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/coordinatorLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+   xmlns:app="http://schemas.android.com/apk/res-auto"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:id="@+id/coordinatorLayout"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent">
 
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingBottom="@dimen/fabOverflow"
-        android:scrollbars="none">
+   <ScrollView
+      android:id="@+id/scrollView"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:clipToPadding="false"
+      android:paddingBottom="@dimen/fabOverflow"
+      android:scrollbars="none">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+      <androidx.constraintlayout.widget.ConstraintLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="vertical"
+         android:paddingTop="@dimen/margin2x">
+
+         <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_center"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:orientation="vertical"
-            android:paddingTop="@dimen/margin2x">
+            app:layout_constraintGuide_percent=".5" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_center"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent=".5" />
+         <!-- Text: Properties -->
+         <TextView
+            android:id="@+id/title_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin2x"
+            android:text="@string/hint_description"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_normal"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+         <!-- /Text: Properties -->
 
-            <!-- Text: Properties -->
-            <TextView
-                android:id="@+id/title_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin2x"
-                android:text="@string/hint_description"
-                android:textColor="@color/colorAccent"
-                android:textSize="@dimen/text_normal"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-            <!-- /Text: Properties -->
+         <!-- Name -->
+         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/container_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin2x"
+            android:layout_marginTop="@dimen/margin2x"
+            android:layout_marginEnd="@dimen/margin2x"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_description">
 
-            <!-- Name -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/container_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin2x"
-                android:layout_marginTop="@dimen/margin2x"
-                android:layout_marginEnd="@dimen/margin2x"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/title_description">
+            <EditText
+               android:id="@+id/name"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="@string/hint_name"
+               android:importantForAutofill="no"
+               android:inputType="textCapSentences"
+               android:textAlignment="viewStart"
+               tools:targetApi="o"
+               tools:text="Lee Big Stopper" />
+         </com.google.android.material.textfield.TextInputLayout>
+         <!-- /Name -->
 
-                <EditText
-                    android:id="@+id/name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/hint_name"
-                    android:importantForAutofill="no"
-                    android:inputType="textCapSentences"
-                    tools:targetApi="o"
-                    tools:text="Lee Big Stopper" />
-            </com.google.android.material.textfield.TextInputLayout>
-            <!-- /Name -->
+         <!-- Info -->
+         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/container_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin2x"
+            android:layout_marginTop="@dimen/margin2x"
+            android:layout_marginEnd="@dimen/margin2x"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/container_name">
 
-            <!-- Info -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/container_info"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin2x"
-                android:layout_marginTop="@dimen/margin2x"
-                android:layout_marginEnd="@dimen/margin2x"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/container_name">
+            <EditText
+               android:id="@+id/info"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="@string/hint_info"
+               android:importantForAutofill="no"
+               android:inputType="textMultiLine|textCapSentences"
+               android:textAlignment="viewStart"
+               tools:targetApi="o"
+               tools:text="measured ~ND3.0" />
+         </com.google.android.material.textfield.TextInputLayout>
+         <!-- /Info -->
 
-                <EditText
-                    android:id="@+id/info"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/hint_info"
-                    android:importantForAutofill="no"
-                    android:inputType="textMultiLine|textCapSentences"
-                    tools:targetApi="o"
-                    tools:text="measured ~ND3.0" />
-            </com.google.android.material.textfield.TextInputLayout>
-            <!-- /Info -->
+         <!-- Text: Properties -->
+         <TextView
+            android:id="@+id/title_strength"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin2x"
+            android:layout_marginTop="@dimen/margin4x"
+            android:text="@string/hint_strength"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_normal"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/container_info" />
+         <!-- /Text: Properties -->
 
-            <!-- Text: Properties -->
-            <TextView
-                android:id="@+id/title_strength"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin2x"
-                android:layout_marginTop="@dimen/margin4x"
-                android:text="@string/hint_strength"
-                android:textColor="@color/colorAccent"
-                android:textSize="@dimen/text_normal"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/container_info" />
-            <!-- /Text: Properties -->
+         <!-- Factor -->
+         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/container_factor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin2x"
+            android:layout_marginTop="@dimen/margin2x"
+            app:layout_constraintEnd_toStartOf="@id/guideline_center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_strength">
 
-            <!-- Factor -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/container_factor"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin2x"
-                android:layout_marginTop="@dimen/margin2x"
-                app:layout_constraintEnd_toStartOf="@id/guideline_center"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/title_strength">
+            <EditText
+               android:id="@+id/factor"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="@string/hint_factor"
+               android:importantForAutofill="no"
+               android:inputType="number"
+               tools:targetApi="o"
+               tools:text="1024" />
+         </com.google.android.material.textfield.TextInputLayout>
+         <!-- /Factor -->
 
-                <EditText
-                    android:id="@+id/factor"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/hint_factor"
-                    android:importantForAutofill="no"
-                    android:inputType="number"
-                    tools:targetApi="o"
-                    tools:text="1024" />
-            </com.google.android.material.textfield.TextInputLayout>
-            <!-- /Factor -->
+         <!-- Stops -->
+         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/container_f_stops"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin2x"
+            app:layout_constraintEnd_toStartOf="@+id/container_nd"
+            app:layout_constraintStart_toEndOf="@id/container_factor"
+            app:layout_constraintTop_toBottomOf="@id/title_strength">
 
-            <!-- Stops -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/container_f_stops"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin2x"
-                app:layout_constraintEnd_toStartOf="@+id/container_nd"
-                app:layout_constraintStart_toEndOf="@id/container_factor"
-                app:layout_constraintTop_toBottomOf="@id/title_strength">
+            <EditText
+               android:id="@+id/f_stops"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="@string/hint_stops"
+               android:importantForAutofill="no"
+               android:inputType="numberDecimal"
+               tools:targetApi="o"
+               tools:text="10" />
+         </com.google.android.material.textfield.TextInputLayout>
+         <!-- /Stops -->
 
-                <EditText
-                    android:id="@+id/f_stops"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/hint_stops"
-                    android:importantForAutofill="no"
-                    android:inputType="numberDecimal"
-                    tools:targetApi="o"
-                    tools:text="10" />
-            </com.google.android.material.textfield.TextInputLayout>
-            <!-- /Stops -->
+         <!-- ND -->
+         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/container_nd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin2x"
+            android:layout_marginEnd="@dimen/margin2x"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/container_f_stops"
+            app:layout_constraintTop_toBottomOf="@id/title_strength">
 
-            <!-- ND -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/container_nd"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin2x"
-                android:layout_marginEnd="@dimen/margin2x"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/container_f_stops"
-                app:layout_constraintTop_toBottomOf="@id/title_strength">
+            <EditText
+               android:id="@+id/nd"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:enabled="false"
+               android:hint="@string/hint_nd"
+               android:importantForAutofill="no"
+               android:inputType="numberDecimal"
+               tools:targetApi="o"
+               tools:text="3.0" />
+         </com.google.android.material.textfield.TextInputLayout>
+         <!-- /ND -->
 
-                <EditText
-                    android:id="@+id/nd"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:hint="@string/hint_nd"
-                    android:importantForAutofill="no"
-                    android:inputType="numberDecimal"
-                    tools:targetApi="o"
-                    tools:text="3.0" />
-            </com.google.android.material.textfield.TextInputLayout>
-            <!-- /ND -->
+         <TextView
+            android:id="@+id/calibrator_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin1x"
+            android:layout_marginEnd="@dimen/margin1x"
+            android:text="@string/calibrator_description"
+            app:layout_constraintEnd_toStartOf="@id/btn_calibrator"
+            app:layout_constraintStart_toStartOf="@id/container_factor"
+            app:layout_constraintTop_toBottomOf="@id/container_factor" />
 
-            <TextView
-                android:id="@+id/calibrator_description"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin1x"
-                android:layout_marginEnd="@dimen/margin1x"
-                android:text="@string/calibrator_description"
-                app:layout_constraintEnd_toStartOf="@id/btn_calibrator"
-                app:layout_constraintStart_toStartOf="@id/container_factor"
-                app:layout_constraintTop_toBottomOf="@id/container_factor" />
+         <Button
+            android:id="@+id/btn_calibrator"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin1x"
+            android:text="@string/btn_calibrator"
+            android:textAlignment="viewStart"
+            app:layout_constraintBottom_toBottomOf="@+id/calibrator_description"
+            app:layout_constraintEnd_toEndOf="@id/container_name"
+            app:layout_constraintTop_toBottomOf="@id/container_nd" />
 
-            <Button
-                android:id="@+id/btn_calibrator"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin1x"
-                android:text="@string/btn_calibrator"
-                app:layout_constraintBottom_toBottomOf="@+id/calibrator_description"
-                app:layout_constraintEnd_toEndOf="@id/container_name"
-                app:layout_constraintTop_toBottomOf="@id/container_nd" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+   </ScrollView>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
-
-    <!-- delete -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin2x"
-        android:src="@drawable/ic_delete_forever_white_24dp"
-        android:visibility="gone"
-        app:backgroundTint="@android:color/holo_red_light"
-        app:fabSize="normal"
-        app:layout_anchor="@id/scrollView"
-        app:layout_anchorGravity="bottom|right|end"
-        tools:visibility="visible" />
-    <!-- /delete -->
+   <!-- delete -->
+   <com.google.android.material.floatingactionbutton.FloatingActionButton
+      android:id="@+id/btn_delete"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/margin2x"
+      android:src="@drawable/ic_delete_forever_white_24dp"
+      android:visibility="gone"
+      app:backgroundTint="@android:color/holo_red_light"
+      app:fabSize="normal"
+      app:layout_anchor="@id/scrollView"
+      app:layout_anchorGravity="bottom|right|end"
+      tools:visibility="visible" />
+   <!-- /delete -->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

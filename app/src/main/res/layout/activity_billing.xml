@@ -47,6 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/billing_pro_feature_1_summary"
+            android:textAlignment="viewStart"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/billing_pro_feature_1_title" />
          <!-- /feature 1 -->
@@ -69,6 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/billing_pro_feature_2_summary"
+            android:textAlignment="viewStart"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/billing_pro_feature_2_title" />
          <!-- /feature 2 -->
@@ -91,6 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/billing_pro_feature_3_summary"
+            android:textAlignment="viewStart"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/billing_pro_feature_3_title" />
          <!-- /feature 3 -->
@@ -113,6 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/billing_pro_feature_4_summary"
+            android:textAlignment="viewStart"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/billing_pro_feature_4_title" />
 
@@ -134,9 +138,9 @@
       android:id="@+id/btn_billing_buy"
       style="@style/Widget.AppCompat.Button.Colored"
       android:layout_width="0dp"
-      android:padding="@dimen/margin2x"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/margin3x"
+      android:padding="@dimen/margin2x"
       android:text="@string/billing_btn_buy"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
