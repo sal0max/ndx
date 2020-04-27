@@ -39,8 +39,8 @@ class PreferenceFragment : PreferenceFragmentCompat(),
     private lateinit var mailPreference: Preference
     private lateinit var ratePreference: Preference
 
-    override fun onCreatePreferences(bundle: Bundle?, s: String?) {
-        addPreferencesFromResource(R.xml.preferences)
+    override fun onCreatePreferences(bundle: Bundle?, rootKey: String?) {
+        setPreferencesFromResource(R.xml.preferences, rootKey)
         viewModel = ViewModelProvider(this).get(PreferenceViewModel::class.java)
 
         /*
