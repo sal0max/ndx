@@ -84,7 +84,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
 
     // Widgets
-    implementation 'com.github.guilhe:circular-progress-view:1.4.0'
+    implementation 'com.github.guilhe:circular-progress-view:1.4.2'
 
     // LeakCanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'

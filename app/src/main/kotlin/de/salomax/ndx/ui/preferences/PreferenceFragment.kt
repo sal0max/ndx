@@ -72,7 +72,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
         // timer
         alarmBeepPreference.onPreferenceClickListener = this
         alarmVibratePreference.onPreferenceClickListener = this
-        alarmVibratePreference.isVisible = (context!!.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator).hasVibrator()
+        alarmVibratePreference.isVisible = (requireContext().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator).hasVibrator()
         // about
         donatePreference.onPreferenceClickListener = this
         aboutPreference.onPreferenceClickListener = this
@@ -120,9 +120,9 @@ class PreferenceFragment : PreferenceFragmentCompat(),
                 if (viewModel.hasPremium.value == true) {
                     viewModel.setTheme(newValue.toString().toInt())
                     // re-create all open activities
-                    TaskStackBuilder.create(context!!)
+                    TaskStackBuilder.create(requireContext())
                           .addNextIntent(Intent(activity, CalculatorActivity::class.java))
-                          .addNextIntent(activity!!.intent)
+                          .addNextIntent(requireActivity().intent)
                           .startActivities()
                 } else {
                     val intent = Intent(context, BillingActivity().javaClass)
@@ -171,7 +171,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
 
                     """.trimIndent()
                 mailIntent.putExtra(Intent.EXTRA_TEXT, info)
-                if (mailIntent.resolveActivity(context!!.packageManager) != null)
+                if (mailIntent.resolveActivity(requireContext().packageManager) != null)
                     startActivity(mailIntent)
                 else // no mail client available
                     showError(getString(R.string.prefError_mail))
@@ -179,7 +179,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
             ratePreference -> {
                 val rateIntent = Intent(Intent.ACTION_VIEW)
                 rateIntent.data = Uri.parse("market://details?id=de.salomax.ndx")
-                if (rateIntent.resolveActivity(context!!.packageManager) != null)
+                if (rateIntent.resolveActivity(requireContext().packageManager) != null)
                     startActivity(rateIntent)
                 else // play store not installed
                     showError(getString(R.string.prefError_rate))
@@ -190,8 +190,8 @@ class PreferenceFragment : PreferenceFragmentCompat(),
     }
 
     private fun showError(errorMsg: String) {
-        val snackbar = Snackbar.make(view!!, errorMsg, Snackbar.LENGTH_SHORT)
-        snackbar.view.setBackgroundColor(ContextCompat.getColor(context!!, android.R.color.holo_red_light))
+        val snackbar = Snackbar.make(requireView(), errorMsg, Snackbar.LENGTH_SHORT)
+        snackbar.view.setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.holo_red_light))
         snackbar.show()
     }
 

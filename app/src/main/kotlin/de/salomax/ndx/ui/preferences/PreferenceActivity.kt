@@ -5,7 +5,6 @@ import android.view.MenuItem
 import de.salomax.ndx.R
 import de.salomax.ndx.ui.BaseActivity
 
-
 class PreferenceActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
