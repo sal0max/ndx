@@ -90,7 +90,7 @@ class BillingActivity : BaseActivity() {
          billingClient?.querySkuDetailsAsync(params) { billingResult, skuDetailsList ->
             if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
                Logger.log("querySkuDetailsAsync   | response: ${billingResult.responseCode} (OK)")
-               launchBillingFlow(skuDetailsList)
+               launchBillingFlow(skuDetailsList as MutableList<SkuDetails>)
             } else {
                Logger.log("querySkuDetailsAsync   | Can't do: ${billingResult.debugMessage}")
             }

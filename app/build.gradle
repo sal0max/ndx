@@ -6,12 +6,12 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
 
     defaultConfig {
         applicationId 'de.salomax.ndx'
         minSdkVersion 24
-        targetSdkVersion 29
+        targetSdkVersion 30
         buildToolsVersion '28.0.3'
         // SemVer
         def major = 3
@@ -90,7 +90,7 @@ dependencies {
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
 
     // billing
-    implementation 'com.android.billingclient:billing:2.2.0'
+    implementation 'com.android.billingclient:billing:3.0.0'
 }
 
 def getSecret(String key) {
