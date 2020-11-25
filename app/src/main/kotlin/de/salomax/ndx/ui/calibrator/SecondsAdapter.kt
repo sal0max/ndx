@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import de.salomax.ndx.R
 import de.salomax.ndx.widget.SnappyRecyclerView
@@ -34,7 +33,7 @@ class SecondsAdapter(private val context: AppCompatActivity, max: Int) : Recycle
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
-        (recyclerView as SnappyRecyclerView).snapped.observe(context, Observer {
+        (recyclerView as SnappyRecyclerView).snapped.observe(context, {
             onValueSelected?.invoke(items[it])
         })
     }

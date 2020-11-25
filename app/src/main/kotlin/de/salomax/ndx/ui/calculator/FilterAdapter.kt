@@ -4,8 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Switch
 import android.widget.TextView
+import androidx.appcompat.widget.SwitchCompat
 import androidx.recyclerview.widget.RecyclerView
 import de.salomax.ndx.R
 import de.salomax.ndx.data.Filter
@@ -71,7 +71,7 @@ class FilterAdapter(private val context: Context) : RecyclerView.Adapter<FilterA
 
         val textView1: TextView = itemView.findViewById(R.id.name)
         val textView2: TextView = itemView.findViewById(R.id.info)
-        val switch: Switch = itemView.findViewById(R.id.checkbox)
+        val switch: SwitchCompat = itemView.findViewById(R.id.checkbox)
 
         init {
             switch.isClickable = false

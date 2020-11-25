@@ -3,7 +3,6 @@ package de.salomax.ndx.ui.timer
 import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import de.salomax.ndx.R
 import de.salomax.ndx.ui.BaseActivity
@@ -58,12 +57,12 @@ class TimerActivity : BaseActivity() {
         }
 
         // observe running timer
-        viewModel.millisCurrent.observe(this, Observer {
+        viewModel.millisCurrent.observe(this, {
             refreshUi()
         })
 
         // observe status: runningPositive -> finished -> runningNegative
-        viewModel.state.observe(this, Observer { state ->
+        viewModel.state.observe(this, { state ->
             @Suppress("WHEN_ENUM_CAN_BE_NULL_IN_JAVA")
             when (state) {
                 TimerViewModel.State.RUNNING_POSITIVE -> {

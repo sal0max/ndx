@@ -7,7 +7,6 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import de.salomax.ndx.R
 import de.salomax.ndx.ui.BaseActivity
@@ -95,8 +94,8 @@ class CalibratorActivity : BaseActivity() {
         }
 
         // refresh data on init & observe
-        viewModel.speeds.observe(this, Observer { (snappy1a.adapter as ShutterAdapter).setSpeeds(it) })
-        viewModel.isoSteps.observe(this, Observer { (snappy2c.adapter as IsoAdapter).setISOs(it) })
+        viewModel.speeds.observe(this, { (snappy1a.adapter as ShutterAdapter).setSpeeds(it) })
+        viewModel.isoSteps.observe(this, { (snappy2c.adapter as IsoAdapter).setISOs(it) })
     }
 
     override fun onSupportNavigateUp(): Boolean {

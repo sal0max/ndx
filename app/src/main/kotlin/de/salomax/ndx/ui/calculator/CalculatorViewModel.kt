@@ -1,13 +1,10 @@
 package de.salomax.ndx.ui.calculator
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.*
 import de.salomax.ndx.data.*
-import de.salomax.ndx.data.model.IsoSteps
 import de.salomax.ndx.data.model.ShutterSpeeds
 import de.salomax.ndx.util.MathUtils
-import java.security.acl.Owner
 
 class CalculatorViewModel(application: Application) : AndroidViewModel(application) {
 

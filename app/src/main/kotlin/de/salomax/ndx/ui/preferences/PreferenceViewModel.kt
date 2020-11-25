@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import de.salomax.ndx.data.*
 import de.salomax.ndx.data.model.ShutterSpeeds
-import java.util.concurrent.Executors
 
 class PreferenceViewModel(application: Application) : AndroidViewModel(application) {
 

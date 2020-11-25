@@ -3,7 +3,6 @@ package de.salomax.ndx.ui.filterpouch
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -67,7 +66,7 @@ class FilterPouchActivity : BaseActivity() {
         }
 
         // refresh data on init & observe
-        viewModel.filters.observe(this, Observer { filterAdapter.setFilters(it) })
+        viewModel.filters.observe(this, { filterAdapter.setFilters(it) })
     }
 
     override fun onSupportNavigateUp(): Boolean {

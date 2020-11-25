@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import de.salomax.ndx.data.PrefDao
-import de.salomax.ndx.data.SharedPreferenceLiveData
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 

@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import de.salomax.ndx.R
 import de.salomax.ndx.data.model.IsoSteps
@@ -40,7 +39,7 @@ class IsoAdapter(private val context: AppCompatActivity) : RecyclerView.Adapter<
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
-        (recyclerView as SnappyRecyclerView).snapped.observe(context, Observer {
+        (recyclerView as SnappyRecyclerView).snapped.observe(context, {
             onIsoSelected?.invoke(items?.get(it) ?: 100)
         })
     }

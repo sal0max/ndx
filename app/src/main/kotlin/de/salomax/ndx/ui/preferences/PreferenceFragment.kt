@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.os.Vibrator
 import androidx.core.app.TaskStackBuilder
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.*
 import com.google.android.material.snackbar.Snackbar
@@ -19,6 +18,7 @@ import de.salomax.ndx.ui.billing.BillingActivity
 import de.salomax.ndx.ui.calculator.CalculatorActivity
 import java.util.*
 
+@Suppress("unused")
 class PreferenceFragment : PreferenceFragmentCompat(),
         Preference.OnPreferenceChangeListener,
         Preference.OnPreferenceClickListener {
@@ -85,18 +85,18 @@ class PreferenceFragment : PreferenceFragmentCompat(),
         /*
          * populate settings with values from prefs
          */
-        viewModel.filterSortOrder.observe(this, Observer { filterSortingPreference.value = it.toString() })
-        viewModel.evSteps.observe(this, Observer { speeds ->
+        viewModel.filterSortOrder.observe(this, { filterSortingPreference.value = it.toString() })
+        viewModel.evSteps.observe(this, { speeds ->
             evStepsPreference.value = when (speeds) {
                 ShutterSpeeds.FULL -> "1"
                 ShutterSpeeds.HALF -> "2"
                 else -> "3"
             }
         })
-        viewModel.showWarning.observe(this, Observer { showWarningPreference.isChecked = it })
-        viewModel.alarmBeepEnabled.observe(this, Observer { alarmBeepPreference.isChecked = it })
-        viewModel.alarmVibrateEnabled.observe(this, Observer { alarmVibratePreference.isChecked = it })
-        viewModel.hasPremium.observe(this, Observer {
+        viewModel.showWarning.observe(this, { showWarningPreference.isChecked = it })
+        viewModel.alarmBeepEnabled.observe(this, { alarmBeepPreference.isChecked = it })
+        viewModel.alarmVibrateEnabled.observe(this, { alarmVibratePreference.isChecked = it })
+        viewModel.hasPremium.observe(this, {
             if (it) {
                 donatePreference.summary = getString(R.string.prefSummary_has_donated)
                 donatePreference.isSelectable = false
@@ -105,7 +105,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
                 donatePreference.isSelectable = true
             }
         })
-        viewModel.theme.observe(this, Observer { themeSelectorPreference.value = it.toString() })
+        viewModel.theme.observe(this, { themeSelectorPreference.value = it.toString() })
     }
 
     override fun onPreferenceChange(preference: Preference?, newValue: Any?): Boolean {

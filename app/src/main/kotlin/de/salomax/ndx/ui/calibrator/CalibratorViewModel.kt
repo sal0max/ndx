@@ -2,9 +2,7 @@ package de.salomax.ndx.ui.calibrator
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import de.salomax.ndx.data.model.IsoSteps
-import de.salomax.ndx.data.NdxDatabase
 import de.salomax.ndx.data.PrefDao
 import de.salomax.ndx.data.SharedPreferenceLiveData
 import de.salomax.ndx.data.model.ShutterSpeeds
@@ -15,7 +13,6 @@ class CalibratorViewModel(application: Application) : AndroidViewModel(applicati
     internal val isoSteps: SharedPreferenceLiveData<IsoSteps>
 
     init {
-        val ndxDatabase = NdxDatabase.getInstance(application)
         val prefDao = PrefDao.getInstance(application)
         speeds = prefDao.getEvSteps()
         isoSteps = prefDao.getIsoSteps()
