@@ -87,8 +87,8 @@ class FilterEditorActivity : BaseActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        return when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
             R.id.save -> {
                 // validate
                 if (name.validate({ s -> s.isNotBlank() }, getString(R.string.error_nameRequired))

@@ -110,8 +110,8 @@ class CalibratorActivity : BaseActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        return when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
             R.id.ok -> {
                 val returnIntent = Intent()
                 returnIntent.putExtra("FACTOR", currentFactor.toInt())
