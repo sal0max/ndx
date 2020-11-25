@@ -7,6 +7,8 @@ import de.salomax.ndx.data.model.ShutterSpeeds
 import de.salomax.ndx.util.MathUtils
 
 class CalculatorViewModel(application: Application) : AndroidViewModel(application) {
+    private val filterDao = NdxDatabase.getInstance(application).filterDao()
+    private val prefDao = PrefDao.getInstance(application)
 
     // from Room
     private val filtersUnsorted: LiveData<List<Filter>?>
@@ -14,7 +16,8 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
     // from SharedPrefs
     internal val speeds: SharedPreferenceLiveData<ShutterSpeeds>
     internal val isWarningEnabled: SharedPreferenceLiveData<Boolean>
-    internal val hasPremium: SharedPreferenceLiveData<Boolean>
+    internal val hasPremium: Boolean
+        get() = prefDao.hasPremiumSync()
     private val filterSortOrder: LiveData<Int>
 
     // live calculated
@@ -24,14 +27,11 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
     internal val filterFactor: MutableLiveData<Long> = MutableLiveData() // 1
 
     init {
-        val filterDao = NdxDatabase.getInstance(application).filterDao()
-        val prefDao = PrefDao.getInstance(application)
 
         filtersUnsorted = filterDao.getAll()
 
         speeds = prefDao.getEvSteps()
         isWarningEnabled = prefDao.isWarningEnabled()
-        hasPremium = prefDao.hasPremium()
         filterSortOrder = prefDao.getFilterSortOrder()
 
         filters = FilterLiveData()

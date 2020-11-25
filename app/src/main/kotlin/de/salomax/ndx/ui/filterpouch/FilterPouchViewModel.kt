@@ -16,7 +16,9 @@ class FilterPouchViewModel(application: Application) : AndroidViewModel(applicat
    private val filtersUnsorted: LiveData<List<Filter>?>
 
    // from SharedPrefs
-   internal val hasPremium: LiveData<Boolean>
+   internal val hasPremium
+      get() = prefDao.hasPremiumSync()
+
    private val filterSortOrder: LiveData<Int>
 
    // live calculated
@@ -25,7 +27,6 @@ class FilterPouchViewModel(application: Application) : AndroidViewModel(applicat
    init {
       filtersUnsorted = filterDao.getAll()
 
-      hasPremium = prefDao.hasPremium()
       filterSortOrder = prefDao.getFilterSortOrder()
 
       filters = FilterLiveData()

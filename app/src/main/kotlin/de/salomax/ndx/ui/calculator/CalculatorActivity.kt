@@ -89,7 +89,7 @@ class CalculatorActivity : BaseActivity() {
                 true
             }
             R.id.menu_timer -> {
-                if (viewModel.hasPremium.value == true) {
+                if (viewModel.hasPremium) {
                     val i = Intent(this, TimerActivity().javaClass)
                     i.putExtra("MILLIS", viewModel.calculatedSpeed.value?.div(1000))
                     startActivity(i)

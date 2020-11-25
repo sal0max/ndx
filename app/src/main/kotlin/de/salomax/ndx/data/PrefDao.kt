@@ -98,6 +98,10 @@ class PrefDao private constructor(context: Context) {
       return sharedPreferences.booleanLiveData(Pref.HAS_PREMIUM, false)
    }
 
+   fun hasPremiumSync(): Boolean {
+      return sharedPreferences.getBoolean(Pref.HAS_PREMIUM, false)
+   }
+
    fun enablePremium() {
       sharedPreferences.edit().putBoolean(Pref.HAS_PREMIUM, true).apply()
    }
