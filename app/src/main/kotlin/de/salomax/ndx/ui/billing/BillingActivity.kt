@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.lifecycle.ViewModelProvider
 import com.android.billingclient.api.*
+import com.android.billingclient.api.BillingClient.BillingResponseCode
+import com.google.android.material.snackbar.Snackbar
 import de.salomax.ndx.R
 import de.salomax.ndx.ui.BaseActivity
 import de.salomax.ndx.util.Logger
+import kotlinx.android.synthetic.main.activity_billing.*
 
-/*
+/**
 Billing workflow:
 1. connect client:             #startConnection()
 2. get details of all SKUs:    #querySkuDetailsAsync()
@@ -43,8 +46,7 @@ class BillingActivity : BaseActivity() {
 
       // button
       findViewById<Button>(R.id.btn_billing_buy).setOnClickListener {
-         ViewModelProvider(this).get(BillingViewModel::class.java).enablePremium()
-//         buy() // TODO
+         buy()
       }
    }
 
@@ -64,15 +66,18 @@ class BillingActivity : BaseActivity() {
       // connect
       billingClient?.startConnection(object : BillingClientStateListener {
          override fun onBillingSetupFinished(billingResponse: BillingResult) {
-            if (billingResponse.responseCode == BillingClient.BillingResponseCode.OK) {
+            if (billingResponse.responseCode == BillingResponseCode.OK) {
+               // The BillingClient is ready. You can query purchases here.
                Logger.log("startConnection        | The BillingClient is ready. You can query purchases here.")
                querySkuDetails()
             } else {
-               Logger.log("startConnection        | Error: ${billingResponse.debugMessage}")
+               Snackbar.make(btn_billing_buy, billingResponse.debugMessage, Snackbar.LENGTH_LONG).setBackgroundTint(getColor(android.R.color.holo_red_light)).show()
+               Logger.log("startConnection        | Error: ${billingResponse.debugMessage} (${billingResponse.responseCode})")
             }
          }
 
          override fun onBillingServiceDisconnected() {
+            // try to restart the connection on the next request to Google Play by calling the startConnection() method.
             billingClient?.startConnection(this)
             Logger.log("onBillingServiceDisconnected   | Disconnected")
          }
@@ -87,10 +92,10 @@ class BillingActivity : BaseActivity() {
                .setSkusList(listOf("premium")) // non-consumable
                .setType(BillingClient.SkuType.INAPP)
                .build()
-         billingClient?.querySkuDetailsAsync(params) { billingResult, skuDetailsList ->
-            if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+         billingClient?.querySkuDetailsAsync(params) { billingResult, skuDetails ->
+            if (billingResult.responseCode == BillingResponseCode.OK) {
                Logger.log("querySkuDetailsAsync   | response: ${billingResult.responseCode} (OK)")
-               launchBillingFlow(skuDetailsList as MutableList<SkuDetails>)
+               launchBillingFlow(skuDetails as MutableList<SkuDetails>)
             } else {
                Logger.log("querySkuDetailsAsync   | Can't do: ${billingResult.debugMessage}")
             }
@@ -105,19 +110,12 @@ class BillingActivity : BaseActivity() {
       for (skuDetail in skuDetails) {
          Logger.log("launchBillingFlow      | ${skuDetail.originalJson}")
          billingClient?.launchBillingFlow(this, BillingFlowParams.newBuilder().setSkuDetails(skuDetail).build())
-
-         // temp
-//         billingClient?.consumeAsync(ConsumeParams.newBuilder()
-//               .setPurchaseToken("klkmnfhjhaobpfaifhmmcmjf.AO-J1Ow_ovlJ60rrhvwFjjcI7DyhMTOb7QK1aRAaaPHIgRtryvQ8F3p3UPiz-F7KScZiQ5Bv60PmYVWL-3gZRROpWI6CyJysvcZL5xte2d_hVozzTiRzGWk")
-//               .build()) { billingResult, s ->
-//            Logger.log("newnew | ${billingResult.responseCode}")
-//         }
       }
    }
 
    // 4. evaluate result of the buy...
-   private fun onPurchasesUpdated(billingResponse: BillingResult?, purchases: MutableList<Purchase>?) {
-      if (billingResponse?.responseCode == BillingClient.BillingResponseCode.OK && purchases != null) {
+   private fun onPurchasesUpdated(billingResult: BillingResult?, purchases: MutableList<Purchase>?) {
+      if (billingResult?.responseCode == BillingResponseCode.OK && purchases != null) {
          for (purchase in purchases)
             if (purchase.purchaseState == Purchase.PurchaseState.PURCHASED) {
                Logger.log("onPurchasesUpdated     | premium granted")
@@ -128,8 +126,8 @@ class BillingActivity : BaseActivity() {
                }
             }
       } else {
-         // Handle any error code (e. g. by a user cancelling the purchase flow)
-         Logger.log("onPurchasesUpdated     | ${billingResponse?.responseCode}")
+         // handle any error code (e. g. by a user cancelling the purchase flow)
+         Logger.log("onPurchasesUpdated     | ${billingResult?.responseCode}")
       }
    }
 
@@ -139,12 +137,11 @@ class BillingActivity : BaseActivity() {
             .setPurchaseToken(purchaseToken)
             .build()
       billingClient?.acknowledgePurchase(params) { billingResult ->
-         if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+         if (billingResult.responseCode == BillingResponseCode.OK) {
             Logger.log("acknowledgePurchase    | success; billingResult: ${billingResult.responseCode}")
          } else {
             Logger.log("acknowledgePurchase    | failure; billingResult: ${billingResult.responseCode}")
          }
-
       }
    }
 
