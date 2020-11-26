@@ -67,13 +67,16 @@ class BillingActivity : BaseActivity() {
       // connect
       billingClient?.startConnection(object : BillingClientStateListener {
          override fun onBillingSetupFinished(billingResponse: BillingResult) {
-            if (billingResponse.responseCode == BillingResponseCode.OK) {
-               // The BillingClient is ready. You can query purchases here.
-               Logger.log("startConnection        | The BillingClient is ready. You can query purchases here.")
-               querySkuDetails()
-            } else {
-               Snackbar.make(btn_billing_buy, billingResponse.debugMessage, Snackbar.LENGTH_LONG).setBackgroundTint(getColor(android.R.color.holo_red_light)).show()
-               Logger.log("startConnection        | Error: ${billingResponse.debugMessage} (${billingResponse.responseCode})")
+            when (billingResponse.responseCode) {
+               BillingResponseCode.OK -> {
+                  // The BillingClient is ready. You can query purchases here.
+                  Logger.log("startConnection        | The BillingClient is ready. You can query purchases here.")
+                  querySkuDetails()
+               }
+               else -> {
+                  Snackbar.make(btn_billing_buy, billingResponse.debugMessage, Snackbar.LENGTH_LONG).setBackgroundTint(getColor(android.R.color.holo_red_light)).show()
+                  Logger.log("startConnection        | Error: ${billingResponse.debugMessage} (${billingResponse.responseCode})")
+               }
             }
          }
 
@@ -124,19 +127,27 @@ class BillingActivity : BaseActivity() {
 
    // 4. evaluate result of the buy...
    private fun onPurchasesUpdated(billingResult: BillingResult?, purchases: MutableList<Purchase>?) {
-      if (billingResult?.responseCode == BillingResponseCode.OK && purchases != null) {
-         for (purchase in purchases)
-            if (purchase.purchaseState == Purchase.PurchaseState.PURCHASED) {
-               Logger.log("onPurchasesUpdated     | premium granted")
-               ViewModelProvider(this).get(BillingViewModel::class.java).enablePremium()
-               // ...and acknowledge the purchase if it hasn't already been acknowledged.
-               if (!purchase.isAcknowledged) {
-                  acknowledgePurchase(purchase.purchaseToken)
+      when {
+         billingResult?.responseCode == BillingResponseCode.OK && purchases != null -> {
+            for (purchase in purchases)
+               if (purchase.purchaseState == Purchase.PurchaseState.PURCHASED) {
+                  Logger.log("onPurchasesUpdated     | premium granted")
+                  ViewModelProvider(this).get(BillingViewModel::class.java).enablePremium()
+                  // ...and acknowledge the purchase if it hasn't already been acknowledged.
+                  if (!purchase.isAcknowledged) {
+                     acknowledgePurchase(purchase.purchaseToken)
+                  }
                }
-            }
-      } else {
-         // handle any error code (e. g. by a user cancelling the purchase flow)
-         Logger.log("onPurchasesUpdated     | ${billingResult?.responseCode}")
+         }
+         billingResult?.responseCode == BillingResponseCode.ITEM_ALREADY_OWNED && purchases != null -> {
+            Logger.log("querySkuDetailsAsync   | item already owned: premium granted")
+            ViewModelProvider(this).get(BillingViewModel::class.java).enablePremium()
+            thanksAndFinish()
+         }
+         else -> {
+            // handle any error code (e. g. by a user cancelling the purchase flow)
+            Logger.log("onPurchasesUpdated     | ${billingResult?.responseCode}")
+         }
       }
    }
 
