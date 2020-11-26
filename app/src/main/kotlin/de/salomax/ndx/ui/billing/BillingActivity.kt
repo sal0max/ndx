@@ -2,6 +2,7 @@ package de.salomax.ndx.ui.billing
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.android.billingclient.api.*
 import com.android.billingclient.api.BillingClient.BillingResponseCode
@@ -93,11 +94,19 @@ class BillingActivity : BaseActivity() {
                .setType(BillingClient.SkuType.INAPP)
                .build()
          billingClient?.querySkuDetailsAsync(params) { billingResult, skuDetails ->
-            if (billingResult.responseCode == BillingResponseCode.OK) {
-               Logger.log("querySkuDetailsAsync   | response: ${billingResult.responseCode} (OK)")
-               launchBillingFlow(skuDetails as MutableList<SkuDetails>)
-            } else {
-               Logger.log("querySkuDetailsAsync   | Can't do: ${billingResult.debugMessage}")
+            when (billingResult.responseCode) {
+               BillingResponseCode.OK -> {
+                  Logger.log("querySkuDetailsAsync   | response: ${billingResult.responseCode} -> launchBillingFLow")
+                  launchBillingFlow(skuDetails as MutableList<SkuDetails>)
+               }
+               BillingResponseCode.ITEM_ALREADY_OWNED -> {
+                  Logger.log("querySkuDetailsAsync   | item already owned: premium granted")
+                  ViewModelProvider(this).get(BillingViewModel::class.java).enablePremium()
+                  thanksAndFinish()
+               }
+               else -> {
+                  Logger.log("querySkuDetailsAsync   | Can't do: ${billingResult.debugMessage}")
+               }
             }
          }
       } else {
@@ -138,11 +147,16 @@ class BillingActivity : BaseActivity() {
             .build()
       billingClient?.acknowledgePurchase(params) { billingResult ->
          if (billingResult.responseCode == BillingResponseCode.OK) {
-            Logger.log("acknowledgePurchase    | success; billingResult: ${billingResult.responseCode}")
+            thanksAndFinish()
          } else {
             Logger.log("acknowledgePurchase    | failure; billingResult: ${billingResult.responseCode}")
          }
       }
+   }
+
+   private fun thanksAndFinish() {
+      Toast.makeText(applicationContext, getString(R.string.billing_thanks_for_buying), Toast.LENGTH_LONG).show()
+      onSupportNavigateUp()
    }
 
 }

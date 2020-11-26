@@ -21,5 +21,9 @@ I'm working on this project in my free time. I spent many hours on it, to make i
 Thank you,"</string>
     <string name="billing_pro_feature_4_closing">\ Max</string>
 
+    <string name="billing_already_supported"><i>PS: If you already bought premium, just tap the button anyway. Your purchase will be restored.</i> 🙂</string>
+
     <string name="billing_btn_buy">Become a supporter</string>
+
+    <string name="billing_thanks_for_buying">Thanks a lot for your support!</string>
 </resources>
