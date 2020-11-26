@@ -73,6 +73,11 @@ class BillingActivity : BaseActivity() {
                   Logger.log("startConnection        | The BillingClient is ready. You can query purchases here.")
                   querySkuDetails()
                }
+               BillingResponseCode.ITEM_ALREADY_OWNED -> {
+                  Logger.log("querySkuDetailsAsync   | item already owned: premium granted")
+                  ViewModelProvider(this@BillingActivity).get(BillingViewModel::class.java).enablePremium()
+                  thanksAndFinish()
+               }
                else -> {
                   Snackbar.make(btn_billing_buy, billingResponse.debugMessage, Snackbar.LENGTH_LONG).setBackgroundTint(getColor(android.R.color.holo_red_light)).show()
                   Logger.log("startConnection        | Error: ${billingResponse.debugMessage} (${billingResponse.responseCode})")
@@ -157,10 +162,18 @@ class BillingActivity : BaseActivity() {
             .setPurchaseToken(purchaseToken)
             .build()
       billingClient?.acknowledgePurchase(params) { billingResult ->
-         if (billingResult.responseCode == BillingResponseCode.OK) {
-            thanksAndFinish()
-         } else {
-            Logger.log("acknowledgePurchase    | failure; billingResult: ${billingResult.responseCode}")
+         when (billingResult.responseCode) {
+            BillingResponseCode.OK -> {
+               thanksAndFinish()
+            }
+            BillingResponseCode.ITEM_ALREADY_OWNED -> {
+               Logger.log("querySkuDetailsAsync   | item already owned: premium granted")
+               ViewModelProvider(this).get(BillingViewModel::class.java).enablePremium()
+               thanksAndFinish()
+            }
+            else -> {
+               Logger.log("acknowledgePurchase    | failure; billingResult: ${billingResult.responseCode}")
+            }
          }
       }
    }
