@@ -12,11 +12,12 @@
 
    <TextView
       android:id="@+id/name"
+      style="@style/TextAppearance.AppCompat.Body1"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
+      android:fontFamily="sans-serif-medium"
       android:lines="1"
       android:textAlignment="viewStart"
-      android:textColor="?android:textColorPrimary"
       android:textSize="@dimen/text_big"
       app:layout_constraintEnd_toStartOf="@id/checkbox"
       app:layout_constraintStart_toStartOf="parent"
@@ -25,6 +26,7 @@
 
    <TextView
       android:id="@+id/info"
+      style="@style/TextAppearance.AppCompat"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:textAlignment="viewStart"
@@ -32,7 +34,19 @@
       app:layout_constraintEnd_toStartOf="@id/checkbox"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/name"
-      tools:text="× 1024  ·  10 Stops  ·  ND 3.0\nSuper dark for long exposures during bright daylight." />
+      tools:text="× 1024  ·  10 Stops  ·  ND 3.0" />
+
+   <TextView
+      android:id="@+id/info2"
+      style="@style/TextAppearance.AppCompat"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:textAlignment="viewStart"
+      android:textSize="@dimen/text_small"
+      app:layout_constraintEnd_toStartOf="@id/checkbox"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/info"
+      tools:text="Super dark for long exposures during bright daylight." />
 
    <androidx.appcompat.widget.SwitchCompat
       android:id="@+id/checkbox"

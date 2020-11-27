@@ -32,15 +32,15 @@ class FilterAdapter(private val context: Context) : RecyclerView.Adapter<FilterA
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val filter = items[position]
-        holder.textView1.text = filter.name
+        holder.tvName.text = filter.name
         //
         val factor = items[position].factor
         val stops = MathUtils.factor2fstopRounded(factor)
         val nd = MathUtils.factor2nd(factor)
-        holder.textView2.text = context.resources.getQuantityString(R.plurals.filterInfo,
+        holder.tvInfo.text = context.resources.getQuantityString(R.plurals.filterInfo,
                 factor - 1,
-                factor, stops, nd,
-                if (items[position].info.isNullOrBlank()) "" else "\n" + items[position].info)
+                factor, stops, nd)
+        holder.tvInfo2.text = items[position].info
         //
         holder.switch.isChecked = activeItems.contains(filter)
     }
@@ -69,8 +69,9 @@ class FilterAdapter(private val context: Context) : RecyclerView.Adapter<FilterA
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val textView1: TextView = itemView.findViewById(R.id.name)
-        val textView2: TextView = itemView.findViewById(R.id.info)
+        val tvName: TextView = itemView.findViewById(R.id.name)
+        val tvInfo: TextView = itemView.findViewById(R.id.info)
+        val tvInfo2: TextView = itemView.findViewById(R.id.info2)
         val switch: SwitchCompat = itemView.findViewById(R.id.checkbox)
 
         init {
