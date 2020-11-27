@@ -3,7 +3,7 @@
 ## Features
 
 ### high priority
-* ~~create releases config +~~ upload it as beta to the play store
+* ~~create releases config + upload it as beta to the play store~~
 * ~~show changelog somewhere~~
 * ~~landscape layout~~
    * ~~restore values on configuration change (-> activated filters)~~
@@ -27,7 +27,7 @@
    * ~~all white (?)~~
 * ~~filter calibrator~~
 * ~~Crashlytics~~
-* monetization
+* ~~monetization~~
 * add privacy policy
    * crashlytics: http://try.crashlytics.com/terms/privacy-policy.pdf
 

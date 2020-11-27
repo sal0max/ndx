@@ -7,7 +7,7 @@ Exposure time calculator for when using ND filter(s). Written in Kotlin. For And
 
 * Beautiful and fast user interface
 * High precision calculation
-* Combine (_stack_) as many filters as you like
+* Combine (*stack*) as many filters as you like
 * Create your own filters
 * Includes a handy timer
 * Customizable EV step size: full, half or third
