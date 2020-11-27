@@ -47,7 +47,7 @@ class FilterPouchActivity : BaseActivity() {
         }
         fab_add.setOnClickListener {
             if (
-                  viewModel.filters.value?.size?.let { it < 4 } == true || // less than 4 filters until now...
+                  viewModel.filters.value?.size?.let { it < 3 } == true || // less than 4 filters until now...
                   viewModel.hasPremium                                     // ...or has premium
             ) {
                 val intent = Intent(this, FilterEditorActivity().javaClass)

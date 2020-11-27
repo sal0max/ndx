@@ -4,8 +4,8 @@
 
     <string name="billing_lead">Upgrade to get the following features:</string>
 
-    <string name="billing_pro_feature_1_title">🌟 Add more than four filters</string>
-    <string name="billing_pro_feature_1_summary">NDx lets you insert up to four filters. If you carry more than that, you should get the premium upgrade to eliminate this limit.</string>
+    <string name="billing_pro_feature_1_title">🌟 Add more than three filters</string>
+    <string name="billing_pro_feature_1_summary">NDx lets you insert up to three filters. If you carry more than that, you should get the premium upgrade to eliminate this limit.</string>
 
     <string name="billing_pro_feature_2_title">✨ Two additional themes</string>
     <string name="billing_pro_feature_2_summary">Enjoy two awesome dark themes: \"Moonlit Dark\", a modern eye-pleasing dimmed down version of the default theme. \"Pitch Black\" is even darker for all you OLED owners and milky way hunters!</string>
