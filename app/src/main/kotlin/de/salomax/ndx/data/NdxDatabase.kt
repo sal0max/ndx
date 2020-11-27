@@ -50,26 +50,10 @@ abstract class NdxDatabase : RoomDatabase() {
                                             context.getString(R.string.preset_filterName1),
                                             context.getString(R.string.preset_filterInfo1)),
                                     Filter(null,
-                                            context.resources.getInteger(R.integer.preset_filterValue2),
-                                            context.getString(R.string.preset_filterName2),
-                                            context.getString(R.string.preset_filterInfo2)),
-                                    Filter(null,
                                             context.resources.getInteger(R.integer.preset_filterValue3),
                                             context.getString(R.string.preset_filterName3),
-                                            context.getString(R.string.preset_filterInfo3)),
-                                    Filter(null,
-                                            context.resources.getInteger(R.integer.preset_filterValue4),
-                                            context.getString(R.string.preset_filterName4),
-                                            context.getString(R.string.preset_filterInfo4)),
-                                    Filter(null,
-                                            context.resources.getInteger(R.integer.preset_filterValue5),
-                                            context.getString(R.string.preset_filterName5),
-                                            context.getString(R.string.preset_filterInfo5)),
-                                    Filter(null,
-                                            context.resources.getInteger(R.integer.preset_filterValue6),
-                                            context.getString(R.string.preset_filterName6),
-                                            context.getString(R.string.preset_filterInfo6)))
-                            )
+                                            context.getString(R.string.preset_filterInfo3))
+                            ))
                 }
             }
         }

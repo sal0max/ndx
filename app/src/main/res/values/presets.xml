@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="preset_filterValue1">3</integer>
-    <string name="preset_filterName1">Generic circular polarizer</string>
+    <string name="preset_filterName1">Circular polarizer</string>
     <string name="preset_filterInfo1">Polarizers add about 1½ Stops</string>
 
     <integer name="preset_filterValue2">4</integer>
@@ -9,8 +9,8 @@
     <string name="preset_filterInfo2" />
 
     <integer name="preset_filterValue3">64</integer>
-    <string name="preset_filterName3" translatable="false">Lee Little Stopper</string>
-    <string name="preset_filterInfo3" />
+    <string name="preset_filterName3" translatable="false">Little Stopper</string>
+    <string name="preset_filterInfo3">This is just an example. Why not add all your filters to the <b>Filter Pouch"</b> that you can reach via the overflow menu in the top right corner? 🙂</string>
 
     <integer name="preset_filterValue4">1024</integer>
     <string name="preset_filterName4" translatable="false">Lee Big Stopper</string>
