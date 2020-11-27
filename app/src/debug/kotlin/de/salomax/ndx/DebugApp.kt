@@ -1,6 +1,7 @@
 package de.salomax.ndx
 
 import android.app.Application
+import de.salomax.ndx.data.PrefDao
 import leakcanary.LeakCanary
 
 @Suppress("unused")
@@ -19,5 +20,7 @@ class DebugApp : Application() {
       //                   description = "PurchasesUpdatedListener from BillingClient leaks as it is not unregistered when endConnection() is called."
       //             )
       // )
+      // always enable premium in debug
+      PrefDao.getInstance(this).enablePremium()
    }
 }
