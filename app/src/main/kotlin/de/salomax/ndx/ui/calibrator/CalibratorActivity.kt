@@ -9,14 +9,15 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import de.salomax.ndx.R
+import de.salomax.ndx.databinding.ActivityCalibratorBinding
 import de.salomax.ndx.ui.BaseActivity
 import de.salomax.ndx.ui.calculator.ShutterAdapter
 import de.salomax.ndx.util.MathUtils
 import de.salomax.ndx.widget.CenterLineDecoration
-import kotlinx.android.synthetic.main.activity_calibrator.*
 
 class CalibratorActivity : BaseActivity() {
 
+    private lateinit var binding: ActivityCalibratorBinding
     private lateinit var viewModel: CalibratorViewModel
 
     // without filter
@@ -35,7 +36,8 @@ class CalibratorActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         // init view
-        setContentView(R.layout.activity_calibrator)
+        binding = ActivityCalibratorBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(CalibratorViewModel::class.java)
 
         // title bar
@@ -48,7 +50,7 @@ class CalibratorActivity : BaseActivity() {
 
         // prepare all snappy views
         // all
-        listOf(snappy1a, snappy1b, snappy2a, snappy2b, snappy2c)
+        listOf(binding.snappy1a, binding.snappy1b, binding.snappy2a, binding.snappy2b, binding.snappy2c)
                 .forEach {
                     it.apply {
                         addItemDecoration(CenterLineDecoration(ContextCompat.getColor(context, android.R.color.white))) // center line
@@ -56,14 +58,14 @@ class CalibratorActivity : BaseActivity() {
                     }
                 }
         // without filter
-        snappy1a.apply {
+        binding.snappy1a.apply {
             adapter = ShutterAdapter(this@CalibratorActivity)
             (adapter as ShutterAdapter).onSpeedSelected = {
                 shutterBefore = it
                 showResult()
             }
         }
-        snappy1b.apply {
+        binding.snappy1b.apply {
             adapter = IsoAdapter(this@CalibratorActivity)
             (adapter as IsoAdapter).onIsoSelected = {
                 isoBefore = it
@@ -71,21 +73,21 @@ class CalibratorActivity : BaseActivity() {
             }
         }
         // with filter
-        snappy2a.apply {
+        binding.snappy2a.apply {
             adapter = SecondsAdapter(this@CalibratorActivity, 15)
             (adapter as SecondsAdapter).onValueSelected = {
                 shutterMinAfter = it
                 showResult()
             }
         }
-        snappy2b.apply {
+        binding.snappy2b.apply {
             adapter = SecondsAdapter(this@CalibratorActivity, 59)
             (adapter as SecondsAdapter).onValueSelected = {
                 shutterSecAfter = it
                 showResult()
             }
         }
-        snappy2c.apply {
+        binding.snappy2c.apply {
             adapter = IsoAdapter(this@CalibratorActivity)
             (adapter as IsoAdapter).onIsoSelected = {
                 isoAfter = it
@@ -94,8 +96,8 @@ class CalibratorActivity : BaseActivity() {
         }
 
         // refresh data on init & observe
-        viewModel.speeds.observe(this, { (snappy1a.adapter as ShutterAdapter).setSpeeds(it) })
-        viewModel.isoSteps.observe(this, { (snappy2c.adapter as IsoAdapter).setISOs(it) })
+        viewModel.speeds.observe(this, { (binding.snappy1a.adapter as ShutterAdapter).setSpeeds(it) })
+        viewModel.isoSteps.observe(this, { (binding.snappy2c.adapter as IsoAdapter).setISOs(it) })
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -137,15 +139,15 @@ class CalibratorActivity : BaseActivity() {
                 * isoAfter / isoBefore) // iso
         // error
         if (currentFactor < 1) {
-            factor.text = "..."
-            f_stops.text = String.format(resources.getString(R.string.label_f_stops), "...")
-            nd.text = String.format(getString(R.string.label_nd), "...")
+            binding.factor.text = "..."
+            binding.fStops.text = String.format(resources.getString(R.string.label_f_stops), "...")
+            binding.nd.text = String.format(getString(R.string.label_nd), "...")
         }
         // result
         else {
-            factor.text = String.format(getString(R.string.label_factor), currentFactor.toInt())
-            f_stops.text = String.format(getString(R.string.label_f_stops), MathUtils.factor2fstop(currentFactor))
-            nd.text = String.format(getString(R.string.label_nd), MathUtils.factor2nd(currentFactor))
+            binding.factor.text = String.format(getString(R.string.label_factor), currentFactor.toInt())
+            binding.fStops.text = String.format(getString(R.string.label_f_stops), MathUtils.factor2fstop(currentFactor))
+            binding.nd.text = String.format(getString(R.string.label_nd), MathUtils.factor2nd(currentFactor))
         }
     }
 

@@ -11,10 +11,10 @@ import android.widget.EditText
 import androidx.lifecycle.ViewModelProvider
 import de.salomax.ndx.R
 import de.salomax.ndx.data.Filter
+import de.salomax.ndx.databinding.ActivityFiltereditorBinding
 import de.salomax.ndx.ui.BaseActivity
 import de.salomax.ndx.ui.calibrator.CalibratorActivity
 import de.salomax.ndx.util.MathUtils
-import kotlinx.android.synthetic.main.activity_filtereditor.*
 import java.util.*
 import kotlin.math.pow
 
@@ -24,6 +24,7 @@ class FilterEditorActivity : BaseActivity() {
         const val ARG_FILTER = "ARG_FILTER"
     }
 
+    private lateinit var binding: ActivityFiltereditorBinding
     private lateinit var viewModel: FilterEditorViewModel
 
     private var oldId: Long? = null
@@ -32,7 +33,8 @@ class FilterEditorActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         // init view
-        setContentView(R.layout.activity_filtereditor)
+        binding = ActivityFiltereditorBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(FilterEditorViewModel::class.java)
 
         // edit existing filter
@@ -41,28 +43,28 @@ class FilterEditorActivity : BaseActivity() {
             // edit mode: show delete button
             if (filter.id != null) {
                 oldId = filter.id
-                btn_delete.show()
-                btn_delete.setOnClickListener {
+                binding.btnDelete.show()
+                binding.btnDelete.setOnClickListener {
                     viewModel.delete(filter)
                     val returnIntent = Intent()
-                    val deletedFilter = Filter(oldId!!, factor.text.toString().toInt(), name.text.toString(), info.text.toString())
+                    val deletedFilter = Filter(oldId!!, binding.factor.text.toString().toInt(), binding.name.text.toString(), binding.info.text.toString())
                     returnIntent.putExtra("FILTER", deletedFilter)
                     setResult(Activity.RESULT_OK, returnIntent)
                     finish()
                 }
             }
             // populate editText fields
-            name.setText(filter.name)
-            info.setText(filter.info)
+            binding.name.setText(filter.name)
+            binding.info.setText(filter.info)
             init(filter.factor)
         }
 
         //
-        f_stops.calc()
-        factor.calc()
-        factor.onlyGreaterEqualOne()
+        binding.fStops.calc()
+        binding.factor.calc()
+        binding.factor.onlyGreaterEqualOne()
 
-        btn_calibrator.setOnClickListener {
+        binding.btnCalibrator.setOnClickListener {
                 val intent = Intent(this, CalibratorActivity().javaClass)
                 startActivityForResult(intent, 1)
         }
@@ -91,14 +93,14 @@ class FilterEditorActivity : BaseActivity() {
         return when (item.itemId) {
             R.id.save -> {
                 // validate
-                if (name.validate({ s -> s.isNotBlank() }, getString(R.string.error_nameRequired))
-                        && factor.validate({ s -> s.isNotBlank() }, getString(R.string.error_factorRequired))) {
+                if (binding.name.validate({ s -> s.isNotBlank() }, getString(R.string.error_nameRequired))
+                        && binding.factor.validate({ s -> s.isNotBlank() }, getString(R.string.error_factorRequired))) {
                     // save
                     val filter = Filter(
                             oldId,
-                            factor.text.toString().toInt(),
-                            name.text.toString(),
-                            info.text.toString())
+                            binding.factor.text.toString().toInt(),
+                            binding.name.text.toString(),
+                            binding.info.text.toString())
                     viewModel.insert(filter)
                     finish()
                 }
@@ -120,10 +122,10 @@ class FilterEditorActivity : BaseActivity() {
      *
      */
     private fun init(factor: Int) {
-        this.factor.setText(factor.toString())
+        binding.factor.setText(factor.toString())
         // calc fStops & nd
-        f_stops.setText(MathUtils.factor2fstop(factor.toDouble()))
-        nd.setText(MathUtils.factor2nd(factor))
+        binding.fStops.setText(MathUtils.factor2fstop(factor.toDouble()))
+        binding.nd.setText(MathUtils.factor2nd(factor))
     }
 
     /**
@@ -135,21 +137,21 @@ class FilterEditorActivity : BaseActivity() {
             val input = if (s.toDoubleOrNull() != null)
                 s.toDouble()
             else when {
-                this == factor -> 1.0
-                this == f_stops -> 0.0
+                this == binding.factor -> 1.0
+                this == binding.fStops -> 0.0
                 else -> 0.0
             }
 
             // set listener
             if (this.isFocused)
                 when (this) {
-                    factor -> {
-                        f_stops.setText(MathUtils.factor2fstop(input))
-                        nd.setText(MathUtils.factor2nd(input))
+                    binding.factor -> {
+                        binding.fStops.setText(MathUtils.factor2fstop(input))
+                        binding.nd.setText(MathUtils.factor2nd(input))
                     }
-                    f_stops -> {
-                        factor.setText(2.0.pow(input).toInt().toString())
-                        nd.setText(String.format(Locale.US, "%.1f", kotlin.math.log10(2.0.pow(input))))
+                    binding.fStops -> {
+                        binding.factor.setText(2.0.pow(input).toInt().toString())
+                        binding.nd.setText(String.format(Locale.US, "%.1f", kotlin.math.log10(2.0.pow(input))))
                     }
                     // don't let users enter the ND value: very inaccurate!
                     // factor.setText(kotlin.math.round(Math.pow(10.0, input)).toInt().toString())

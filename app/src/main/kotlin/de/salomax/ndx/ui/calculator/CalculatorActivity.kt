@@ -9,16 +9,17 @@ import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.salomax.ndx.R
+import de.salomax.ndx.databinding.ActivityCalculatorBinding
 import de.salomax.ndx.ui.BaseActivity
 import de.salomax.ndx.ui.billing.BillingActivity
 import de.salomax.ndx.ui.filterpouch.FilterPouchActivity
 import de.salomax.ndx.ui.preferences.PreferenceActivity
 import de.salomax.ndx.ui.timer.TimerActivity
 import de.salomax.ndx.widget.CenterLineDecoration
-import kotlinx.android.synthetic.main.activity_calculator.*
 
 class CalculatorActivity : BaseActivity() {
 
+    private lateinit var binding: ActivityCalculatorBinding
     private lateinit var viewModel: CalculatorViewModel
     private var timerMenuEnabled: Boolean = true
 
@@ -26,12 +27,13 @@ class CalculatorActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         // init view
-        setContentView(R.layout.activity_calculator)
+        binding = ActivityCalculatorBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(CalculatorViewModel::class.java)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         // list & adapter : shutter speeds
-        recycler_shutter.apply {
+        binding.recyclerShutter.apply {
             adapter = ShutterAdapter(this@CalculatorActivity)
             addItemDecoration(CenterLineDecoration(ContextCompat.getColor(context, android.R.color.white))) // center line
             // addItemDecoration(DotDividerDecoration(ContextCompat.getColor(context, android.R.color.white)))
@@ -41,7 +43,7 @@ class CalculatorActivity : BaseActivity() {
             }
         }
         // list & adapter : filters
-        recycler_filters.apply {
+        binding.recyclerFilters.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             adapter = FilterAdapter(this@CalculatorActivity)
             (adapter as FilterAdapter).onFilterFactorChanged = {
@@ -51,16 +53,16 @@ class CalculatorActivity : BaseActivity() {
 
         // refresh data on init & observe
         viewModel.filters.observe(this, Observer {
-            (recycler_filters.adapter as FilterAdapter).setFilters(it)
+            (binding.recyclerFilters.adapter as FilterAdapter).setFilters(it)
         })
         viewModel.speeds.observe(this, Observer {
-            (recycler_shutter.adapter as ShutterAdapter).setSpeeds(it)
+            (binding.recyclerShutter.adapter as ShutterAdapter).setSpeeds(it)
         })
         viewModel.isWarningEnabled.observe(this, Observer {
-            resultView.showWarning = it
+            binding.resultView.showWarning = it
         })
         viewModel.calculatedSpeed.observe(this, Observer { micros ->
-            resultView.duration = micros
+            binding.resultView.duration = micros
             enableTimer(micros != null && micros >= 1_000_000L)
         })
     }

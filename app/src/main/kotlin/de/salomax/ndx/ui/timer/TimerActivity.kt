@@ -5,16 +5,17 @@ import android.view.View
 import android.view.animation.Animation
 import androidx.lifecycle.ViewModelProvider
 import de.salomax.ndx.R
+import de.salomax.ndx.databinding.ActivityTimerBinding
 import de.salomax.ndx.ui.BaseActivity
 import de.salomax.ndx.util.ManagedAlarmPlayer
 import de.salomax.ndx.util.ManagedVibrator
 import de.salomax.ndx.widget.BlinkAnimation
-import kotlinx.android.synthetic.main.activity_timer.*
 import java.util.concurrent.*
 import kotlin.math.abs
 
 class TimerActivity : BaseActivity() {
 
+    private lateinit var binding: ActivityTimerBinding
     private lateinit var viewModel: TimerViewModel
     private lateinit var alarmPlayer: ManagedAlarmPlayer
     private lateinit var vibrator: ManagedVibrator
@@ -25,11 +26,12 @@ class TimerActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         // init view
-        setContentView(R.layout.activity_timer)
+        binding = ActivityTimerBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(TimerViewModel::class.java)
         alarmPlayer = ManagedAlarmPlayer(this)
         vibrator = ManagedVibrator(this)
-        btn_reset.setOnClickListener {
+        binding.btnReset.setOnClickListener {
             viewModel.stopTimer()
             viewModel.millisCurrent.value = 0
         }
@@ -48,8 +50,8 @@ class TimerActivity : BaseActivity() {
             if (viewModel.millisTotal == null) {
                 viewModel.millisTotal = it.getLong("MILLIS")
                 // first start: init
-                btn_reset.apply { visibility = View.GONE }
-                btn_control.apply {
+                binding.btnReset.apply { visibility = View.GONE }
+                binding.btnControl.apply {
                     setImageResource(R.drawable.ic_play_arrow_white_24dp)
                     setOnClickListener { viewModel.startTimer() }
                 }
@@ -69,15 +71,15 @@ class TimerActivity : BaseActivity() {
                     // animations
                     blinkText(false)
                     // buttons
-                    btn_reset.apply { visibility = View.GONE }
-                    btn_control.apply {
+                    binding.btnReset.apply { visibility = View.GONE }
+                    binding.btnControl.apply {
                         setImageResource(R.drawable.ic_pause_white_24dp)
                         setOnClickListener { viewModel.stopTimer() }
                     }
                 }
                 TimerViewModel.State.FINISHED -> {
                     // animations
-                    progress.startAnimation(blinkAnimation)
+                    binding.progress.startAnimation(blinkAnimation)
                     // alarms
                     if (viewModel.shouldAlarmBeep()) playAlarm()
                     if (viewModel.shouldAlarmVibrate()) vibrate()
@@ -86,8 +88,8 @@ class TimerActivity : BaseActivity() {
                     // animations
                     blinkText(false)
                     // buttons
-                    btn_reset.apply { visibility = View.GONE }
-                    btn_control.apply {
+                    binding.btnReset.apply { visibility = View.GONE }
+                    binding.btnControl.apply {
                         setImageResource(R.drawable.ic_stop_white_24dp)
                         setOnClickListener {
                             alarmPlayer.stop()
@@ -101,8 +103,8 @@ class TimerActivity : BaseActivity() {
                     // animations
                     blinkText(true)
                     // buttons
-                    btn_reset.apply { visibility = View.VISIBLE }
-                    btn_control.apply {
+                    binding.btnReset.apply { visibility = View.VISIBLE }
+                    binding.btnControl.apply {
                         setImageResource(R.drawable.ic_play_arrow_white_24dp)
                         setOnClickListener { viewModel.startTimer() }
                     }
@@ -151,20 +153,20 @@ class TimerActivity : BaseActivity() {
      *
      */
     private fun blinkText(enabled: Boolean) {
-        if (enabled && colon.animation == null) {
-            colon.startAnimation(blinkAnimation)
-            minus.startAnimation(blinkAnimation)
-            textMin.startAnimation(blinkAnimation)
-            textSec.startAnimation(blinkAnimation)
-            textHour.startAnimation(blinkAnimation)
-            textMilli.startAnimation(blinkAnimation)
+        if (enabled && binding.colon.animation == null) {
+            binding.colon.startAnimation(blinkAnimation)
+            binding.minus.startAnimation(blinkAnimation)
+            binding.textMin.startAnimation(blinkAnimation)
+            binding.textSec.startAnimation(blinkAnimation)
+            binding.textHour.startAnimation(blinkAnimation)
+            binding.textMilli.startAnimation(blinkAnimation)
         } else {
-            colon.clearAnimation()
-            minus.clearAnimation()
-            textMin.clearAnimation()
-            textSec.clearAnimation()
-            textHour.clearAnimation()
-            textMilli.clearAnimation()
+            binding.colon.clearAnimation()
+            binding.minus.clearAnimation()
+            binding.textMin.clearAnimation()
+            binding.textSec.clearAnimation()
+            binding.textHour.clearAnimation()
+            binding.textMilli.clearAnimation()
         }
     }
 
@@ -176,41 +178,41 @@ class TimerActivity : BaseActivity() {
 
         // progress bar
         if (remainingTime >= 0) {
-            if (progress.max != viewModel.millisTotal!!.toInt())
-                progress.max = viewModel.millisTotal!!.toInt()
-            progress.setProgress(viewModel.millisCurrent.value!!.toFloat(), true, 100)
-        } else if (progress.max != 1) {
-            progress.progress = 1f
-            progress.max = 1
+            if (binding.progress.max != viewModel.millisTotal!!.toInt())
+                binding.progress.max = viewModel.millisTotal!!.toInt()
+            binding.progress.setProgress(viewModel.millisCurrent.value!!.toFloat(), true, 100)
+        } else if (binding.progress.max != 1) {
+            binding.progress.progress = 1f
+            binding.progress.max = 1
         }
 
         // negative
-        minus.visibility = if (remainingTime < 0) View.VISIBLE else View.GONE
+        binding.minus.visibility = if (remainingTime < 0) View.VISIBLE else View.GONE
 
         // tenths of a second
         val tenth = abs(remainingTime / 100 % 10)
-        textMilli.text = String.format(".%d", tenth)
+        binding.textMilli.text = String.format(".%d", tenth)
 
         // seconds
         val sec = abs(TimeUnit.MILLISECONDS.toSeconds(remainingTime) % 60)
         val sSec = String.format("%02d", sec)
-        if (textSec.text != sSec)
-            textSec.text = sSec
+        if (binding.textSec.text != sSec)
+            binding.textSec.text = sSec
 
         // minus
         val min = abs(TimeUnit.MILLISECONDS.toMinutes(remainingTime) % 60)
         val sMin = String.format("%02d", min)
-        if (textMin.text != sMin)
-            textMin.text = sMin
+        if (binding.textMin.text != sMin)
+            binding.textMin.text = sMin
 
         // hours
         val h = abs(TimeUnit.MILLISECONDS.toHours(remainingTime))
         if (h > 0) {
             val sH = h.toString() + getString(R.string.unit_hours)
-            if (textHour.text != sH)
-                textHour.text = sH
-        } else if (textHour.text != null) {
-            textHour.text = null
+            if (binding.textHour.text != sH)
+                binding.textHour.text = sH
+        } else if (binding.textHour.text != null) {
+            binding.textHour.text = null
         }
     }
 

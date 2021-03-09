@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import de.salomax.ndx.R
 import de.salomax.ndx.data.Filter
+import de.salomax.ndx.databinding.ActivityFilterpouchBinding
 import de.salomax.ndx.ui.BaseActivity
 import de.salomax.ndx.ui.billing.BillingActivity
 import de.salomax.ndx.ui.filtereditor.FilterEditorActivity
 import de.salomax.ndx.widget.MarginHorizontalDividerItemDecoration
-import kotlinx.android.synthetic.main.activity_filterpouch.*
 
 /**
  * Shows a list of all filters.
@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.activity_filterpouch.*
  */
 class FilterPouchActivity : BaseActivity() {
 
+    private lateinit var binding: ActivityFilterpouchBinding
     private lateinit var viewModel: FilterPouchViewModel
 
     private val filterAdapter: FilterAdapter = FilterAdapter(this)
@@ -32,7 +33,8 @@ class FilterPouchActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         // init view
-        setContentView(R.layout.activity_filterpouch)
+        binding = ActivityFilterpouchBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(FilterPouchViewModel::class.java)
 
         filterAdapter.onClick = {
@@ -40,12 +42,12 @@ class FilterPouchActivity : BaseActivity() {
             intent.putExtra(FilterEditorActivity.ARG_FILTER, it)
             startActivityForResult(intent, ARG_EDIT)
         }
-        list.apply {
+        binding.list.apply {
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(MarginHorizontalDividerItemDecoration(this@FilterPouchActivity, resources.getDimension(R.dimen.margin2x).toInt()))
             adapter = filterAdapter
         }
-        fab_add.setOnClickListener {
+        binding.fabAdd.setOnClickListener {
             if (
                   viewModel.filters.value?.size?.let { it < 3 } == true || // less than 4 filters until now...
                   viewModel.hasPremium                                     // ...or has premium
@@ -79,7 +81,7 @@ class FilterPouchActivity : BaseActivity() {
         // filter got deleted: show undo
         if (requestCode == ARG_EDIT && resultCode == Activity.RESULT_OK && data != null) {
             val filter = data.getParcelableExtra<Filter>("FILTER")!!
-            Snackbar.make(list, getString(R.string.filterDeleted, filter.name), 5_000) // 5s
+            Snackbar.make(binding.list, getString(R.string.filterDeleted, filter.name), 5_000) // 5s
                     .setAction(R.string.undo) { viewModel.insert(filter) }
                     .show()
         }

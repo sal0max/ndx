@@ -9,14 +9,20 @@ import android.text.style.RelativeSizeSpan
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import de.salomax.ndx.R
 import de.salomax.ndx.data.model.ShutterSpeeds
-import kotlinx.android.synthetic.main.view_result.view.*
 import kotlin.math.abs
 
 @SuppressLint("SetTextI18n")
 class ResultView : ConstraintLayout {
+
+    private val warning: ImageView
+    private val seconds: TextView
+    private val minutes: TextView
+    private val hoursDays: TextView
 
     private val dUnit = resources.getString(R.string.unit_days)
     private val hUnit = resources.getString(R.string.unit_hours)
@@ -50,6 +56,11 @@ class ResultView : ConstraintLayout {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         inflater.inflate(R.layout.view_result, this)
+
+        warning = findViewById(R.id.warning)
+        seconds = findViewById(R.id.seconds)
+        minutes = findViewById(R.id.minutes)
+        hoursDays = findViewById(R.id.hoursDays)
     }
 
     /*
