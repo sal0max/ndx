@@ -3,7 +3,7 @@
     <string name="title_addFilter">Add Filter</string>
     <string name="title_editFilter">Edit Filter</string>
 
-    <string name="btn_calibrator">Measure</string>
+    <string name="btn_calibrator">Calibrate</string>
     <string name="calibrator_description">Often the real filter strength differs from the one given by the manufacturer. You can use the <b>Filter Calibrator</b> to measure the actual value."</string>
 
     <string name="error_nameRequired">Name is required</string>
