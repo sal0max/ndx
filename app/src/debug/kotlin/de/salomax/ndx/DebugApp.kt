@@ -22,6 +22,6 @@ class DebugApp : Application() {
                   )
       )
       // always enable premium in debug
-      PrefDao.getInstance(this).enablePremium()
+      PrefDao.getInstance(this).enablePremium(true)
    }
 }

@@ -102,8 +102,8 @@ class PrefDao private constructor(context: Context) {
       return sharedPreferences.getBoolean(Pref.HAS_PREMIUM, false)
    }
 
-   fun enablePremium() {
-      sharedPreferences.edit().putBoolean(Pref.HAS_PREMIUM, true).apply()
+   fun enablePremium(enabled: Boolean) {
+      sharedPreferences.edit().putBoolean(Pref.HAS_PREMIUM, enabled).apply()
    }
 
    /*

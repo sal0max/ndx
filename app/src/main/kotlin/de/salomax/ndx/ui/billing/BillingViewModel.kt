@@ -11,7 +11,7 @@ class BillingViewModel(application: Application) : AndroidViewModel(application)
     private val prefDao = PrefDao.getInstance(application)
 
     fun enablePremium() {
-        prefDao.enablePremium()
+        prefDao.enablePremium(true)
     }
 
 }
