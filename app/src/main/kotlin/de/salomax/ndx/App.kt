@@ -26,7 +26,7 @@ class App : Application() {
                      // check if a user has purchased premium before
                      val result = billingClient.queryPurchases(BillingClient.SkuType.INAPP)
                      // yes -> enable premium | no -> disable it, to be sure
-                     PrefDao.getInstance(applicationContext).enablePremium(result.purchasesList != null)
+                     PrefDao.getInstance(applicationContext).enablePremium(result.purchasesList?.isNotEmpty() == true)
                      // NOTE:
                      // Big problem! Refunded purchases will get reported still as valid, here.
                      // Seems to be a known flaw with the billing library. Will just leave it that
