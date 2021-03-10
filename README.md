@@ -21,16 +21,16 @@
 
 ### Three different themes
 <div>
-   <img src="art/screenshots/screen01.png" width="300" alt="screenshot 1">
-   <img src="art/screenshots/screen02.png" width="300" alt="screenshot 2">
-   <img src="art/screenshots/screen03.png" width="300" alt="screenshot 3">
+   <img src="art/screenshots/screen01.png" width="275" alt="screenshot 1">
+   <img src="art/screenshots/screen02.png" width="275" alt="screenshot 2">
+   <img src="art/screenshots/screen03.png" width="275" alt="screenshot 3">
 </div>
 
 ### Timer, Filter Editor & Filter Calibrator
 <div>
-   <img src="art/screenshots/screen04.png" width="300" alt="screenshot 4">
-   <img src="art/screenshots/screen05.png" width="300" alt="screenshot 5">
-   <img src="art/screenshots/screen06.png" width="300" alt="screenshot 6">
+   <img src="art/screenshots/screen04.png" width="275" alt="screenshot 4">
+   <img src="art/screenshots/screen05.png" width="275" alt="screenshot 5">
+   <img src="art/screenshots/screen06.png" width="275" alt="screenshot 6">
 </div>
 
 
