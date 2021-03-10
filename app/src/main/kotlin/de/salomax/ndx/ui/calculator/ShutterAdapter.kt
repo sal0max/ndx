@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import de.salomax.ndx.R
 import de.salomax.ndx.data.model.ShutterSpeeds
