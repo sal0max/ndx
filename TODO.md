@@ -3,7 +3,7 @@
 ## Features
 
 ### high priority
-* piracy check: check periodically if valid purchase and disable/enable premium accordingly
+* ~~piracy check: check periodically if valid purchase and disable/enable premium accordingly~~
 * ~~create releases config + upload it as beta to the play store~~
 * ~~show changelog somewhere~~
 * ~~landscape layout~~
