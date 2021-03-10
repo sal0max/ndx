@@ -11,6 +11,7 @@
    * ~~keep position of shutter-snappyRecyclerView and snap it~~
 
 ### normal priority
+* examine: change two base themes to be variants of Theme.AppCompat.DayNight?
 * add (optional) aperture selection to fine-tune resulting exposure time
 * add (optional) ISO selection to fine-tune resulting exposure time
 * implement timer
