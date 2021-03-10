@@ -61,7 +61,7 @@ class BillingActivity: BaseActivity(), PurchasesUpdatedListener, BillingClientSt
 
    override fun onDestroy() {
       super.onDestroy()
-      if (billingClient.isReady) {
+      if (this::billingClient.isInitialized && billingClient.isReady) {
          // BillingClient can only be used once. After calling endConnection(), we must create a new BillingClient.
          billingClient.endConnection()
       }
