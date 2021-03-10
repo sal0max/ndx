@@ -13,7 +13,7 @@ data class Pref(val key: String, val value: String) {
       const val ALARM_BEEP = "ALARM_BEEP"
       const val ALARM_VIBRATE = "ALARM_VIBRATE"
 
-      // theme: NDx Light (0), Moonlit Dark (1), Pitch Black (2)
+      // theme: NDx Light (0), Moonlit Dark (1), Pitch Black (2), System Default (3)
       const val THEME = "THEME"
 
       // warning: very long exposures (boolean)

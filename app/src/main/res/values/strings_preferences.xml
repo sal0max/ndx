@@ -26,6 +26,7 @@
         <item>NDx Light</item>
         <item>Moonlit Dark</item>
         <item>Pitch Black</item>
+        <item>System default</item>
     </string-array>
 
     <!-- timer -->
@@ -89,6 +90,7 @@
         <item>0</item>
         <item>1</item>
         <item>2</item>
+        <item>3</item>
     </string-array>
 
 </resources>
