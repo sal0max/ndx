@@ -13,6 +13,7 @@ import de.salomax.ndx.ui.BaseActivity
  * At the bottom, there's the button that initializes the billing flow.
  * The entire billing flow is done here.
  */
+@Suppress("UNUSED_VARIABLE", "ControlFlowWithEmptyBody")
 class BillingActivity: BaseActivity(), PurchasesUpdatedListener, BillingClientStateListener,
       SkuDetailsResponseListener {
 
