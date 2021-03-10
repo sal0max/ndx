@@ -11,7 +11,6 @@
    * ~~keep position of shutter-snappyRecyclerView and snap it~~
 
 ### normal priority
-* add setting: set minimal exposure time (1/8000?, 1/4000? etc.)
 * add (optional) aperture selection to fine-tune resulting exposure time
 * add (optional) ISO selection to fine-tune resulting exposure time
 * implement timer
@@ -37,6 +36,7 @@
 
 ### low priority
 * German localization
+* add setting: set minimal exposure time (1/8000?, 1/4000? etc.)
 * android wear support (timer)
 * intro/howtos on
    * using nd filters
