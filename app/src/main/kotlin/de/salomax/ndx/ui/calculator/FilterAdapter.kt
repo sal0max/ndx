@@ -40,7 +40,12 @@ class FilterAdapter(private val context: Context) : RecyclerView.Adapter<FilterA
         holder.tvInfo.text = context.resources.getQuantityString(R.plurals.filterInfo,
                 factor - 1,
                 factor, stops, nd)
-        holder.tvInfo2.text = items[position].info
+        if (items[position].info.isNullOrBlank())
+            holder.tvInfo2.visibility = View.GONE
+        else {
+            holder.tvInfo2.visibility = View.VISIBLE
+            holder.tvInfo2.text = items[position].info
+        }
         //
         holder.switch.isChecked = activeItems.contains(filter)
     }
