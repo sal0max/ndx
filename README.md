@@ -13,6 +13,7 @@
 * High precision calculation
 * Combine (*stack*) as many filters as you like
 * Create your own filters
+* Filter calibrator included
 * Comes with a handy timer
 * Customizable EV step size: full, half or third
 
