@@ -58,7 +58,13 @@ class CalculatorActivity : BaseActivity() {
             (binding.recyclerFilters.adapter as FilterAdapter).setFilters(it)
         })
         viewModel.speeds.observe(this, Observer {
-            (binding.recyclerShutter.adapter as ShutterAdapter).setSpeeds(it)
+            val adapter = binding.recyclerShutter.adapter as ShutterAdapter
+            if (adapter.speeds != it) {
+                // set new speeds
+                adapter.speeds = it
+                // scroll to middle
+                binding.recyclerShutter.scrollToPosition(it.doubleValues.size / 2)
+            }
         })
         viewModel.isWarningEnabled.observe(this, Observer {
             binding.resultView.showWarning = it

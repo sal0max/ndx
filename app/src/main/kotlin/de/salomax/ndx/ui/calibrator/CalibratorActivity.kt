@@ -96,7 +96,7 @@ class CalibratorActivity : BaseActivity() {
         }
 
         // refresh data on init & observe
-        viewModel.speeds.observe(this, { (binding.snappy1a.adapter as ShutterAdapter).setSpeeds(it) })
+        viewModel.speeds.observe(this, { (binding.snappy1a.adapter as ShutterAdapter).speeds = it })
         viewModel.isoSteps.observe(this, { (binding.snappy2c.adapter as IsoAdapter).setISOs(it) })
     }
 

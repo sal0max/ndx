@@ -11,9 +11,13 @@ import de.salomax.ndx.widget.SnappyRecyclerView
 
 class ShutterAdapter(private val context: AppCompatActivity) : RecyclerView.Adapter<ShutterAdapter.ViewHolder>() {
 
-    companion object {
-        private var items: ShutterSpeeds? = null
-    }
+    var speeds: ShutterSpeeds? = null
+        set(speeds) {
+            if (this.speeds != speeds) {
+                field = speeds
+                notifyDataSetChanged()
+            }
+        }
 
     var onSpeedSelected: ((Long) -> Unit)? = null
 
@@ -23,24 +27,17 @@ class ShutterAdapter(private val context: AppCompatActivity) : RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textView.text = items?.htmlValues?.get(position)
-    }
-
-    fun setSpeeds(speeds: ShutterSpeeds?) {
-        if (items != speeds) {
-            items = speeds
-            notifyDataSetChanged()
-        }
+        holder.textView.text = speeds?.htmlValues?.get(position)
     }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
         (recyclerView as SnappyRecyclerView).snapped.observe(context, {
-            onSpeedSelected?.invoke(items?.doubleValues?.get(it) ?: 1)
+            onSpeedSelected?.invoke(speeds?.doubleValues?.get(it) ?: 1)
         })
     }
 
-    override fun getItemCount() = items?.doubleValues?.size ?: 0
+    override fun getItemCount() = speeds?.doubleValues?.size ?: 0
 
     inner class ViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView)
 

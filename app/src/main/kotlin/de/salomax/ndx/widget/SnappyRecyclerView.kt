@@ -3,10 +3,10 @@ package de.salomax.ndx.widget
 import android.content.Context
 import android.graphics.Rect
 import android.os.Parcelable
-import androidx.core.view.ViewCompat
 import android.util.AttributeSet
 import android.view.View
 import android.os.Bundle
+import androidx.core.view.*
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
@@ -76,12 +76,20 @@ class SnappyRecyclerView : RecyclerView {
         }
 
         override fun scrollToPosition(position: Int) {
-            val center = width / 2
-
-            val view = this.findViewByPosition(position)
-            view?.let {
-                scrollToPositionWithOffset(position, center - it.width / 2)
+            post {
+                val viewCenter = width / 2
+                // first scroll near to the position…
+                scrollToPositionWithOffset(position, (viewCenter - 20))
+                // …then snap to the view
+                post {
+                    snap()
+                }
             }
+        }
+
+        override fun findViewByPosition(position: Int): View? {
+            getChildAt(position)
+            return super.findViewByPosition(position)
         }
     }
 
