@@ -9,7 +9,7 @@
         android:id="@+id/progress"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:backgroundAlphaEnabled="true"
+        app:progressBackgroundAlphaEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/btn_control"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_max="300sp"

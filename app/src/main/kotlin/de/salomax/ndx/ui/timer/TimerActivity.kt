@@ -182,7 +182,7 @@ class TimerActivity : BaseActivity() {
                 binding.progress.max = viewModel.millisTotal!!.toInt()
             binding.progress.setProgress(viewModel.millisCurrent.value!!.toFloat(), true, 100)
         } else if (binding.progress.max != 1) {
-            binding.progress.progress = 1f
+            binding.progress.setProgress(1f)
             binding.progress.max = 1
         }
 
