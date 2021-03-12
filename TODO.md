@@ -11,7 +11,6 @@
    * ~~keep position of shutter-snappyRecyclerView and snap it~~
 
 ### normal priority
-* examine: change two base themes to be variants of Theme.AppCompat.DayNight?
 * add (optional) aperture selection to fine-tune resulting exposure time
 * add (optional) ISO selection to fine-tune resulting exposure time
 * implement timer
@@ -24,8 +23,9 @@
    * ~~vibrate~~
    * ~~fix: wrong state when finished and configuration change happens~~
    * ~~better blinking~~
-* add privacy policy
-   * (if using crashlytics: http://try.crashlytics.com/terms/privacy-policy.pdf)
+* if using crashlytics
+   * add privacy policy: http://try.crashlytics.com/terms/privacy-policy.pdf
+* ~~examine: change two base themes to be variants of Theme.AppCompat.DayNight?~~
 * ~~decrease distance of numbers in resultView~~
 * ~~additional themes~~
    * ~~dark~~
@@ -36,6 +36,7 @@
 * ~~monetization~~
 
 ### low priority
+* redesign filter calibrator
 * German localization
 * add setting: set minimal exposure time (1/8000?, 1/4000? etc.)
 * android wear support (timer)
@@ -49,7 +50,7 @@
    * How often is the calibrator used (when adding/editing a new filter)?
    * How often is the timer used?
    * ~~What theme is used?~~
-* ~~animate addition/removal of filters in `myfilters`~~
+* ~~animate addition/removal of filters in filter pouch~~
 
 
 ## Bugs
@@ -58,10 +59,10 @@
 
 
 ## Monetization
-* freemium-features:
-   1. additional themes
-   2. more than 3 (or 4?) filters
-   3. timer
+* ~~freemium-features:~~
+   1. ~~additional themes~~
+   2. ~~more than 3 (or 4?) filters~~
+   3. ~~timer~~
 * ~~maybe instead: implement donation via In-App Purchase~~
    * ~~01,00€: small coffee~~
    * ~~02,00€: small beer~~
