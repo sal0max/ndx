@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="changelog">
-        <b><big>3.0.7 – <i>initial release</i></big></b>
+    <string name="changelog"><b>3.0.8</b>
+        \n• Some UI improvements
+        \n• Minor tweaks
         \n
+        \n<b>3.0.7 – <i>initial release</i></b>
         \nVersion 3 is the third iteration in writing this app.
         \n• A complete re-write!
         \n• A different, better user interface!
