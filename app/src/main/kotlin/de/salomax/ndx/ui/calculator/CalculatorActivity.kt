@@ -16,6 +16,7 @@ import de.salomax.ndx.ui.filterpouch.FilterPouchActivity
 import de.salomax.ndx.ui.preferences.PreferenceActivity
 import de.salomax.ndx.ui.timer.TimerActivity
 import de.salomax.ndx.widget.CenterLineDecoration
+import de.salomax.ndx.widget.MarginHorizontalDividerItemDecoration
 
 class CalculatorActivity : BaseActivity() {
 
@@ -45,6 +46,7 @@ class CalculatorActivity : BaseActivity() {
         // list & adapter : filters
         binding.recyclerFilters.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            addItemDecoration(MarginHorizontalDividerItemDecoration(this@CalculatorActivity))
             adapter = FilterAdapter(this@CalculatorActivity)
             (adapter as FilterAdapter).onFilterFactorChanged = {
                 viewModel.filterFactor.value = it

@@ -12,10 +12,9 @@
 
    <TextView
       android:id="@+id/name"
-      style="@style/TextAppearance.AppCompat.Body1"
+      style="@style/TextAppearance.AppCompat.Body2"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:fontFamily="sans-serif-medium"
       android:textAlignment="viewStart"
       android:textSize="@dimen/text_big"
       app:layout_constraintEnd_toStartOf="@id/checkbox"
@@ -25,9 +24,10 @@
 
    <TextView
       android:id="@+id/info"
-      style="@style/TextAppearance.AppCompat"
+      style="@style/TextAppearance.AppCompat.Body1"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
+      android:paddingTop="@dimen/margin0.5x"
       android:textAlignment="viewStart"
       android:textSize="@dimen/text_small"
       app:layout_constraintEnd_toStartOf="@id/checkbox"
@@ -37,9 +37,10 @@
 
    <TextView
       android:id="@+id/info2"
-      style="@style/TextAppearance.AppCompat"
+      style="@style/TextAppearance.AppCompat.Body1"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
+      android:paddingTop="@dimen/margin0.5x"
       android:textAlignment="viewStart"
       android:textSize="@dimen/text_small"
       app:layout_constraintEnd_toStartOf="@id/checkbox"

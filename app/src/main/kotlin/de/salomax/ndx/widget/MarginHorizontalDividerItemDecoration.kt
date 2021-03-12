@@ -5,6 +5,8 @@ import android.graphics.Canvas
 import androidx.recyclerview.widget.RecyclerView
 import android.graphics.drawable.Drawable
 import androidx.annotation.DimenRes
+import androidx.core.content.ContextCompat
+import de.salomax.ndx.R
 
 class MarginHorizontalDividerItemDecoration(context: Context, @DimenRes private val marginLeft: Int, @DimenRes private val marginRight: Int)
     : RecyclerView.ItemDecoration() {
@@ -15,16 +17,10 @@ class MarginHorizontalDividerItemDecoration(context: Context, @DimenRes private 
     @Suppress("unused")
     constructor(context: Context, @DimenRes margin: Int) : this(context, margin, margin)
 
-    companion object {
-        private val ATTRS = intArrayOf(android.R.attr.listDivider)
-    }
-
     private var divider: Drawable? = null
 
     init {
-        val styledAttributes = context.obtainStyledAttributes(ATTRS)
-        divider = styledAttributes.getDrawable(0)
-        styledAttributes.recycle()
+        divider = ContextCompat.getDrawable(context, R.drawable.divider_list)
     }
 
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {

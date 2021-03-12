@@ -44,7 +44,7 @@ class FilterPouchActivity : BaseActivity() {
         }
         binding.list.apply {
             layoutManager = LinearLayoutManager(context)
-            addItemDecoration(MarginHorizontalDividerItemDecoration(this@FilterPouchActivity, resources.getDimension(R.dimen.margin2x).toInt()))
+            addItemDecoration(MarginHorizontalDividerItemDecoration(this@FilterPouchActivity))
             adapter = filterAdapter
         }
         binding.fabAdd.setOnClickListener {
