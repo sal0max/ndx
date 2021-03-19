@@ -2,6 +2,7 @@ package de.salomax.ndx.data
 
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
+import de.salomax.ndx.data.model.Compensation
 import de.salomax.ndx.data.model.IsoSteps
 import de.salomax.ndx.data.model.ShutterSpeeds
 
@@ -87,6 +88,16 @@ class SharedPreferenceShutterSpeedsLiveData(sharedPrefs: SharedPreferences, key:
    }
 }
 
+// Compensation
+class SharedPreferenceCompensationLiveData(sharedPrefs: SharedPreferences, key: String, defValue: Compensation) :
+      SharedPreferenceLiveData<Compensation>(sharedPrefs, key, defValue) {
+   override fun getValueFromPreferences(key: String, defValue: Compensation): Compensation = when (sharedPrefs.getInt(key, 3)) {
+      1 -> Compensation.FULL
+      2 -> Compensation.HALF
+      else -> Compensation.THIRD
+   }
+}
+
 
 // Kotlin
 
@@ -123,4 +134,9 @@ fun SharedPreferences.isoStepsLiveData(key: String, defValue: IsoSteps): SharedP
 @Suppress("unused")
 fun SharedPreferences.shutterSpeedsLiveData(key: String, defValue: ShutterSpeeds): SharedPreferenceLiveData<ShutterSpeeds> {
    return SharedPreferenceShutterSpeedsLiveData(this, key, defValue)
+}
+
+@Suppress("unused")
+fun SharedPreferences.compensationLiveData(key: String, defValue: Compensation): SharedPreferenceLiveData<Compensation> {
+   return SharedPreferenceCompensationLiveData(this, key, defValue)
 }
