@@ -93,6 +93,10 @@ class CalculatorActivity : BaseActivity() {
             when (it) {
                 true -> {
                     binding.recyclerCompensationContainer.visibility = View.VISIBLE
+                    // scroll to center
+                    binding.recyclerCompensation.adapter?.itemCount?.div(2)?.let {
+                        center -> binding.recyclerCompensation.scrollToPosition(center)
+                    }
                 }
                 false -> {
                     binding.recyclerCompensationContainer.visibility = View.GONE
