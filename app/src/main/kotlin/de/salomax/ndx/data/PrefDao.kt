@@ -72,11 +72,11 @@ class PrefDao private constructor(context: Context) {
    }
 
    fun shouldAlarmVibrate(): SharedPreferenceLiveData<Boolean> {
-      return sharedPreferences.booleanLiveData(Pref.ALARM_VIBRATE, false)
+      return sharedPreferences.booleanLiveData(Pref.ALARM_VIBRATE, true)
    }
 
    fun shouldAlarmVibrateSync(): Boolean {
-      return sharedPreferences.getBoolean(Pref.ALARM_VIBRATE, false)
+      return sharedPreferences.getBoolean(Pref.ALARM_VIBRATE, true)
    }
 
    fun setAlarmVibrate(enabled: Boolean) {
