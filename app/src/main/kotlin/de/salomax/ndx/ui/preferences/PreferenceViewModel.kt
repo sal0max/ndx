@@ -14,6 +14,7 @@ class PreferenceViewModel(application: Application) : AndroidViewModel(applicati
     internal val showWarning: SharedPreferenceLiveData<Boolean>
     internal val alarmBeepEnabled: SharedPreferenceLiveData<Boolean>
     internal val alarmVibrateEnabled: SharedPreferenceLiveData<Boolean>
+    internal val compensationDialEnabled: SharedPreferenceLiveData<Boolean>
     internal val hasPremium: SharedPreferenceLiveData<Boolean>
     internal val theme: SharedPreferenceLiveData<Int>
 
@@ -23,6 +24,7 @@ class PreferenceViewModel(application: Application) : AndroidViewModel(applicati
         showWarning = prefDao.isWarningEnabled()
         alarmBeepEnabled = prefDao.shouldAlarmBeep()
         alarmVibrateEnabled = prefDao.shouldAlarmVibrate()
+        compensationDialEnabled = prefDao.isCompensationDialEnabled()
         hasPremium = prefDao.hasPremium()
         theme = prefDao.getTheme()
     }
@@ -31,6 +33,7 @@ class PreferenceViewModel(application: Application) : AndroidViewModel(applicati
     fun setWarning(enabled: Boolean) { prefDao.setWarning(enabled) }
     fun setAlarmBeep(enabled: Boolean) { prefDao.setAlarmBeep(enabled) }
     fun setAlarmVibrate(enabled: Boolean) { prefDao.setAlarmVibrate(enabled) }
+    fun setCompensationDialEnabled(enabled: Boolean) { prefDao.setCompensationDialEnabled(enabled) }
     fun setFilterSortOrder(sortOrder: Int) {prefDao.setFilterSortOrder(sortOrder)}
     fun setTheme(theme: Int) {prefDao.setTheme(theme)}
 

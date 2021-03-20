@@ -28,6 +28,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
     private lateinit var evStepsPreference: ListPreference
     private lateinit var filterSortingPreference: ListPreference
     private lateinit var showWarningPreference: SwitchPreference
+    private lateinit var showCompensationDialogPreference: SwitchPreference
     private lateinit var themeSelectorPreference: ListPreference
 
     private lateinit var alarmBeepPreference: SwitchPreference
@@ -50,6 +51,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
         evStepsPreference = findPreference(getString(R.string.prefKey_evSteps))!!
         filterSortingPreference = findPreference(getString(R.string.prefKey_sortOrder))!!
         showWarningPreference = findPreference(getString(R.string.prefKey_showWarning))!!
+        showCompensationDialogPreference = findPreference(getString(R.string.prefKey_enableCompensationDial))!!
         themeSelectorPreference = findPreference(getString(R.string.prefKey_themeSelector))!!
         // timer
         alarmBeepPreference = findPreference(getString(R.string.prefKey_alarmBeep))!!
@@ -68,6 +70,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
         evStepsPreference.onPreferenceChangeListener = this
         filterSortingPreference.onPreferenceChangeListener = this
         showWarningPreference.onPreferenceClickListener = this
+        showCompensationDialogPreference.onPreferenceClickListener = this
         themeSelectorPreference.onPreferenceChangeListener = this
         // timer
         alarmBeepPreference.onPreferenceClickListener = this
@@ -94,6 +97,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
             }
         })
         viewModel.showWarning.observe(this, { showWarningPreference.isChecked = it })
+        viewModel.compensationDialEnabled.observe(this, { showCompensationDialogPreference.isChecked = it })
         viewModel.alarmBeepEnabled.observe(this, { alarmBeepPreference.isChecked = it })
         viewModel.alarmVibrateEnabled.observe(this, { alarmVibratePreference.isChecked = it })
         viewModel.hasPremium.observe(this, {
@@ -153,6 +157,9 @@ class PreferenceFragment : PreferenceFragmentCompat(),
             }
             alarmVibratePreference -> {
                 viewModel.setAlarmVibrate((preference as SwitchPreference).isChecked)
+            }
+            showCompensationDialogPreference -> {
+                viewModel.setCompensationDialEnabled((preference as SwitchPreference).isChecked)
             }
             mailPreference -> {
                 val mailIntent = Intent(Intent.ACTION_SENDTO)

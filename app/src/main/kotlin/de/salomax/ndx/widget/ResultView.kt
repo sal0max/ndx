@@ -82,8 +82,8 @@ class ResultView : ConstraintLayout {
      */
 
     private fun infinite() {
-        minutes.text = "\u221E"
-        seconds.text = "\u221E"
+        minutes.text = "-"
+        seconds.text = "-"
         hoursDays.text = null
     }
 

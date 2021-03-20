@@ -2,6 +2,7 @@ package de.salomax.ndx.data
 
 import android.content.Context
 import androidx.preference.PreferenceManager
+import de.salomax.ndx.data.model.Compensation
 import de.salomax.ndx.data.model.IsoSteps
 import de.salomax.ndx.data.model.ShutterSpeeds
 
@@ -32,6 +33,10 @@ class PrefDao private constructor(context: Context) {
 
    fun getEvSteps(): SharedPreferenceLiveData<ShutterSpeeds> {
       return sharedPreferences.shutterSpeedsLiveData(Pref.EV_STEPS, ShutterSpeeds.THIRD)
+   }
+
+   fun getCompensationSteps(): SharedPreferenceLiveData<Compensation> {
+      return sharedPreferences.compensationLiveData(Pref.EV_STEPS, Compensation.THIRD)
    }
 
    fun setEvSteps(evSteps: Int) {
@@ -88,6 +93,18 @@ class PrefDao private constructor(context: Context) {
 
    fun setWarning(enabled: Boolean) {
       sharedPreferences.edit().putBoolean(Pref.SHOW_WARNING, enabled).apply()
+   }
+
+   /*
+    * compensation dial
+    */
+
+   fun isCompensationDialEnabled(): SharedPreferenceLiveData<Boolean> {
+      return sharedPreferences.booleanLiveData(Pref.COMPENSATION_DIAL_ENABLED, false)
+   }
+
+   fun setCompensationDialEnabled(enabled: Boolean) {
+      sharedPreferences.edit().putBoolean(Pref.COMPENSATION_DIAL_ENABLED, enabled).apply()
    }
 
    /*
