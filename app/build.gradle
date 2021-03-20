@@ -14,8 +14,8 @@ android {
         targetSdkVersion 30
         // SemVer
         def major = 3
-        def minor = 0
-        def patch = 8
+        def minor = 1
+        def patch = 0
         versionCode = (major * 10000) + (minor * 100) + patch
         versionName = "$major.$minor.$patch"
         archivesBaseName = "$applicationId-v$versionCode"

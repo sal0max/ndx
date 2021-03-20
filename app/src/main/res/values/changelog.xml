@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="changelog"><b>3.0.8</b>
+    <string name="changelog"><b>3.1.0</b>
+        \n• Big new feature: A compensation dial, to fine-tune ISO/Aperture settings and see how to achieve the desired exposure time. Enable it in the settings!
+        \n• Some smaller UI improvements
+        \n
+        \n<b>3.0.8</b>
         \n• Some UI improvements
         \n• Minor tweaks
         \n
