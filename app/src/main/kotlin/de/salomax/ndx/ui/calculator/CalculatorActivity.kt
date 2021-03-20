@@ -90,9 +90,14 @@ class CalculatorActivity : BaseActivity() {
             binding.resultView.showWarning = it
         })
         viewModel.isCompensationDialEnabled.observe(this, Observer {
-            binding.recyclerCompensationContainer.visibility = when (it) {
-                true -> View.VISIBLE
-                false -> View.GONE
+            when (it) {
+                true -> {
+                    binding.recyclerCompensationContainer.visibility = View.VISIBLE
+                }
+                false -> {
+                    binding.recyclerCompensationContainer.visibility = View.GONE
+                    viewModel.selectedOffset.value = 0
+                }
             }
         })
         viewModel.calculatedSpeed.observe(this, Observer { micros ->
