@@ -19,6 +19,7 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
     internal val speeds: SharedPreferenceLiveData<ShutterSpeeds> = prefDao.getEvSteps()
     internal val compensation: SharedPreferenceLiveData<Compensation> = prefDao.getCompensationSteps()
     internal val isWarningEnabled: SharedPreferenceLiveData<Boolean> = prefDao.isWarningEnabled()
+    internal val isCompensationDialEnabled: SharedPreferenceLiveData<Boolean> = prefDao.isCompensationDialEnabled()
     internal val hasPremium: Boolean
         get() = prefDao.hasPremiumSync()
     private val filterSortOrder: LiveData<Int> = prefDao.getFilterSortOrder()
@@ -56,24 +57,30 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
         }
 
         private fun calc() {
-            // offset
-            val selectedIndex = selectedSpeed.value?.let { speeds.value?.doubleValues?.indexOf(it) }
-            val newIndex = selectedOffset.value?.let { selectedIndex?.plus(it) }
-            var compensatedSpeed = newIndex?.let { speeds.value?.doubleValues?.getOrNull(it) }
+            var speed : Long?
 
-            // offset outside of enum data -> manually extrapolate
-            if (compensatedSpeed == null && selectedOffset.value?.isLessThan(0) == true) {
-                val stopSize = when (compensation.value) {
-                    Compensation.THIRD -> 0.3333333333333333333333333333333333333333333333333333333f
-                    Compensation.HALF -> 0.5f
-                    Compensation.FULL -> 1f
-                    else -> 0F
+            if (selectedOffset.value == null) {
+                speed = selectedSpeed.value
+            } else {
+                // offset
+                val selectedIndex = selectedSpeed.value?.let { speeds.value?.doubleValues?.indexOf(it) }
+                val newIndex = selectedOffset.value?.let { selectedIndex?.plus(it) }
+                speed = newIndex?.let { speeds.value?.doubleValues?.getOrNull(it) }
+
+                // offset outside of enum data -> manually extrapolate
+                if (speed == null && selectedOffset.value?.isLessThan(0) == true) {
+                    val stopSize = when (compensation.value) {
+                        Compensation.THIRD -> 0.3333333333333333333333333333333333333333333333333333333f
+                        Compensation.HALF -> 0.5f
+                        Compensation.FULL -> 1f
+                        else -> 0F
+                    }
+                    val offset = selectedOffset.value?.times(stopSize)?.times(-1)
+                    // compensatedSpeed = speed * 2^offset
+                    speed = offset?.let { selectedSpeed.value?.times(2f.pow(it))?.toLong() }
                 }
-                val offset = selectedOffset.value?.times(stopSize)?.times(-1)
-                // compensatedSpeed = speed * 2^offset
-                compensatedSpeed = offset?.let { selectedSpeed.value?.times(2f.pow(it))?.toLong() }
             }
-            value = MathUtils.multiply(compensatedSpeed, filterFactor.value)
+            value = MathUtils.multiply(speed, filterFactor.value)
         }
 
         private fun Int?.isLessThan(other: Int?) =

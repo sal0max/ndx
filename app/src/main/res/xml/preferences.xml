@@ -1,74 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="@string/prefTitle_categoryGeneral">
+   <PreferenceCategory android:title="@string/prefTitle_categoryGeneral">
 
-        <ListPreference
-            android:entries="@array/prefEntries_evSteps"
-            android:entryValues="@array/prefValues_evSteps"
-            android:key="@string/prefKey_evSteps"
-            android:summary="%s"
-            android:title="@string/prefTitle_evSteps" />
+      <ListPreference
+         android:entries="@array/prefEntries_evSteps"
+         android:entryValues="@array/prefValues_evSteps"
+         android:key="@string/prefKey_evSteps"
+         android:summary="%s"
+         android:title="@string/prefTitle_evSteps" />
 
-        <ListPreference
-            android:entries="@array/prefEntries_sortOrder"
-            android:entryValues="@array/prefValues_sortOrder"
-            android:key="@string/prefKey_sortOrder"
-            android:summary="%s"
-            android:title="@string/prefTitle_sortOrder" />
+      <ListPreference
+         android:entries="@array/prefEntries_sortOrder"
+         android:entryValues="@array/prefValues_sortOrder"
+         android:key="@string/prefKey_sortOrder"
+         android:summary="%s"
+         android:title="@string/prefTitle_sortOrder" />
 
-        <SwitchPreference
-            android:key="@string/prefKey_showWarning"
-            android:summary="@string/prefSummary_showWarning"
-            android:title="@string/prefTitle_showWarning" />
+      <SwitchPreference
+         android:key="@string/prefKey_showWarning"
+         android:summary="@string/prefSummary_showWarning"
+         android:title="@string/prefTitle_showWarning" />
 
-        <ListPreference
-            android:entries="@array/prefEntries_themes"
-            android:entryValues="@array/prefValues_themes"
-            android:key="@string/prefKey_themeSelector"
-            android:summary="%s"
-            android:title="@string/prefTitle_themeSelector" />
+      <SwitchPreference
+         android:key="@string/prefKey_enableCompensationDial"
+         android:summary="@string/prefSummary_enableCompensation"
+         android:title="@string/prefTitle_enableCompensation" />
 
-    </PreferenceCategory>
+      <ListPreference
+         android:entries="@array/prefEntries_themes"
+         android:entryValues="@array/prefValues_themes"
+         android:key="@string/prefKey_themeSelector"
+         android:summary="%s"
+         android:title="@string/prefTitle_themeSelector" />
 
-    <PreferenceCategory android:title="Timer">
+   </PreferenceCategory>
 
-        <SwitchPreference
-            android:key="@string/prefKey_alarmBeep"
-            android:summary="@string/prefSummary_timerBeep"
-            android:title="@string/prefTitle_timerBeep" />
+   <PreferenceCategory android:title="Timer">
 
-        <SwitchPreference
-            android:key="@string/prefKey_alarmVibrate"
-            android:summary="@string/prefSummary_timerVibrate"
-            android:title="@string/prefTitle_timerVibrate" />
+      <SwitchPreference
+         android:key="@string/prefKey_alarmBeep"
+         android:summary="@string/prefSummary_timerBeep"
+         android:title="@string/prefTitle_timerBeep" />
 
-    </PreferenceCategory>
+      <SwitchPreference
+         android:key="@string/prefKey_alarmVibrate"
+         android:summary="@string/prefSummary_timerVibrate"
+         android:title="@string/prefTitle_timerVibrate" />
 
-    <PreferenceCategory android:title="@string/prefTitle_categoryAbout">
+   </PreferenceCategory>
 
-        <Preference
-            android:key="@string/prefKey_donate"
-            android:summary="@string/prefSummary_donate"
-            android:title="@string/prefTitle_donate" />
+   <PreferenceCategory android:title="@string/prefTitle_categoryAbout">
 
-        <Preference
-            android:key="@string/prefKey_about"
-            android:summary="@string/prefSummary_about"
-            android:title="@string/prefTitle_about" />
+      <Preference
+         android:key="@string/prefKey_donate"
+         android:summary="@string/prefSummary_donate"
+         android:title="@string/prefTitle_donate" />
 
-    </PreferenceCategory>
+      <Preference
+         android:key="@string/prefKey_about"
+         android:summary="@string/prefSummary_about"
+         android:title="@string/prefTitle_about" />
 
-    <PreferenceCategory android:title="@string/prefTitle_categoryFeedback">
+   </PreferenceCategory>
 
-        <!--suppress AndroidElementNotAllowed -->
-        <Preference
-            android:key="@string/prefKey_mail"
-            android:title="@string/prefTitle_mail" />
+   <PreferenceCategory android:title="@string/prefTitle_categoryFeedback">
 
-        <Preference
-            android:key="@string/prefKey_rate"
-            android:title="@string/prefTitle_rate" />
-    </PreferenceCategory>
+      <!--suppress AndroidElementNotAllowed -->
+      <Preference
+         android:key="@string/prefKey_mail"
+         android:title="@string/prefTitle_mail" />
+
+      <Preference
+         android:key="@string/prefKey_rate"
+         android:title="@string/prefTitle_rate" />
+   </PreferenceCategory>
 
 </PreferenceScreen>

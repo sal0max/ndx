@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -77,16 +78,22 @@ class CalculatorActivity : BaseActivity() {
             }
         })
         viewModel.compensation.observe(this, Observer {
-            val adapter = binding.recyclerCompensation?.adapter as CompensationAdapter
+            val adapter = binding.recyclerCompensation.adapter as CompensationAdapter
             if (adapter.compensation != it) {
                 // set new compensation values
                 adapter.compensation = it
                 // scroll to middle
-                binding.recyclerCompensation?.scrollToPosition(it.text.size / 2)
+                binding.recyclerCompensation.scrollToPosition(it.text.size / 2)
             }
         })
         viewModel.isWarningEnabled.observe(this, Observer {
             binding.resultView.showWarning = it
+        })
+        viewModel.isCompensationDialEnabled.observe(this, Observer {
+            binding.recyclerCompensationContainer.visibility = when (it) {
+                true -> View.VISIBLE
+                false -> View.GONE
+            }
         })
         viewModel.calculatedSpeed.observe(this, Observer { micros ->
             binding.resultView.duration = micros

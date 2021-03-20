@@ -19,6 +19,9 @@ data class Pref(val key: String, val value: String) {
       // warning: very long exposures (boolean)
       const val SHOW_WARNING = "SHOW_WARNING"
 
+      // show compensation dial
+      const val COMPENSATION_DIAL_ENABLED = "COMPENSATION_DIAL_ENABLED"
+
       // premium (boolean)
       const val HAS_PREMIUM = "HAS_PREMIUM"
    }

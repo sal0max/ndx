@@ -96,6 +96,18 @@ class PrefDao private constructor(context: Context) {
    }
 
    /*
+    * compensation dial
+    */
+
+   fun isCompensationDialEnabled(): SharedPreferenceLiveData<Boolean> {
+      return sharedPreferences.booleanLiveData(Pref.COMPENSATION_DIAL_ENABLED, false)
+   }
+
+   fun setCompensationDialEnabled(enabled: Boolean) {
+      sharedPreferences.edit().putBoolean(Pref.COMPENSATION_DIAL_ENABLED, enabled).apply()
+   }
+
+   /*
     * premium
     */
 
