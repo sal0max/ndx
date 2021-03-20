@@ -39,7 +39,7 @@
 
    <!-- compensation -->
 
-   <androidx.recyclerview.widget.RecyclerView
+   <androidx.constraintlayout.widget.ConstraintLayout
       android:id="@+id/recycler_compensation_container"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
@@ -112,7 +112,7 @@
          app:layout_constraintTop_toTopOf="@id/recycler_compensation"
          tools:ignore="HardcodedText,SmallSp" />
 
-   </androidx.recyclerview.widget.RecyclerView>
+   </androidx.constraintlayout.widget.ConstraintLayout>
 
    <!-- /compensation -->
 
