@@ -11,8 +11,8 @@
    * ~~keep position of shutter-snappyRecyclerView and snap it~~
 
 ### normal priority
-* add (optional) aperture selection to fine-tune resulting exposure time
-* add (optional) ISO selection to fine-tune resulting exposure time
+* ~~add (optional) aperture selection to fine-tune resulting exposure time~~
+* ~~add (optional) ISO selection to fine-tune resulting exposure time~~
 * implement timer
    * make system alarm when in background
    * (also display days, not just hours)
