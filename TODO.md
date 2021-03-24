@@ -36,7 +36,6 @@
 * ~~monetization~~
 
 ### low priority
-* redesign filter calibrator
 * German localization
 * add setting: set minimal exposure time (1/8000?, 1/4000? etc.)
 * android wear support (timer)
@@ -50,6 +49,7 @@
    * How often is the calibrator used (when adding/editing a new filter)?
    * How often is the timer used?
    * ~~What theme is used?~~
+* ~~redesign filter calibrator~~
 * ~~animate addition/removal of filters in filter pouch~~
 
 

@@ -79,6 +79,7 @@ class CalibratorActivity : BaseActivity() {
                 shutterMinAfter = it
                 showResult()
             }
+            scrollToPosition(1)
         }
         binding.snappy2b.apply {
             adapter = SecondsAdapter(this@CalibratorActivity, 59)
@@ -96,8 +97,14 @@ class CalibratorActivity : BaseActivity() {
         }
 
         // refresh data on init & observe
-        viewModel.speeds.observe(this, { (binding.snappy1a.adapter as ShutterAdapter).speeds = it })
-        viewModel.isoSteps.observe(this, { (binding.snappy2c.adapter as IsoAdapter).setISOs(it) })
+        viewModel.speeds.observe(this, {
+            (binding.snappy1a.adapter as ShutterAdapter).speeds = it
+            binding.snappy1a.scrollToPosition(it.doubleValues.size / 2)
+        })
+        viewModel.isoSteps.observe(this, {
+            (binding.snappy1b.adapter as IsoAdapter).setISOs(it)
+            (binding.snappy2c.adapter as IsoAdapter).setISOs(it)
+        })
     }
 
     override fun onSupportNavigateUp(): Boolean {
