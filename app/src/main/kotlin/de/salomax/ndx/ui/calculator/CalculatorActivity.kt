@@ -92,10 +92,12 @@ class CalculatorActivity : BaseActivity() {
         viewModel.isCompensationDialEnabled.observe(this, Observer {
             when (it) {
                 true -> {
-                    binding.recyclerCompensationContainer.visibility = View.VISIBLE
-                    // scroll to center
-                    binding.recyclerCompensation.adapter?.itemCount?.div(2)?.let {
-                        center -> binding.recyclerCompensation.scrollToPosition(center)
+                    if (binding.recyclerCompensationContainer.visibility != View.VISIBLE) {
+                        binding.recyclerCompensationContainer.visibility = View.VISIBLE
+                        // scroll to center
+                        binding.recyclerCompensation.adapter?.itemCount?.div(2)?.let { center ->
+                            binding.recyclerCompensation.scrollToPosition(center)
+                        }
                     }
                 }
                 false -> {
