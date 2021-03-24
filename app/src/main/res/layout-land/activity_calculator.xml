@@ -57,6 +57,8 @@
       android:id="@+id/recycler_compensation_container"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
+      android:background="@color/colorPrimary"
+      android:elevation="2dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toStartOf="@id/guideline"
       app:layout_constraintStart_toStartOf="parent">
@@ -66,7 +68,6 @@
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:background="?android:attr/colorPrimary"
-         android:elevation="2dp"
          android:orientation="horizontal"
          android:scrollbars="none"
          tools:listitem="@layout/row_shutter" />
