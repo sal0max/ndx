@@ -11,9 +11,7 @@ import de.salomax.ndx.widget.SnappyRecyclerView
 
 class IsoAdapter(private val context: AppCompatActivity) : RecyclerView.Adapter<IsoAdapter.ViewHolder>() {
 
-    companion object {
-        private var items: IsoSteps? = null
-    }
+    private var items: IsoSteps? = null
 
     var onIsoSelected: ((Int) -> Unit)? = null
 

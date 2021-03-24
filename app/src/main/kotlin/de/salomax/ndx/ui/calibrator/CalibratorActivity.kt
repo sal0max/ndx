@@ -102,6 +102,7 @@ class CalibratorActivity : BaseActivity() {
             binding.snappy1a.scrollToPosition(it.doubleValues.size / 2)
         })
         viewModel.isoSteps.observe(this, {
+            (binding.snappy1b.adapter as IsoAdapter).setISOs(it)
             (binding.snappy2c.adapter as IsoAdapter).setISOs(it)
         })
     }
