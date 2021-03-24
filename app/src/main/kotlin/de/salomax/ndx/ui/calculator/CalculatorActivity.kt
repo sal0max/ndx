@@ -45,7 +45,7 @@ class CalculatorActivity : BaseActivity() {
             }
         }
         // list & adapter : compensation
-        binding.recyclerCompensation?.apply {
+        binding.recyclerCompensation.apply {
             adapter = CompensationAdapter(this@CalculatorActivity)
             addItemDecoration(CenterLineDecoration(ContextCompat.getColor(context, android.R.color.white))) // center line
             // addItemDecoration(DotDividerDecoration(ContextCompat.getColor(context, android.R.color.white)))
