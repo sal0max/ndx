@@ -206,7 +206,7 @@ class FilterEditorActivity : BaseActivity() {
         })
     }
 
-    class MinMaxInputFilter(private var min: Int, private var max: Int) : InputFilter {
+    private class MinMaxInputFilter(private var min: Int, private var max: Int) : InputFilter {
 
         override fun filter(source: CharSequence, start: Int, end: Int, dest: Spanned, dstart: Int, dend: Int): CharSequence? {
             try {
