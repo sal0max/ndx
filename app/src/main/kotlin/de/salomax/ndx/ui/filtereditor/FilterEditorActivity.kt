@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputFilter
+import android.text.Spanned
 import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
@@ -36,6 +38,9 @@ class FilterEditorActivity : BaseActivity() {
         binding = ActivityFiltereditorBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(FilterEditorViewModel::class.java)
+
+        // don't allow > Int.MAX_VALUE
+        binding.factor.filters = arrayOf<InputFilter>(MinMaxInputFilter(0, Int.MAX_VALUE))
 
         // edit existing filter
         val filter = intent.getParcelableExtra<Filter>(ARG_FILTER)
@@ -199,6 +204,32 @@ class FilterEditorActivity : BaseActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
+    }
+
+    class MinMaxInputFilter(private var min: Int, private var max: Int) : InputFilter {
+
+        override fun filter(source: CharSequence, start: Int, end: Int, dest: Spanned, dstart: Int, dend: Int): CharSequence? {
+            try {
+                // calculate the new input, the user wants
+                val input = Integer.parseInt(
+                      dest.subSequence(0, dstart).toString() +
+                            source.subSequence(start, end).toString() +
+                            dest.subSequence(dend, dest.length)
+                )
+                if (isInRange(min, max, input))
+                    // accept the new input
+                    return null
+            } catch (ignored: java.lang.NumberFormatException) {}
+            // append "nothing" instead of the input
+            return ""
+        }
+
+        private fun isInRange(a: Int, b: Int, c: Int): Boolean {
+            return if (b > a)
+                c in a..b
+            else
+                c in b..a
+        }
     }
 
 }
