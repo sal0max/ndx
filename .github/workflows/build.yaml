@@ -19,4 +19,4 @@ jobs:
         run: sudo snap install gradle --classic
 
       - name: Lint, test and build the debug apk
-        run: gradle check assembleDebug
+        run: gradle check assembleDebug --stacktrace
