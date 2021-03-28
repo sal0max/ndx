@@ -61,6 +61,7 @@ android {
         sourceSets {
             main.java.srcDirs += 'src/main/kotlin'
             debug.java.srcDirs += 'src/debug/kotlin'
+            test.java.srcDirs += 'src/test/kotlin'
         }
     }
 
@@ -99,6 +100,9 @@ dependencies {
 
     // billing
     implementation 'com.android.billingclient:billing-ktx:3.0.3'
+
+    // test
+    testImplementation 'junit:junit:4.13.2'
 }
 
 def getSecret(String key) {
