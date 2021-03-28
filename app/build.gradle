@@ -44,7 +44,6 @@ android {
         }
         debug {
             applicationIdSuffix '.debug'
-            signingConfig signingConfigs.release
             versionNameSuffix ' [DEBUG]'
         }
     }
