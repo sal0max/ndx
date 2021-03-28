@@ -213,7 +213,8 @@
       app:fabSize="normal"
       app:layout_anchor="@id/scrollView"
       app:layout_anchorGravity="bottom|right|end"
-      tools:visibility="visible" />
+      tools:visibility="visible"
+      tools:ignore="ContentDescription" />
    <!-- /delete -->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

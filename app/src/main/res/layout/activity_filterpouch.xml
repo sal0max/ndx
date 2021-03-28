@@ -24,6 +24,7 @@
         android:src="@drawable/ic_add_white_24dp"
         app:fabSize="normal"
         app:layout_anchor="@id/list"
-        app:layout_anchorGravity="bottom|right|end" />
+        app:layout_anchorGravity="bottom|right|end"
+        tools:ignore="ContentDescription" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
