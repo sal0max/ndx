@@ -9,12 +9,9 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
-      - name: Setup java environment
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
-      - name: Run lint, tests, etc. and finally build the debug flavor
-        uses: eskatos/gradle-command-action@v1
-        with:
-          arguments: check assembleDebug
-          dependencies-cache-enabled: true
+
+      - name: Install gradle
+        run: sudo apt-get install gradle
+
+      - name: Lint, test and build the debug apk
+        run: gradle check assembleDebug
