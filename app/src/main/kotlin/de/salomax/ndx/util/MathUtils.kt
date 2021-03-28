@@ -15,12 +15,31 @@ object MathUtils {
             a * b
     }
 
-    fun factor2fstop(factor: Double): String =
-            String.format(Locale.US, "%.1f", kotlin.math.log2(factor))
+    /**
+     * Converts a filter factor to the equivalent f-stop reduction. Also rounds to one fraction.
+     *
+     * "1024" will be converted to "10.0"
+     */
+    fun factor2fstop(factor: Number): String =
+            String.format(Locale.US, "%.1f", kotlin.math.log2(factor.toDouble()))
 
-    fun factor2fstopRounded(factor: Number): String =
-            kotlin.math.log2(factor.toDouble()).roundToLong().toString()
+    /**
+     * Converts a filter factor to the equivalent f-stop reduction.
+     * Rounds to one fraction, if there is a fraction.
+     * If there is no fraction, only the full number is returned.
+     *
+     * - "1024" will be converted to "10"
+     * - "3" will be converted to "1.6"
+     */
+    fun factor2fstopRounded(factor: Number): String {
+        return factor2fstop(factor).substringBefore(".0")
+    }
 
+    /**
+     * Converts a filter factor to the equivalent nd number. Also rounds to one fraction.
+     *
+     * "1024" will be converted to "3.0"
+     */
     fun factor2nd(factor: Number): String =
             String.format(Locale.US, "%.1f", kotlin.math.log10(factor.toDouble()))
 }
