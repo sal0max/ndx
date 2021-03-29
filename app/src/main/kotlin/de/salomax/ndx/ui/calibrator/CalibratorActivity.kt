@@ -98,8 +98,13 @@ class CalibratorActivity : BaseActivity() {
 
         // refresh data on init & observe
         viewModel.speeds.observe(this, {
-            (binding.snappy1a.adapter as ShutterAdapter).speeds = it
-            binding.snappy1a.scrollToPosition(it.doubleValues.size / 2)
+            val adapter = binding.snappy1a.adapter as ShutterAdapter
+            if (adapter.speeds != it) {
+                // set new values
+                adapter.speeds = it
+                // scroll to middle
+                binding.snappy1a.scrollToPosition(it.doubleValues.size / 2)
+            }
         })
         viewModel.isoSteps.observe(this, {
             (binding.snappy1b.adapter as IsoAdapter).setISOs(it)
