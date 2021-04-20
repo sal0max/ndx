@@ -83,7 +83,7 @@ class FilterAdapter(private val context: Context) : RecyclerView.Adapter<FilterA
             switch.isClickable = false
             itemView.setOnClickListener { switch.toggle() }
             switch.setOnCheckedChangeListener { _, isChecked ->
-                val item = items[adapterPosition]
+                val item = items[bindingAdapterPosition]
                 if (isChecked)
                     activeItems.add(item)
                 else
