@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="changelog"><b>3.1.2</b>
-        \n• Some stability improvements and fixed bugs
-        \n• As always: minor UI improvements
+        \n⸻
+        \n<li>Some stability improvements and fixed bugs</li>
+        \n<li>As always: minor UI improvements</li>
         \n
         \n<b>3.1.1</b>
-        \n• Some UI improvements
+        \n⸻
+        \n<li>Some UI improvements</li>
         \n
         \n<b>3.1.0</b>
-        \n• Big new feature: A compensation dial, to fine-tune ISO/Aperture settings and see how to achieve the desired exposure time. Enable it in the settings!
-        \n• Some smaller UI improvements
+        \n⸻
+        \n<li>Big new feature: A compensation dial, to fine-tune ISO/Aperture settings and see how to achieve the desired exposure time. Enable it in the settings!</li>
+        \n<li>Some smaller UI improvements</li>
         \n
         \n<b>3.0.8</b>
-        \n• Some UI improvements
-        \n• Minor tweaks
+        \n⸻
+        \n<li>Some UI improvements</li>
+        \n<li>Minor tweaks</li>
         \n
         \n<b>3.0.7 – <i>initial release</i></b>
+        \n⸻
         \nVersion 3 is the third iteration in writing this app.
-        \n• A complete re-write!
-        \n• A different, better user interface!
-        \n• Performance first!
-        \n• More features than ever!
+        \n<li>A complete re-write!</li>
+        \n<li>A different, better user interface!</li>
+        \n<li>Performance first!</li>
+        \n<li>More features than ever!</li>
         \nAnd ultimately the first version that is publicly available.
     </string>
 
