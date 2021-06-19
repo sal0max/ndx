@@ -10,6 +10,7 @@ import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import de.salomax.ndx.R
 import de.salomax.ndx.data.Filter
@@ -70,8 +71,8 @@ class FilterEditorActivity : BaseActivity() {
         binding.factor.onlyGreaterEqualOne()
 
         binding.btnCalibrator.setOnClickListener {
-                val intent = Intent(this, CalibratorActivity().javaClass)
-                startActivityForResult(intent, 1)
+            val intent = Intent(this, CalibratorActivity().javaClass)
+            calibratorActivityWithResult.launch(intent)
         }
 
         // title bar
@@ -80,6 +81,13 @@ class FilterEditorActivity : BaseActivity() {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
             setHomeAsUpIndicator(R.drawable.ic_close_white_24dp)
+        }
+    }
+
+    private val calibratorActivityWithResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        val data: Intent? = result.data
+        if (result.resultCode == Activity.RESULT_OK && data != null && data.hasExtra("FACTOR")) {
+            init(data.getIntExtra("FACTOR", 1))
         }
     }
 
@@ -112,14 +120,6 @@ class FilterEditorActivity : BaseActivity() {
                 true
             }
             else -> false
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 1 && resultCode == Activity.RESULT_OK
-                && data != null && data.hasExtra("FACTOR")) {
-            init(data.getIntExtra("FACTOR", 1))
         }
     }
 

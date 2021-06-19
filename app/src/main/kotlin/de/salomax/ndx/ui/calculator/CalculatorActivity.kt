@@ -143,7 +143,7 @@ class CalculatorActivity : BaseActivity() {
                     true
                 } else {
                     val intent = Intent(this, BillingActivity().javaClass)
-                    startActivityForResult(intent, 1)
+                    startActivity(intent)
                     false
                 }
             }

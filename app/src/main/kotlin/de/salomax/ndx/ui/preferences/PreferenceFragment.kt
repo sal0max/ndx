@@ -130,7 +130,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
                           .startActivities()
                 } else {
                     val intent = Intent(context, BillingActivity().javaClass)
-                    startActivityForResult(intent, 1)
+                    startActivity(intent)
                     return false
                 }
             }
@@ -143,7 +143,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
         when (preference) {
             donatePreference -> {
                 val intent = Intent(context, BillingActivity().javaClass)
-                startActivityForResult(intent, 1)
+                startActivity(intent)
             }
             aboutPreference -> {
                 val fragment = ChangelogDialog()

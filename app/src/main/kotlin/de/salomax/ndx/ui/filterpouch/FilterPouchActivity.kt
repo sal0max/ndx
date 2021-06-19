@@ -3,6 +3,7 @@ package de.salomax.ndx.ui.filterpouch
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -25,10 +26,6 @@ class FilterPouchActivity : BaseActivity() {
 
     private val filterAdapter: FilterAdapter = FilterAdapter(this)
 
-    companion object {
-        private const val ARG_EDIT = 1
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -40,7 +37,7 @@ class FilterPouchActivity : BaseActivity() {
         filterAdapter.onClick = {
             val intent = Intent(this, FilterEditorActivity().javaClass)
             intent.putExtra(FilterEditorActivity.ARG_FILTER, it)
-            startActivityForResult(intent, ARG_EDIT)
+            filterEditorActivityWithResult.launch(intent)
         }
         binding.list.apply {
             layoutManager = LinearLayoutManager(context)
@@ -56,7 +53,7 @@ class FilterPouchActivity : BaseActivity() {
                 startActivity(intent)
             } else {
                 val intent = Intent(this, BillingActivity().javaClass)
-                startActivityForResult(intent, 1)
+                startActivity(intent)
             }
         }
 
@@ -71,20 +68,20 @@ class FilterPouchActivity : BaseActivity() {
         viewModel.filters.observe(this, { filterAdapter.setFilters(it) })
     }
 
+    private val filterEditorActivityWithResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        val data: Intent? = result.data
+        // filter got deleted: show undo
+        if (result.resultCode == Activity.RESULT_OK && data != null) {
+            val filter = data.getParcelableExtra<Filter>("FILTER")!!
+            Snackbar.make(binding.list, getString(R.string.filterDeleted, filter.name), 5_000) // 5s
+                .setAction(R.string.undo) { viewModel.insert(filter) }
+                .show()
+        }
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        // filter got deleted: show undo
-        if (requestCode == ARG_EDIT && resultCode == Activity.RESULT_OK && data != null) {
-            val filter = data.getParcelableExtra<Filter>("FILTER")!!
-            Snackbar.make(binding.list, getString(R.string.filterDeleted, filter.name), 5_000) // 5s
-                    .setAction(R.string.undo) { viewModel.insert(filter) }
-                    .show()
-        }
     }
 
 }
