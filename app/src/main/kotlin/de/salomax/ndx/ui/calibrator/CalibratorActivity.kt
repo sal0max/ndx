@@ -107,8 +107,8 @@ class CalibratorActivity : BaseActivity() {
             }
         })
         viewModel.isoSteps.observe(this, {
-            (binding.snappy1b.adapter as IsoAdapter).setISOs(it)
-            (binding.snappy2c.adapter as IsoAdapter).setISOs(it)
+            (binding.snappy1b.adapter as IsoAdapter).isoSteps = it
+            (binding.snappy2c.adapter as IsoAdapter).isoSteps = it
         })
     }
 

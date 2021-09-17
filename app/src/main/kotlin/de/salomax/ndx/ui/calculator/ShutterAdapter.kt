@@ -1,5 +1,6 @@
 package de.salomax.ndx.ui.calculator
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -12,6 +13,7 @@ import de.salomax.ndx.widget.SnappyRecyclerView
 class ShutterAdapter(private val context: AppCompatActivity) : RecyclerView.Adapter<ShutterAdapter.ViewHolder>() {
 
     var speeds: ShutterSpeeds? = null
+        @SuppressLint("NotifyDataSetChanged")
         set(speeds) {
             if (this.speeds != speeds) {
                 field = speeds

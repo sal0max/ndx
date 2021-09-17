@@ -1,5 +1,6 @@
 package de.salomax.ndx.ui.calculator
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -52,6 +53,7 @@ class FilterAdapter(private val context: Context) : RecyclerView.Adapter<FilterA
 
     override fun getItemCount() = items.size
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setFilters(filters: List<Filter>?) {
         items.clear()
         filters?.let {

@@ -1,5 +1,6 @@
 package de.salomax.ndx.ui.filterpouch
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -47,6 +48,7 @@ class FilterAdapter(private val context: Context) : RecyclerView.Adapter<FilterA
 
     override fun getItemId(position: Int) = items[position].id!!
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setFilters(filters: List<Filter>?) {
         items.clear()
         filters?.let {

@@ -1,7 +1,6 @@
 package de.salomax.ndx.util
 
 import java.util.*
-import kotlin.math.roundToLong
 
 object MathUtils {
 

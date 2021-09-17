@@ -13,24 +13,16 @@ class FilterPouchViewModel(application: Application) : AndroidViewModel(applicat
    private val prefDao = PrefDao.getInstance(application)
 
    // from Room
-   private val filtersUnsorted: LiveData<List<Filter>?>
+   private val filtersUnsorted: LiveData<List<Filter>?> = filterDao.getAll()
 
    // from SharedPrefs
    internal val hasPremium
       get() = prefDao.hasPremiumSync()
 
-   private val filterSortOrder: LiveData<Int>
+   private val filterSortOrder: LiveData<Int> = prefDao.getFilterSortOrder()
 
    // live calculated
-   internal val filters: LiveData<List<Filter>?>
-
-   init {
-      filtersUnsorted = filterDao.getAll()
-
-      filterSortOrder = prefDao.getFilterSortOrder()
-
-      filters = FilterLiveData()
-   }
+   internal val filters: LiveData<List<Filter>?> = FilterLiveData()
 
    fun insert(filter: Filter) {
       Executors.newSingleThreadScheduledExecutor().execute { filterDao.insert(filter) }

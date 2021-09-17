@@ -34,41 +34,48 @@ abstract class SharedPreferenceLiveData<T>(val sharedPrefs: SharedPreferences,
 // Implementations
 
 // Int
+@Suppress("unused")
 class SharedPreferenceIntLiveData(sharedPrefs: SharedPreferences, key: String, defValue: Int) :
       SharedPreferenceLiveData<Int>(sharedPrefs, key, defValue) {
    override fun getValueFromPreferences(key: String, defValue: Int): Int = sharedPrefs.getInt(key, defValue)
 }
 
 // String
+@Suppress("unused")
 class SharedPreferenceStringLiveData(sharedPrefs: SharedPreferences, key: String, defValue: String?) : SharedPreferenceLiveData<String?>(sharedPrefs, key, defValue) {
    override fun getValueFromPreferences(key: String, defValue: String?): String? = sharedPrefs.getString(key, defValue)
 }
 
 // Boolean
+@Suppress("unused")
 class SharedPreferenceBooleanLiveData(sharedPrefs: SharedPreferences, key: String, defValue: Boolean) :
       SharedPreferenceLiveData<Boolean>(sharedPrefs, key, defValue) {
    override fun getValueFromPreferences(key: String, defValue: Boolean): Boolean = sharedPrefs.getBoolean(key, defValue)
 }
 
 // Float
+@Suppress("unused")
 class SharedPreferenceFloatLiveData(sharedPrefs: SharedPreferences, key: String, defValue: Float) :
       SharedPreferenceLiveData<Float>(sharedPrefs, key, defValue) {
    override fun getValueFromPreferences(key: String, defValue: Float): Float = sharedPrefs.getFloat(key, defValue)
 }
 
 // Long
+@Suppress("unused")
 class SharedPreferenceLongLiveData(sharedPrefs: SharedPreferences, key: String, defValue: Long) :
       SharedPreferenceLiveData<Long>(sharedPrefs, key, defValue) {
    override fun getValueFromPreferences(key: String, defValue: Long): Long = sharedPrefs.getLong(key, defValue)
 }
 
 // StringSet
+@Suppress("unused")
 class SharedPreferenceStringSetLiveData(sharedPrefs: SharedPreferences, key: String, defValue: Set<String>?) :
       SharedPreferenceLiveData<Set<String>?>(sharedPrefs, key, defValue) {
    override fun getValueFromPreferences(key: String, defValue: Set<String>?): Set<String>? = sharedPrefs.getStringSet(key, defValue)
 }
 
 // IsoSteps
+@Suppress("unused")
 class SharedPreferenceIsoStepsLiveData(sharedPrefs: SharedPreferences, key: String, defValue: IsoSteps) :
       SharedPreferenceLiveData<IsoSteps>(sharedPrefs, key, defValue) {
    override fun getValueFromPreferences(key: String, defValue: IsoSteps): IsoSteps = when (sharedPrefs.getInt(key, 3)) {
@@ -79,6 +86,7 @@ class SharedPreferenceIsoStepsLiveData(sharedPrefs: SharedPreferences, key: Stri
 }
 
 // ShutterSpeeds
+@Suppress("unused")
 class SharedPreferenceShutterSpeedsLiveData(sharedPrefs: SharedPreferences, key: String, defValue: ShutterSpeeds) :
       SharedPreferenceLiveData<ShutterSpeeds>(sharedPrefs, key, defValue) {
    override fun getValueFromPreferences(key: String, defValue: ShutterSpeeds): ShutterSpeeds = when (sharedPrefs.getInt(key, 3)) {
@@ -89,6 +97,7 @@ class SharedPreferenceShutterSpeedsLiveData(sharedPrefs: SharedPreferences, key:
 }
 
 // Compensation
+@Suppress("unused")
 class SharedPreferenceCompensationLiveData(sharedPrefs: SharedPreferences, key: String, defValue: Compensation) :
       SharedPreferenceLiveData<Compensation>(sharedPrefs, key, defValue) {
    override fun getValueFromPreferences(key: String, defValue: Compensation): Compensation = when (sharedPrefs.getInt(key, 3)) {

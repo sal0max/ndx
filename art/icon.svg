@@ -1,5 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="108"
-   height="108" viewBox="0 0 108 108">
+<svg xmlns="http://www.w3.org/2000/svg" width="108" height="108" viewBox="0 0 108 108">
    <defs>
       <clipPath id="clip-path">
          <path id="mask-squircle" d="M36,0C7.2,0,0,7.2,0,36S7.2,72,36,72s36-7.2,36-36S64.8,0,36,0Z"
@@ -16,12 +15,12 @@
    </defs>
    <g id="squircle-masked" clip-path="url(#clip-squircle-masked)">
       <g id="group" transform="translate(4 4)">
-         <path id="mask-squircle-2" data-name="mask-squircle"
+         <path id="mask-squircle-2"
             d="M36,0C7.2,0,0,7.2,0,36S7.2,72,36,72s36-7.2,36-36S64.8,0,36,0Z"
             transform="translate(14 14)" fill="none" />
-         <g id="group-2" data-name="group" clip-path="url(#clip-path)">
+         <g id="group-2" clip-path="url(#clip-path)">
             <g id="adaptive-icon" transform="translate(-4 -4)">
-               <g id="adaptive-icon-2" data-name="adaptive-icon">
+               <g id="adaptive-icon-2">
                   <g id="foreground">
                      <rect id="shadow" width="76" height="52"
                         transform="translate(72.515 35.745) rotate(45)"

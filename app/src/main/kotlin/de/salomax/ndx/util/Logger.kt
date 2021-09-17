@@ -2,6 +2,7 @@ package de.salomax.ndx.util
 
 import android.util.Log
 
+@Suppress("unused")
 object Logger {
 
     private const val tag = "!!! NDx !!!"

@@ -9,32 +9,43 @@ class PreferenceViewModel(application: Application) : AndroidViewModel(applicati
 
     private val prefDao: PrefDao = PrefDao.getInstance(application)
 
-    internal val filterSortOrder: SharedPreferenceLiveData<Int>
-    internal val evSteps: SharedPreferenceLiveData<ShutterSpeeds>
-    internal val showWarning: SharedPreferenceLiveData<Boolean>
-    internal val alarmBeepEnabled: SharedPreferenceLiveData<Boolean>
-    internal val alarmVibrateEnabled: SharedPreferenceLiveData<Boolean>
-    internal val compensationDialEnabled: SharedPreferenceLiveData<Boolean>
-    internal val hasPremium: SharedPreferenceLiveData<Boolean>
-    internal val theme: SharedPreferenceLiveData<Int>
+    internal val filterSortOrder: SharedPreferenceLiveData<Int> =
+        prefDao.getFilterSortOrder()
+    internal val evSteps: SharedPreferenceLiveData<ShutterSpeeds> =
+        prefDao.getEvSteps()
+    internal val showWarning: SharedPreferenceLiveData<Boolean> =
+        prefDao.isWarningEnabled()
+    internal val alarmBeepEnabled: SharedPreferenceLiveData<Boolean> =
+        prefDao.shouldAlarmBeep()
+    internal val alarmVibrateEnabled: SharedPreferenceLiveData<Boolean> =
+        prefDao.shouldAlarmVibrate()
+    internal val compensationDialEnabled: SharedPreferenceLiveData<Boolean> =
+        prefDao.isCompensationDialEnabled()
+    internal val hasPremium: SharedPreferenceLiveData<Boolean> =
+        prefDao.hasPremium()
+    internal val theme: SharedPreferenceLiveData<Int> =
+        prefDao.getTheme()
 
-    init {
-        filterSortOrder = prefDao.getFilterSortOrder()
-        evSteps = prefDao.getEvSteps()
-        showWarning = prefDao.isWarningEnabled()
-        alarmBeepEnabled = prefDao.shouldAlarmBeep()
-        alarmVibrateEnabled = prefDao.shouldAlarmVibrate()
-        compensationDialEnabled = prefDao.isCompensationDialEnabled()
-        hasPremium = prefDao.hasPremium()
-        theme = prefDao.getTheme()
+    fun setEvSteps(evSteps: Int) {
+        prefDao.setEvSteps(evSteps)
     }
-
-    fun setEvSteps(evSteps: Int) { prefDao.setEvSteps(evSteps) }
-    fun setWarning(enabled: Boolean) { prefDao.setWarning(enabled) }
-    fun setAlarmBeep(enabled: Boolean) { prefDao.setAlarmBeep(enabled) }
-    fun setAlarmVibrate(enabled: Boolean) { prefDao.setAlarmVibrate(enabled) }
-    fun setCompensationDialEnabled(enabled: Boolean) { prefDao.setCompensationDialEnabled(enabled) }
-    fun setFilterSortOrder(sortOrder: Int) {prefDao.setFilterSortOrder(sortOrder)}
-    fun setTheme(theme: Int) {prefDao.setTheme(theme)}
+    fun setWarning(enabled: Boolean) {
+        prefDao.setWarning(enabled)
+    }
+    fun setAlarmBeep(enabled: Boolean) {
+        prefDao.setAlarmBeep(enabled)
+    }
+    fun setAlarmVibrate(enabled: Boolean) {
+        prefDao.setAlarmVibrate(enabled)
+    }
+    fun setCompensationDialEnabled(enabled: Boolean) {
+        prefDao.setCompensationDialEnabled(enabled)
+    }
+    fun setFilterSortOrder(sortOrder: Int) {
+        prefDao.setFilterSortOrder(sortOrder)
+    }
+    fun setTheme(theme: Int) {
+        prefDao.setTheme(theme)
+    }
 
 }

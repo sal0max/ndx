@@ -1,6 +1,6 @@
 package de.salomax.ndx.ui.calculator
 
-import android.util.Log
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -13,6 +13,7 @@ import de.salomax.ndx.widget.SnappyRecyclerView
 class CompensationAdapter(private val context: AppCompatActivity) : RecyclerView.Adapter<CompensationAdapter.ViewHolder>() {
 
     var compensation: Compensation? = null
+        @SuppressLint("NotifyDataSetChanged")
         set(compensation) {
             if (this.compensation != compensation) {
                 field = compensation
