@@ -15,7 +15,9 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".ui.billing.BillingActivity" />
-        <activity android:name=".ui.calculator.CalculatorActivity">
+        <activity
+           android:name=".ui.calculator.CalculatorActivity"
+           android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
