@@ -1,41 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="108" height="108" viewBox="0 0 108 108">
+<svg id="foreground" xmlns="http://www.w3.org/2000/svg" width="108" height="108"
+   viewBox="0 0 108 108">
    <defs>
-      <clipPath id="clip-path">
-         <path id="mask-squircle" d="M36,0C7.2,0,0,7.2,0,36S7.2,72,36,72s36-7.2,36-36S64.8,0,36,0Z"
-            transform="translate(14 14)" fill="none" />
-      </clipPath>
-      <radialGradient id="radial-gradient" cx="0.029" cy="0.5" r="0.471"
+      <radialGradient id="radial-gradient" cx="0.5" cy="0.5" r="0.5"
          gradientUnits="objectBoundingBox">
-         <stop offset="0" stop-opacity="0.4" />
+         <stop offset="0" />
+         <stop offset="0.921" />
          <stop offset="1" stop-opacity="0" />
       </radialGradient>
-      <clipPath id="clip-squircle-masked">
-         <rect width="108" height="108" />
-      </clipPath>
+      <radialGradient id="radial-gradient-2" cx="0.275" cy="0.275" r="0.659"
+         gradientUnits="objectBoundingBox">
+         <stop offset="0" stop-color="#fff" stop-opacity="0.102" />
+         <stop offset="1" stop-color="#fff" stop-opacity="0" />
+      </radialGradient>
    </defs>
-   <g id="squircle-masked" clip-path="url(#clip-squircle-masked)">
-      <g id="group" transform="translate(4 4)">
-         <path id="mask-squircle-2"
-            d="M36,0C7.2,0,0,7.2,0,36S7.2,72,36,72s36-7.2,36-36S64.8,0,36,0Z"
-            transform="translate(14 14)" fill="none" />
-         <g id="group-2" clip-path="url(#clip-path)">
-            <g id="adaptive-icon" transform="translate(-4 -4)">
-               <g id="adaptive-icon-2">
-                  <g id="foreground">
-                     <rect id="shadow" width="76" height="52"
-                        transform="translate(72.515 35.745) rotate(45)"
-                        fill="url(#radial-gradient)" />
-                     <g id="outer" transform="translate(28 28)">
-                        <circle id="glass" cx="26" cy="26" r="26" transform="translate(0 0)"
-                           fill="#212121" />
-                        <path id="reflection"
-                           d="M0,25.88A25.88,25.88,0,0,1,44.71,8.127L8.127,44.71A25.809,25.809,0,0,1,0,25.88Z"
-                           transform="translate(0.121 0.121)" fill="rgba(224,224,224,0.08)" />
-                     </g>
-                  </g>
-               </g>
-            </g>
-         </g>
-      </g>
+   <g id="outer" transform="translate(28 28)">
+      <ellipse id="shadow" cx="27" cy="27.5" rx="27" ry="27.5" transform="translate(-1)"
+         opacity="0.2" fill="url(#radial-gradient)" />
+      <circle id="glass" cx="26" cy="26" r="26" transform="translate(0 0)" fill="#212121" />
+      <path id="tinted_edge_bottom"
+         d="M268,150a25.978,25.978,0,0,1-26-26c0-.166,0-.334,0-.5a26,26,0,0,0,51.991,0l0,.106c0,.13,0,.262,0,.394a25.978,25.978,0,0,1-26,26Z"
+         transform="translate(-242 -98)" opacity="0.2" />
+      <path id="tinted_edge_top"
+         d="M242,124.5h0v-.109c0-.13,0-.261,0-.391a26,26,0,1,1,52,0c0,.151,0,.3,0,.447A26,26,0,0,0,242,124.5Z"
+         transform="translate(-242 -98)" fill="#fff" opacity="0.1" />
+      <path id="reflection"
+         d="M0,28.4v-5.04A26.008,26.008,0,0,1,23.359,0H28.4A25.93,25.93,0,0,1,44.8,8.042L8.042,44.8A25.93,25.93,0,0,1,0,28.4Z"
+         transform="translate(0.121 0.121)" fill="#e0e0e0" opacity="0.08" />
    </g>
 </svg>
