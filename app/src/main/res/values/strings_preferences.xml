@@ -23,14 +23,18 @@
     <!--  -->
     <string name="prefTitle_enableCompensation">Enable compensation dial</string>
     <string name="prefSummary_enableCompensation">With the compensation dial, you can fine-tune your camera settings to achieve your desired exposure time. Shift ISO and Aperture to adjust the final result.</string>
+
+    <!-- appearance -->
+    <string name="prefTitle_categoryAppearance">Appearance</string>
     <!--  -->
     <string name="prefTitle_themeSelector">Select Theme</string>
     <string-array name="prefEntries_themes">
         <item>NDx Light</item>
         <item>Moonlit Dark</item>
-        <item>Pitch Black</item>
         <item>System default</item>
     </string-array>
+    <string name="prefTitle_pitchBlack">Pitch black</string>
+    <string name="prefSummary_pitchBlack">Use pure black in dark mode</string>
 
     <!-- timer -->
     <string name="prefTitle_categoryTimer" translatable="false">@string/title_timer</string>
@@ -70,6 +74,7 @@
     <string name="prefKey_showWarning" translatable="false">KEY_SHOW_WARNING</string>
     <string name="prefKey_enableCompensationDial" translatable="false">KEY_ENABLE_COMPENSATION_DIAL</string>
     <string name="prefKey_themeSelector" translatable="false">KEY_THEME_SELECTOR</string>
+    <string name="prefKey_pitchBlack" translatable="false">KEY_PITCH_BLACK</string>
 
     <string name="prefKey_alarmBeep" translatable="false">KEY_ALARM_BEEP</string>
     <string name="prefKey_alarmVibrate" translatable="false">KEY_ALARM_VIBRATE</string>
@@ -94,7 +99,6 @@
         <item>0</item>
         <item>1</item>
         <item>2</item>
-        <item>3</item>
     </string-array>
 
 </resources>

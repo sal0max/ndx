@@ -139,5 +139,13 @@ class PrefDao private constructor(context: Context) {
       sharedPreferences.edit().putInt(Pref.THEME, theme).apply()
    }
 
+   fun setPitchBlackEnabled(enabled: Boolean) {
+      sharedPreferences.edit().putBoolean(Pref.PITCH_BLACK, enabled).apply()
+   }
+
+   fun isPureBlackEnabled(): Boolean {
+      return sharedPreferences.getBoolean(Pref.PITCH_BLACK, false)
+   }
+
 
 }

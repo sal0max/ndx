@@ -29,7 +29,9 @@ class PreferenceFragment : PreferenceFragmentCompat(),
     private lateinit var filterSortingPreference: ListPreference
     private lateinit var showWarningPreference: SwitchPreference
     private lateinit var showCompensationDialogPreference: SwitchPreference
+
     private lateinit var themeSelectorPreference: ListPreference
+    private lateinit var pitchBlackSwitchPreference: SwitchPreference
 
     private lateinit var alarmBeepPreference: SwitchPreference
     private lateinit var alarmVibratePreference: SwitchPreference
@@ -52,7 +54,9 @@ class PreferenceFragment : PreferenceFragmentCompat(),
         filterSortingPreference = findPreference(getString(R.string.prefKey_sortOrder))!!
         showWarningPreference = findPreference(getString(R.string.prefKey_showWarning))!!
         showCompensationDialogPreference = findPreference(getString(R.string.prefKey_enableCompensationDial))!!
+        // appearance
         themeSelectorPreference = findPreference(getString(R.string.prefKey_themeSelector))!!
+        pitchBlackSwitchPreference = findPreference(getString(R.string.prefKey_pitchBlack))!!
         // timer
         alarmBeepPreference = findPreference(getString(R.string.prefKey_alarmBeep))!!
         alarmVibratePreference = findPreference(getString(R.string.prefKey_alarmVibrate))!!
@@ -72,6 +76,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
         showWarningPreference.onPreferenceClickListener = this
         showCompensationDialogPreference.onPreferenceClickListener = this
         themeSelectorPreference.onPreferenceChangeListener = this
+        pitchBlackSwitchPreference.onPreferenceChangeListener = this
         // timer
         alarmBeepPreference.onPreferenceClickListener = this
         alarmVibratePreference.onPreferenceClickListener = this
@@ -124,16 +129,14 @@ class PreferenceFragment : PreferenceFragmentCompat(),
             themeSelectorPreference -> {
                 if (viewModel.hasPremium.value == true) {
                     viewModel.setTheme(newValue.toString().toInt())
-                    // re-create all open activities
-                    TaskStackBuilder.create(requireContext())
-                          .addNextIntent(Intent(activity, CalculatorActivity::class.java))
-                          .addNextIntent(requireActivity().intent)
-                          .startActivities()
                 } else {
                     val intent = Intent(context, BillingActivity().javaClass)
                     startActivity(intent)
                     return false
                 }
+            }
+            pitchBlackSwitchPreference -> {
+                viewModel.setPitchBlackEnabled(newValue.toString().toBoolean())
             }
             else -> return false
         }

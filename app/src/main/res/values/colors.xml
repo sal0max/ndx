@@ -19,7 +19,8 @@
     <color name="colorAccent">#ffa459</color>
     <color name="colorBackground">#e0e0e0</color>
 
-    <color name="colorBlackAccent">@color/colorPrimary</color>
-    <color name="colorBlackBackground">#000</color>
+    <color name="colorPrimary_pitchBlack">@color/colorPrimary</color>
+    <color name="colorAccent_pitchBlack">@color/colorAccent</color>
+    <color name="colorBackground_pitchBlack">@color/colorBackground</color>
 
 </resources>

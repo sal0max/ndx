@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
    <color name="colorBackground">@color/background_material_dark</color>
+
+   <color name="colorPrimary_pitchBlack">@color/colorBackground_pitchBlack</color>
+   <color name="colorAccent_pitchBlack">@color/colorPrimary</color>
+   <color name="colorBackground_pitchBlack">#000</color>
 </resources>

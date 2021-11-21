@@ -27,12 +27,22 @@
          android:summary="@string/prefSummary_enableCompensation"
          android:title="@string/prefTitle_enableCompensation" />
 
+   </PreferenceCategory>
+
+   <PreferenceCategory android:title="@string/prefTitle_categoryAppearance">
+
       <ListPreference
          android:entries="@array/prefEntries_themes"
          android:entryValues="@array/prefValues_themes"
          android:key="@string/prefKey_themeSelector"
          android:summary="%s"
          android:title="@string/prefTitle_themeSelector" />
+      <!--  -->
+      <SwitchPreference
+         android:defaultValue="false"
+         android:key="@string/prefKey_pitchBlack"
+         android:summary="@string/prefSummary_pitchBlack"
+         android:title="@string/prefTitle_pitchBlack" />
 
    </PreferenceCategory>
 

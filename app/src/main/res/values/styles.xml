@@ -9,17 +9,16 @@
         <item name="android:windowBackground">@color/colorBackground</item>
     </style>
 
-    <style name="AppTheme.Black" parent="Theme.AppCompat">
-        <item name="colorPrimary">@color/colorBlackBackground</item>
-        <item name="colorPrimaryDark">@color/colorBlackBackground</item>
-        <item name="colorAccent">@color/colorBlackAccent</item>
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
-        <item name="android:windowBackground">@color/colorBlackBackground</item>
+    <style name="AppTheme.Black" parent="AppTheme">
+        <item name="colorPrimary">@color/colorPrimary_pitchBlack</item>
+        <item name="colorPrimaryDark">@color/colorPrimary_pitchBlack</item>
+        <item name="colorAccent">@color/colorAccent_pitchBlack</item>
+        <item name="android:windowBackground">@color/colorBackground_pitchBlack</item>
         <item name="cardViewStyle">@style/AppTheme.CardView.Black</item>
     </style>
 
     <style name="AppTheme.CardView.Black" parent="CardView.Dark">
-        <item name="cardBackgroundColor">@color/colorBlackBackground</item>
+        <item name="cardBackgroundColor">@color/colorBackground_pitchBlack</item>
     </style>
 
 </resources>
