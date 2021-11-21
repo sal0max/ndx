@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="changelog"><b>3.2.0</b>
+        \n⸻
+        \n<li>\"Pitch Black\" ist nun neben der Light/Dark-Einstellung als separate Designoption verfügbar.</li>
+        \n<li>Die App ist nun auch ins Deutsche übersetzt. 🥨🍻</li>
+        \n<li>Einige UI-Verbesserungen</li>
+        \n<li>Kleine Verbesserungen und behobene Fehler</li>
+        \n
+        \n<b>3.1.3</b>
+        \n⸻
+        \n<li>Kleine Verbesserungen und behobene Fehler</li>
+        \n
+        \n<b>3.1.2</b>
+        \n⸻
+        \n<li>Einige Stabilitätsverbesserungen und behobene Fehler</li>
+        \n<li>Wie immer: kleine UI-Verbesserungen</li>
+        \n
+        \n<b>3.1.1</b>
+        \n⸻
+        \n<li>Einige UI-Verbesserungen</li>
+        \n
+        \n<b>3.1.0</b>
+        \n⸻
+        \n<li>Großes neues Feature: Ein Ausgleichsregler, um ISO/Blende nachzujustieren, um zu sehen, wie die gewünschte Belichtungszeit erreicht werden kann. Aktiviere ihn in den Einstellungen!</li>
+        \n<li>Einige kleine UI-Verbesserungen</li>
+        \n
+        \n<b>3.0.8</b>
+        \n⸻
+        \n<li>Einige UI-Verbesserungen</li>
+        \n<li>Kleine Optimierungen</li>
+        \n
+        \n<b>3.0.7 – <i>Erstes Release</i></b>
+        \n⸻
+        \nVersion 3 ist der dritte Anlauf diese App zu schreiben.
+        \n<li>Von Grund auf neue programmiert!</li>
+        \n<li>Ein brandneues, besseres User Interface!</li>
+        \n<li>Performance first!</li>
+        \n<li>Mehr Features als jemals zuvor!</li>
+        \nUnd letztlich die erste Version, die öffentlich verfügbar gemacht ist.
+    </string>
+
+</resources>
