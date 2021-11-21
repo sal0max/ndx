@@ -57,14 +57,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    android {
-        sourceSets {
-            main.java.srcDirs += 'src/main/kotlin'
-            debug.java.srcDirs += 'src/debug/kotlin'
-            test.java.srcDirs += 'src/test/kotlin'
-        }
-    }
-
     buildFeatures {
         viewBinding true
     }
