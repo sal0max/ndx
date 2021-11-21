@@ -19,7 +19,7 @@
 I'm working on this project in my free time. I spent many hours on it, to make it perfect. Getting premium is your chance to buy me a beer. 🍺
 
 Thank you,"</string>
-    <string name="billing_pro_feature_4_closing">\ Max</string>
+    <string name="billing_pro_feature_4_closing" translatable="false">\ Max</string>
 
     <string name="billing_already_supported"><i>PS: If you already bought premium, just tap the button anyway. Your purchase will be restored.</i> 🙂</string>
 

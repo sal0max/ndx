@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- default -->
+    <string name="preset_filterName1">Zirkularer Polfilter</string>
+    <string name="preset_filterInfo1">Polfilter fügen ungefähr 1½ Stops hinzu</string>
+
+    <!-- debug -->
+    <string name="preset_filterInfo2">Ein kleiner Filter. FÜR DIE BLAUE STUNDE!</string>
+
+    <!-- default -->
+    <string name="preset_filterInfo3">Das ist nur ein Beispiel. Warum fügst du nicht all deine Filter der <b>Filtertasche</b> hinzu? Du gelangst zu ihr über das Kontextmenü im oberen rechten Eck. 🙂</string>
+
+    <!-- debug -->
+    <string name="preset_filterInfo4">Das Arbeitstier 🎠</string>
+
+    <!-- debug -->
+    <string name="preset_filterInfo6">Superdunkel für lange Belichtungen am hellichten Tag. Den Sucher abdecken um Lichtlecks zu vermeiden!</string>
+
+</resources>

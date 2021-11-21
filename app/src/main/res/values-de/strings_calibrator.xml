@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_calibrator">Filterkalibrator</string>
+
+    <string name="label_1"><b>Ohne</b> Filter</string>
+    <string name="label_2"><b>Mit</b> Filter</string>
+
+    <string name="manual_title">Anleitung</string>
+    <string name="manual_summary">1) Nehme ein Foto im <b>M-Modus</b> ohne Filter in einer Umgebung in der sich das Licht nicht verändert auf: Idealerweise ohne Tagesslicht mit einer konstanten künstlichen Lichtquelle.\nVerwende ein Stativ um die Kamera zu fixieren.
+        \n\n2) Setze nun den Filter auf und erhöhe die Belichtungszeit um den Faktor, den der Hersteller angegeben hat. Falls nötig, erhöhe ebenso den ISO-Wert. Vor allem beim Messen starker Filter nötig. <b>Aber ändere nicht den Blendenwert!</b>
+        \n\n3) Mache das Foto und vergleiche das Histogramm mit dem ohne Filter. <b>Sie sollten identisch sein</b>. Falls nicht, wiederhole Schritt 2 mit erhöhter oder verringerter Belichtungszeit und/oder ISO bis sie identisch sind.</string>
+
+    <string name="label_f_stops">%1$s Stops</string>
+</resources>

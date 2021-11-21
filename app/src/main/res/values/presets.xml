@@ -13,7 +13,7 @@
     <!-- default -->
     <integer name="preset_filterValue3">64</integer>
     <string name="preset_filterName3" translatable="false">Little Stopper</string>
-    <string name="preset_filterInfo3">This is just an example. Why not add all your filters to the <b>Filter Pouch"</b>? You can reach it via the overflow menu in the top right corner. 🙂</string>
+    <string name="preset_filterInfo3">This is just an example. Why not add all your filters to the <b>Filter Pouch</b>? You can reach it via the overflow menu in the top right corner. 🙂</string>
 
     <!-- debug -->
     <integer name="preset_filterValue4">1024</integer>
@@ -23,11 +23,11 @@
     <!-- debug -->
     <integer name="preset_filterValue5">4096</integer>
     <string name="preset_filterName5" translatable="false">Haida Slim PROII ND3.6</string>
-    <string name="preset_filterInfo5" />
+    <string name="preset_filterInfo5" translatable="false" />
 
     <!-- debug -->
     <integer name="preset_filterValue6">65536</integer>
     <string name="preset_filterName6" translatable="false">Formatt Hitech Firecrest 16</string>
-    <string name="preset_filterInfo6">Super dark for long exposures during bright daylight. Cover the viewfinder to prevent light leaks!</string>
+    <string name="preset_filterInfo6">Super dark for long exposures during bright daylight. Cover viewfinder to prevent light leaks!</string>
 
 </resources>

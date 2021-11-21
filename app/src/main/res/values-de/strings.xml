@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">NDx</string>
+
+    <!-- menu entries .......................................................................... -->
+    <string name="menu_filterPouch" translatable="false">@string/title_filterPouch</string>
+    <string name="menu_preferences" translatable="false">@string/title_preferences</string>
+
+    <!-- misc .................................................................................. -->
+    <string name="ok">OK</string>
+    <string name="save">Speichern</string>
+    <string name="undo">Rückgängig</string>
+    <string name="delete">Löschen</string>
+
+    <string name="unit_seconds">sek</string>
+    <string name="unit_minutes">min</string>
+    <string name="unit_hours">h</string>
+    <string name="unit_days">d</string>
+    <string name="unit_iso">ISO</string>
+
+    <plurals name="filterInfo">
+        <item quantity="one">× %1$s\u2002·\u2002%2$s Stop\u2002·\u2002ND %3$s</item>
+        <item quantity="other">× %1$s\u2002·\u2002%2$s Stops\u2002·\u2002ND %3$s</item>
+    </plurals>
+
+</resources>

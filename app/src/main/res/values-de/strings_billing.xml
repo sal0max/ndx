@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_billing">NDx Premium</string>
+
+    <string name="billing_lead">Upgrade um folgende Features zu erhalten:</string>
+
+    <string name="billing_pro_feature_1_title">🌟 Mehr als drei Filter</string>
+    <string name="billing_pro_feature_1_summary">NDx lässt dich bis zu drei Filter in der App verwalten. Wenn du mehr bei dir trägst, solltest du das Premium-Upgrade holen um diese Einschränkung aufzuheben.</string>
+
+    <string name="billing_pro_feature_2_title">✨ Zwei zusätzliche Designs</string>
+    <string name="billing_pro_feature_2_summary">Erfreue dich an zwei großartigen dunklen Designs: \"Moonlit Dark\", eine moderne, ansprechende dunkle Variante des Standard-Desings. \"Pitch Black\" ist komplett schwarz, für all euch OLED-Besitzer und Milchstraßenjäger!</string>
+
+    <string name="billing_pro_feature_3_title">💫 Timer</string>
+    <string name="billing_pro_feature_3_summary">Den Kabelfernauslöser schon wieder vergessen? Keine Sorge: Stelle deine Kamera in den Bulb-Timer-Modus und verwende den NDx&#160;Timer™ um die errechnete Belichtungszeit direkt herunterzuzählen.</string>
+
+    <string name="billing_pro_feature_4_title">💖 Ein tolles Gefühl</string>
+    <string name="billing_pro_feature_4_summary">"Mit dem Kauf von Premium erhältst du nicht nur all diese Dinge, du unterstützt außerdem die Weiterentwicklung der App und zeigst deine Anerkennung. ❤️
+
+Ich arbeite in meiner Freizeit an diesem Projekt. Ich habe unzählige Stunden investiert um es perfekt zu machen. Mit dem Kauf von Premium hast du die Gelegenheit mir ein Bier auszugeben. 🍺
+
+Vielen Dank,"</string>
+
+    <string name="billing_already_supported"><i>PS: Solltest du Premium bereits gekauft haben, drücke einfach trotzdem auf den Button. Dein Kauf wird dann wiederhergestellt.</i> 🙂</string>
+
+    <string name="billing_btn_buy">Werde Unterstützer</string>
+
+    <string name="billing_thanks_for_buying">Vielen Dank für die Unterstützung!</string>
+</resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_addFilter">Filter hinzufügen</string>
+    <string name="title_editFilter">Filter bearbeiten</string>
+
+    <string name="btn_calibrator">Kalibieren</string>
+    <string name="calibrator_description">Häufig weicht die tatsächliche Filterstärke von der vom Hersteller angegebenen ab. Mit dem <b>Filterkalibrator</b> kann der tatsächliche Wert gemessen werden."</string>
+
+    <string name="error_nameRequired">Name ist ein Pflichtfeld</string>
+    <string name="error_factorRequired">Filterfaktor ist ein Pflichtfeld.</string>
+
+    <string name="hint_description">Beschreibung</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_info">Notiz</string>
+    <string name="hint_strength">Stärke</string>
+    <string name="hint_factor">Filterfaktor</string>
+    <string name="hint_stops">ƒ-Stops</string>
+    <string name="hint_nd">ND</string>
+
+</resources>

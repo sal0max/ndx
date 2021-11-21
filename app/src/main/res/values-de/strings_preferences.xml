@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_preferences">Einstellungen</string>
+
+    <!-- general -->
+    <string name="prefTitle_categoryGeneral">Allgemein</string>
+    <!-- -->
+    <string name="prefTitle_evSteps">Lichtwert-Schrittweite</string>
+    <string-array name="prefEntries_evSteps">
+        <item>1 Stop</item>
+        <item>½ Stop</item>
+        <item>⅓ Stop</item>
+    </string-array>
+    <!-- -->
+    <string name="prefTitle_sortOrder">Sortiere Filter nach…</string>
+    <string-array name="prefEntries_sortOrder">
+        <item>Filterstärke</item>
+        <item>Name</item>
+    </string-array>
+    <!-- -->
+    <string name="prefTitle_showWarning">Vor zu langen Belichtungen warnen</string>
+    <string name="prefSummary_showWarning">Zeige einen Warnhinweis, wenn eine Zeit länger 20 Minuten berechnet wird. Belichtungen dieser Länge führen üblicherweise zur Überhitzung des Bildsensors, was wiederum zuviel Bildrauschen verursach um noch nützlich zu sein.</string>
+    <!--  -->
+    <string name="prefTitle_enableCompensation">Ausgleichsregler aktivieren</string>
+    <string name="prefSummary_enableCompensation">Mit dem Ausgleichsregler können Kameraeinstellungen feinjustiert werden, um die gewünschten Belichtungszeit zu erreichen: Verändere ISO und Blende um das Endergebnis anzupassen.</string>
+
+    <!-- appearance -->
+    <string name="prefTitle_categoryAppearance">Erscheinung</string>
+    <!--  -->
+    <string name="prefTitle_themeSelector">Design</string>
+    <string-array name="prefEntries_themes">
+        <item>NDx Light</item>
+        <item>Moonlit Dark</item>
+        <item>Systemstandard</item>
+    </string-array>
+    <string name="prefTitle_pitchBlack">Pitch black</string>
+    <string name="prefSummary_pitchBlack">Komplett schwarzes Design im Dark-Modus verwenden</string>
+
+    <!-- timer -->
+    <string name="prefTitle_timerBeep">Alarmton</string>
+    <string name="prefSummary_timerBeep">Piepen, wenn die Zeit abgelaufen ist.</string>
+    <!-- -->
+    <string name="prefTitle_timerVibrate">Vibrieren</string>
+    <string name="prefSummary_timerVibrate">… wenn die Zeit abgelaufen ist.</string>
+
+    <!-- about -->
+    <string name="prefTitle_categoryAbout">Über</string>
+    <!-- -->
+    <string name="prefTitle_donate">NDx Premium</string>
+    <string name="prefSummary_donate">Den Entwickler unterstützen.</string>
+    <string name="prefSummary_has_donated">Vielen Dank für die Unterstützung. Viel Spaß mit den Premium-Features! ❤️</string>
+    <!-- -->
+    <string name="prefTitle_about">Version %1$s</string>
+    <string name="title_changelog">Changelog</string>
+
+    <!-- feedback -->
+    <string name="prefTitle_categoryFeedback">Feedback</string>
+    <!-- -->
+    <string name="prefTitle_mail">Eine E-Mail senden</string>
+    <string name="prefValue_mail_subject">Feedback: NDx</string>
+    <string name="prefError_mail">Es scheint, als wäre kein E-Mail-Client installiert.</string>
+    <!-- -->
+    <string name="prefTitle_rate">Bewerte die App</string>
+    <string name="prefError_rate">Der Play Store scheint nicht installiert zu sein.</string>
+
+
+</resources>

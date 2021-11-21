@@ -10,7 +10,7 @@
         \n\n2) Now put on the filter and compensate for it by cranking up the exposure time by the factor the filter manufacturer claims. If necessary also increase the ISO, when measuring strong filters. <b>However don\'t change the aperture setting!</b>
         \n\n3) Take the photo and compare both histograms. <b>They should look identical</b>. If they don\'t, repeat step 2 with increased or decreased shutter speed and/or ISO until they do.</string>
 
-    <string name="label_factor">× %d</string>
+    <string name="label_factor" translatable="false">× %d</string>
     <string name="label_f_stops">%1$s Stops</string>
-    <string name="label_nd">ND %1$s</string>
+    <string name="label_nd" translatable="false">ND %1$s</string>
 </resources>
