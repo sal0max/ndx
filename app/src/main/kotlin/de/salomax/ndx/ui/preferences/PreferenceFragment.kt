@@ -75,6 +75,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
         // timer
         alarmBeepPreference.onPreferenceClickListener = this
         alarmVibratePreference.onPreferenceClickListener = this
+        @Suppress("DEPRECATION")
         alarmVibratePreference.isVisible = (requireContext().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator).hasVibrator()
         // about
         donatePreference.onPreferenceClickListener = this
