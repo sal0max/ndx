@@ -3,6 +3,7 @@
     package="de.salomax.ndx">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
         android:name=".App"
@@ -23,11 +24,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.calibrator.CalibratorActivity" />
-        <activity android:name=".ui.filtereditor.FilterEditorActivity" />
-        <activity android:name=".ui.filterpouch.FilterPouchActivity" />
-        <activity android:name=".ui.preferences.PreferenceActivity" />
-        <activity android:name=".ui.timer.TimerActivity" />
+        <activity
+           android:name=".ui.calibrator.CalibratorActivity"
+           android:parentActivityName=".ui.filtereditor.FilterEditorActivity" />
+        <activity
+           android:name=".ui.filtereditor.FilterEditorActivity"
+           android:parentActivityName=".ui.filterpouch.FilterPouchActivity" />
+        <activity
+           android:name=".ui.filterpouch.FilterPouchActivity"
+           android:parentActivityName=".ui.calculator.CalculatorActivity" />
+        <activity
+           android:name=".ui.preferences.PreferenceActivity"
+           android:parentActivityName=".ui.calculator.CalculatorActivity" />
+        <activity
+           android:name=".ui.timer.TimerActivity"
+           android:launchMode="singleTask"
+           android:parentActivityName=".ui.calculator.CalculatorActivity" />
+
+        <service
+           android:name=".ui.timer.TimerService"
+           android:enabled="true"
+           android:exported="false" />
     </application>
 
     <queries>

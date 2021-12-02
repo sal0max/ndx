@@ -1,40 +1,61 @@
 package de.salomax.ndx.ui.timer
 
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
+import android.content.ServiceConnection
 import android.os.Bundle
+import android.os.IBinder
 import android.view.View
 import android.view.animation.Animation
-import androidx.lifecycle.ViewModelProvider
+import androidx.core.content.ContextCompat
 import de.salomax.ndx.R
 import de.salomax.ndx.databinding.ActivityTimerBinding
 import de.salomax.ndx.ui.BaseActivity
-import de.salomax.ndx.util.ManagedAlarmPlayer
-import de.salomax.ndx.util.ManagedVibrator
+import de.salomax.ndx.ui.calculator.CalculatorActivity
 import de.salomax.ndx.widget.BlinkAnimation
 import java.util.concurrent.*
 import kotlin.math.abs
 
-class TimerActivity : BaseActivity() {
+class TimerActivity : BaseActivity(), ServiceConnection {
 
-    private lateinit var binding: ActivityTimerBinding
-    private lateinit var viewModel: TimerViewModel
-    private lateinit var alarmPlayer: ManagedAlarmPlayer
-    private lateinit var vibrator: ManagedVibrator
-
+    private lateinit var viewBinding: ActivityTimerBinding
+    private lateinit var service: TimerService
+    private var isServiceBound: Boolean = false
     private val blinkAnimation: Animation = BlinkAnimation()
+
+    // service
+    override fun onServiceConnected(className: ComponentName, iBinder: IBinder) {
+        val binder = iBinder as TimerService.LocalBinder
+        service = binder.getService()
+        isServiceBound = true
+        intent.extras?.let {
+            // first start: initialize countdown
+            if (intent.extras != null && intent.extras?.getLong("MILLIS") != 0L)
+                service.initCountdown(intent.extras!!.getLong("MILLIS"))
+        }
+        observe()
+    }
+
+    override fun onServiceDisconnected(arg0: ComponentName) {
+        isServiceBound = false
+    }
+
+    override fun onStart() {
+        super.onStart()
+        // start service and bind to it
+        val intent = Intent(this, TimerService::class.java)
+        ContextCompat.startForegroundService(this, intent)
+        bindService(intent, this, Context.BIND_AUTO_CREATE)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         // init view
-        binding = ActivityTimerBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        viewModel = ViewModelProvider(this).get(TimerViewModel::class.java)
-        alarmPlayer = ManagedAlarmPlayer(this)
-        vibrator = ManagedVibrator(this)
-        binding.btnReset.setOnClickListener {
-            viewModel.stopTimer()
-            viewModel.millisCurrent.value = 0
-        }
+        viewBinding = ActivityTimerBinding.inflate(layoutInflater)
+        setContentView(viewBinding.root)
+        viewBinding.btnReset.setOnClickListener { service.resetCountdown() }
 
         // title bar
         setTitle(R.string.title_timer)
@@ -43,75 +64,89 @@ class TimerActivity : BaseActivity() {
             setDisplayShowHomeEnabled(true)
             setHomeAsUpIndicator(R.drawable.ic_close_white_24dp)
         }
+    }
 
-        // init timer
-        intent.extras?.let {
-            // totalMillis
-            if (viewModel.millisTotal == null) {
-                viewModel.millisTotal = it.getLong("MILLIS")
-                // first start: init
-                binding.btnReset.apply { visibility = View.GONE }
-                binding.btnControl.apply {
-                    setImageResource(R.drawable.ic_play_arrow_white_24dp)
-                    setOnClickListener { viewModel.startTimer() }
-                }
-            }
+    override fun onStop() {
+        super.onStop()
+        if (isServiceBound) {
+            unbindService(this)
+            isServiceBound = false
         }
+    }
 
+    private fun observe() {
         // observe running timer
-        viewModel.millisCurrent.observe(this, {
+        service.millisCurrent.observe(this, {
             refreshUi()
         })
 
-        // observe status: runningPositive -> finished -> runningNegative
-        viewModel.state.observe(this, { state ->
+        // observe status: stopped -> runningPositive/paused -> -> runningNegative
+        service.state.observe(this, { state ->
             @Suppress("WHEN_ENUM_CAN_BE_NULL_IN_JAVA")
             when (state) {
-                TimerViewModel.State.RUNNING_POSITIVE -> {
-                    // animations
-                    blinkText(false)
-                    // buttons
-                    binding.btnReset.apply { visibility = View.GONE }
-                    binding.btnControl.apply {
-                        setImageResource(R.drawable.ic_pause_white_24dp)
-                        setOnClickListener { viewModel.stopTimer() }
+                TimerService.State.WAITING -> {
+                    // hide reset
+                    viewBinding.btnReset.apply { visibility = View.GONE }
+                    // start
+                    viewBinding.btnControl.apply {
+                        setImageResource(R.drawable.ic_play_arrow_white_24dp)
+                        setOnClickListener { service.runCountdown() }
                     }
                 }
-                TimerViewModel.State.FINISHED -> {
-                    // animations
-                    binding.progress.startAnimation(blinkAnimation)
-                    // alarms
-                    if (viewModel.shouldAlarmBeep()) playAlarm()
-                    if (viewModel.shouldAlarmVibrate()) vibrate()
-                }
-                TimerViewModel.State.RUNNING_NEGATIVE -> {
+                TimerService.State.RUNNING_POSITIVE -> {
                     // animations
                     blinkText(false)
-                    // buttons
-                    binding.btnReset.apply { visibility = View.GONE }
-                    binding.btnControl.apply {
+                    // hide reset
+                    viewBinding.btnReset.apply { visibility = View.GONE }
+                    // pause
+                    viewBinding.btnControl.apply {
+                        setImageResource(R.drawable.ic_pause_white_24dp)
+                        setOnClickListener { service.pauseCountdown() }
+                    }
+                }
+                TimerService.State.PAUSED -> {
+                    // animations
+                    blinkText(true)
+                    // show reset
+                    viewBinding.btnReset.apply { visibility = View.VISIBLE }
+                    // continue
+                    viewBinding.btnControl.apply {
+                        setImageResource(R.drawable.ic_play_arrow_white_24dp)
+                        setOnClickListener { service.runCountdown() }
+                    }
+
+                }
+                TimerService.State.RUNNING_NEGATIVE -> {
+                    // animations
+                    blinkText(false)
+                    if (viewBinding.progress.animation == null) {
+                        viewBinding.progress.startAnimation(blinkAnimation)
+                    }
+                    // hide reset
+                    viewBinding.btnReset.apply { visibility = View.GONE }
+                    // stop
+                    viewBinding.btnControl.apply {
                         setImageResource(R.drawable.ic_stop_white_24dp)
                         setOnClickListener {
-                            alarmPlayer.stop()
-                            vibrator.stop()
-                            viewModel.stopTimer()
+                            service.stopCountdown()
+                            // exit
+                            stopService(Intent(context, TimerService::class.java))
                             finish()
                         }
                     }
                 }
-                TimerViewModel.State.PAUSED -> {
-                    // animations
-                    blinkText(true)
-                    // buttons
-                    binding.btnReset.apply { visibility = View.VISIBLE }
-                    binding.btnControl.apply {
-                        setImageResource(R.drawable.ic_play_arrow_white_24dp)
-                        setOnClickListener { viewModel.startTimer() }
-                    }
-
-                }
             }
         })
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        // kill service
+        service.stopCountdown()
+        // go back to CalculatorActivity or launch it, if it isn't on the stack any more
+        val intent = Intent(this, CalculatorActivity().javaClass)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        startActivity(intent)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -119,100 +154,64 @@ class TimerActivity : BaseActivity() {
         return true
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putBoolean("ALARM_PLAYING", alarmPlayer.isPlaying)
-        outState.putBoolean("VIBRATOR_VIBRATING", vibrator.isVibrating)
-        alarmPlayer.stop()
-        vibrator.stop()
-
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        if (savedInstanceState.getBoolean("ALARM_PLAYING")) playAlarm()
-        if (savedInstanceState.getBoolean("VIBRATOR_VIBRATING")) vibrate()
-    }
-
-    /**
-     *
-     */
-    private fun playAlarm() {
-        alarmPlayer.play(R.raw.timer_expire_short)
-    }
-
-    /**
-     *
-     */
-    private fun vibrate() {
-        val vibratorPattern = longArrayOf(0, 100, 100, 200, 500)
-        vibrator.vibrate(vibratorPattern)
-    }
-
-    /**
-     *
-     */
     private fun blinkText(enabled: Boolean) {
-        if (enabled && binding.colon.animation == null) {
-            binding.colon.startAnimation(blinkAnimation)
-            binding.minus.startAnimation(blinkAnimation)
-            binding.textMin.startAnimation(blinkAnimation)
-            binding.textSec.startAnimation(blinkAnimation)
-            binding.textHour.startAnimation(blinkAnimation)
-            binding.textMilli.startAnimation(blinkAnimation)
+        if (enabled && viewBinding.colon.animation == null) {
+            viewBinding.colon.startAnimation(blinkAnimation)
+            viewBinding.minus.startAnimation(blinkAnimation)
+            viewBinding.textMin.startAnimation(blinkAnimation)
+            viewBinding.textSec.startAnimation(blinkAnimation)
+            viewBinding.textHour.startAnimation(blinkAnimation)
+            viewBinding.textMilli.startAnimation(blinkAnimation)
         } else {
-            binding.colon.clearAnimation()
-            binding.minus.clearAnimation()
-            binding.textMin.clearAnimation()
-            binding.textSec.clearAnimation()
-            binding.textHour.clearAnimation()
-            binding.textMilli.clearAnimation()
+            viewBinding.colon.clearAnimation()
+            viewBinding.minus.clearAnimation()
+            viewBinding.textMin.clearAnimation()
+            viewBinding.textSec.clearAnimation()
+            viewBinding.textHour.clearAnimation()
+            viewBinding.textMilli.clearAnimation()
         }
     }
 
-    /**
-     *
-     */
     private fun refreshUi() {
-        val remainingTime = viewModel.millisTotal!! - viewModel.millisCurrent.value!!
+        val remainingTime = service.millisTotal - service.millisCurrent.value!!
 
         // progress bar
         if (remainingTime >= 0) {
-            if (binding.progress.max != viewModel.millisTotal!!.toInt())
-                binding.progress.max = viewModel.millisTotal!!.toInt()
-            binding.progress.setProgress(viewModel.millisCurrent.value!!.toFloat(), true, 100)
-        } else if (binding.progress.max != 1) {
-            binding.progress.setProgress(1f)
-            binding.progress.max = 1
+            if (viewBinding.progress.max != service.millisTotal.toInt())
+                viewBinding.progress.max = service.millisTotal.toInt()
+            viewBinding.progress.setProgress(service.millisCurrent.value!!.toFloat(), true, 100)
+        } else if (viewBinding.progress.max != 1) {
+            viewBinding.progress.setProgress(1f)
+            viewBinding.progress.max = 1
         }
 
         // negative
-        binding.minus.visibility = if (remainingTime < 0) View.VISIBLE else View.GONE
+        viewBinding.minus.visibility = if (remainingTime < 0) View.VISIBLE else View.GONE
 
         // tenths of a second
         val tenth = abs(remainingTime / 100 % 10)
-        binding.textMilli.text = String.format(".%d", tenth)
+        viewBinding.textMilli.text = String.format(".%d", tenth)
 
         // seconds
         val sec = abs(TimeUnit.MILLISECONDS.toSeconds(remainingTime) % 60)
         val sSec = String.format("%02d", sec)
-        if (binding.textSec.text != sSec)
-            binding.textSec.text = sSec
+        if (viewBinding.textSec.text != sSec)
+            viewBinding.textSec.text = sSec
 
         // minus
         val min = abs(TimeUnit.MILLISECONDS.toMinutes(remainingTime) % 60)
         val sMin = String.format("%02d", min)
-        if (binding.textMin.text != sMin)
-            binding.textMin.text = sMin
+        if (viewBinding.textMin.text != sMin)
+            viewBinding.textMin.text = sMin
 
         // hours
         val h = abs(TimeUnit.MILLISECONDS.toHours(remainingTime))
         if (h > 0) {
             val sH = h.toString() + getString(R.string.unit_hours)
-            if (binding.textHour.text != sH)
-                binding.textHour.text = sH
-        } else if (binding.textHour.text != null) {
-            binding.textHour.text = null
+            if (viewBinding.textHour.text != sH)
+                viewBinding.textHour.text = sH
+        } else if (viewBinding.textHour.text != null) {
+            viewBinding.textHour.text = null
         }
     }
 
