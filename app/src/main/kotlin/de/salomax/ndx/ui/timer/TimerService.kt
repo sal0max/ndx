@@ -92,8 +92,8 @@ class TimerService : Service() {
 
    private var lastUpdate = 0L
    private val observer = Observer<Long> { current ->
-      // max 2 notification updates/second - more than 10/second will be blocked
-      if (System.currentTimeMillis() - lastUpdate > 500) {
+      // max 4 notification updates/second - more than 10/second will be blocked
+      if (System.currentTimeMillis() - lastUpdate > 250) {
          lastUpdate = System.currentTimeMillis()
          startForeground(1, TimerNotification(this).getTimerNotification(current, millisTotal))
       }
