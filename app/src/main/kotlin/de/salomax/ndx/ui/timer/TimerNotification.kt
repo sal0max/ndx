@@ -23,6 +23,7 @@ class TimerNotification(private val context: Context) {
          .setSmallIcon(R.drawable.ic_timer_white_24dp)
          .setTicker("${context.getString(R.string.app_name)} ${context.getString(R.string.title_timer)}") // NDx Timer
          .setContentText(context.getString(R.string.title_timer)) // Timer
+         .setShowWhen(false)
          .setPriority(NotificationCompat.PRIORITY_DEFAULT)
          .setOnlyAlertOnce(true)
          // click on notification: go back to activity
