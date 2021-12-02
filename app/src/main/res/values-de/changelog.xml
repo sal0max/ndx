@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="changelog"><b>3.2.0</b>
+    <string name="changelog"><b>3.3.0</b>
+        \n⸻
+        \n<li>Der Timer zeigt nun eine Notification, wenn er läuft und die App im Hintergrund ist.</li>
+        \n
+        \n<b>3.2.0</b>
         \n⸻
         \n<li>\"Pitch Black\" ist nun neben der Light/Dark-Einstellung als separate Designoption verfügbar.</li>
         \n<li>Die App ist nun auch ins Deutsche übersetzt. 🥨🍻</li>

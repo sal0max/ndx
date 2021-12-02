@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="changelog"><b>3.2.0</b>
+    <string name="changelog"><b>3.3.0</b>
+        \n⸻
+        \n<li>Timer now shows a notification, when it is running and the app is in the background.</li>
+        \n
+        \n<b>3.2.0</b>
         \n⸻
         \n<li>\"Pitch Black\" is now a separate theme option on top of the Light/Dark setting.</li>
         \n<li>The app is now translated into German. 🥨🍻</li>
