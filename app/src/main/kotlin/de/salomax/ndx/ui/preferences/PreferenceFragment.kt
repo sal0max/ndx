@@ -6,7 +6,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Vibrator
-import androidx.core.app.TaskStackBuilder
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.*
@@ -15,7 +14,6 @@ import de.salomax.ndx.BuildConfig
 import de.salomax.ndx.R
 import de.salomax.ndx.data.model.ShutterSpeeds
 import de.salomax.ndx.ui.billing.BillingActivity
-import de.salomax.ndx.ui.calculator.CalculatorActivity
 import java.util.*
 
 @Suppress("unused")
@@ -27,6 +25,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
 
     private lateinit var evStepsPreference: ListPreference
     private lateinit var filterSortingPreference: ListPreference
+    private lateinit var filterGroupBySizePreference: SwitchPreference
     private lateinit var showWarningPreference: SwitchPreference
     private lateinit var showCompensationDialogPreference: SwitchPreference
 
@@ -52,6 +51,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
         // general
         evStepsPreference = findPreference(getString(R.string.prefKey_evSteps))!!
         filterSortingPreference = findPreference(getString(R.string.prefKey_sortOrder))!!
+        filterGroupBySizePreference = findPreference(getString(R.string.prefKey_groupByFilterSize))!!
         showWarningPreference = findPreference(getString(R.string.prefKey_showWarning))!!
         showCompensationDialogPreference = findPreference(getString(R.string.prefKey_enableCompensationDial))!!
         // appearance
@@ -72,11 +72,14 @@ class PreferenceFragment : PreferenceFragmentCompat(),
          */
         // general
         evStepsPreference.onPreferenceChangeListener = this
-        filterSortingPreference.onPreferenceChangeListener = this
         showWarningPreference.onPreferenceClickListener = this
         showCompensationDialogPreference.onPreferenceClickListener = this
+        // filter sorting
+        filterSortingPreference.onPreferenceChangeListener = this
+        filterGroupBySizePreference.onPreferenceClickListener = this
+        // theme
         themeSelectorPreference.onPreferenceChangeListener = this
-        pitchBlackSwitchPreference.onPreferenceChangeListener = this
+        pitchBlackSwitchPreference.onPreferenceClickListener = this
         // timer
         alarmBeepPreference.onPreferenceClickListener = this
         alarmVibratePreference.onPreferenceClickListener = this
@@ -102,6 +105,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
                 else -> "3"
             }
         })
+        viewModel.filterGroupBySize.observe(this, {filterGroupBySizePreference.isChecked = it})
         viewModel.showWarning.observe(this, { showWarningPreference.isChecked = it })
         viewModel.compensationDialEnabled.observe(this, { showCompensationDialogPreference.isChecked = it })
         viewModel.alarmBeepEnabled.observe(this, { alarmBeepPreference.isChecked = it })
@@ -135,9 +139,6 @@ class PreferenceFragment : PreferenceFragmentCompat(),
                     return false
                 }
             }
-            pitchBlackSwitchPreference -> {
-                viewModel.setPitchBlackEnabled(newValue.toString().toBoolean())
-            }
             else -> return false
         }
         return true
@@ -156,6 +157,9 @@ class PreferenceFragment : PreferenceFragmentCompat(),
             showWarningPreference -> {
                 viewModel.setWarning((preference as SwitchPreference).isChecked)
             }
+            filterGroupBySizePreference -> {
+                viewModel.setFilterGroupBySize((preference as SwitchPreference).isChecked)
+            }
             alarmBeepPreference -> {
                 viewModel.setAlarmBeep((preference as SwitchPreference).isChecked)
             }
@@ -164,6 +168,9 @@ class PreferenceFragment : PreferenceFragmentCompat(),
             }
             showCompensationDialogPreference -> {
                 viewModel.setCompensationDialEnabled((preference as SwitchPreference).isChecked)
+            }
+            pitchBlackSwitchPreference -> {
+                viewModel.setPitchBlackEnabled((preference as SwitchPreference).isChecked)
             }
             mailPreference -> {
                 val mailIntent = Intent(Intent.ACTION_SENDTO)

@@ -2,6 +2,7 @@
 <resources>
     <string name="changelog"><b>3.3.0</b>
         \n⸻
+        \n<li>It\'s now possible to add a size value to filters. Handy, to get some order in the filter pouch, if you own different sizes of filters.</li>
         \n<li>Timer now shows a notification, when it is running and the app is in the background.</li>
         \n
         \n<b>3.2.0</b>

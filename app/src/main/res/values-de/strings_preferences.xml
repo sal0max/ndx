@@ -12,17 +12,22 @@
         <item>⅓ Stop</item>
     </string-array>
     <!-- -->
+    <string name="prefTitle_showWarning">Vor zu langen Belichtungen warnen</string>
+    <string name="prefSummary_showWarning">Zeige einen Warnhinweis, wenn eine Zeit länger 20 Minuten berechnet wird. Belichtungen dieser Länge führen üblicherweise zur Überhitzung des Bildsensors, was wiederum zuviel Bildrauschen verursach um noch nützlich zu sein.</string>
+    <!--  -->
+    <string name="prefTitle_enableCompensation">Ausgleichsregler aktivieren</string>
+    <string name="prefSummary_enableCompensation">Mit dem Ausgleichsregler können Kameraeinstellungen feinjustiert werden, um die gewünschten Belichtungszeit zu erreichen: Verändere ISO und Blende um das Endergebnis anzupassen.</string>
+
+    <!-- filter sorting -->
+    <string name="prefTitle_categorySorting">Filtersortierung</string>
+    <!-- -->
     <string name="prefTitle_sortOrder">Sortiere Filter nach…</string>
     <string-array name="prefEntries_sortOrder">
         <item>Filterstärke</item>
         <item>Name</item>
     </string-array>
     <!-- -->
-    <string name="prefTitle_showWarning">Vor zu langen Belichtungen warnen</string>
-    <string name="prefSummary_showWarning">Zeige einen Warnhinweis, wenn eine Zeit länger 20 Minuten berechnet wird. Belichtungen dieser Länge führen üblicherweise zur Überhitzung des Bildsensors, was wiederum zuviel Bildrauschen verursach um noch nützlich zu sein.</string>
-    <!--  -->
-    <string name="prefTitle_enableCompensation">Ausgleichsregler aktivieren</string>
-    <string name="prefSummary_enableCompensation">Mit dem Ausgleichsregler können Kameraeinstellungen feinjustiert werden, um die gewünschten Belichtungszeit zu erreichen: Verändere ISO und Blende um das Endergebnis anzupassen.</string>
+    <string name="prefTitle_groupByFilterSize">Gruppiere nach Filtergröße</string>
 
     <!-- appearance -->
     <string name="prefTitle_categoryAppearance">Erscheinung</string>

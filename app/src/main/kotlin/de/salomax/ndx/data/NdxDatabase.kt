@@ -4,12 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import de.salomax.ndx.BuildConfig
 import de.salomax.ndx.R
 import java.util.concurrent.Executors
 
-@Database(entities = [(Filter::class)], version = 1, exportSchema = false)
+@Database(entities = [(Filter::class)], version = 2, exportSchema = false)
 abstract class NdxDatabase : RoomDatabase() {
 
     abstract fun filterDao(): FilterDao
@@ -29,7 +30,7 @@ abstract class NdxDatabase : RoomDatabase() {
                     INSTANCE = Room
                             .databaseBuilder(context.applicationContext, NdxDatabase::class.java, "ndx.db")
                             .addCallback(init(context))
-                            //.addMigrations(migration1To2(context))
+                            .addMigrations(MIGRATION_1_2)
                             .build()
                 }
             }
@@ -45,10 +46,12 @@ abstract class NdxDatabase : RoomDatabase() {
                         Filter(null,
                                 context.resources.getInteger(R.integer.preset_filterValue1),
                                 context.getString(R.string.preset_filterName1),
+                                null,
                                 context.getString(R.string.preset_filterInfo1)),
                         Filter(null,
                                 context.resources.getInteger(R.integer.preset_filterValue3),
                                 context.getString(R.string.preset_filterName3),
+                                null,
                                 context.getString(R.string.preset_filterInfo3))
                 )
                 // add some more when in debug mode
@@ -56,21 +59,25 @@ abstract class NdxDatabase : RoomDatabase() {
                     filters.add(Filter(null,
                             context.resources.getInteger(R.integer.preset_filterValue2),
                             context.getString(R.string.preset_filterName2),
+                            72,
                             context.getString(R.string.preset_filterInfo2))
                     )
                     filters.add(Filter(null,
                             context.resources.getInteger(R.integer.preset_filterValue4),
                             context.getString(R.string.preset_filterName4),
+                            100,
                             context.getString(R.string.preset_filterInfo4))
                     )
                     filters.add(Filter(null,
                             context.resources.getInteger(R.integer.preset_filterValue5),
                             context.getString(R.string.preset_filterName5),
+                            100,
                             context.getString(R.string.preset_filterInfo5))
                     )
                     filters.add(Filter(null,
                             context.resources.getInteger(R.integer.preset_filterValue6),
                             context.getString(R.string.preset_filterName6),
+                            150,
                             context.getString(R.string.preset_filterInfo6))
                     )
                 }
@@ -83,17 +90,11 @@ abstract class NdxDatabase : RoomDatabase() {
             }
         }
 
-//        private fun migration1To2(context: Context): Migration = object : Migration(2, 3) {
-//            override fun migrate(database: SupportSQLiteDatabase) {
-//                Single.fromCallable {
-//                    getInstance(context)
-//                            .prefDao()
-//                            .insert(Pref(Pref.SHOW_WARNING, "0"))
-//                }.subscribeOn(Schedulers.io())
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribe()
-//            }
-//        }
+       private val MIGRATION_1_2 = object : Migration(1, 2) {
+          override fun migrate(database: SupportSQLiteDatabase) {
+             database.execSQL("ALTER TABLE filters ADD COLUMN SIZE INTEGER")
+          }
+       }
 
     }
 }

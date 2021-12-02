@@ -56,6 +56,18 @@ class PrefDao private constructor(context: Context) {
    }
 
    /*
+    * group by filter size
+    */
+
+   fun getFilterGroupBySize(): SharedPreferenceLiveData<Boolean> {
+      return sharedPreferences.booleanLiveData(Pref.FILTER_GROUP_BY_SIZE, false)
+   }
+
+   fun setFilterGroupBySize(groupBy: Boolean) {
+      sharedPreferences.edit().putBoolean(Pref.FILTER_GROUP_BY_SIZE, groupBy).apply()
+   }
+
+   /*
     * alarm
     */
 

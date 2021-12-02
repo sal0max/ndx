@@ -23,6 +23,7 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
     internal val hasPremium: Boolean
         get() = prefDao.hasPremiumSync()
     private val filterSortOrder: LiveData<Int> = prefDao.getFilterSortOrder()
+    private val filterGroupBySize: LiveData<Boolean> = prefDao.getFilterGroupBySize()
 
     // set by activity
     internal val selectedSpeed: MutableLiveData<Long> = MutableLiveData()
@@ -37,15 +38,20 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
         init {
             addSource(filtersUnsorted) { calc() }
             addSource(filterSortOrder) { calc() }
+            addSource(filterGroupBySize) { calc() }
         }
 
         private fun calc() {
+            // sort by factor/name
             value = filtersUnsorted.value?.sortedWith(
                   when (filterSortOrder.value) {
                       0 -> compareBy { it.factor }
                       else -> compareBy { it.name } // 1
                   }
             )
+            // also sort by size?
+            if (filterGroupBySize.value == true)
+                value = value?.sortedWith( compareBy { it.size }) // compareByDescending
         }
     }
 

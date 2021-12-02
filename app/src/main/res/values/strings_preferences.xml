@@ -12,17 +12,22 @@
         <item>⅓ Stop</item>
     </string-array>
     <!-- -->
+    <string name="prefTitle_showWarning">Warn of too long exposures</string>
+    <string name="prefSummary_showWarning">Show a warning label, when a time larger than 20 minutes is calculated. Exposures that long usually overheat the sensor and produce too much noise to be useful any more.</string>
+    <!--  -->
+    <string name="prefTitle_enableCompensation">Enable compensation dial</string>
+    <string name="prefSummary_enableCompensation">With the compensation dial, you can fine-tune your camera settings to achieve your desired exposure time. Shift ISO and Aperture to adjust the final result.</string>
+
+    <!-- filter sorting -->
+    <string name="prefTitle_categorySorting">Filter sorting</string>
+    <!-- -->
     <string name="prefTitle_sortOrder">Sort filters by…</string>
     <string-array name="prefEntries_sortOrder">
         <item>Filter factor</item>
         <item>Name</item>
     </string-array>
     <!-- -->
-    <string name="prefTitle_showWarning">Warn of too long exposures</string>
-    <string name="prefSummary_showWarning">Show a warning label, when a time larger than 20 minutes is calculated. Exposures that long usually overheat the sensor and produce too much noise to be useful any more.</string>
-    <!--  -->
-    <string name="prefTitle_enableCompensation">Enable compensation dial</string>
-    <string name="prefSummary_enableCompensation">With the compensation dial, you can fine-tune your camera settings to achieve your desired exposure time. Shift ISO and Aperture to adjust the final result.</string>
+    <string name="prefTitle_groupByFilterSize">Group by filter size</string>
 
     <!-- appearance -->
     <string name="prefTitle_categoryAppearance">Appearance</string>
@@ -70,9 +75,10 @@
 
     <!-- CONSTANTS ............................................................................. -->
     <string name="prefKey_evSteps" translatable="false">KEY_EV_STEPS</string>
-    <string name="prefKey_sortOrder" translatable="false">KEY_SORT_ORDER</string>
     <string name="prefKey_showWarning" translatable="false">KEY_SHOW_WARNING</string>
     <string name="prefKey_enableCompensationDial" translatable="false">KEY_ENABLE_COMPENSATION_DIAL</string>
+    <string name="prefKey_sortOrder" translatable="false">KEY_SORT_ORDER</string>
+    <string name="prefKey_groupByFilterSize" translatable="false">KEY_GROUP_FILTER_SIZE</string>
     <string name="prefKey_themeSelector" translatable="false">KEY_THEME_SELECTOR</string>
     <string name="prefKey_pitchBlack" translatable="false">KEY_PITCH_BLACK</string>
 

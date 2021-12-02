@@ -42,6 +42,7 @@ class FilterEditorActivity : BaseActivity() {
 
         // don't allow > Int.MAX_VALUE
         binding.factor.filters = arrayOf<InputFilter>(MinMaxInputFilter(0, Int.MAX_VALUE))
+        binding.size.filters = arrayOf<InputFilter>(MinMaxInputFilter(0, Int.MAX_VALUE))
 
         // edit existing filter
         val filter = intent.getParcelableExtra<Filter>(ARG_FILTER)
@@ -53,7 +54,7 @@ class FilterEditorActivity : BaseActivity() {
                 binding.btnDelete.setOnClickListener {
                     viewModel.delete(filter)
                     val returnIntent = Intent()
-                    val deletedFilter = Filter(oldId!!, binding.factor.text.toString().toInt(), binding.name.text.toString(), binding.info.text.toString())
+                    val deletedFilter = Filter(oldId!!, binding.factor.text.toString().toInt(), binding.name.text.toString(), binding.size.toString().toInt(), binding.info.text.toString())
                     returnIntent.putExtra("FILTER", deletedFilter)
                     setResult(Activity.RESULT_OK, returnIntent)
                     finish()
@@ -61,6 +62,7 @@ class FilterEditorActivity : BaseActivity() {
             }
             // populate editText fields
             binding.name.setText(filter.name)
+            binding.size.setText(filter.size?.toString())
             binding.info.setText(filter.info)
             init(filter.factor)
         }
@@ -113,6 +115,7 @@ class FilterEditorActivity : BaseActivity() {
                             oldId,
                             binding.factor.text.toString().toInt(),
                             binding.name.text.toString(),
+                            binding.size.text?.let { if (it.isEmpty()) null else it.toString().toInt() },
                             binding.info.text.toString())
                     viewModel.insert(filter)
                     finish()

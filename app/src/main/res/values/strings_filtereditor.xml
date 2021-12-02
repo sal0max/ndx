@@ -12,6 +12,7 @@
     <string name="hint_description">Description</string>
     <string name="hint_name">Name</string>
     <string name="hint_info">Additional info</string>
+    <string name="hint_size">Filter size</string>
     <string name="hint_strength">Strength</string>
     <string name="hint_factor">Filter factor</string>
     <string name="hint_stops">ƒ-Stops</string>

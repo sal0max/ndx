@@ -10,13 +10,6 @@
          android:summary="%s"
          android:title="@string/prefTitle_evSteps" />
 
-      <ListPreference
-         android:entries="@array/prefEntries_sortOrder"
-         android:entryValues="@array/prefValues_sortOrder"
-         android:key="@string/prefKey_sortOrder"
-         android:summary="%s"
-         android:title="@string/prefTitle_sortOrder" />
-
       <SwitchPreference
          android:key="@string/prefKey_showWarning"
          android:summary="@string/prefSummary_showWarning"
@@ -27,6 +20,21 @@
          android:summary="@string/prefSummary_enableCompensation"
          android:title="@string/prefTitle_enableCompensation" />
 
+   </PreferenceCategory>
+
+   <PreferenceCategory android:title="@string/prefTitle_categorySorting">
+
+      <ListPreference
+         android:entries="@array/prefEntries_sortOrder"
+         android:entryValues="@array/prefValues_sortOrder"
+         android:key="@string/prefKey_sortOrder"
+         android:summary="%s"
+         android:title="@string/prefTitle_sortOrder" />
+
+      <SwitchPreference
+         android:key="@string/prefKey_groupByFilterSize"
+         android:summary=""
+         android:title="@string/prefTitle_groupByFilterSize" />
    </PreferenceCategory>
 
    <PreferenceCategory android:title="@string/prefTitle_categoryAppearance">

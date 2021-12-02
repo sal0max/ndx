@@ -66,6 +66,40 @@
          </com.google.android.material.textfield.TextInputLayout>
          <!-- /Name -->
 
+         <!-- Size -->
+         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/container_size"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin2x"
+            android:layout_marginTop="@dimen/margin2x"
+            app:layout_constraintEnd_toEndOf="@id/guideline_center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/container_name">
+
+            <EditText
+               android:id="@+id/size"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="@string/hint_size"
+               android:importantForAutofill="no"
+               android:inputType="number"
+               android:paddingEnd="48dp"
+               tools:ignore="RtlSymmetry"
+               tools:targetApi="o"
+               tools:text="82" />
+         </com.google.android.material.textfield.TextInputLayout>
+         <TextView
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin1x"
+            android:text="mm"
+            app:layout_constraintBaseline_toBaselineOf="@id/container_size"
+            app:layout_constraintEnd_toEndOf="@id/guideline_center"
+            tools:ignore="HardcodedText" />
+         <!-- /Size -->
+
          <!-- Info -->
          <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/container_info"
@@ -76,7 +110,7 @@
             android:layout_marginEnd="@dimen/margin2x"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/container_name">
+            app:layout_constraintTop_toBottomOf="@id/container_size">
 
             <EditText
                android:id="@+id/info"
@@ -213,8 +247,8 @@
       app:fabSize="normal"
       app:layout_anchor="@id/scrollView"
       app:layout_anchorGravity="bottom|right|end"
-      tools:visibility="visible"
-      tools:ignore="ContentDescription" />
+      tools:ignore="ContentDescription"
+      tools:visibility="visible" />
    <!-- /delete -->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

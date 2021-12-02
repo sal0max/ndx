@@ -8,6 +8,8 @@ data class Pref(val key: String, val value: String) {
 
       // sort order: factor (0), name (1)
       const val FILTER_SORT_ORDER = "FILTER_SORT_ORDER"
+      // group by filter size
+      const val FILTER_GROUP_BY_SIZE = "FILTER_GROUP_BY_SIZE"
 
       // timer: alarms (boolean)
       const val ALARM_BEEP = "ALARM_BEEP"

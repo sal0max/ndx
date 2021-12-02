@@ -14,6 +14,7 @@ class FilterPouchViewModel(application: Application) : AndroidViewModel(applicat
 
    // from Room
    private val filtersUnsorted: LiveData<List<Filter>?> = filterDao.getAll()
+   private val filterGroupBySize: LiveData<Boolean> = prefDao.getFilterGroupBySize()
 
    // from SharedPrefs
    internal val hasPremium
@@ -32,6 +33,7 @@ class FilterPouchViewModel(application: Application) : AndroidViewModel(applicat
       init {
          addSource(filtersUnsorted) { calc() }
          addSource(filterSortOrder) { calc() }
+         addSource(filterGroupBySize) { calc() }
       }
 
       private fun calc() {
@@ -41,6 +43,9 @@ class FilterPouchViewModel(application: Application) : AndroidViewModel(applicat
                   else -> compareBy { it.name } // 1
                }
          )
+         // also sort by size?
+         if (filterGroupBySize.value == true)
+            value = value?.sortedWith( compareBy { it.size }) // compareByDescending
       }
    }
 

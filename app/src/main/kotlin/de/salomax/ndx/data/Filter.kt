@@ -10,18 +10,21 @@ import androidx.room.PrimaryKey
 data class Filter(@PrimaryKey(autoGenerate = true) var id: Long?,
                   @ColumnInfo(name = "FACTOR") val factor: Int,
                   @ColumnInfo(name = "NAME") val name: String,
+                  @ColumnInfo(name = "SIZE") val size: Int?,
                   @ColumnInfo(name = "INFO") val info: String?) : Parcelable, Comparable<Filter> {
 
     constructor(parcel: Parcel) : this(
             parcel.readValue(Long::class.java.classLoader) as? Long,
             parcel.readInt(),
             parcel.readString()!!,
+            parcel.readInt().let { if (it == -1) null else it },
             parcel.readString())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeValue(id)
         parcel.writeInt(factor)
         parcel.writeString(name)
+        parcel.writeInt(size ?: -1)
         parcel.writeString(info)
     }
 

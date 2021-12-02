@@ -44,7 +44,7 @@
       app:layout_constraintEnd_toStartOf="@id/checkbox"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/info2"
-      tools:text="× 1024  ·  10 Stops  ·  ND 3.0" />
+      tools:text="82 mm  |  × 1024  ·  10 Stops  ·  ND 3.0" />
 
    <androidx.appcompat.widget.SwitchCompat
       android:id="@+id/checkbox"

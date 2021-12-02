@@ -17,6 +17,8 @@ class PreferenceViewModel(private val app: Application) : AndroidViewModel(app) 
 
     internal val filterSortOrder: SharedPreferenceLiveData<Int> =
         prefDao.getFilterSortOrder()
+    internal val filterGroupBySize: SharedPreferenceLiveData<Boolean> =
+        prefDao.getFilterGroupBySize()
     internal val evSteps: SharedPreferenceLiveData<ShutterSpeeds> =
         prefDao.getEvSteps()
     internal val showWarning: SharedPreferenceLiveData<Boolean> =
@@ -49,6 +51,9 @@ class PreferenceViewModel(private val app: Application) : AndroidViewModel(app) 
     }
     fun setFilterSortOrder(sortOrder: Int) {
         prefDao.setFilterSortOrder(sortOrder)
+    }
+    fun setFilterGroupBySize(group: Boolean) {
+        prefDao.setFilterGroupBySize(group)
     }
     fun setTheme(theme: Int) {
         prefDao.setTheme(theme)
