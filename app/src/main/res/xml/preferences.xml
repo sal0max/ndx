@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:app="http://schemas.android.com/apk/res-auto">
 
    <PreferenceCategory android:title="@string/prefTitle_categoryGeneral">
 
@@ -82,9 +83,10 @@
 
    </PreferenceCategory>
 
-   <PreferenceCategory android:title="@string/prefTitle_categoryFeedback">
+   <PreferenceCategory
+      android:title="@string/prefTitle_categoryFeedback"
+      app:allowDividerAbove="false">
 
-      <!--suppress AndroidElementNotAllowed -->
       <Preference
          android:key="@string/prefKey_mail"
          android:title="@string/prefTitle_mail" />
