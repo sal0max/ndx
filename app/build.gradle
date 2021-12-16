@@ -5,13 +5,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
     buildToolsVersion = '30.0.3'
 
     defaultConfig {
         applicationId 'de.salomax.ndx'
         minSdkVersion 24
-        targetSdkVersion 31
+        targetSdkVersion 32
         // SemVer
         def major = 3
         def minor = 3
@@ -67,7 +67,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version" // optional
 
     // Room
-    def room_version = '2.3.0'
+    def room_version = '2.4.0'
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
