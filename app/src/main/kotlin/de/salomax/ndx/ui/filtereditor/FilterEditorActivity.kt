@@ -54,7 +54,13 @@ class FilterEditorActivity : BaseActivity() {
                 binding.btnDelete.setOnClickListener {
                     viewModel.delete(filter)
                     val returnIntent = Intent()
-                    val deletedFilter = Filter(oldId!!, binding.factor.text.toString().toInt(), binding.name.text.toString(), binding.size.toString().toInt(), binding.info.text.toString())
+                    val deletedFilter = Filter(
+                        id = oldId!!,
+                        factor = binding.factor.text.toString().toInt(),
+                        name = binding.name.text.toString(),
+                        size = if (binding.size.text.isNullOrEmpty()) null else binding.size.text.toString().toInt(),
+                        info = binding.info.text.toString()
+                    )
                     returnIntent.putExtra("FILTER", deletedFilter)
                     setResult(Activity.RESULT_OK, returnIntent)
                     finish()
