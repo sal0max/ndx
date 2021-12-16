@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="changelog"><b>3.3.0</b>
+    <string name="changelog"><b>3.3.1</b>
+        \n⸻
+        \n<li>Absturz beim Löschen von Filtern behoben</li>
+        \n<li>Kleine UI-Verbesserungen</li>
+        \n
+        \n<b>3.3.0</b>
         \n⸻
         \n<li>Es ist nun möglich, die Größe eines Filters zu speichern. Praktisch, um Ordnung in die Filtertasche zu bringen, wenn man Filter verschiedener Größen besitzt.</li>
         \n<li>Der Timer zeigt nun eine Notification, wenn er läuft und die App im Hintergrund ist.</li>

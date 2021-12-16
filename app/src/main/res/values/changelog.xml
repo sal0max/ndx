@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="changelog"><b>3.3.0</b>
+    <string name="changelog"><b>3.3.1</b>
+        \n⸻
+        \n<li>Fix a crash that happened when deleting filters</li>
+        \n<li>Minor UI improvements</li>
+        \n
+        \n<b>3.3.0</b>
         \n⸻
         \n<li>It\'s now possible to add a size value to filters. Handy, to get some order in the filter pouch, if you own different sizes of filters.</li>
         \n<li>Timer now shows a notification, when it is running and the app is in the background.</li>
