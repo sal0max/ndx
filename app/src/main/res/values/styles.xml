@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <!-- themes to be applied -->
+    <style name="AppTheme" parent="BaseAppTheme" />
+    <style name="AppTheme.Black" parent="BaseAppTheme.Black" />
+
+    <!-- light/dark theme, to be extended -->
+    <style name="BaseAppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -9,15 +14,16 @@
         <item name="android:windowBackground">@color/colorBackground</item>
     </style>
 
-    <style name="AppTheme.Black" parent="AppTheme">
+    <!-- black theme, to be extended -->
+    <style name="BaseAppTheme.Black" parent="BaseAppTheme">
         <item name="colorPrimary">@color/colorPrimary_pitchBlack</item>
         <item name="colorPrimaryDark">@color/colorPrimary_pitchBlack</item>
         <item name="colorAccent">@color/colorAccent_pitchBlack</item>
+        <item name="cardViewStyle">@style/BaseAppTheme.CardView.Black</item>
         <item name="android:windowBackground">@color/colorBackground_pitchBlack</item>
-        <item name="cardViewStyle">@style/AppTheme.CardView.Black</item>
     </style>
 
-    <style name="AppTheme.CardView.Black" parent="CardView.Dark">
+    <style name="BaseAppTheme.CardView.Black" parent="CardView.Dark">
         <item name="cardBackgroundColor">@color/colorBackground_pitchBlack</item>
     </style>
 
