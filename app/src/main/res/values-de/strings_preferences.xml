@@ -30,7 +30,7 @@
     <string name="prefTitle_groupByFilterSize">Gruppiere nach Filtergröße</string>
 
     <!-- appearance -->
-    <string name="prefTitle_categoryAppearance">Erscheinung</string>
+    <string name="prefTitle_categoryAppearance">Aussehen</string>
     <!--  -->
     <string name="prefTitle_themeSelector">Design</string>
     <string-array name="prefEntries_themes">
