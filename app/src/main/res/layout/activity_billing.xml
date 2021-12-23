@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin3x"
             android:text="@string/billing_pro_feature_1_title"
-            android:textColor="@color/colorAccent"
+            android:textColor="?attr/colorAccent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/billing_lead" />
 
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin2x"
             android:text="@string/billing_pro_feature_2_title"
-            android:textColor="@color/colorAccent"
+            android:textColor="?attr/colorAccent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/billing_pro_feature_1_summary" />
 
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin2x"
             android:text="@string/billing_pro_feature_3_title"
-            android:textColor="@color/colorAccent"
+            android:textColor="?attr/colorAccent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/billing_pro_feature_2_summary" />
 
@@ -106,7 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin2x"
             android:text="@string/billing_pro_feature_4_title"
-            android:textColor="@color/colorAccent"
+            android:textColor="?attr/colorAccent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/billing_pro_feature_3_summary" />
 

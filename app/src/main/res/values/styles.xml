@@ -1,30 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- main colors to be referenced throughout the theme -->
+    <attr name="colorActionBar" format="reference|color" />
+    <attr name="colorBackground" format="reference|color" />
+    <attr name="colorAccent1" format="reference|color" />
+    <attr name="colorAccent2" format="reference|color" />
+
     <!-- themes to be applied -->
     <style name="AppTheme" parent="BaseAppTheme" />
     <style name="AppTheme.Black" parent="BaseAppTheme.Black" />
 
     <!-- light/dark theme, to be extended -->
     <style name="BaseAppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorActionBar">@color/colorActionBar</item>
+        <item name="colorBackground">@color/colorBackground</item>
+        <item name="colorAccent1">@color/colorAccent1</item>
+        <item name="colorAccent2">@color/colorAccent2</item>
+
+        <item name="actionBarStyle">@style/BaseAppTheme.ActionBar</item>
+        <item name="android:statusBarColor">?attr/colorActionBar</item>
+
+        <item name="colorPrimary">?attr/colorActionBar</item>
+        <item name="colorPrimaryDark">?attr/colorActionBar</item>
+        <item name="android:windowBackground">?attr/colorBackground</item>
+        <item name="colorAccent">?attr/colorAccent1</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
-        <item name="android:windowBackground">@color/colorBackground</item>
     </style>
 
     <!-- black theme, to be extended -->
     <style name="BaseAppTheme.Black" parent="BaseAppTheme">
-        <item name="colorPrimary">@color/colorPrimary_pitchBlack</item>
-        <item name="colorPrimaryDark">@color/colorPrimary_pitchBlack</item>
-        <item name="colorAccent">@color/colorAccent_pitchBlack</item>
-        <item name="cardViewStyle">@style/BaseAppTheme.CardView.Black</item>
-        <item name="android:windowBackground">@color/colorBackground_pitchBlack</item>
+        <item name="colorActionBar">@color/colorActionBarPitchBlack</item>
+        <item name="colorBackground">@color/colorBackgroundPitchBlack</item>
+        <item name="colorAccent1">@color/colorAccent1pitchBlack</item>
+        <item name="colorAccent2">@color/colorAccent2pitchBlack</item>
     </style>
 
-    <style name="BaseAppTheme.CardView.Black" parent="CardView.Dark">
-        <item name="cardBackgroundColor">@color/colorBackground_pitchBlack</item>
+    <!-- set the actionbar background color -->
+    <style name="BaseAppTheme.ActionBar" parent="@style/Widget.AppCompat.ActionBar">>
+        <item name="background">?attr/colorActionBar</item>
     </style>
 
 </resources>

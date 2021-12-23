@@ -5,6 +5,7 @@
     <dimen name="margin2x">16dp</dimen>
     <dimen name="margin3x">24dp</dimen>
     <dimen name="margin4x">32dp</dimen>
+    <dimen name="margin5x">50dp</dimen>
 
     <dimen name="text_big">18sp</dimen>
     <dimen name="text_normal">16sp</dimen>

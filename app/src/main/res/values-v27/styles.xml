@@ -9,7 +9,7 @@
 
    <style name="AppTheme.Black" parent="BaseAppTheme.Black">
       <!-- "transparent" navigation bar -->
-      <item name="android:navigationBarColor">@color/colorBackground_pitchBlack</item>
+      <item name="android:navigationBarColor">?attr/colorBackground</item>
       <item name="android:windowLightNavigationBar">?attr/isLightTheme</item>
    </style>
 

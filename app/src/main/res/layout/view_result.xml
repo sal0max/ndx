@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
     Try to make every element "fixed" by avoiding wrap_content and instead use match_parent or 0dp
     Improves performance a lot!
 -->
@@ -73,7 +72,7 @@
       android:layout_marginTop="@dimen/text_resultLarge"
       android:gravity="center_vertical|end"
       android:paddingStart="@dimen/margin3x"
-      android:paddingTop="@dimen/margin3x"
+      android:paddingTop="@dimen/margin4x"
       android:paddingEnd="@dimen/margin3x"
       android:text="@string/unit_minutes"
       android:textAlignment="viewEnd"
@@ -127,7 +126,7 @@
       android:layout_marginTop="@dimen/text_resultLarge"
       android:gravity="center_vertical|start"
       android:paddingStart="@dimen/margin3x"
-      android:paddingTop="@dimen/margin3x"
+      android:paddingTop="@dimen/margin4x"
       android:paddingEnd="@dimen/margin3x"
       android:text="@string/unit_seconds"
       android:textAlignment="viewStart"

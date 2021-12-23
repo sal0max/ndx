@@ -35,7 +35,7 @@ class CalculatorActivity : BaseActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         // list & adapter : shutter speeds
-        binding.recyclerShutter.apply {
+        binding.dials.recyclerShutter.apply {
             adapter = ShutterAdapter(this@CalculatorActivity)
             addItemDecoration(CenterLineDecoration(ContextCompat.getColor(context, android.R.color.white))) // center line
             // addItemDecoration(DotDividerDecoration(ContextCompat.getColor(context, android.R.color.white)))
@@ -45,7 +45,7 @@ class CalculatorActivity : BaseActivity() {
             }
         }
         // list & adapter : compensation
-        binding.recyclerCompensation.apply {
+        binding.dials.recyclerCompensation.apply {
             adapter = CompensationAdapter(this@CalculatorActivity)
             addItemDecoration(CenterLineDecoration(ContextCompat.getColor(context, android.R.color.white))) // center line
             // addItemDecoration(DotDividerDecoration(ContextCompat.getColor(context, android.R.color.white)))
@@ -69,21 +69,21 @@ class CalculatorActivity : BaseActivity() {
             (binding.recyclerFilters.adapter as FilterAdapter).setFilters(it)
         })
         viewModel.speeds.observe(this, Observer {
-            val adapter = binding.recyclerShutter.adapter as ShutterAdapter
+            val adapter = binding.dials.recyclerShutter.adapter as ShutterAdapter
             if (adapter.speeds != it) {
                 // set new speeds
                 adapter.speeds = it
                 // scroll to middle
-                binding.recyclerShutter.scrollToPosition(it.doubleValues.size / 2)
+                binding.dials.recyclerShutter.scrollToPosition(it.doubleValues.size / 2)
             }
         })
         viewModel.compensation.observe(this, Observer {
-            val adapter = binding.recyclerCompensation.adapter as CompensationAdapter
+            val adapter = binding.dials.recyclerCompensation.adapter as CompensationAdapter
             if (adapter.compensation != it) {
                 // set new compensation values
                 adapter.compensation = it
                 // scroll to middle
-                binding.recyclerCompensation.scrollToPosition(it.text.size / 2)
+                binding.dials.recyclerCompensation.scrollToPosition(it.text.size / 2)
             }
         })
         viewModel.isWarningEnabled.observe(this, Observer {
@@ -92,16 +92,16 @@ class CalculatorActivity : BaseActivity() {
         viewModel.isCompensationDialEnabled.observe(this, Observer {
             when (it) {
                 true -> {
-                    if (binding.recyclerCompensationContainer.visibility != View.VISIBLE) {
-                        binding.recyclerCompensationContainer.visibility = View.VISIBLE
+                    if (binding.dials.compensationContainer.visibility != View.VISIBLE) {
+                        binding.dials.compensationContainer.visibility = View.VISIBLE
                         // scroll to center
-                        binding.recyclerCompensation.adapter?.itemCount?.div(2)?.let { center ->
-                            binding.recyclerCompensation.scrollToPosition(center)
+                        binding.dials.recyclerCompensation.adapter?.itemCount?.div(2)?.let { center ->
+                            binding.dials.recyclerCompensation.scrollToPosition(center)
                         }
                     }
                 }
                 false -> {
-                    binding.recyclerCompensationContainer.visibility = View.GONE
+                    binding.dials.compensationContainer.visibility = View.GONE
                     viewModel.selectedOffset.value = 0
                 }
             }
