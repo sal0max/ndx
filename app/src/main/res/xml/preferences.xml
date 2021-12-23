@@ -3,94 +3,77 @@
    xmlns:app="http://schemas.android.com/apk/res-auto">
 
    <PreferenceCategory android:title="@string/prefTitle_categoryGeneral">
-
       <ListPreference
          android:entries="@array/prefEntries_evSteps"
          android:entryValues="@array/prefValues_evSteps"
          android:key="@string/prefKey_evSteps"
          android:summary="%s"
          android:title="@string/prefTitle_evSteps" />
-
       <SwitchPreference
          android:key="@string/prefKey_showWarning"
          android:summary="@string/prefSummary_showWarning"
          android:title="@string/prefTitle_showWarning" />
-
       <SwitchPreference
          android:key="@string/prefKey_enableCompensationDial"
          android:summary="@string/prefSummary_enableCompensation"
          android:title="@string/prefTitle_enableCompensation" />
-
-   </PreferenceCategory>
-
-   <PreferenceCategory android:title="@string/prefTitle_categorySorting">
-
-      <ListPreference
-         android:entries="@array/prefEntries_sortOrder"
-         android:entryValues="@array/prefValues_sortOrder"
-         android:key="@string/prefKey_sortOrder"
-         android:summary="%s"
-         android:title="@string/prefTitle_sortOrder" />
-
-      <SwitchPreference
-         android:key="@string/prefKey_groupByFilterSize"
-         android:summary=""
-         android:title="@string/prefTitle_groupByFilterSize" />
    </PreferenceCategory>
 
    <PreferenceCategory android:title="@string/prefTitle_categoryAppearance">
-
       <ListPreference
          android:entries="@array/prefEntries_themes"
          android:entryValues="@array/prefValues_themes"
          android:key="@string/prefKey_themeSelector"
          android:summary="%s"
          android:title="@string/prefTitle_themeSelector" />
-      <!--  -->
       <SwitchPreference
          android:defaultValue="false"
          android:key="@string/prefKey_pitchBlack"
          android:summary="@string/prefSummary_pitchBlack"
          android:title="@string/prefTitle_pitchBlack" />
+   </PreferenceCategory>
 
+   <PreferenceCategory android:title="@string/prefTitle_categorySorting">
+      <ListPreference
+         android:entries="@array/prefEntries_sortOrder"
+         android:entryValues="@array/prefValues_sortOrder"
+         android:key="@string/prefKey_sortOrder"
+         android:summary="%s"
+         android:title="@string/prefTitle_sortOrder" />
+      <SwitchPreference
+         android:key="@string/prefKey_groupByFilterSize"
+         android:summary=""
+         android:title="@string/prefTitle_groupByFilterSize" />
    </PreferenceCategory>
 
    <PreferenceCategory android:title="Timer">
-
       <SwitchPreference
          android:key="@string/prefKey_alarmBeep"
          android:summary="@string/prefSummary_timerBeep"
          android:title="@string/prefTitle_timerBeep" />
-
       <SwitchPreference
          android:key="@string/prefKey_alarmVibrate"
          android:summary="@string/prefSummary_timerVibrate"
          android:title="@string/prefTitle_timerVibrate" />
-
    </PreferenceCategory>
 
    <PreferenceCategory android:title="@string/prefTitle_categoryAbout">
-
       <Preference
          android:key="@string/prefKey_donate"
          android:summary="@string/prefSummary_donate"
          android:title="@string/prefTitle_donate" />
-
       <Preference
          android:key="@string/prefKey_about"
          android:summary="@string/prefSummary_about"
          android:title="@string/prefTitle_about" />
-
    </PreferenceCategory>
 
    <PreferenceCategory
       android:title="@string/prefTitle_categoryFeedback"
       app:allowDividerAbove="false">
-
       <Preference
          android:key="@string/prefKey_mail"
          android:title="@string/prefTitle_mail" />
-
       <Preference
          android:key="@string/prefKey_rate"
          android:title="@string/prefTitle_rate" />
