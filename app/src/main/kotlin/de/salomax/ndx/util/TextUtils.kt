@@ -7,6 +7,7 @@ import android.text.TextPaint
 import android.text.style.MetricAffectingSpan
 import android.text.style.RelativeSizeSpan
 import java.util.concurrent.TimeUnit
+import kotlin.math.abs
 import kotlin.math.absoluteValue
 
 object TextUtils {
@@ -50,7 +51,7 @@ object TextUtils {
     /**
      * takes a duration in millis and returns either h:mm:ss or mm:ss
      */
-    fun Long?.toTimeString(): String? {
+    fun Long?.toTimeString(withMillis: Boolean = false): String? {
         return if (this == null)
             null
         else {
@@ -62,11 +63,20 @@ object TextUtils {
             val seconds = TimeUnit.MILLISECONDS.toSeconds(
                 this.absoluteValue - TimeUnit.HOURS.toMillis(hours) - TimeUnit.MINUTES.toMillis(minutes)
             ).absoluteValue
+            val millis = this.absoluteValue - TimeUnit.HOURS.toMillis(hours) - TimeUnit.MINUTES.toMillis(minutes) - TimeUnit.SECONDS.toMillis(seconds)
 
-            if (hours > 0)
+            var timeString = if (hours > 0)
                 signString + String.format("%d:%02d:%02d", hours, minutes, seconds)
             else
                 signString + String.format("%02d:%02d", minutes, seconds)
+
+            if (withMillis) {
+                // tenths of a second
+                val tenth = abs(millis / 100 % 10)
+                timeString += String.format(".%d", tenth)
+            }
+
+            return timeString
         }
     }
 

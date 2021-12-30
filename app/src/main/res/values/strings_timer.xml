@@ -2,5 +2,6 @@
 <resources>
     <string name="title_timer">Timer</string>
 
+    <string name="total_exposure_time">Exposure Time</string>
     <string name="reset_timer">Reset</string>
 </resources>

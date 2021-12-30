@@ -13,6 +13,7 @@ import de.salomax.ndx.R
 import de.salomax.ndx.databinding.ActivityTimerBinding
 import de.salomax.ndx.ui.BaseActivity
 import de.salomax.ndx.ui.calculator.CalculatorActivity
+import de.salomax.ndx.util.TextUtils.toTimeString
 import de.salomax.ndx.widget.BlinkAnimation
 import java.util.concurrent.*
 import kotlin.math.abs
@@ -31,8 +32,11 @@ class TimerActivity : BaseActivity(), ServiceConnection {
         isServiceBound = true
         intent.extras?.let {
             // first start: initialize countdown
-            if (intent.extras != null && intent.extras?.getLong("MILLIS") != 0L)
-                service.initCountdown(intent.extras!!.getLong("MILLIS"))
+            if (intent.extras != null && intent.extras?.getLong("MILLIS") != 0L) {
+                val millis = intent.extras!!.getLong("MILLIS")
+                service.initCountdown(millis)
+                viewBinding.totalTime.text = millis.toTimeString(true)
+            }
         }
         observe()
     }

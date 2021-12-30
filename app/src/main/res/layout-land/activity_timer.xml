@@ -1,123 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+   xmlns:app="http://schemas.android.com/apk/res-auto"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent">
 
-    <com.github.guilhe.views.CircularProgressView
-        android:id="@+id/progress"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:progressBackgroundAlphaEnabled="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_max="300sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_max="wrap"
-        app:progressBarColor="?android:attr/colorAccent"
-        app:progressBarThickness="8dp"
-        app:progressThumb="true"
-        app:reverse="true"
-        app:shadow="false"
-        tools:progress="60" />
+   <TextView
+      android:id="@+id/totalTitle"
+      style="@style/TextAppearance.MaterialComponents.Caption"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/margin2x"
+      android:layout_marginTop="@dimen/margin2x"
+      android:alpha=".5"
+      android:text="@string/total_exposure_time"
+      android:textAllCaps="true"
+      android:textStyle="bold"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/colon"
-        style="@style/Base.TextAppearance.AppCompat.Body1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingEnd="@dimen/margin1x"
-        android:paddingStart="@dimen/margin1x"
-        android:text=":"
-        android:textSize="@dimen/text_resultLarge"
-        app:layout_constraintBottom_toBottomOf="@id/progress"
-        app:layout_constraintEnd_toEndOf="@id/progress"
-        app:layout_constraintStart_toStartOf="@id/progress"
-        app:layout_constraintTop_toTopOf="@id/progress"
-        tools:ignore="hardcodedText" />
+   <TextView
+      android:id="@+id/totalTime"
+      style="@style/TextAppearance.MaterialComponents.Headline6"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/margin2x"
+      android:textSize="18sp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/totalTitle"
+      tools:text="1h 12:49.0" />
 
-    <TextView
-        android:id="@+id/textMin"
-        style="@style/Base.TextAppearance.AppCompat.Body1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_resultLarge"
-        app:layout_constraintBaseline_toBaselineOf="@id/colon"
-        app:layout_constraintEnd_toStartOf="@id/colon"
-        tools:text="01" />
+   <com.github.guilhe.views.CircularProgressView
+      android:id="@+id/progress"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHeight_max="300sp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintWidth_max="wrap"
+      app:progressBackgroundAlphaEnabled="true"
+      app:progressBarColor="?android:attr/colorAccent"
+      app:progressBarThickness="8dp"
+      app:progressThumb="true"
+      app:reverse="true"
+      app:shadow="false"
+      tools:progress="60" />
 
-    <TextView
-        android:id="@+id/textSec"
-        style="@style/Base.TextAppearance.AppCompat.Body1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingEnd="@dimen/margin1x"
-        android:textSize="@dimen/text_resultLarge"
-        app:layout_constraintBaseline_toBaselineOf="@id/colon"
-        app:layout_constraintStart_toEndOf="@id/colon"
-        tools:ignore="RtlSymmetry"
-        tools:text="12" />
+   <TextView
+      android:id="@+id/colon"
+      style="@style/Base.TextAppearance.AppCompat.Body1"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingStart="@dimen/margin1x"
+      android:paddingEnd="@dimen/margin1x"
+      android:text=":"
+      android:textSize="@dimen/text_resultLarge"
+      app:layout_constraintBottom_toBottomOf="@id/progress"
+      app:layout_constraintEnd_toEndOf="@id/progress"
+      app:layout_constraintStart_toStartOf="@id/progress"
+      app:layout_constraintTop_toTopOf="@id/progress"
+      tools:ignore="hardcodedText" />
 
-    <TextView
-        android:id="@+id/textMilli"
-        style="@style/Base.TextAppearance.AppCompat.Body1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_resultSmall"
-        app:layout_constraintBaseline_toBaselineOf="@id/colon"
-        app:layout_constraintStart_toEndOf="@id/textSec"
-        tools:text=".1" />
+   <TextView
+      android:id="@+id/textMin"
+      style="@style/Base.TextAppearance.AppCompat.Body1"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="@dimen/text_resultLarge"
+      app:layout_constraintBaseline_toBaselineOf="@id/colon"
+      app:layout_constraintEnd_toStartOf="@id/colon"
+      tools:text="01" />
 
-    <TextView
-        android:id="@+id/minus"
-        style="@style/Base.TextAppearance.AppCompat.Body1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingEnd="@dimen/margin1x"
-        android:paddingStart="@dimen/margin1x"
-        android:text="-"
-        android:textSize="@dimen/text_resultLarge"
-        android:visibility="gone"
-        app:layout_constraintBaseline_toBaselineOf="@id/colon"
-        app:layout_constraintEnd_toStartOf="@id/textMin"
-        tools:ignore="hardcodedText"
-        tools:visibility="visible" />
+   <TextView
+      android:id="@+id/textSec"
+      style="@style/Base.TextAppearance.AppCompat.Body1"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingEnd="@dimen/margin1x"
+      android:textSize="@dimen/text_resultLarge"
+      app:layout_constraintBaseline_toBaselineOf="@id/colon"
+      app:layout_constraintStart_toEndOf="@id/colon"
+      tools:ignore="RtlSymmetry"
+      tools:text="12" />
 
-    <TextView
-        android:id="@+id/textHour"
-        style="@style/Base.TextAppearance.AppCompat.Body1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_normal"
-        app:layout_constraintBottom_toTopOf="@id/colon"
-        app:layout_constraintStart_toStartOf="@id/textMin"
-        tools:text="152 h" />
+   <TextView
+      android:id="@+id/textMilli"
+      style="@style/Base.TextAppearance.AppCompat.Body1"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="@dimen/text_resultSmall"
+      app:layout_constraintBaseline_toBaselineOf="@id/colon"
+      app:layout_constraintStart_toEndOf="@id/textSec"
+      tools:text=".1" />
 
-    <Button
-        android:id="@+id/btn_reset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="?android:selectableItemBackgroundBorderless"
-        android:minHeight="48dp"
-        android:minWidth="48dp"
-        android:text="@string/reset_timer"
-        app:layout_constraintEnd_toEndOf="@id/colon"
-        app:layout_constraintStart_toStartOf="@id/colon"
-        app:layout_constraintTop_toBottomOf="@id/colon" />
+   <TextView
+      android:id="@+id/minus"
+      style="@style/Base.TextAppearance.AppCompat.Body1"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingStart="@dimen/margin1x"
+      android:paddingEnd="@dimen/margin1x"
+      android:text="-"
+      android:textSize="@dimen/text_resultLarge"
+      android:visibility="gone"
+      app:layout_constraintBaseline_toBaselineOf="@id/colon"
+      app:layout_constraintEnd_toStartOf="@id/textMin"
+      tools:ignore="hardcodedText"
+      tools:visibility="visible" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_control"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin2x"
-        android:src="@drawable/ic_pause_white_24dp"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="ContentDescription" />
+   <TextView
+      android:id="@+id/textHour"
+      style="@style/Base.TextAppearance.AppCompat.Body1"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="@dimen/text_normal"
+      app:layout_constraintBottom_toTopOf="@id/colon"
+      app:layout_constraintStart_toStartOf="@id/textMin"
+      tools:text="152 h" />
+
+   <Button
+      android:id="@+id/btn_reset"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:background="?android:selectableItemBackgroundBorderless"
+      android:minWidth="48dp"
+      android:minHeight="48dp"
+      android:text="@string/reset_timer"
+      app:layout_constraintEnd_toEndOf="@id/colon"
+      app:layout_constraintStart_toStartOf="@id/colon"
+      app:layout_constraintTop_toBottomOf="@id/colon" />
+
+   <com.google.android.material.floatingactionbutton.FloatingActionButton
+      android:id="@+id/btn_control"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/margin2x"
+      android:src="@drawable/ic_pause_white_24dp"
+      app:fabSize="normal"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
