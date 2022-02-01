@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="changelog"><b>3.3.2</b>
+    <string name="changelog"><b>3.3.3</b>
+        \n⸻
+        \n<li>Fehlerbehebungen bei RTL-Sprachen</li>
+        \n
+        \n<b>3.3.2</b>
         \n⸻
         \n<li>UI-Verbesserungen</li>
         \n
