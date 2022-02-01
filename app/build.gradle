@@ -67,22 +67,22 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version" // optional
 
     // Room
-    def room_version = '2.4.0'
+    def room_version = '2.4.1'
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
     // SupportLibs
-    implementation 'androidx.appcompat:appcompat:1.4.0'
-    implementation 'androidx.preference:preference-ktx:1.1.1'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
-    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'com.google.android.material:material:1.5.0'
 
     // Widgets
     implementation 'com.github.guilhe:circular-progress-view:2.0.0'
 
     // LeakCanary
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
 
     // billing
     implementation 'com.android.billingclient:billing-ktx:3.0.3'

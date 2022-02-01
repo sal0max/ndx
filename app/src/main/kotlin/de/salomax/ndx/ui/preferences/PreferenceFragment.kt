@@ -122,7 +122,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
         viewModel.theme.observe(this, { themeSelectorPreference.value = it.toString() })
     }
 
-    override fun onPreferenceChange(preference: Preference?, newValue: Any?): Boolean {
+    override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
         when (preference) {
             evStepsPreference -> {
                 viewModel.setEvSteps(newValue.toString().toInt())
@@ -144,7 +144,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
         return true
     }
 
-    override fun onPreferenceClick(preference: Preference?): Boolean {
+    override fun onPreferenceClick(preference: Preference): Boolean {
         when (preference) {
             donatePreference -> {
                 val intent = Intent(context, BillingActivity().javaClass)
