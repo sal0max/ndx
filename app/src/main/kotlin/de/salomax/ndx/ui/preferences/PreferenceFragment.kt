@@ -97,20 +97,20 @@ class PreferenceFragment : PreferenceFragmentCompat(),
         /*
          * populate settings with values from prefs
          */
-        viewModel.filterSortOrder.observe(this, { filterSortingPreference.value = it.toString() })
-        viewModel.evSteps.observe(this, { speeds ->
+        viewModel.filterSortOrder.observe(this) { filterSortingPreference.value = it.toString() }
+        viewModel.evSteps.observe(this) { speeds ->
             evStepsPreference.value = when (speeds) {
                 ShutterSpeeds.FULL -> "1"
                 ShutterSpeeds.HALF -> "2"
                 else -> "3"
             }
-        })
-        viewModel.filterGroupBySize.observe(this, {filterGroupBySizePreference.isChecked = it})
-        viewModel.showWarning.observe(this, { showWarningPreference.isChecked = it })
-        viewModel.compensationDialEnabled.observe(this, { showCompensationDialogPreference.isChecked = it })
-        viewModel.alarmBeepEnabled.observe(this, { alarmBeepPreference.isChecked = it })
-        viewModel.alarmVibrateEnabled.observe(this, { alarmVibratePreference.isChecked = it })
-        viewModel.hasPremium.observe(this, {
+        }
+        viewModel.filterGroupBySize.observe(this) { filterGroupBySizePreference.isChecked = it }
+        viewModel.showWarning.observe(this) { showWarningPreference.isChecked = it }
+        viewModel.compensationDialEnabled.observe(this) { showCompensationDialogPreference.isChecked = it }
+        viewModel.alarmBeepEnabled.observe(this) { alarmBeepPreference.isChecked = it }
+        viewModel.alarmVibrateEnabled.observe(this) { alarmVibratePreference.isChecked = it }
+        viewModel.hasPremium.observe(this) {
             if (it) {
                 donatePreference.summary = getString(R.string.prefSummary_has_donated)
                 donatePreference.isSelectable = false
@@ -118,8 +118,8 @@ class PreferenceFragment : PreferenceFragmentCompat(),
                 donatePreference.summary = getString(R.string.prefSummary_donate)
                 donatePreference.isSelectable = true
             }
-        })
-        viewModel.theme.observe(this, { themeSelectorPreference.value = it.toString() })
+        }
+        viewModel.theme.observe(this) { themeSelectorPreference.value = it.toString() }
     }
 
     override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {

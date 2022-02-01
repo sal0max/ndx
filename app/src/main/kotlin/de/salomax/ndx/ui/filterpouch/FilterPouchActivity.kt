@@ -65,7 +65,7 @@ class FilterPouchActivity : BaseActivity() {
         }
 
         // refresh data on init & observe
-        viewModel.filters.observe(this, { filterAdapter.setFilters(it) })
+        viewModel.filters.observe(this) { filterAdapter.setFilters(it) }
     }
 
     private val filterEditorActivityWithResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->

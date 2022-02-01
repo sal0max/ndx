@@ -80,12 +80,12 @@ class TimerActivity : BaseActivity(), ServiceConnection {
 
     private fun observe() {
         // observe running timer
-        service.millisCurrent.observe(this, {
+        service.millisCurrent.observe(this) {
             refreshUi()
-        })
+        }
 
         // observe status: stopped -> runningPositive/paused -> -> runningNegative
-        service.state.observe(this, { state ->
+        service.state.observe(this) { state ->
             @Suppress("WHEN_ENUM_CAN_BE_NULL_IN_JAVA")
             when (state) {
                 TimerService.State.WAITING -> {
@@ -140,7 +140,7 @@ class TimerActivity : BaseActivity(), ServiceConnection {
                     }
                 }
             }
-        })
+        }
     }
 
     override fun onBackPressed() {
