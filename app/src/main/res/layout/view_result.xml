@@ -6,7 +6,8 @@
    xmlns:app="http://schemas.android.com/apk/res-auto"
    xmlns:tools="http://schemas.android.com/tools"
    android:layout_width="match_parent"
-   android:layout_height="match_parent">
+   android:layout_height="match_parent"
+   android:layoutDirection="ltr">
 
    <!-- days & hours -->
    <TextView
@@ -58,6 +59,7 @@
       android:paddingEnd="@dimen/margin2x"
       android:textAlignment="viewEnd"
       android:textColor="?android:textColorPrimary"
+      android:textDirection="ltr"
       android:textSize="@dimen/text_resultVeryLarge"
       android:typeface="monospace"
       app:layout_constraintBottom_toBottomOf="parent"
@@ -112,6 +114,7 @@
       android:paddingEnd="@dimen/margin2x"
       android:textAlignment="viewStart"
       android:textColor="?android:textColorPrimary"
+      android:textDirection="ltr"
       android:textSize="@dimen/text_resultVeryLarge"
       android:typeface="monospace"
       app:layout_constraintBottom_toBottomOf="@id/minutes"

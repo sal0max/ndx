@@ -31,13 +31,14 @@
          android:layout_height="wrap_content"
          android:layout_marginEnd="@dimen/margin2x"
          android:gravity="end|center_vertical"
+         android:textAlignment="viewEnd"
          android:textColor="?android:attr/colorAccent"
          android:textSize="@dimen/text_resultVeryLarge"
          app:layout_constraintBottom_toBottomOf="parent"
          app:layout_constraintEnd_toEndOf="parent"
          app:layout_constraintStart_toStartOf="parent"
          app:layout_constraintTop_toTopOf="parent"
-         tools:text="× 1000000" />
+         tools:text="× 10000" />
 
       <TextView
          android:id="@+id/f_stops"
@@ -45,8 +46,8 @@
          android:layout_height="wrap_content"
          android:layout_marginEnd="@dimen/margin2x"
          android:fontFamily="monospace"
-         android:gravity="end"
          android:lines="1"
+         android:textAlignment="viewEnd"
          android:textColor="?android:attr/textColorSecondary"
          android:textSize="@dimen/text_normal"
          app:layout_constraintEnd_toEndOf="parent"
@@ -62,6 +63,7 @@
          android:fontFamily="monospace"
          android:gravity="end"
          android:lines="1"
+         android:textAlignment="viewEnd"
          android:textColor="?android:attr/textColorSecondary"
          android:textSize="@dimen/text_normal"
          app:layout_constraintEnd_toEndOf="parent"

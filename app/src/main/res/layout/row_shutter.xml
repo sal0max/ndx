@@ -8,5 +8,6 @@
     android:gravity="bottom"
     android:padding="@dimen/margin3x"
     android:textColor="@android:color/primary_text_dark"
+    android:textDirection="ltr"
     android:textSize="@dimen/text_big"
     tools:text="1.3" />

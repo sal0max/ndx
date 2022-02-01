@@ -89,7 +89,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
         donatePreference.onPreferenceClickListener = this
         aboutPreference.onPreferenceClickListener = this
         aboutPreference.title = getString(R.string.prefTitle_about, BuildConfig.VERSION_NAME)
-        aboutPreference.summary = getString(R.string.prefSummary_about, 2018, Calendar.getInstance().get(Calendar.YEAR))
+        aboutPreference.summary = getString(R.string.prefSummary_about, "2018", Calendar.getInstance().get(Calendar.YEAR).toString())
         // feedback
         mailPreference.onPreferenceClickListener = this
         ratePreference.onPreferenceClickListener = this

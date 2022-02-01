@@ -6,6 +6,7 @@ import android.text.Spanned
 import android.text.TextPaint
 import android.text.style.MetricAffectingSpan
 import android.text.style.RelativeSizeSpan
+import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.math.abs
 import kotlin.math.absoluteValue
@@ -66,14 +67,14 @@ object TextUtils {
             val millis = this.absoluteValue - TimeUnit.HOURS.toMillis(hours) - TimeUnit.MINUTES.toMillis(minutes) - TimeUnit.SECONDS.toMillis(seconds)
 
             var timeString = if (hours > 0)
-                signString + String.format("%d:%02d:%02d", hours, minutes, seconds)
+                signString + String.format(Locale.ENGLISH, "%d:%02d:%02d", hours, minutes, seconds)
             else
-                signString + String.format("%02d:%02d", minutes, seconds)
+                signString + String.format(Locale.ENGLISH, "%02d:%02d", minutes, seconds)
 
             if (withMillis) {
                 // tenths of a second
                 val tenth = abs(millis / 100 % 10)
-                timeString += String.format(".%d", tenth)
+                timeString += ".$tenth"
             }
 
             return timeString

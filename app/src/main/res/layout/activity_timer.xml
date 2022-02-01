@@ -3,7 +3,8 @@
    xmlns:app="http://schemas.android.com/apk/res-auto"
    xmlns:tools="http://schemas.android.com/tools"
    android:layout_width="match_parent"
-   android:layout_height="match_parent">
+   android:layout_height="match_parent"
+   android:layoutDirection="ltr">
 
    <TextView
       android:id="@+id/totalTitle"
@@ -13,6 +14,7 @@
       android:layout_marginStart="@dimen/margin2x"
       android:layout_marginTop="@dimen/margin2x"
       android:alpha=".5"
+      android:layoutDirection="locale"
       android:text="@string/total_exposure_time"
       android:textAllCaps="true"
       android:textStyle="bold"
@@ -25,6 +27,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="@dimen/margin2x"
+      android:layoutDirection="locale"
       android:textSize="18sp"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/totalTitle"

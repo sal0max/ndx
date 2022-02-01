@@ -97,7 +97,7 @@ class CalibratorActivity : BaseActivity() {
         }
 
         // refresh data on init & observe
-        viewModel.speeds.observe(this, {
+        viewModel.speeds.observe(this) {
             val adapter = binding.snappy1a.adapter as ShutterAdapter
             if (adapter.speeds != it) {
                 // set new values
@@ -105,11 +105,11 @@ class CalibratorActivity : BaseActivity() {
                 // scroll to middle
                 binding.snappy1a.scrollToPosition(it.doubleValues.size / 2)
             }
-        })
-        viewModel.isoSteps.observe(this, {
+        }
+        viewModel.isoSteps.observe(this) {
             (binding.snappy1b.adapter as IsoAdapter).isoSteps = it
             (binding.snappy2c.adapter as IsoAdapter).isoSteps = it
-        })
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

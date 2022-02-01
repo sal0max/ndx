@@ -1,5 +1,6 @@
 package de.salomax.ndx.ui.timer
 
+import android.annotation.SuppressLint
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -176,6 +177,7 @@ class TimerActivity : BaseActivity(), ServiceConnection {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun refreshUi() {
         val remainingTime = service.millisTotal - service.millisCurrent.value!!
 
@@ -194,17 +196,17 @@ class TimerActivity : BaseActivity(), ServiceConnection {
 
         // tenths of a second
         val tenth = abs(remainingTime / 100 % 10)
-        viewBinding.textMilli.text = String.format(".%d", tenth)
+        viewBinding.textMilli.text = ".$tenth"
 
         // seconds
         val sec = abs(TimeUnit.MILLISECONDS.toSeconds(remainingTime) % 60)
-        val sSec = String.format("%02d", sec)
+        val sSec = sec.toString().padStart(2, '0')
         if (viewBinding.textSec.text != sSec)
             viewBinding.textSec.text = sSec
 
         // minus
         val min = abs(TimeUnit.MILLISECONDS.toMinutes(remainingTime) % 60)
-        val sMin = String.format("%02d", min)
+        val sMin = min.toString().padStart(2, '0')
         if (viewBinding.textMin.text != sMin)
             viewBinding.textMin.text = sMin
 

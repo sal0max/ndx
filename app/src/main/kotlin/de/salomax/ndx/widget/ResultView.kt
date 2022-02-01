@@ -101,12 +101,12 @@ class ResultView : ConstraintLayout {
         val f = micro / 100_000 % 10
 
         // seconds & fractions: e.g. "02.1"
-        val sf = SpannableString("%02d".format(s) + ".$f")
+        val sf = SpannableString(s.toString().padStart(2, '0') + ".$f")
         sf.setSpan(RelativeSizeSpan(.6f), sf.length - 2, sf.length, Spanned.SPAN_INCLUSIVE_INCLUSIVE)
         seconds.text = sf
 
         // minutes: e.g. "00"
-        minutes.text = "%02d".format(m)
+        minutes.text = m.toString().padStart(2, '0')
 
         // hours & days
         val hourDayStringBuilder = StringBuilder()
