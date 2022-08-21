@@ -148,7 +148,7 @@ class TimerActivity : BaseActivity(), ServiceConnection {
         super.onBackPressed()
         // kill service
         service.stopCountdown()
-        // go back to CalculatorActivity or launch it, if it isn't on the stack any more
+        // go back to CalculatorActivity or launch it, if it isn't on the stack anymore
         val intent = Intent(this, CalculatorActivity().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
         startActivity(intent)

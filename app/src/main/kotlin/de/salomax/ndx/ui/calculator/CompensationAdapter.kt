@@ -34,9 +34,9 @@ class CompensationAdapter(private val context: AppCompatActivity) : RecyclerView
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
-        (recyclerView as SnappyRecyclerView).snapped.observe(context, {
+        (recyclerView as SnappyRecyclerView).snapped.observe(context) {
             onCompensationSelected?.invoke(compensation?.offset?.get(it) ?: 0)
-        })
+        }
     }
 
     override fun getItemCount() = compensation?.text?.size ?: 0

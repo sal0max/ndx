@@ -34,9 +34,9 @@ class ShutterAdapter(private val context: AppCompatActivity) : RecyclerView.Adap
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
-        (recyclerView as SnappyRecyclerView).snapped.observe(context, {
+        (recyclerView as SnappyRecyclerView).snapped.observe(context) {
             onSpeedSelected?.invoke(speeds?.doubleValues?.get(it) ?: 1)
-        })
+        }
     }
 
     override fun getItemCount() = speeds?.doubleValues?.size ?: 0

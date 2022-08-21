@@ -38,9 +38,9 @@ class IsoAdapter(private val context: AppCompatActivity) : RecyclerView.Adapter<
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
-        (recyclerView as SnappyRecyclerView).snapped.observe(context, {
+        (recyclerView as SnappyRecyclerView).snapped.observe(context) {
             onIsoSelected?.invoke(isoSteps?.get(it) ?: 100)
-        })
+        }
     }
 
     override fun getItemCount() = isoSteps?.values?.size ?: 0

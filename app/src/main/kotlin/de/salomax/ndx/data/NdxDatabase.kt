@@ -20,7 +20,7 @@ abstract class NdxDatabase : RoomDatabase() {
 
         /*
          * ATTENTION! Every migration runs only if an older db version was already installed.
-         * Hence on db upgrade:
+         * Hence, on db upgrade:
          * 1. provide migration
          * 2. add migration result also to #init()
          */

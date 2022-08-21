@@ -33,9 +33,9 @@ class SecondsAdapter(private val context: AppCompatActivity, max: Int) : Recycle
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
-        (recyclerView as SnappyRecyclerView).snapped.observe(context, {
+        (recyclerView as SnappyRecyclerView).snapped.observe(context) {
             onValueSelected?.invoke(items[it])
-        })
+        }
     }
 
     override fun getItemCount() = items.size

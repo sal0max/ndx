@@ -68,7 +68,7 @@ class FilterAdapter(private val context: Context) : RecyclerView.Adapter<FilterA
         filters?.let {
             // add all filters
             items.addAll(it)
-            // remove activeItems which aren't present any more
+            // remove activeItems which aren't present anymore
             activeItems.retainAll(filters)
             calculateFactor()
         }
