@@ -10,10 +10,10 @@ import com.google.android.material.snackbar.Snackbar
 import de.salomax.ndx.R
 import de.salomax.ndx.data.Filter
 import de.salomax.ndx.databinding.ActivityFilterpouchBinding
+import de.salomax.ndx.ui.FilterAdapter
 import de.salomax.ndx.ui.BaseActivity
 import de.salomax.ndx.ui.billing.BillingActivity
 import de.salomax.ndx.ui.filtereditor.FilterEditorActivity
-import de.salomax.ndx.widget.MarginHorizontalDividerItemDecoration
 
 /**
  * Shows a list of all filters.
@@ -24,7 +24,7 @@ class FilterPouchActivity : BaseActivity() {
     private lateinit var binding: ActivityFilterpouchBinding
     private lateinit var viewModel: FilterPouchViewModel
 
-    private val filterAdapter: FilterAdapter = FilterAdapter(this)
+    private val filterAdapter = FilterAdapter(this, false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,12 +41,12 @@ class FilterPouchActivity : BaseActivity() {
         }
         binding.list.apply {
             layoutManager = LinearLayoutManager(context)
-            addItemDecoration(MarginHorizontalDividerItemDecoration(this@FilterPouchActivity))
+//            addItemDecoration(MarginHorizontalDividerItemDecoration(this@FilterPouchActivity))
             adapter = filterAdapter
         }
         binding.fabAdd.setOnClickListener {
             if (
-                  viewModel.filters.value?.size?.let { it < 3 } == true || // less than 4 filters until now...
+                  viewModel.filters.value?.first?.size?.let { it < 3 } == true || // less than 4 filters until now...
                   viewModel.hasPremium                                     // ...or has premium
             ) {
                 val intent = Intent(this, FilterEditorActivity().javaClass)
@@ -65,7 +65,7 @@ class FilterPouchActivity : BaseActivity() {
         }
 
         // refresh data on init & observe
-        viewModel.filters.observe(this) { filterAdapter.setFilters(it) }
+        viewModel.filters.observe(this) { filterAdapter.setFilters(it.first, it.second) }
     }
 
     private val filterEditorActivityWithResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->

@@ -23,13 +23,13 @@ class FilterPouchViewModel(application: Application) : AndroidViewModel(applicat
    private val filterSortOrder: LiveData<Int> = prefDao.getFilterSortOrder()
 
    // live calculated
-   internal val filters: LiveData<List<Filter>?> = FilterLiveData()
+   internal val filters: LiveData<Pair<List<Filter>?, Boolean>> = FilterLiveData()
 
    fun insert(filter: Filter) {
       Executors.newSingleThreadScheduledExecutor().execute { filterDao.insert(filter) }
    }
 
-   internal inner class FilterLiveData : MediatorLiveData<List<Filter>?>() {
+   internal inner class FilterLiveData : MediatorLiveData<Pair<List<Filter>?, Boolean>>() {
       init {
          addSource(filtersUnsorted) { calc() }
          addSource(filterSortOrder) { calc() }
@@ -37,15 +37,16 @@ class FilterPouchViewModel(application: Application) : AndroidViewModel(applicat
       }
 
       private fun calc() {
-         value = filtersUnsorted.value?.sortedWith(
+         // sort by factor/name
+         value = Pair(filtersUnsorted.value?.sortedWith(
                when (filterSortOrder.value) {
                   0 -> compareBy { it.factor }
                   else -> compareBy { it.name } // 1
                }
-         )
-         // also sort by size?
+         ), false)
+         // also sort by size
          if (filterGroupBySize.value == true)
-            value = value?.sortedWith( compareBy { it.size }) // compareByDescending
+            value = Pair(value?.first?.sortedWith( compareBy { it.size }), true) // compareByDescending
       }
    }
 

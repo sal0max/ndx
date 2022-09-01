@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.salomax.ndx.R
 import de.salomax.ndx.databinding.ActivityCalculatorBinding
+import de.salomax.ndx.ui.FilterAdapter
 import de.salomax.ndx.ui.BaseActivity
 import de.salomax.ndx.ui.billing.BillingActivity
 import de.salomax.ndx.ui.filterpouch.FilterPouchActivity
 import de.salomax.ndx.ui.preferences.PreferenceActivity
 import de.salomax.ndx.ui.timer.TimerActivity
 import de.salomax.ndx.widget.CenterLineDecoration
-import de.salomax.ndx.widget.MarginHorizontalDividerItemDecoration
 
 class CalculatorActivity : BaseActivity() {
 
@@ -57,8 +57,7 @@ class CalculatorActivity : BaseActivity() {
         // list & adapter : filters
         binding.recyclerFilters.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            addItemDecoration(MarginHorizontalDividerItemDecoration(this@CalculatorActivity))
-            adapter = FilterAdapter(this@CalculatorActivity)
+            adapter = FilterAdapter(this@CalculatorActivity, true)
             (adapter as FilterAdapter).onFilterFactorChanged = {
                 viewModel.filterFactor.value = it
             }
@@ -66,7 +65,7 @@ class CalculatorActivity : BaseActivity() {
 
         // refresh data on init & observe
         viewModel.filters.observe(this, Observer {
-            (binding.recyclerFilters.adapter as FilterAdapter).setFilters(it)
+            (binding.recyclerFilters.adapter as FilterAdapter).setFilters(it.first, it.second)
         })
         viewModel.speeds.observe(this, Observer {
             val adapter = binding.dials.recyclerShutter.adapter as ShutterAdapter

@@ -31,10 +31,10 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
     internal val selectedOffset: MutableLiveData<Int> = MutableLiveData()
 
     // live calculated
-    internal val filters: LiveData<List<Filter>?> = FilterLiveData()
+    internal val filters: LiveData<Pair<List<Filter>?, Boolean>> = FilterLiveData()
     internal val calculatedSpeed: LiveData<Long> = MicroLiveData()
 
-    internal inner class FilterLiveData : MediatorLiveData<List<Filter>?>() {
+    internal inner class FilterLiveData : MediatorLiveData<Pair<List<Filter>?, Boolean>>() {
         init {
             addSource(filtersUnsorted) { calc() }
             addSource(filterSortOrder) { calc() }
@@ -43,15 +43,15 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
 
         private fun calc() {
             // sort by factor/name
-            value = filtersUnsorted.value?.sortedWith(
+            value = Pair(filtersUnsorted.value?.sortedWith(
                   when (filterSortOrder.value) {
                       0 -> compareBy { it.factor }
                       else -> compareBy { it.name } // 1
                   }
-            )
-            // also sort by size?
+            ), false)
+            // also sort by size
             if (filterGroupBySize.value == true)
-                value = value?.sortedWith( compareBy { it.size }) // compareByDescending
+                value = Pair(value?.first?.sortedWith( compareBy { it.size }), true) // compareByDescending
         }
     }
 
