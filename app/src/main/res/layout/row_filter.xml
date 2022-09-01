@@ -17,6 +17,7 @@
       android:layout_height="wrap_content"
       android:textAlignment="viewStart"
       android:textColor="?android:textColorPrimary"
+      android:textSize="16sp"
       app:layout_constraintEnd_toStartOf="@id/checkbox"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
@@ -30,21 +31,21 @@
       android:layout_marginTop="@dimen/margin0.5x"
       android:textAlignment="viewStart"
       android:textColor="?android:textColorSecondary"
-      app:layout_constraintEnd_toStartOf="@id/checkbox"
-      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="@id/name"
+      app:layout_constraintStart_toStartOf="@id/name"
       app:layout_constraintTop_toBottomOf="@id/name"
       tools:text="Super dark for long exposures during bright daylight." />
 
    <TextView
       android:id="@+id/info"
-      style="@style/TextAppearance.MaterialComponents.Body2"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/margin0.5x"
+      android:fontFamily="sans-serif-medium"
       android:textAlignment="viewStart"
-      android:textColor="?android:textColorPrimary"
-      app:layout_constraintEnd_toStartOf="@id/checkbox"
-      app:layout_constraintStart_toStartOf="parent"
+      android:textColor="?android:textColorSecondary"
+      app:layout_constraintEnd_toEndOf="@id/name"
+      app:layout_constraintStart_toStartOf="@id/name"
       app:layout_constraintTop_toBottomOf="@id/info2"
       tools:text="82 mm  |  × 1024  ·  10 Stops  ·  ND 3.0" />
 

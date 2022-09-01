@@ -18,9 +18,9 @@
     <string name="unit_days">d</string>
     <string name="unit_iso">ISO</string>
 
-    <plurals name="filterInfo">
-        <item quantity="one">× %1$s\u2002·\u2002%2$s Stop\u2002·\u2002ND %3$s</item>
-        <item quantity="other">× %1$s\u2002·\u2002%2$s Stops\u2002·\u2002ND %3$s</item>
+    <plurals name="filterInfo" translatable="false">
+        <item quantity="one">×\u202F%1$s\u2002·\u2002%2$s\u202FStop\u2002·\u2002ND\u202F%3$s</item>
+        <item quantity="other">×\u202F%1$s\u2002·\u2002%2$s\u202FStops\u2002·\u2002ND\u202F%3$s</item>
     </plurals>
 
 </resources>

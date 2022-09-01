@@ -8,7 +8,7 @@
     <!-- ndx light (casio fx-991de plus) -->
     <color name="colorActionBar">#63607d</color>
     <color name="colorBackground">#e0e0e0</color>
-    <color name="colorAccent1">#ffa459</color>
+    <color name="colorAccent1">#EB791C</color>
     <color name="colorAccent2">@color/colorActionBar</color>
 
     <!-- ndx light (in pitch black mode) -->
