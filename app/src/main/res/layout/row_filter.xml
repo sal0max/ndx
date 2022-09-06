@@ -17,7 +17,7 @@
       android:layout_height="wrap_content"
       android:textAlignment="viewStart"
       android:textColor="?android:textColorPrimary"
-      android:textSize="16sp"
+      android:textSize="@dimen/text_normal"
       app:layout_constraintEnd_toStartOf="@id/checkbox"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
