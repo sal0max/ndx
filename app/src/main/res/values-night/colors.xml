@@ -7,5 +7,5 @@
    <color name="colorActionBarPitchBlack">#000</color>
    <color name="colorBackgroundPitchBlack">@color/colorActionBarPitchBlack</color>
    <color name="colorAccent1pitchBlack">@color/colorAccent2</color>
-   <color name="colorAccent2pitchBlack">@color/material_grey_850</color>
+   <color name="colorAccent2pitchBlack">@color/material_grey_800</color>
 </resources>

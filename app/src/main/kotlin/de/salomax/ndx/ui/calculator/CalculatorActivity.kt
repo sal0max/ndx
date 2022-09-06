@@ -37,8 +37,8 @@ class CalculatorActivity : BaseActivity() {
         // list & adapter : shutter speeds
         binding.dials.recyclerShutter.apply {
             adapter = ShutterAdapter(this@CalculatorActivity)
-            addItemDecoration(CenterLineDecoration(ContextCompat.getColor(context, android.R.color.white))) // center line
-            // addItemDecoration(DotDividerDecoration(ContextCompat.getColor(context, android.R.color.white)))
+            addItemDecoration(CenterLineDecoration(ContextCompat.getColor(context, R.color.colorOnAccent1))) // center line
+//             addItemDecoration(DotDividerDecoration(ContextCompat.getColor(context, R.color.colorOnAccent1)))
             setHasFixedSize(true)
             (adapter as ShutterAdapter).onSpeedSelected = {
                 viewModel.selectedSpeed.value = it
@@ -47,8 +47,8 @@ class CalculatorActivity : BaseActivity() {
         // list & adapter : compensation
         binding.dials.recyclerCompensation.apply {
             adapter = CompensationAdapter(this@CalculatorActivity)
-            addItemDecoration(CenterLineDecoration(ContextCompat.getColor(context, android.R.color.white))) // center line
-            // addItemDecoration(DotDividerDecoration(ContextCompat.getColor(context, android.R.color.white)))
+            addItemDecoration(CenterLineDecoration(ContextCompat.getColor(context, R.color.colorOnAccent2))) // center line
+//             addItemDecoration(DotDividerDecoration(ContextCompat.getColor(context, R.color.colorOnAccent2)))
             setHasFixedSize(true)
             (adapter as CompensationAdapter).onCompensationSelected = {
                 viewModel.selectedOffset.value = it

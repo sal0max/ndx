@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import de.salomax.ndx.R
 import de.salomax.ndx.data.model.Compensation
@@ -25,6 +26,7 @@ class CompensationAdapter(private val context: AppCompatActivity) : RecyclerView
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val textView = LayoutInflater.from(parent.context).inflate(R.layout.row_shutter, parent, false) as TextView
+        textView.setTextColor(ContextCompat.getColor(context, R.color.colorOnAccent2))
         return ViewHolder(textView)
     }
 

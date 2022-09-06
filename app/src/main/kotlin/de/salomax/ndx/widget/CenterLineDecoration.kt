@@ -16,7 +16,7 @@ class CenterLineDecoration(color: Int, width: Float) : RecyclerView.ItemDecorati
     private val mPaint: Paint = Paint()
     private val metrics = Resources.getSystem().displayMetrics
 
-    constructor(color: Int) : this(color, 1.5f)
+    constructor(color: Int) : this(color, 1.2f)
     constructor() : this(Color.LTGRAY)
 
     init {

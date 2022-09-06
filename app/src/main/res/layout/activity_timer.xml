@@ -123,12 +123,12 @@
       app:layout_constraintStart_toStartOf="@id/textMin"
       tools:text="152 h" />
 
-   <Button
+   <com.google.android.material.button.MaterialButton
       android:id="@+id/btn_reset"
+      style="@style/Widget.Material3.Button.TextButton"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="24dp"
-      android:background="?android:selectableItemBackgroundBorderless"
       android:minWidth="48dp"
       android:minHeight="48dp"
       android:text="@string/reset_timer"

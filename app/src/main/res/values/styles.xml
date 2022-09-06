@@ -3,6 +3,7 @@
 
     <!-- main colors to be referenced throughout the theme -->
     <attr name="colorActionBar" format="reference|color" />
+    <attr name="colorOnActionBar" format="reference|color" />
     <attr name="colorBackground" format="reference|color" />
     <attr name="colorAccent1" format="reference|color" />
     <attr name="colorAccent2" format="reference|color" />
@@ -12,20 +13,74 @@
     <style name="AppTheme.Black" parent="BaseAppTheme.Black" />
 
     <!-- light/dark theme, to be extended -->
-    <style name="BaseAppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <style name="BaseAppTheme" parent="Theme.Material3.DayNight">
+        <!-- theme-dependant colors (different for light/dark/black) -->
         <item name="colorActionBar">@color/colorActionBar</item>
+        <item name="colorOnActionBar">@color/colorOnActionBar</item>
         <item name="colorBackground">@color/colorBackground</item>
         <item name="colorAccent1">@color/colorAccent1</item>
         <item name="colorAccent2">@color/colorAccent2</item>
 
-        <item name="actionBarStyle">@style/BaseAppTheme.ActionBar</item>
-        <item name="android:statusBarColor">?attr/colorActionBar</item>
+        <!-- Material 3 colors +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+          - https://material.io/blog/migrating-material-3
+          - https://material.io/blog/android-material-theme-color
+          - https://m3.material.io/libraries/mdc-android/color-theming  -->
 
-        <item name="colorPrimary">?attr/colorActionBar</item>
+        <item name="android:colorBackground">?attr/colorBackground</item>
+        <item name="colorOnBackground">?android:attr/colorForeground</item>
+
+        <item name="colorPrimary">@color/colorAccent1</item>
+        <item name="colorOnPrimary">@color/colorOnAccent1</item>
+        <item name="colorPrimaryContainer">?attr/colorPrimary</item>
+        <item name="colorOnPrimaryContainer">?attr/colorOnPrimary</item>
+        <item name="colorPrimaryInverse">?attr/colorPrimary</item>
+
+        <item name="colorSecondary">?attr/colorAccent1</item>
+        <item name="colorOnSecondary">@color/colorOnAccent1</item>
+        <item name="colorSecondaryContainer">?attr/colorSecondary</item>
+        <item name="colorOnSecondaryContainer">?attr/colorOnPrimary</item>
+
+        <item name="colorTertiary">?attr/colorAccent2</item>
+        <item name="colorOnTertiary">@color/colorOnAccent2</item>
+        <item name="colorTertiaryContainer">?attr/colorTertiary</item>
+        <item name="colorOnTertiaryContainer">?attr/colorOnTertiary</item>
+
+        <item name="colorError">@android:color/holo_red_light</item>
+        <item name="colorOnError">@android:color/white</item>
+        <item name="colorErrorContainer">?attr/colorOnError</item>
+        <item name="colorOnErrorContainer">@android:color/holo_red_dark</item>
+
+        <item name="colorSurface">?android:attr/colorBackground</item>
+        <item name="colorOnSurface">?attr/colorOnBackground</item>
+        <item name="colorSurfaceVariant">?attr/colorSurface</item>
+        <item name="colorOnSurfaceVariant">?attr/colorOnSurface</item>
+        <item name="colorSurfaceInverse">?attr/colorOnBackground</item>
+        <item name="colorOnSurfaceInverse">?android:attr/colorBackground</item>
+
+        <item name="colorOutline">?attr/colorOnBackground</item>
+
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+        <!-- action bar -->
+        <item name="actionBarStyle">@style/AppTheme.ActionBar</item>
+        <item name="actionMenuTextColor">?attr/colorOnActionBar</item>
+
+        <!-- "transparent" status bar -->
         <item name="colorPrimaryDark">?attr/colorActionBar</item>
-        <item name="android:windowBackground">?attr/colorBackground</item>
-        <item name="colorAccent">?attr/colorAccent1</item>
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+        <!-- big rounded corners. guide says 28dp; too much for my taste -->
+        <item name="dialogCornerRadius">14dp</item>
+
+        <!-- prevent black colored switch thumbs in disabled state on light theme -->
+        <item name="switchStyle">@style/AppTheme.Switch</item>
+
+        <!-- remove color tint from overflow menu -->
+        <item name="actionOverflowMenuStyle">@style/AppTheme.PopupMenu.Overflow</item>
+
+        <!-- remove color tint from popup menu -->
+        <item name="popupMenuBackground">?attr/colorBackground</item>
+        <item name="android:popupBackground">?attr/colorBackground</item>
     </style>
 
     <!-- black theme, to be extended -->
@@ -36,9 +91,32 @@
         <item name="colorAccent2">@color/colorAccent2pitchBlack</item>
     </style>
 
-    <!-- set the actionbar background color -->
-    <style name="BaseAppTheme.ActionBar" parent="@style/Widget.AppCompat.ActionBar">>
+    <!-- actionbar -->
+    <style name="AppTheme.ActionBar" parent="Widget.Material3.ActionBar.Solid">
         <item name="background">?attr/colorActionBar</item>
+        <item name="theme">@style/AppTheme.ToolbarTheme</item>
+        <item name="titleTextStyle">@style/AppTheme.ActionBar.Title</item>
+    </style>
+
+    <!-- actionbar: white back arrow -->
+    <style name="AppTheme.ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">?attr/colorOnActionBar</item>
+    </style>
+
+    <!-- actionbar: white text -->
+    <style name="AppTheme.ActionBar.Title" parent="TextAppearance.Material3.ActionBar.Title">
+        <item name="android:textColor">?attr/colorOnActionBar</item>
+    </style>
+
+    <!-- actionbar: make popup menu the same color as the background -->
+    <style name="AppTheme.PopupMenu.Overflow" parent="Widget.Material3.PopupMenu.Overflow">
+        <item name="android:popupBackground">?attr/colorBackground</item>
+    </style>
+
+    <!-- more traditional switch style -->
+    <style name="AppTheme.Switch" parent="Widget.Material3.CompoundButton.Switch">
+        <item name="thumbTint">@color/switch_thumb_tint</item>
+        <item name="trackTint">?android:attr/textColorSecondaryInverseNoDisable</item>
     </style>
 
 </resources>
