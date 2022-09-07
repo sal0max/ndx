@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="changelog"><b>3.3.3</b>
+    <string name="changelog"><b>3.4.0</b>
+        \n⸻
+        \n<li>Ein frisches Design: Material 3!</li>
+        \n<li>Verbesserte Anzeige wenn Gruppieren nach Größe aktiv ist.</li>
+        \n
+        \n<b>3.3.3</b>
         \n⸻
         \n<li>Fehlerbehebungen bei RTL-Sprachen</li>
         \n
