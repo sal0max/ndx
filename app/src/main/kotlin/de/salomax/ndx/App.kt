@@ -24,13 +24,18 @@ class App : Application() {
                object : BillingClientStateListener {
                   override fun onBillingSetupFinished(billingResult: BillingResult) {
                      // check if a user has purchased premium before
-                     val result = billingClient.queryPurchases(BillingClient.SkuType.INAPP)
-                     // yes -> enable premium | no -> disable it, to be sure
-                     PrefDao.getInstance(applicationContext).enablePremium(result.purchasesList?.isNotEmpty() == true)
-                     // NOTE:
-                     // Big problem! Refunded purchases will get reported still as valid, here.
-                     // Seems to be a known flaw with the billing library. Will just leave it that
-                     // way and see how it works out.
+                     billingClient.queryPurchasesAsync(
+                        QueryPurchasesParams.newBuilder()
+                              .setProductType(BillingClient.ProductType.INAPP)
+                              .build()
+                     ) { _, purchaseList ->
+                        // yes -> enable premium | no -> disable it, to be sure
+                        PrefDao.getInstance(applicationContext).enablePremium(purchaseList.isNotEmpty())
+                        // NOTE:
+                        // Big problem! Refunded purchases will get reported still as valid, here.
+                        // Seems to be a known flaw with the billing library. Will just leave it that
+                        // way and see how it works out.
+                     }
                   }
 
                   override fun onBillingServiceDisconnected() {}

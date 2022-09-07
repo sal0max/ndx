@@ -85,7 +85,7 @@ dependencies {
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
 
     // billing
-    implementation 'com.android.billingclient:billing-ktx:3.0.3'
+    implementation 'com.android.billingclient:billing-ktx:5.0.0'
 
     // test
     testImplementation 'junit:junit:4.13.2'

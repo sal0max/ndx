@@ -2,9 +2,9 @@ package de.salomax.ndx.ui.billing
 
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.android.billingclient.api.*
+import com.google.android.material.snackbar.Snackbar
 import de.salomax.ndx.R
 import de.salomax.ndx.ui.BaseActivity
 
@@ -14,11 +14,10 @@ import de.salomax.ndx.ui.BaseActivity
  * The entire billing flow is done here.
  */
 @Suppress("UNUSED_VARIABLE", "ControlFlowWithEmptyBody")
-class BillingActivity: BaseActivity(), PurchasesUpdatedListener, BillingClientStateListener,
-      SkuDetailsResponseListener {
+class BillingActivity: BaseActivity(), BillingClientStateListener, PurchasesUpdatedListener {
 
    companion object {
-      private const val SKU_PREMIUM = "premium"
+      private const val PRODUCT_PREMIUM = "premium"
    }
 
    /**
@@ -45,7 +44,7 @@ class BillingActivity: BaseActivity(), PurchasesUpdatedListener, BillingClientSt
          // Create a new BillingClient in onCreate().
          // Since the BillingClient can only be used once, we need to create a new instance
          // after ending the previous connection to the Google Play Store in onDestroy().
-         billingClient = BillingClient.newBuilder(applicationContext)
+         billingClient = BillingClient.newBuilder(this)
                .setListener(this)
                .enablePendingPurchases()
                .build()
@@ -73,8 +72,15 @@ class BillingActivity: BaseActivity(), PurchasesUpdatedListener, BillingClientSt
       val debugMessage = billingResult.debugMessage
       if (responseCode == BillingClient.BillingResponseCode.OK) {
          // The billing client is ready. You can query purchases here.
-         querySkuDetails()
+         queryProductDetails()
          queryPurchases()
+      } else {
+         // something went wrong
+         Snackbar.make(
+            findViewById(android.R.id.content),
+            "$debugMessage (Code $responseCode)",
+            Snackbar.LENGTH_LONG
+         ).show()
       }
    }
 
@@ -84,47 +90,61 @@ class BillingActivity: BaseActivity(), PurchasesUpdatedListener, BillingClientSt
    }
 
    /**
-    * In order to make purchases, you need the [SkuDetails] for the item or subscription.
-    * This is an asynchronous call that will receive a result in [onSkuDetailsResponse].
+    * In order to make purchases, you need the [ProductDetails] for the item or subscription.
+    * This is an asynchronous call.
     */
-   private fun querySkuDetails() {
-      val params = SkuDetailsParams.newBuilder()
-            .setType(BillingClient.SkuType.INAPP)
-            .setSkusList(listOf(SKU_PREMIUM))
+   private fun queryProductDetails() {
+      val productList = listOf(
+         QueryProductDetailsParams.Product.newBuilder()
+            .setProductId(PRODUCT_PREMIUM)
+            .setProductType(BillingClient.ProductType.INAPP)
             .build()
-      params.let { skuDetailsParams ->
-         billingClient.querySkuDetailsAsync(skuDetailsParams, this)
+      )
+      val params = QueryProductDetailsParams.newBuilder()
+         .setProductList(productList)
+         .build()
+      billingClient.queryProductDetailsAsync(params) { billingResult, productDetailsList ->
+         // make the purchases
+         val responseCode = billingResult.responseCode
+         val debugMessage = billingResult.debugMessage
+         when (responseCode) {
+            BillingClient.BillingResponseCode.OK -> {
+               productDetailsList.forEach { productDetails ->
+                  launchOfferPurchaseFlow(productDetails)
+               }
+            }
+            BillingClient.BillingResponseCode.SERVICE_DISCONNECTED,
+            BillingClient.BillingResponseCode.SERVICE_UNAVAILABLE,
+            BillingClient.BillingResponseCode.BILLING_UNAVAILABLE,
+            BillingClient.BillingResponseCode.ITEM_UNAVAILABLE,
+            BillingClient.BillingResponseCode.DEVELOPER_ERROR,
+            BillingClient.BillingResponseCode.ERROR -> {
+               // TODO?
+            }
+            BillingClient.BillingResponseCode.USER_CANCELED,
+            BillingClient.BillingResponseCode.FEATURE_NOT_SUPPORTED,
+            BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED,
+            BillingClient.BillingResponseCode.ITEM_NOT_OWNED -> {
+               // ignore: these response codes are not expected.
+            }
+         }
       }
    }
 
-   /**
-    * Receives the result from [querySkuDetails].
-    * make the purchases
-    */
-   override fun onSkuDetailsResponse(billingResult: BillingResult, skuDetailsList: MutableList<SkuDetails>?) {
-      val responseCode = billingResult.responseCode
-      val debugMessage = billingResult.debugMessage
-      when (responseCode) {
-         BillingClient.BillingResponseCode.OK -> {
-            skuDetailsList?.forEach { skuDetails ->
-               launchBillingFlow(BillingFlowParams.newBuilder().setSkuDetails(skuDetails).build())
-            }
-         }
-         BillingClient.BillingResponseCode.SERVICE_DISCONNECTED,
-         BillingClient.BillingResponseCode.SERVICE_UNAVAILABLE,
-         BillingClient.BillingResponseCode.BILLING_UNAVAILABLE,
-         BillingClient.BillingResponseCode.ITEM_UNAVAILABLE,
-         BillingClient.BillingResponseCode.DEVELOPER_ERROR,
-         BillingClient.BillingResponseCode.ERROR -> {
-            // TODO?
-         }
-         BillingClient.BillingResponseCode.USER_CANCELED,
-         BillingClient.BillingResponseCode.FEATURE_NOT_SUPPORTED,
-         BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED,
-         BillingClient.BillingResponseCode.ITEM_NOT_OWNED -> {
-            // ignore: these response codes are not expected.
-         }
-      }
+   private fun launchOfferPurchaseFlow(productDetails: ProductDetails): BillingResult {
+      val productDetailsParamsList =
+         listOf(
+            BillingFlowParams.ProductDetailsParams.newBuilder()
+               .setProductDetails(productDetails)
+               .build()
+         )
+      val billingFlowParams =
+         BillingFlowParams.newBuilder()
+            .setProductDetailsParamsList(productDetailsParamsList)
+            .build()
+
+      // Launching the billing flow: Launching the UI to make a purchase.
+      return billingClient.launchBillingFlow(this, billingFlowParams)
    }
 
    /**
@@ -137,10 +157,14 @@ class BillingActivity: BaseActivity(), PurchasesUpdatedListener, BillingClientSt
       if (!billingClient.isReady) {
          // TODO: what now?
       }
-      val result = billingClient.queryPurchases(BillingClient.SkuType.INAPP)
-      if (result.purchasesList != null) {
-         processPurchases(result.purchasesList!!)
+      val result = billingClient.queryPurchasesAsync(
+         QueryPurchasesParams.newBuilder()
+            .setProductType(BillingClient.ProductType.INAPP)
+            .build()
+      ) { _, purchaseList ->
+         processPurchases(purchaseList)
       }
+
    }
 
    /**
@@ -156,16 +180,16 @@ class BillingActivity: BaseActivity(), PurchasesUpdatedListener, BillingClientSt
             }
          }
          BillingClient.BillingResponseCode.USER_CANCELED -> {
-            // User canceled the purchase")
+            // User canceled the purchase
          }
          BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED -> {
-            // The user already owns this item")
+            // The user already owns this item
          }
          BillingClient.BillingResponseCode.DEVELOPER_ERROR -> {
             // onPurchasesUpdated: Developer error means that Google Play
             // does not recognize the configuration. If you are just getting started,
             // make sure you have configured the application correctly in the
-            // Google Play Console. The SKU product ID must match and the APK you
+            // Google Play Console. The product ID must match and the APK you
             // are using must be signed with release keys.
          }
       }
@@ -185,11 +209,11 @@ class BillingActivity: BaseActivity(), PurchasesUpdatedListener, BillingClientSt
    }
 
    /**
-    * Log the number of purchases that are acknowledge and not acknowledged.
+    * Log the number of purchases that are acknowledged and not acknowledged.
     *
     * https://developer.android.com/google/play/billing/billing_library_releases_notes#2_0_acknowledge
     *
-    * When the purchase is first received, it will not be acknowledge.
+    * When the purchase is first received, it will not be acknowledged.
     * This application sends the purchase token to the server for registration. After the
     * purchase token is registered to an account, the Android app acknowledges the purchase token.
     * The next time the purchase list is updated, it will contain acknowledged purchases.
@@ -204,22 +228,6 @@ class BillingActivity: BaseActivity(), PurchasesUpdatedListener, BillingClientSt
             ackNo++
          }
       }
-   }
-
-   /**
-    * Launching the billing flow.
-    * Launching the UI to make a purchase.
-    */
-   private fun launchBillingFlow(params: BillingFlowParams): Int {
-      val sku = params.sku
-      val oldSku = params.oldSku
-      if (!billingClient.isReady) {
-         // TODO: what now?
-      }
-      val billingResult = billingClient.launchBillingFlow(this, params)
-      val responseCode = billingResult.responseCode
-      val debugMessage = billingResult.debugMessage
-      return responseCode
    }
 
    /**
@@ -257,7 +265,11 @@ class BillingActivity: BaseActivity(), PurchasesUpdatedListener, BillingClientSt
       // enablePremium
       ViewModelProvider(this).get(BillingViewModel::class.java).enablePremium()
       // thank
-      Toast.makeText(applicationContext, getString(R.string.billing_thanks_for_buying), Toast.LENGTH_LONG).show()
+      Snackbar.make(
+         findViewById(android.R.id.content),
+         getString(R.string.billing_thanks_for_buying),
+         Snackbar.LENGTH_LONG
+      ).show()
       // finish
       onSupportNavigateUp()
    }
