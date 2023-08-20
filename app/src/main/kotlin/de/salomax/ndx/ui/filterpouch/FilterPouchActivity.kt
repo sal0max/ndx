@@ -14,6 +14,7 @@ import de.salomax.ndx.ui.FilterAdapter
 import de.salomax.ndx.ui.BaseActivity
 import de.salomax.ndx.ui.billing.BillingActivity
 import de.salomax.ndx.ui.filtereditor.FilterEditorActivity
+import de.salomax.ndx.util.ParcelableUtils.parcelable
 
 /**
  * Shows a list of all filters.
@@ -32,7 +33,7 @@ class FilterPouchActivity : BaseActivity() {
         // init view
         binding = ActivityFilterpouchBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel = ViewModelProvider(this).get(FilterPouchViewModel::class.java)
+        viewModel = ViewModelProvider(this)[FilterPouchViewModel::class.java]
 
         filterAdapter.onClick = {
             val intent = Intent(this, FilterEditorActivity().javaClass)
@@ -72,7 +73,7 @@ class FilterPouchActivity : BaseActivity() {
         val data: Intent? = result.data
         // filter got deleted: show undo
         if (result.resultCode == Activity.RESULT_OK && data != null) {
-            val filter = data.getParcelableExtra<Filter>("FILTER")!!
+            val filter = data.parcelable<Filter>("FILTER")!!
             Snackbar.make(binding.list, getString(R.string.filterDeleted, filter.name), 5_000) // 5s
                 .setAction(R.string.undo) { viewModel.insert(filter) }
                 .show()

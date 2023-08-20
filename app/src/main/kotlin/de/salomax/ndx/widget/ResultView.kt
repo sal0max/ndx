@@ -44,7 +44,10 @@ class ResultView : ConstraintLayout {
                 infinite()
             } else {
                 if (micro < 1_000_000L)
-                    smaller1s(micro)
+                    if (micro >= 950_000L)
+                        round1s()
+                    else
+                        smaller1s(micro)
                 else
                     greater1s(micro)
             }
@@ -84,6 +87,14 @@ class ResultView : ConstraintLayout {
     private fun infinite() {
         minutes.text = "-"
         seconds.text = "-"
+        hoursDays.text = null
+    }
+
+    private fun round1s() {
+        minutes.text = "00"
+        val sf = SpannableString("01.0")
+        sf.setSpan(RelativeSizeSpan(.6f), sf.length - 2, sf.length, Spanned.SPAN_INCLUSIVE_INCLUSIVE)
+        seconds.text = sf
         hoursDays.text = null
     }
 

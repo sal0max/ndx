@@ -4,4 +4,6 @@
 
     <string name="total_exposure_time">Belichtungszeit</string>
     <string name="reset_timer">Zurücksetzen</string>
+    <string name="ask_notification_permission_title">Benachrichtigungen erlauben</string>
+    <string name="ask_notification_permission_message">Damit der Timer funktioniert, wenn die App im Hintergrund läuft, wird die Berechtigung zum Zeigen von Benachrichtigungen benötigt.</string>
 </resources>

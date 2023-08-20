@@ -38,7 +38,7 @@ class CalibratorActivity : BaseActivity() {
         // init view
         binding = ActivityCalibratorBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel = ViewModelProvider(this).get(CalibratorViewModel::class.java)
+        viewModel = ViewModelProvider(this)[CalibratorViewModel::class.java]
 
         // title bar
         supportActionBar?.apply {

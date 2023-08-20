@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.OrientationHelper
 import androidx.recyclerview.widget.RecyclerView
+import de.salomax.ndx.util.ParcelableUtils.parcelable
 import kotlin.math.abs
 
 class SnappyRecyclerView : RecyclerView {
@@ -51,7 +52,7 @@ class SnappyRecyclerView : RecyclerView {
             post {
                 scrollToPosition(state.getInt("snappedPosition"))
             }
-            super.onRestoreInstanceState(state.getParcelable("superState"))
+            super.onRestoreInstanceState(state.parcelable("superState"))
         } else
             super.onRestoreInstanceState(state)
     }
@@ -104,7 +105,7 @@ class SnappyRecyclerView : RecyclerView {
          */
         override fun attachToRecyclerView(recyclerView: RecyclerView?) {
             var viewCache: View? = null
-            recyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            recyclerView?.addOnScrollListener(object : OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     val view = findSnapView(layoutManager!!)
                     if (viewCache != view) {
@@ -160,7 +161,7 @@ class SnappyRecyclerView : RecyclerView {
      * centered. Works with margins instead of outRect, as the LinearSnapHelper has problems with
      * outRect.
      */
-    inner class MyItemDecoration : RecyclerView.ItemDecoration() {
+    inner class MyItemDecoration : ItemDecoration() {
 
         private var parentWidth = width
 

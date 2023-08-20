@@ -18,6 +18,7 @@ import de.salomax.ndx.databinding.ActivityFiltereditorBinding
 import de.salomax.ndx.ui.BaseActivity
 import de.salomax.ndx.ui.calibrator.CalibratorActivity
 import de.salomax.ndx.util.MathUtils
+import de.salomax.ndx.util.ParcelableUtils.parcelable
 import java.util.*
 import kotlin.math.pow
 
@@ -38,14 +39,14 @@ class FilterEditorActivity : BaseActivity() {
         // init view
         binding = ActivityFiltereditorBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel = ViewModelProvider(this).get(FilterEditorViewModel::class.java)
+        viewModel = ViewModelProvider(this)[FilterEditorViewModel::class.java]
 
         // don't allow > Int.MAX_VALUE
         binding.factor.filters = arrayOf<InputFilter>(MinMaxInputFilter(0, Int.MAX_VALUE))
         binding.size.filters = arrayOf<InputFilter>(MinMaxInputFilter(0, Int.MAX_VALUE))
 
         // edit existing filter
-        val filter = intent.getParcelableExtra<Filter>(ARG_FILTER)
+        val filter = intent.parcelable<Filter>(ARG_FILTER)
         if (filter != null) {
             // edit mode: show delete button
             if (filter.id != null) {

@@ -37,7 +37,7 @@ abstract class NdxDatabase : RoomDatabase() {
             return INSTANCE!!
         }
 
-        private fun init(context: Context) = object : RoomDatabase.Callback() {
+        private fun init(context: Context) = object : Callback() {
             // pre-populate the database
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)

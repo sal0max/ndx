@@ -76,7 +76,7 @@ class TimerService : Service() {
 
    private fun hideNotification() {
       millisCurrent.removeObserver(observer)
-      stopForeground(true)
+      stopForeground(STOP_FOREGROUND_REMOVE)
    }
 
    private fun showNotification() {

@@ -73,10 +73,10 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
                 val newIndex = selectedOffset.value?.let { selectedIndex?.plus(it) }
                 speed = newIndex?.let { speeds.value?.doubleValues?.getOrNull(it) }
 
-                // offset outside of enum data -> manually extrapolate
+                // offset outside enum data -> manually extrapolate
                 if (speed == null && selectedOffset.value?.isLessThan(0) == true) {
                     val stopSize = when (compensation.value) {
-                        Compensation.THIRD -> 0.3333333333333333333333333333333333333333333333333333333f
+                        Compensation.THIRD -> 0.3333333f
                         Compensation.HALF -> 0.5f
                         Compensation.FULL -> 1f
                         else -> 0F

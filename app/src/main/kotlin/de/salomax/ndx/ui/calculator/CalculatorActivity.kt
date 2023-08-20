@@ -31,7 +31,7 @@ class CalculatorActivity : BaseActivity() {
         // init view
         binding = ActivityCalculatorBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel = ViewModelProvider(this).get(CalculatorViewModel::class.java)
+        viewModel = ViewModelProvider(this)[CalculatorViewModel::class.java]
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         // list & adapter : shutter speeds
@@ -64,10 +64,10 @@ class CalculatorActivity : BaseActivity() {
         }
 
         // refresh data on init & observe
-        viewModel.filters.observe(this, Observer {
+        viewModel.filters.observe(this) {
             (binding.recyclerFilters.adapter as FilterAdapter).setFilters(it.first, it.second)
-        })
-        viewModel.speeds.observe(this, Observer {
+        }
+        viewModel.speeds.observe(this) {
             val adapter = binding.dials.recyclerShutter.adapter as ShutterAdapter
             if (adapter.speeds != it) {
                 // set new speeds
@@ -75,40 +75,42 @@ class CalculatorActivity : BaseActivity() {
                 // scroll to middle
                 binding.dials.recyclerShutter.scrollToPosition(it.doubleValues.size / 2)
             }
-        })
-        viewModel.compensation.observe(this, Observer {
+        }
+        viewModel.compensation.observe(this) {
             val adapter = binding.dials.recyclerCompensation.adapter as CompensationAdapter
             if (adapter.compensation != it) {
-                // set new compensation values
+                // set new compensation value
                 adapter.compensation = it
                 // scroll to middle
                 binding.dials.recyclerCompensation.scrollToPosition(it.text.size / 2)
             }
-        })
-        viewModel.isWarningEnabled.observe(this, Observer {
+        }
+        viewModel.isWarningEnabled.observe(this) {
             binding.resultView.showWarning = it
-        })
-        viewModel.isCompensationDialEnabled.observe(this, Observer {
+        }
+        viewModel.isCompensationDialEnabled.observe(this) {
             when (it) {
                 true -> {
                     if (binding.dials.compensationContainer.visibility != View.VISIBLE) {
                         binding.dials.compensationContainer.visibility = View.VISIBLE
                         // scroll to center
-                        binding.dials.recyclerCompensation.adapter?.itemCount?.div(2)?.let { center ->
-                            binding.dials.recyclerCompensation.scrollToPosition(center)
-                        }
+                        binding.dials.recyclerCompensation.adapter?.itemCount?.div(2)
+                            ?.let { center ->
+                                binding.dials.recyclerCompensation.scrollToPosition(center)
+                            }
                     }
                 }
+
                 false -> {
                     binding.dials.compensationContainer.visibility = View.GONE
                     viewModel.selectedOffset.value = 0
                 }
             }
-        })
-        viewModel.calculatedSpeed.observe(this, Observer { micros ->
+        }
+        viewModel.calculatedSpeed.observe(this) { micros ->
             binding.resultView.duration = micros
             enableTimer(micros != null && micros >= 1_000_000L)
-        })
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -118,7 +120,7 @@ class CalculatorActivity : BaseActivity() {
         // enable or disable timer
         menu.findItem(R.id.menu_timer).apply {
             isEnabled = timerMenuEnabled
-            icon.alpha = if (timerMenuEnabled) 255 else 128
+            icon?.alpha = if (timerMenuEnabled) 255 else 128
         }
 
         return true

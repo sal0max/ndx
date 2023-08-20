@@ -1,14 +1,20 @@
 package de.salomax.ndx.ui.timer
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
+import android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
 import android.view.View
 import android.view.animation.Animation
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import de.salomax.ndx.R
 import de.salomax.ndx.databinding.ActivityTimerBinding
@@ -25,6 +31,20 @@ class TimerActivity : BaseActivity(), ServiceConnection {
     private lateinit var service: TimerService
     private var isServiceBound: Boolean = false
     private val blinkAnimation: Animation = BlinkAnimation()
+
+    private val notificationPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (!isGranted) {
+                // only have to ask on API level >= 33
+                if (Build.VERSION.SDK_INT >= 33) {
+                    if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+                        showNotificationPermissionRationale()
+                    } else {
+                        showSettingDialog()
+                    }
+                }
+            }
+        }
 
     // service
     override fun onServiceConnected(className: ComponentName, iBinder: IBinder) {
@@ -68,6 +88,11 @@ class TimerActivity : BaseActivity(), ServiceConnection {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
             setHomeAsUpIndicator(R.drawable.ic_close_white_24dp)
+        }
+
+        // ask for notification permission
+        if (Build.VERSION.SDK_INT >= 33) {
+            notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
         }
     }
 
@@ -144,6 +169,7 @@ class TimerActivity : BaseActivity(), ServiceConnection {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         super.onBackPressed()
         // kill service
@@ -155,7 +181,7 @@ class TimerActivity : BaseActivity(), ServiceConnection {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+        onBackPressedDispatcher.onBackPressed()
         return true
     }
 
@@ -219,6 +245,32 @@ class TimerActivity : BaseActivity(), ServiceConnection {
         } else if (viewBinding.textHour.text != null) {
             viewBinding.textHour.text = null
         }
+    }
+
+    private fun showNotificationPermissionRationale() {
+        AlertDialog.Builder(this)
+            .setTitle(R.string.ask_notification_permission_title)
+            .setMessage(R.string.ask_notification_permission_message)
+            .setPositiveButton(android.R.string.ok) { _, _ ->
+                if (Build.VERSION.SDK_INT >= 33) {
+                    notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                }
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
+    }
+
+    private fun showSettingDialog() {
+        AlertDialog.Builder(this)
+            .setTitle(R.string.ask_notification_permission_title)
+            .setMessage(R.string.ask_notification_permission_message)
+            .setPositiveButton(android.R.string.ok) { _, _ ->
+                val intent = Intent(ACTION_APPLICATION_DETAILS_SETTINGS)
+                intent.data = Uri.parse("package:$packageName")
+                startActivity(intent)
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
     }
 
 }

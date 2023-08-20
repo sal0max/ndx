@@ -43,7 +43,7 @@ class PreferenceFragment : PreferenceFragmentCompat(),
 
     override fun onCreatePreferences(bundle: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
-        viewModel = ViewModelProvider(this).get(PreferenceViewModel::class.java)
+        viewModel = ViewModelProvider(this)[PreferenceViewModel::class.java]
 
         /*
          * find prefs

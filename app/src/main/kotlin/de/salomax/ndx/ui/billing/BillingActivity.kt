@@ -263,7 +263,7 @@ class BillingActivity: BaseActivity(), BillingClientStateListener, PurchasesUpda
 
    private fun enablePremiumThankAndFinish() {
       // enablePremium
-      ViewModelProvider(this).get(BillingViewModel::class.java).enablePremium()
+      ViewModelProvider(this)[BillingViewModel::class.java].enablePremium()
       // thank
       Snackbar.make(
          findViewById(android.R.id.content),

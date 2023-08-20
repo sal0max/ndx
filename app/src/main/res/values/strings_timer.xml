@@ -4,4 +4,6 @@
 
     <string name="total_exposure_time">Exposure Time</string>
     <string name="reset_timer">Reset</string>
+    <string name="ask_notification_permission_title">Allow notifications</string>
+    <string name="ask_notification_permission_message">In order for the timer to work when the app is in the background, permission to show notifications is required.</string>
 </resources>
