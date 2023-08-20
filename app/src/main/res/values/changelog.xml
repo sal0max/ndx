@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="changelog"><b>3.4.0</b>
+    <string name="changelog"><b>3.4.1</b>
+        \n⸻
+        \n<li>Increased compatibility with Android 13.</li>
+        \n
+        \n<b>3.4.0</b>
         \n⸻
         \n<li>A fresh Design: Material 3!</li>
         \n<li>Improved display when grouping by size is enabled.</li>
