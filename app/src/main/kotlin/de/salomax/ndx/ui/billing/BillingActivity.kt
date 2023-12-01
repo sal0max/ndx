@@ -55,7 +55,7 @@ class BillingActivity: BaseActivity(), BillingClientStateListener, PurchasesUpda
    }
 
    override fun onSupportNavigateUp(): Boolean {
-      onBackPressed()
+      onBackPressedDispatcher.onBackPressed()
       return true
    }
 
