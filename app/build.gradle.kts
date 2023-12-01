@@ -107,7 +107,7 @@ dependencies {
     debugImplementation("com.squareup.leakcanary:leakcanary-android:2.12")
 
     // billing
-    implementation("com.android.billingclient:billing-ktx:5.0.0")
+    implementation("com.android.billingclient:billing-ktx:5.2.1")
 
     // test
     testImplementation("junit:junit:4.13.2")
