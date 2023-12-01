@@ -37,7 +37,7 @@ class TimerService : Service() {
    internal var state: MutableLiveData<State> = MutableLiveData(State.WAITING)
       private set
 
-   // livecycle ====================================================================================
+   // lifecycle ====================================================================================
 
    override fun onCreate() {
       super.onCreate()

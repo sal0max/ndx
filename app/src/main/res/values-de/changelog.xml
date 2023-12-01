@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="changelog"><b>3.4.1</b>
+    <string name="changelog"><b>3.4.2</b>
+        \n⸻
+        \n<li>Kompatibilität mit Android 14 erhöht.</li>
+        \n
+        \n<b>3.4.1</b>
         \n⸻
         \n<li>Kompatibilität mit Android 13 erhöht.</li>
         \n
